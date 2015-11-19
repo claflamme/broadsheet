@@ -1,15 +1,20 @@
 User = App.Models.User
 
-module.exports = (req, email, password, done) ->
+module.exports = (email, password, done) ->
 
-  User.findOne {'email': email}, (err, user) ->
-    if err
-      done err
-    else if user
-      done null, false, req.flash('signupMessage', 'Email taken.')
+  new User(email: email).fetch()
+  .then (user) ->
+    if user
+      # email already taken
+      done null, false
     else
-      user = new User()
-      user.email = email
-      user.password = password
-      user.save (err) ->
-        done err, user
+      user = new User email: email, password: password
+      user.save()
+      .then (user) ->
+        done null, user
+      .catch (err) ->
+        console.log err
+        done err
+  .catch (err) ->
+    console.log err
+    done err

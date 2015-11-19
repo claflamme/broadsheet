@@ -5,7 +5,6 @@ LocalRegister = require './LocalRegister'
 
 localOpts =
   usernameField: 'email'
-  passReqToCallback: true
 
 module.exports = (passport) ->
 

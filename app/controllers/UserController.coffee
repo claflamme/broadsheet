@@ -16,10 +16,10 @@ module.exports = class UserController
     opts =
       successRedirect: '/auth'
       failureRedirect: '/register'
-      failureFlash: true
+      session: false
 
     if req.body.email and req.body.password
       App.Passport.authenticate('local-register', opts)(req, res, next)
     else
-      req.flash 'loginError', 'Both email and password are required.'
+      # Both email and password are required
       res.redirect opts.failureRedirect

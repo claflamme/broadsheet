@@ -26,7 +26,8 @@ module.exports = (app) ->
     routerPath = @path
 
     # Remove the filename, since we only want the path in which it resides.
-    routerPath.pop()
+    if routerPath[0] is 'router'
+      routerPath.pop()
 
     # Now, following the above example, we have 'routers/users'
     routerPath = "/#{ routerPath.join '/' }"

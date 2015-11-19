@@ -7,11 +7,12 @@ module.exports = class SessionController
       successRedirect: '/auth'
       failureRedirect: '/login'
       failureFlash: true
+      session: false
 
     if req.body.email and req.body.password
       App.Passport.authenticate('local-login', opts)(req, res, next)
     else
-      req.flash 'loginError', 'Both email and password are required.'
+      # Both email and password are required
       res.redirect opts.failureRedirect
 
   # Log out (i.e. delete the active session)
@@ -22,4 +23,4 @@ module.exports = class SessionController
 
   index: (req, res) ->
 
-    res.render 'auth/login', flash: req.flash()
+    res.render 'auth/login'

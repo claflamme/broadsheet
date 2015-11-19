@@ -1,14 +1,8 @@
 requireDir = require 'require-dir'
-traverse = require 'traverse'
-mongoose = require 'mongoose'
 
-models = requireDir App.Config.paths.models, recurse: true
+models = requireDir App.Config.paths.models
 
-traverse(models).forEach (model) ->
-
-  unless @isLeaf
-    return
-
-  @update model mongoose
+for i, model of models
+  models[i] = App.Bookshelf.Model.extend model
 
 module.exports = models

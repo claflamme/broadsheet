@@ -1,18 +1,28 @@
 bcrypt = require 'bcryptjs'
 
-module.exports = (mongoose) ->
+module.exports =
 
-  schema = mongoose.Schema
-    email: String
-    password: String
+  tableName: 'users'
+  hasTimestamps: true
+  hidden: ['password']
+  rules:
+    email: ['maxLength:255']
 
-  schema.pre 'save', (next) ->
-    if @isModified 'password'
-      hash = bcrypt.hashSync @password, 10
-      @set 'password', hash
-      next()
+  initialize: (attributes, options) ->
 
-  schema.methods.passwordIsValid = (password) ->
-    bcrypt.compareSync password, @password
+    @on 'saving', @hashPassword
 
-  mongoose.model 'User', schema
+  hashPassword: ->
+
+    unless @hasChanged 'password'
+      return
+
+    password = @get 'password'
+    hash = bcrypt.hashSync password, 10
+
+    @set 'password', hash
+
+  passwordIsValid: (providedPassword) ->
+
+    currentPassword = @get 'password'
+    bcrypt.compareSync providedPassword, currentPassword
