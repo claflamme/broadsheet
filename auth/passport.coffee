@@ -6,14 +6,23 @@ LocalRegister = require './LocalRegister'
 localOpts =
   usernameField: 'email'
 
+serializeUser = (user, done) ->
+
+  done null, user.get 'id'
+
+deserializeUser = (id, done) ->
+
+  user = new User { id: id }
+
+  user.fetch().then (user) ->
+    done null, user
+  .catch (err) ->
+    done err
+
 module.exports = (passport) ->
 
-  passport.serializeUser (user, done) ->
-    done null, user.id
-
-  passport.deserializeUser (id, done) ->
-    User.findById id, (err, user) ->
-      done err, user
+  passport.serializeUser serializeUser
+  passport.deserializeUser deserializeUser
 
   passport.use 'local-login', new LocalStrategy localOpts, LocalLogin
   passport.use 'local-register', new LocalStrategy localOpts, LocalRegister

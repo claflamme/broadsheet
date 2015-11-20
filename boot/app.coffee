@@ -1,14 +1,14 @@
 express = require 'express'
 bodyParser = require 'body-parser'
 passport = require 'passport'
-flash = require 'connect-flash'
 config = require '../config'
 knex = require('knex') config.db
 
 GLOBAL.App = {}
 
 App.Config = require '../config'
-App.Bookshelf = require('bookshelf') knex
+App.Bookshelf = require './bookshelf'
+App.Services = require './services'
 App.Models = require './models'
 App.Controllers = require './controllers'
 App.Policies = require './policies'
@@ -22,7 +22,6 @@ app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.urlencoded extended: true
 app.use App.Passport.initialize()
-app.use flash()
 
 require('./routers')(app)
 

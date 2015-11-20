@@ -1,4 +1,5 @@
 bcrypt = require 'bcryptjs'
+AuthService = App.Services.AuthService
 
 module.exports =
 
@@ -18,7 +19,7 @@ module.exports =
       return
 
     password = @get 'password'
-    hash = bcrypt.hashSync password, 10
+    hash = AuthService.hashPasswordSync
 
     @set 'password', hash
 

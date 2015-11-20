@@ -1,6 +1,6 @@
 UserController = App.Controllers.UserController
-SessionController = App.Controllers.SessionController
+JWTController = App.Controllers.JWTController
 
 module.exports = (router) ->
 
-  router.get '/', (req, res) -> res.send 'api api api'
+  router.post '/tokens', JWTController.create

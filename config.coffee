@@ -22,6 +22,7 @@ module.exports =
     views: path.resolve __dirname, 'app', 'views'
     policies: path.resolve __dirname, 'app', 'policies'
     routers: path.resolve __dirname, 'app', 'routers'
+    services: path.resolve __dirname, 'app', 'services'
 
   # === Authentication =========================================================
   # Settings that pertain to the various authentication packages e.g. passport,
@@ -39,3 +40,5 @@ module.exports =
 
     # Route path to redirect to when logging out.
     logoutRedirect: '/'
+
+    bcryptSaltRounds: 10
