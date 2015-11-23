@@ -12,10 +12,10 @@ module.exports = class JWTController
     user = new User()
     user.set 'email', req.body.email
 
-    user.fetch().then (user) ->
+    user.fetch().then (user) =>
 
       unless user
-        return res.status(404).json error: message: 'User not found'
+        return @_returnUserNotFound req, res
 
       unless AuthService.passwordMatchesSync req.body.password, user.get('password')
         return res.status(401).json error: message: 'Incorrect password'
