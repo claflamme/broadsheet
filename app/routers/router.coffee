@@ -1,5 +1,5 @@
 UserController = App.Controllers.UserController
-JWTController = App.Controllers.JWTController
+AuthController = App.Controllers.AuthController
 
 module.exports = (router) ->
 
@@ -10,8 +10,8 @@ module.exports = (router) ->
   router.post '/register', UserController.create
 
   # Authentication
-  router.get '/login', JWTController.index
-  router.post '/login', JWTController.create
+  router.get '/login', AuthController.index
+  router.post '/login', AuthController.create
 
   router.get '/auth', App.Policies.auth.isLoggedIn, (req, res) ->
     res.render 'dashboard'

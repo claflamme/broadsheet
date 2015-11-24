@@ -8,8 +8,8 @@ GLOBAL.App = {}
 
 App.Config = require '../config'
 App.Bookshelf = require './bookshelf'
-App.Services = require './services'
 App.Models = require './models'
+App.Services = require './services'
 App.Controllers = require './controllers'
 App.Policies = require './policies'
 App.Passport = require('../auth/passport') passport

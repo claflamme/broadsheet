@@ -1,5 +1,4 @@
 bcrypt = require 'bcryptjs'
-AuthService = App.Services.AuthService
 
 module.exports =
 
@@ -19,9 +18,9 @@ module.exports =
       return
 
     password = @get 'password'
-    hash = AuthService.hashPasswordSync
+    salt = bcrypt.genSaltSync App.Config.auth.bcryptSaltRounds
 
-    @set 'password', hash
+    @set 'password', bcrypt.hashSync password, salt
 
   passwordIsValid: (providedPassword) ->
 

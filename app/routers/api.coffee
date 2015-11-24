@@ -1,6 +1,6 @@
 UserController = App.Controllers.UserController
-JWTController = App.Controllers.JWTController
+AuthController = App.Controllers.AuthController
 
 module.exports = (router) ->
 
-  router.post '/tokens', JWTController.create
+  router.post '/tokens', AuthController.create
