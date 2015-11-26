@@ -10,9 +10,9 @@ module.exports =
 
   initialize: (attributes, options) ->
 
-    @on 'saving', @hashPassword
+    @on 'saving', @_saveHashedPassword
 
-  hashPassword: ->
+  _saveHashedPassword: ->
 
     unless @hasChanged 'password'
       return

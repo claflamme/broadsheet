@@ -1,5 +1,6 @@
 jwt = require 'jsonwebtoken'
 bcrypt = require 'bcryptjs'
+User = App.Models.User
 
 module.exports = class AuthService
 
@@ -9,7 +10,9 @@ module.exports = class AuthService
   #   Bookshelf model of the user for which to generate the token.
   # @param callback [Function]
   #   Receives the hashed token as its only parameter.
-
+  #
+  # @return [String] A signed JSON Web Token.
+  # ----------------------------------------------------------------------------
   generateToken: (user, callback) ->
 
     payload = {}
@@ -18,17 +21,30 @@ module.exports = class AuthService
 
     jwt.sign payload, secret, options, callback
 
-  hashPassword: (password, callback) ->
+  # Attempts to find and authenticate a user.
+  #
+  # @param email [String]
+  #   The user's email address.
+  # @param password [String]
+  #   User's unhashed password, to be compared with the hash.
+  # @param callback [Function]
+  #   Receives 3 parameters - `statusCode`, the HTTP response code to return;
+  #   `user`, the user model if successful; `errorMessage`, if unsuccessful.
+  # ----------------------------------------------------------------------------
+  authenticate: (email, password, callback) ->
 
-    bcrypt.genSalt App.Config.auth.bcryptSaltRounds, (err, salt) ->
-      bcrypt.hash password, salt, callback
+    user = new User email: email
 
-  hashPasswordSync: (password) ->
+    user.fetch().then (user) ->
 
-    salt = bcrypt.genSaltSync App.Config.auth.bcryptSaltRounds
+      unless user
+        return callback 404, null, 'User not found.'
 
-    bcrypt.hashSync password, salt
+      unless user.passwordIsValid password
+        return callback 401, null, 'Incorrect password.'
 
-  passwordMatchesSync: (password, hash) ->
+      callback 200, user
 
-    bcrypt.compareSync password, hash
+    .catch (err) ->
+
+      callback 500, null, 'There was an unknown error.'

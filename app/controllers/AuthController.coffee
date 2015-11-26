@@ -1,19 +1,34 @@
-TokenService = App.Services.TokenService
+AuthService = App.Services.AuthService
 
 module.exports = class AuthController
 
-  create: (req, res, next) ->
+  authenticate: (req, res) ->
 
-    email = req.body.email
-    password = req.body.password
+    { email, password } = req.body
 
     unless email and password
-      return res.status(400).json
-        error: message: 'Both email and password are required.'
+      return @_emailAndPasswordRequired res
 
-    TokenService.create email, password, (status, json) ->
-      res.status(status).json json
+    AuthService.authenticate email, password, (status, user, err) ->
 
-  index: (req, res) ->
+      if status isnt 200
+        return res.status(status).json error: message: err
 
-    res.render 'auth/login'
+      AuthService.generateToken user, (token) ->
+        return res.status(status).json token: token
+
+  register: (req, res) ->
+
+    { email, password } = req.body
+
+    unless email and password
+      return @_emailAndPasswordRequired res
+
+    AuthService.register email, password, (status, data) ->
+      res.status(status).json data
+
+  _emailAndPasswordRequired: (res) ->
+
+    data = error: message: 'Both email and password are required.'
+
+    res.status(400).json data
