@@ -4,6 +4,8 @@ User = App.Models.User
 
 module.exports = class AuthService
 
+  maxPasswordBytes: 72
+
   # Generates a new JSON Web Token using the given user model's info.
   #
   # @param user [bookshelf.Model]
@@ -17,7 +19,9 @@ module.exports = class AuthService
 
     payload = {}
     secret = process.env.JWT_SECRET
-    options = subject: user.get 'id'
+    options =
+      subject: user.get 'id'
+      expiresIn: '7d'
 
     jwt.sign payload, secret, options, callback
 
@@ -32,6 +36,9 @@ module.exports = class AuthService
   #   `user`, the user model if successful; `errorMessage`, if unsuccessful.
   # ----------------------------------------------------------------------------
   authenticate: (email, password, callback) ->
+
+    unless @_passwordIsValid password
+      return callback 400, null, 'Password is too long.'
 
     user = new User email: email
 
@@ -48,3 +55,38 @@ module.exports = class AuthService
     .catch (err) ->
 
       callback 500, null, 'There was an unknown error.'
+
+  register: (email, password, callback) ->
+
+    user = new User email: email
+
+    user.fetch().then (foundUser) ->
+
+      if foundUser
+        return callback 400, null, 'Email already exists.'
+
+      user.save( password: password ).then (newUser) ->
+        callback 200, newUser
+      .catch (err) ->
+        callback 500, null, 'There was an unknown error creating a new user.'
+
+    .catch (err) ->
+
+      callback 500, null, 'There was an unknown error querying users.'
+
+
+  # Checks a plaintext (unhashed) password to make sure it is considered valid.
+  # For now, valid just means it's 72 bytes or under (the max length accepted
+  # by the bcryptjs library).
+  #
+  # @param password [String]
+  #   Plaintext (unhashed) password string to check.
+  #
+  # @return [Boolean]
+  #   Whether or not the password is acceptabled.
+  # ----------------------------------------------------------------------------
+  _passwordIsValid: (password) ->
+
+    byteLength = Buffer.byteLength password, 'utf8'
+
+    byteLength <= @maxPasswordBytes

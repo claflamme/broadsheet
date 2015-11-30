@@ -24,8 +24,9 @@ module.exports = class AuthController
     unless email and password
       return @_emailAndPasswordRequired res
 
-    AuthService.register email, password, (status, data) ->
-      res.status(status).json data
+    AuthService.register email, password, (status, user, err) ->
+      output = if status isnt 200 then error: message: err else user
+      res.status(status).json output
 
   _emailAndPasswordRequired: (res) ->
 
