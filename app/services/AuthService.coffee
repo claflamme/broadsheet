@@ -17,6 +17,9 @@ module.exports = class AuthService
   # ----------------------------------------------------------------------------
   generateToken: (user, callback) ->
 
+    unless process.env.JWT_SECRET
+      console.error 'No JWT_SECRET environment variable is set!'
+
     payload = {}
     secret = process.env.JWT_SECRET
     options =
@@ -38,24 +41,32 @@ module.exports = class AuthService
   authenticate: (email, password, callback) ->
 
     unless @_passwordIsValid password
-      return callback 400, null, 'Password is too long.'
+      return callback 'Password is too long.', null, 400
 
     user = new User email: email
 
     user.fetch().then (user) ->
 
       unless user
-        return callback 404, null, 'User not found.'
+        return callback 'User not found.', null, 404
 
       unless user.passwordIsValid password
-        return callback 401, null, 'Incorrect password.'
+        return callback 'Incorrect password.', null, 401
 
-      callback 200, user
+      callback null, user, 200
 
     .catch (err) ->
 
-      callback 500, null, 'There was an unknown error.'
+      callback 'There was an unknown error.', null, 500
 
+  # Creates a new user account.
+  #
+  # @param email [String]
+  # @param password [String]
+  # @param callback [Function]
+  #   Receives 3 parameters - `statusCode`, the HTTP response code to return;
+  #   `user`, the user model if successful; `errorMessage`, if unsuccessful.
+  # ----------------------------------------------------------------------------
   register: (email, password, callback) ->
 
     user = new User email: email

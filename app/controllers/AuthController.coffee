@@ -9,13 +9,13 @@ module.exports = class AuthController
     unless email and password
       return @_emailAndPasswordRequired res
 
-    AuthService.authenticate email, password, (status, user, err) ->
+    AuthService.authenticate email, password, (err, user, statusCode) ->
 
-      if status isnt 200
-        return res.status(status).json error: message: err
+      if statusCode isnt 200
+        return res.status(statusCode).json error: message: err
 
       AuthService.generateToken user, (token) ->
-        return res.status(status).json token: token
+        res.status(statusCode).json token: token
 
   register: (req, res) ->
 

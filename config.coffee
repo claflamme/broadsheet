@@ -31,13 +31,6 @@ module.exports =
 
   auth:
 
-    # Secret key to use when generating session IDs.
-    sessionSecret: process.env.SESSION_SECRET or 'mysecretkey'
-
-    # Secure cookies require an HTTPS connection. If they are enabled over plain
-    # HTTP, cookies will not be set.
-    secureCookies: process.env.SECURE_COOKIES or false
-
     # Route path to redirect to when logging out.
     logoutRedirect: '/'
 
