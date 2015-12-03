@@ -1,6 +1,5 @@
 express = require 'express'
 bodyParser = require 'body-parser'
-passport = require 'passport'
 config = require '../config'
 knex = require('knex') config.db
 
@@ -12,7 +11,6 @@ App.Models = require './models'
 App.Services = require './services'
 App.Controllers = require './controllers'
 App.Policies = require './policies'
-App.Passport = require('../auth/passport') passport
 
 # Start the server
 # ------------------------------------------------------------------------------
@@ -21,7 +19,6 @@ app = express()
 app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.urlencoded extended: true
-app.use App.Passport.initialize()
 
 require('./routers')(app)
 
