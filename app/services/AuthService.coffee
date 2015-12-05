@@ -24,7 +24,6 @@ module.exports = class AuthService
     secret = process.env.JWT_SECRET
     options =
       subject: user.get 'id'
-      expiresIn: '7d'
 
     jwt.sign payload, secret, options, callback
 
@@ -41,23 +40,23 @@ module.exports = class AuthService
   authenticate: (email, password, callback) ->
 
     unless @_passwordIsValid password
-      return callback 'Password is too long.', null, 400
+      return callback 'Password is too long.', 400, null
 
     user = new User email: email
 
     user.fetch().then (user) ->
 
       unless user
-        return callback 'User not found.', null, 404
+        return callback 'User not found.', 404, null
 
       unless user.passwordIsValid password
-        return callback 'Incorrect password.', null, 401
+        return callback 'Incorrect password.', 401, null
 
-      callback null, user, 200
+      callback null, 200, user
 
     .catch (err) ->
 
-      callback 'There was an unknown error.', null, 500
+      callback 'There was an unknown error.', 500, null
 
   # Creates a new user account.
   #
@@ -74,16 +73,16 @@ module.exports = class AuthService
     user.fetch().then (foundUser) ->
 
       if foundUser
-        return callback 400, null, 'Email already exists.'
+        return callback 'Email already exists.', 400, null
 
       user.save( password: password ).then (newUser) ->
-        callback 200, newUser
+        callback null, 200, newUser
       .catch (err) ->
-        callback 500, null, 'There was an unknown error creating a new user.'
+        callback 'There was an unknown error creating a new user.', 500, null
 
     .catch (err) ->
 
-      callback 500, null, 'There was an unknown error querying users.'
+      callback 'There was an unknown error querying users.', 500, null
 
 
   # Checks a plaintext (unhashed) password to make sure it is considered valid.
