@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^1.4.2",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.0",
     "bookshelf": "^0.9.1",
