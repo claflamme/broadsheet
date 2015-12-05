@@ -3,7 +3,7 @@ exports.up = (knex) ->
   knex.schema.createTable 'feeds', (table) ->
     table.increments()
     table.timestamps()
-    table.text('url').unique()
+    table.text('url').unique().notNullable()
 
 exports.down = (knex) ->
 
