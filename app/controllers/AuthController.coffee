@@ -5,18 +5,14 @@ module.exports = class AuthController
 
   authenticate: (req, res) ->
 
-    { email, password } = req.body
-
-    unless email and password
-      return @_emailAndPasswordRequired res
-
-    unless validator.isEmail email
-      return @_sendEmailIsInvalid res
-
-    AuthService.authenticate email, password, @_sendSuccessResponse.bind @, res
+    @_processAuthRequest req, res, AuthService.authenticate
 
   register: (req, res) ->
 
+    @_processAuthRequest req, res, AuthService.register
+
+  _processAuthRequest: (req, res, callback) ->
+
     { email, password } = req.body
 
     unless email and password
@@ -25,9 +21,11 @@ module.exports = class AuthController
     unless validator.isEmail email
       return @_sendEmailIsInvalid res
 
-    AuthService.register email, password, @_sendSuccessResponse.bind @, res
+    done = @_sendResponse.bind @, res
 
-  _sendSuccessResponse: (res, err, statusCode, user) ->
+    callback email, password, done
+
+  _sendResponse: (res, err, statusCode, user) ->
 
     if statusCode isnt 200 and statusCode isnt 201
       return res.status(statusCode).json error: err

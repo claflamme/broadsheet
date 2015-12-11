@@ -22,8 +22,7 @@ module.exports = class AuthService
 
     payload = {}
     secret = process.env.JWT_SECRET
-    options =
-      subject: user.get 'id'
+    options = subject: user.get 'id'
 
     jwt.sign payload, secret, options, callback
 
@@ -36,7 +35,7 @@ module.exports = class AuthService
   # @param callback [Function]
   #   Receives 3 parameters - errorKey, statusCode, and user.
   # ----------------------------------------------------------------------------
-  authenticate: (email, password, callback) ->
+  authenticate: (email, password, callback) =>
 
     # Password is too long.
     unless @_passwordIsCorrectLength password
@@ -89,7 +88,6 @@ module.exports = class AuthService
     .catch (err) ->
 
       callback App.Errors.AUTH_UNKNOWN_REGISTRATION, 500, null
-
 
   # Checks a plaintext (unhashed) password to make sure it is considered valid.
   # For now, valid just means it's 72 bytes or under (the max length accepted
