@@ -6,6 +6,7 @@ knex = require('knex') config.db
 
 GLOBAL.App = {}
 
+App.Errors = require '../app/errors'
 App.Config = require '../config'
 App.Bookshelf = require './bookshelf'
 App.Models = require './models'

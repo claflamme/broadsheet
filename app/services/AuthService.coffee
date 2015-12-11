@@ -34,37 +34,40 @@ module.exports = class AuthService
   # @param password [String]
   #   User's unhashed password, to be compared with the hash.
   # @param callback [Function]
-  #   Receives 3 parameters - `statusCode`, the HTTP response code to return;
-  #   `user`, the user model if successful; `errorMessage`, if unsuccessful.
+  #   Receives 3 parameters - errorKey, statusCode, and user.
   # ----------------------------------------------------------------------------
   authenticate: (email, password, callback) ->
 
-    unless @_passwordIsValid password
-      return callback 'Password is too long.', 400, null
+    # Password is too long.
+    unless @_passwordIsCorrectLength password
+      return callback App.Errors.AUTH_PASSWORD_TOO_LONG, 400, null
 
     user = new User email: email
 
     user.fetch().then (user) ->
 
+      # User not found.
       unless user
-        return callback 'User not found.', 404, null
+        return callback App.Errors.AUTH_USER_NOT_FOUND, 404, null
 
+      # Incorrect password.
       unless user.passwordIsValid password
-        return callback 'Incorrect password.', 401, null
+        return callback App.Errors.AUTH_PASSWORD_INCORRECT, 400, null
 
+      # Success!
       callback null, 200, user
 
     .catch (err) ->
 
-      callback 'There was an unknown error.', 500, null
+      # Unknown error during authentication.
+      callback App.Errors.AUTH_UNKNOWN_AUTHENTICATION, 500, null
 
   # Creates a new user account.
   #
   # @param email [String]
   # @param password [String]
   # @param callback [Function]
-  #   Receives 3 parameters - `statusCode`, the HTTP response code to return;
-  #   `user`, the user model if successful; `errorMessage`, if unsuccessful.
+  #   Receives 3 parameters - errorKey, statusCode, and user.
   # ----------------------------------------------------------------------------
   register: (email, password, callback) ->
 
@@ -72,17 +75,20 @@ module.exports = class AuthService
 
     user.fetch().then (foundUser) ->
 
+      # Email already exists
       if foundUser
-        return callback 'Email already exists.', 400, null
+        return callback App.Errors.AUTH_EMAIL_EXISTS, 400, null
 
       user.save( password: password ).then (newUser) ->
-        callback null, 200, newUser
+        # Success!
+        callback null, 201, newUser
       .catch (err) ->
-        callback 'There was an unknown error creating a new user.', 500, null
+        # Unknown error while saving new user.
+        callback App.Errors.AUTH_UNKNOWN_SAVING, 500, null
 
     .catch (err) ->
 
-      callback 'There was an unknown error querying users.', 500, null
+      callback App.Errors.AUTH_UNKNOWN_REGISTRATION, 500, null
 
 
   # Checks a plaintext (unhashed) password to make sure it is considered valid.
@@ -95,7 +101,7 @@ module.exports = class AuthService
   # @return [Boolean]
   #   Whether or not the password is acceptabled.
   # ----------------------------------------------------------------------------
-  _passwordIsValid: (password) ->
+  _passwordIsCorrectLength: (password) ->
 
     byteLength = Buffer.byteLength password, 'utf8'
 
