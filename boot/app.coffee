@@ -24,7 +24,7 @@ auth = jwt(jwtOpts).unless path: unprotectedRoutes
 
 app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
-app.use bodyParser.urlencoded extended: true
+app.use bodyParser.json()
 app.use auth
 
 # Custom error handler for express-jwt.
