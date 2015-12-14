@@ -14,7 +14,7 @@ App.Services = require './services'
 App.Controllers = require './controllers'
 App.Policies = require './policies'
 
-unprotectedRoutes = [ '/register', '/authenticate' ]
+unprotectedRoutes = [ '/auth/register', '/auth/authenticate' ]
 jwtOpts = secret: process.env.JWT_SECRET
 
 # Start the server
