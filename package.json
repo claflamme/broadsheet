@@ -1,8 +1,12 @@
 {
-  "name": "mansbridge",
+  "name": "broadsheet-api",
   "version": "0.0.0",
   "description": "The no bullshit RSS reader.",
   "repository": "https://github.com/claflamme/rss",
+  "apidoc": {
+    "name": "Broadsheet API",
+    "title": "Broadsheet API"
+  },
   "scripts": {
     "start": "coffee boot/app.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"

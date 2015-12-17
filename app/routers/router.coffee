@@ -8,4 +8,4 @@ module.exports = (router) ->
   router.post '/auth/register', AuthController.register
   router.get '/auth/current', AuthController.current
 
-  router.post '/feeds', FeedController.create
+  router.post '/feeds', FeedController.add

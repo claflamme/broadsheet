@@ -6,18 +6,18 @@ module.exports = class AuthController
 
   authenticate: (req, res) ->
 
-    @_processAuthRequest req, res, AuthService.authenticate
+    @_validateAuthRequest req, res, AuthService.authenticate
 
   register: (req, res) ->
 
-    @_processAuthRequest req, res, AuthService.register
+    @_validateAuthRequest req, res, AuthService.register
 
   current: (req, res) ->
 
     UserService.getById req.user.sub, (err, statusCode, user) ->
       res.status(statusCode).json user
 
-  _processAuthRequest: (req, res, callback) ->
+  _validateAuthRequest: (req, res, callback) ->
 
     { email, password } = req.body
 

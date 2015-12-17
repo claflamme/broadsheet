@@ -26,3 +26,6 @@ module.exports =
 
     currentPassword = @get 'password'
     bcrypt.compareSync providedPassword, currentPassword
+
+  feeds: ->
+    @belongsToMany 'Feed'
