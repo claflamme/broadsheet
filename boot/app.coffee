@@ -4,6 +4,10 @@ jwt = require 'express-jwt'
 config = require '../config'
 knex = require('knex') config.db
 
+# Catch uncaught exceptions
+process.stderr.on 'data', (data) ->
+  console.log data
+  
 GLOBAL.App = {}
 
 App.Errors = require '../app/errors'
