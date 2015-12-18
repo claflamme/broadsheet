@@ -13,8 +13,18 @@ module.exports = class FeedController
     feed = new Feed url: req.body.url
     user = new User id: req.user.sub
 
-    feed.save().then (newFeedModel) ->
-      newFeedModel.subscribers().attach user
-      res.json newFeedModel
+    feed.fetch().then (foundFeed) ->
+
+      if foundFeed?
+        foundFeed.subscribers().query('where', 'id', '=', req.user.sub).count().then (count) ->
+          unless count is 0
+            return res.json foundFeed
+          foundFeed.subscribers().attach(user).then ->
+            res.json foundFeed
+      else
+        feed.save().then (newFeed) ->
+          newFeed.subscribers().attach(user).then ->
+            res.json newFeed
+
     .catch (err) ->
-      res.status(500).json error: message: 'Unknown problem saving feed.'
+      res.status(500).json error: message: 'Unknown problem querying feeds.'
