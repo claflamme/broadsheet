@@ -1,6 +1,5 @@
 validator = require 'validator'
 AuthService = App.Services.AuthService
-UserService = App.Services.UserService
 
 module.exports = class AuthController
 
@@ -11,11 +10,6 @@ module.exports = class AuthController
   register: (req, res) ->
 
     @_validateAuthRequest req, res, AuthService.register
-
-  current: (req, res) ->
-
-    UserService.getById req.user.sub, (err, statusCode, user) ->
-      res.status(statusCode).json user
 
   _validateAuthRequest: (req, res, callback) ->
 
