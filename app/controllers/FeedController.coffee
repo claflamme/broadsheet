@@ -1,3 +1,4 @@
+validator = require 'validator'
 Feed = App.Models.Feed
 User = App.Models.User
 
@@ -9,6 +10,9 @@ module.exports = class FeedController
 
     unless url
       return res.status(400).json error: message: 'The url param is required.'
+
+    unless validator.isURL url
+      return res.status(400).json error: message: 'Invalid URL.'
 
     feed = new Feed url: url
     user = new User id: req.user.sub
