@@ -10,4 +10,5 @@ module.exports = (router) ->
   router.get '/user', UserController.get
   router.get '/user/feeds', UserController.getFeeds
 
-  router.post '/feeds', FeedController.add
+  router.post '/user/feeds', FeedController.subscribe
+  router.delete '/user/feeds/:id', FeedController.unsubscribe
