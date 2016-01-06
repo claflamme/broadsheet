@@ -1,10 +1,24 @@
 validator = require 'validator'
 Feed = App.Models.Feed
 User = App.Models.User
+UserService = App.Services.UserService
 
-module.exports = class FeedController
+module.exports = class SubscriptionController
 
-  subscribe: (req, res) ->
+  list: (req, res) ->
+
+    UserService.getFeeds req.user.sub, (err, statusCode, feeds) ->
+      res.status(statusCode).json feeds: feeds
+
+  show: (req, res) ->
+
+    userId = req.user.sub
+    subId = req.params.id
+
+    UserService.getSubscription userId, subId, (err, subscription) ->
+      res.json subscription
+
+  create: (req, res) ->
 
     { url } = req.body
 
@@ -33,7 +47,7 @@ module.exports = class FeedController
     .catch (err) ->
       res.status(500).json error: message: 'Unknown problem querying feeds.'
 
-  unsubscribe: (req, res) ->
+  delete: (req, res) ->
 
     id = parseInt req.params.id
 

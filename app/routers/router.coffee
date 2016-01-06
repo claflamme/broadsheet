@@ -1,6 +1,7 @@
 AuthController = App.Controllers.AuthController
 FeedController = App.Controllers.FeedController
 UserController = App.Controllers.UserController
+SubscriptionController = App.Controllers.SubscriptionController
 
 module.exports = (router) ->
 
@@ -9,8 +10,8 @@ module.exports = (router) ->
 
   router.get '/user', UserController.get
 
-  # Feeds, as they relate to a given user.
-  router.get '/user/feeds', UserController.getFeeds
-  router.post '/user/feeds', FeedController.subscribe
-  router.get '/user/subscriptions/:id', UserController.getSubscription
-  router.delete '/user/feeds/:id', FeedController.unsubscribe
+  # Subscriptions are "instances" of a feed that belong to a user.
+  router.get '/subscriptions', SubscriptionController.list
+  router.post '/subscriptions', SubscriptionController.create
+  router.get '/subscriptions/:id', SubscriptionController.show
+  router.delete '/subscriptions/:id', SubscriptionController.delete
