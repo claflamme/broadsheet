@@ -12,6 +12,7 @@ exports.up = (knex) ->
   .createTable 'feeds_users', (table) ->
     table.integer('feed_id').references 'feeds.id'
     table.integer('user_id').references 'users.id'
+    table.text 'custom_name'
 
 exports.down = (knex) ->
 
