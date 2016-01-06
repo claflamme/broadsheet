@@ -8,7 +8,9 @@ module.exports = (router) ->
   router.post '/auth/register', AuthController.register
 
   router.get '/user', UserController.get
-  router.get '/user/feeds', UserController.getFeeds
 
+  # Feeds, as they relate to a given user.
+  router.get '/user/feeds', UserController.getFeeds
   router.post '/user/feeds', FeedController.subscribe
+  router.get '/user/subscriptions/:id', UserController.getSubscription
   router.delete '/user/feeds/:id', FeedController.unsubscribe

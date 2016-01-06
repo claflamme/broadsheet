@@ -29,3 +29,9 @@ module.exports =
 
   feeds: ->
     @belongsToMany 'Feed'
+
+  subscription: (id) ->
+
+    @belongsToMany 'Feed'
+    .query 'where', 'id', '=', id
+    .withPivot ['custom_name']

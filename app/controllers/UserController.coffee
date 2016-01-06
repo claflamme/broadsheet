@@ -11,3 +11,11 @@ module.exports = class UserController
 
     UserService.getFeeds req.user.sub, (err, statusCode, feeds) ->
       res.status(statusCode).json feeds: feeds
+
+  getSubscription: (req, res) ->
+
+    userId = req.user.sub
+    subId = req.params.id
+
+    UserService.getSubscription userId, subId, (err, subscription) ->
+      res.json subscription
