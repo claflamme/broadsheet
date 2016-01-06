@@ -1,13 +1,13 @@
 validator = require 'validator'
 Feed = App.Models.Feed
 User = App.Models.User
-UserService = App.Services.UserService
+SubscriptionService = App.Services.SubscriptionService
 
 module.exports = class SubscriptionController
 
   list: (req, res) ->
 
-    UserService.getFeeds req.user.sub, (err, statusCode, feeds) ->
+    SubscriptionService.list req.user.sub, (err, statusCode, feeds) ->
       res.status(statusCode).json feeds: feeds
 
   show: (req, res) ->
@@ -15,7 +15,7 @@ module.exports = class SubscriptionController
     userId = req.user.sub
     subId = req.params.id
 
-    UserService.getSubscription userId, subId, (err, subscription) ->
+    SubscriptionService.show userId, subId, (err, subscription) ->
       res.json subscription
 
   create: (req, res) ->
