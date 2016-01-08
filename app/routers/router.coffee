@@ -18,3 +18,4 @@ module.exports = (router) ->
   router.delete '/subscriptions/:id', SubscriptionController.delete
 
   router.get '/feeds', FeedController.list
+  router.get '/feeds/outdated', FeedController.outdated
