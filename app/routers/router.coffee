@@ -1,6 +1,7 @@
 AuthController = App.Controllers.AuthController
 FeedController = App.Controllers.FeedController
 UserController = App.Controllers.UserController
+FeedController = App.Controllers.FeedController
 SubscriptionController = App.Controllers.SubscriptionController
 
 module.exports = (router) ->
@@ -15,3 +16,5 @@ module.exports = (router) ->
   router.post '/subscriptions', SubscriptionController.create
   router.get '/subscriptions/:id', SubscriptionController.show
   router.delete '/subscriptions/:id', SubscriptionController.delete
+
+  router.get '/feeds', FeedController.list

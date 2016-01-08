@@ -7,7 +7,7 @@ knex = require('knex') config.db
 # Catch uncaught exceptions
 process.stderr.on 'data', (data) ->
   console.log data
-  
+
 GLOBAL.App = {}
 
 App.Errors = require '../app/errors'
@@ -18,7 +18,7 @@ App.Services = require './services'
 App.Controllers = require './controllers'
 App.Policies = require './policies'
 
-unprotectedRoutes = [ '/auth/register', '/auth/authenticate' ]
+unprotectedRoutes = [ '/auth/register', '/auth/authenticate', '/feeds' ]
 jwtOpts = secret: process.env.JWT_SECRET
 
 # Start the server
