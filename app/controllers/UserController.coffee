@@ -1,6 +1,6 @@
 UserService = App.Services.UserService
 
-module.exports = class UserController
+module.exports =
 
   get: (req, res) ->
 

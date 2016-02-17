@@ -1,7 +1,7 @@
 moment = require 'moment'
 Feed = App.Models.Feed
 
-module.exports = class FeedController
+module.exports =
 
   list: (req, res) ->
 

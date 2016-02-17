@@ -3,7 +3,7 @@ Feed = App.Models.Feed
 User = App.Models.User
 SubscriptionService = App.Services.SubscriptionService
 
-module.exports = class SubscriptionController
+module.exports =
 
   list: (req, res) ->
 
