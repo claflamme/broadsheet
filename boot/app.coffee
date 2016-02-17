@@ -16,7 +16,6 @@ App.Bookshelf = require './bookshelf'
 App.Models = require './models'
 App.Services = require './services'
 App.Controllers = require './controllers'
-App.Policies = require './policies'
 
 jwtOpts = secret: process.env.JWT_SECRET
 

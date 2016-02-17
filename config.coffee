@@ -20,7 +20,6 @@ module.exports =
     controllers: path.resolve __dirname, 'app', 'controllers'
     models: path.resolve __dirname, 'app', 'models'
     views: path.resolve __dirname, 'app', 'views'
-    policies: path.resolve __dirname, 'app', 'policies'
     routers: path.resolve __dirname, 'app', 'routers'
     services: path.resolve __dirname, 'app', 'services'
 
