@@ -1,6 +1,6 @@
 User = App.Models.User
 
-module.exports = class AuthService
+module.exports =
 
   get: (userId, callback) ->
 

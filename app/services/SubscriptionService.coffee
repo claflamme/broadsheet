@@ -1,6 +1,6 @@
 User = App.Models.User
 
-module.exports = class SubscriptionService
+module.exports =
 
   show: (userId, subId, cb) ->
 
