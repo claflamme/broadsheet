@@ -10,7 +10,7 @@ process.stderr.on 'data', (data) ->
 
 GLOBAL.App = {}
 
-App.Errors = require '../app/errors'
+App.Errors = require '../api/errors'
 App.Config = require '../config'
 App.Bookshelf = require './bookshelf'
 App.Models = require './models'
@@ -23,7 +23,7 @@ jwtOpts = secret: process.env.JWT_SECRET
 # ------------------------------------------------------------------------------
 app = express()
 router = express.Router()
-auth = jwt(jwtOpts).unless path: require('../app/routes/unprotected')
+auth = jwt(jwtOpts).unless path: require('../api/routes/unprotected')
 
 app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
@@ -35,7 +35,7 @@ app.use (err, req, res, next) ->
   if err.name is 'UnauthorizedError'
     res.status(401).json error: message: 'Invalid auth token.'
 
-app.use require('../app/routes/router') router
+app.use require('../api/routes/router') router
 
 server = app.listen process.env.PORT, ->
   console.log 'Listening on port %s', process.env.PORT

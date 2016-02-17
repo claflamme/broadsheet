@@ -17,11 +17,11 @@ module.exports =
     baseUrl: process.env.BASE_URL or 'http://coolsite.com'
 
   paths:
-    controllers: path.resolve __dirname, 'app', 'controllers'
-    models: path.resolve __dirname, 'app', 'models'
-    views: path.resolve __dirname, 'app', 'views'
-    routers: path.resolve __dirname, 'app', 'routers'
-    services: path.resolve __dirname, 'app', 'services'
+    controllers: path.resolve __dirname, 'api', 'controllers'
+    models: path.resolve __dirname, 'api', 'models'
+    views: path.resolve __dirname, 'api', 'views'
+    routers: path.resolve __dirname, 'api', 'routers'
+    services: path.resolve __dirname, 'api', 'services'
 
   # === Authentication =========================================================
   # Settings that pertain to the various authentication packages e.g. passport,
