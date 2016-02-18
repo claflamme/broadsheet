@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.0",
     "bookshelf": "^0.9.1",
@@ -21,12 +22,14 @@
     "dotenv": "^1.2.0",
     "express": "^4.13.3",
     "express-jwt": "^3.3.0",
+    "feedparser": "^1.1.4",
     "jsonwebtoken": "^5.4.1",
     "knex": "^0.9.0",
     "moment": "^2.11.0",
     "pg": "^4.4.3",
     "request": "^2.65.0",
     "require-dir": "^0.3.0",
+    "sanitize-html": "^1.11.3",
     "traverse": "^0.6.6",
     "validator": "^4.4.0"
   }

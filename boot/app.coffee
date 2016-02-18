@@ -39,3 +39,5 @@ app.use require('../api/routes/router') router
 
 server = app.listen process.env.PORT, ->
   console.log 'Listening on port %s', process.env.PORT
+
+require('../workers/crawler')()
