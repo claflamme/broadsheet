@@ -4,7 +4,7 @@ sanitize = require 'sanitize-html'
 parseArticle = (item) ->
 
   # Prefer <summary> tags to full article content.
-  description = if item.summary then item.summary else item.description
+  description = item.summary or item.description
 
   # Strip out <img> tags.
   description = sanitize description, { allowedTags: ['p'] }

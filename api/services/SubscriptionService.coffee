@@ -7,15 +7,16 @@ module.exports =
     user = new User id: userId
 
     user.subscription(subId).fetchOne().then (subscription) ->
-      cleaned = subscription.serialize omitPivot: true
-      cleaned.custom_name = subscription.pivot.get 'custom_name'
-      cb null, cleaned
+      subscription.articles().fetch().then (articles) ->
+        subscription = subscription.serialize()
+        subscription.articles = articles.serialize()
+        cb null, subscription
 
   list: (userId, callback) ->
 
     user = new User id: userId
 
-    user.feeds().fetch().then (feeds) ->
-      callback null, 200, feeds.serialize omitPivot: true
+    user.feeds().withPivot(['custom_name']).fetch().then (feeds) ->
+      callback null, 200, feeds.serialize()
     .catch (err) ->
       callback err, 500, null
