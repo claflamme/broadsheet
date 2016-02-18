@@ -15,6 +15,7 @@ module.exports = (router) ->
   router.get '/subscriptions', SubscriptionController.list
   router.post '/subscriptions', SubscriptionController.create
   router.get '/subscriptions/:id', SubscriptionController.show
+  router.patch '/subscriptions/:id', SubscriptionController.update
   router.delete '/subscriptions/:id', SubscriptionController.delete
 
   router.get '/feeds', FeedController.list

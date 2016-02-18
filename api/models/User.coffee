@@ -28,6 +28,7 @@ module.exports =
     bcrypt.compareSync providedPassword, currentPassword
 
   feeds: ->
+
     @belongsToMany 'Feed'
 
   subscription: (id) ->
@@ -35,3 +36,11 @@ module.exports =
     @belongsToMany 'Feed'
     .query 'where', 'id', '=', id
     .withPivot ['custom_name']
+
+  updateSubscription: (feedId, fields) ->
+
+    pivotOpts =
+      query: (knex) ->
+        knex.where 'feed_id', '=', feedId
+
+    @subscription(feedId).updatePivot fields, pivotOpts

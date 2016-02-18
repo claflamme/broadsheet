@@ -69,3 +69,16 @@ module.exports =
 
     .catch (err) ->
       res.status(500).json error: message: 'Unknown problem querying feeds.'
+
+  update: (req, res) ->
+
+    feedId = parseInt req.params.id
+    userId = req.user.sub
+    user = new User id: userId
+
+    fields =
+      custom_name: req.body.custom_name
+
+    user.updateSubscription(feedId, fields).then ->
+      user.subscription(feedId).fetch().then (feed) ->
+        res.json feed.serialize()
