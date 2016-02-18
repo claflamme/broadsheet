@@ -24,9 +24,9 @@ addArticles = (articles, feed, done) ->
   add = (article, cb) ->
     article =
       feed_id: feed.get 'id'
-      title: article.title
+      title: article.title.trim()
       description: article.description.trim()
-      url: article.url
+      url: article.url.trim()
     new Article(article).save().then ->
       ++numAdded
       cb()
@@ -52,8 +52,8 @@ crawl = ->
     new Feed().oldest().fetch().then (feed) ->
       unless feed
         console.log 'No outdated feeds found.'
-        # 300000ms = 5 minutes
-        setTimeout repeat, 300000
+        # 60000ms = 1 minute
+        setTimeout repeat, 60000
       else
         console.log 'Processing %s...', feed.get('url')
         processFeed feed, repeat
