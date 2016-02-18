@@ -1,11 +1,11 @@
 {
-  "name": "broadsheet-api",
+  "name": "broadsheet",
   "version": "0.0.0",
   "description": "The no bullshit RSS reader.",
   "repository": "https://github.com/claflamme/rss",
   "apidoc": {
-    "name": "Broadsheet API",
-    "title": "Broadsheet API"
+    "name": "Broadsheet",
+    "title": "Broadsheet"
   },
   "scripts": {
     "start": "coffee boot/app.coffee",
@@ -30,7 +30,6 @@
     "request": "^2.65.0",
     "require-dir": "^0.3.0",
     "sanitize-html": "^1.11.3",
-    "traverse": "^0.6.6",
     "validator": "^4.4.0"
   }
 }

@@ -16,7 +16,7 @@ module.exports =
 
     user = new User id: userId
 
-    user.feeds().withPivot(['custom_name']).fetch().then (feeds) ->
+    user.subscriptions().fetch().then (feeds) ->
       callback null, 200, feeds.serialize()
     .catch (err) ->
       callback err, 500, null

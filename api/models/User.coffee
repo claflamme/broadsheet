@@ -27,15 +27,13 @@ module.exports =
     currentPassword = @get 'password'
     bcrypt.compareSync providedPassword, currentPassword
 
-  feeds: ->
+  subscriptions: ->
 
-    @belongsToMany 'Feed'
+    @belongsToMany('Feed').withPivot ['custom_name']
 
   subscription: (id) ->
 
-    @belongsToMany 'Feed'
-    .query 'where', 'id', '=', id
-    .withPivot ['custom_name']
+    @subscriptions().query 'where', 'id', '=', id
 
   updateSubscription: (feedId, fields) ->
 
