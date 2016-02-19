@@ -49,7 +49,7 @@ processFeed = (feed, done) ->
 crawl = ->
 
   async.forever (repeat) ->
-    new Feed().oldest().fetch().then (feed) ->
+    new Feed().mostOutdated().fetch().then (feed) ->
       unless feed
         console.log 'No outdated feeds found.'
         # 60000ms = 1 minute

@@ -21,7 +21,7 @@ module.exports =
 
     @where 'updated_at', '<', getThreshold()
 
-  oldest: ->
+  mostOutdated: ->
 
     @query (queryBuilder) ->
       queryBuilder
