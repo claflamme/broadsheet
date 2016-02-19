@@ -35,6 +35,8 @@ app.use (err, req, res, next) ->
   if err.name is 'UnauthorizedError'
     res.status(401).json error: message: 'Invalid auth token.'
 
+app.use require('./errors')
+
 app.use require('../api/routes/router') router
 
 server = app.listen process.env.PORT, ->

@@ -53,29 +53,25 @@ module.exports =
   # ----------------------------------------------------------------------------
   authenticate: (email, password, callback) ->
 
-    # Password is too long.
     unless _passwordIsCorrectLength password
-      return callback App.Errors.AUTH_PASSWORD_TOO_LONG, 400, null
+      return callback 'AUTH_PASSWORD_TOO_LONG'
 
     user = new User email: email
 
     user.fetch().then (user) ->
 
-      # User not found.
       unless user
-        return callback App.Errors.AUTH_USER_NOT_FOUND, 404, null
+        return callback 'AUTH_USER_NOT_FOUND'
 
-      # Incorrect password.
       unless user.passwordIsValid password
-        return callback App.Errors.AUTH_PASSWORD_INCORRECT, 400, null
+        return callback 'AUTH_PASSWORD_INCORRECT'
 
       # Success!
-      callback null, 200, user
+      callback null, user
 
     .catch (err) ->
 
-      # Unknown error during authentication.
-      callback App.Errors.AUTH_UNKNOWN_AUTHENTICATION, 500, null
+      callback 'AUTH_UNKNOWN'
 
   # Creates a new user account.
   #
@@ -92,15 +88,12 @@ module.exports =
 
       # Email already exists
       if foundUser
-        return callback App.Errors.AUTH_EMAIL_EXISTS, 400, null
+        return callback 'AUTH_EMAIL_EXISTS'
 
       user.save( password: password ).then (newUser) ->
         # Success!
-        callback null, 201, newUser
-      .catch (err) ->
-        # Unknown error while saving new user.
-        callback App.Errors.AUTH_UNKNOWN_SAVING, 500, null
+        callback null, newUser
 
     .catch (err) ->
 
-      callback App.Errors.AUTH_UNKNOWN_REGISTRATION, 500, null
+      callback 'AUTH_UNKNOWN'

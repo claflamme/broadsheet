@@ -6,34 +6,22 @@ _validateAuthRequest = (req, res, callback) ->
   { email, password } = req.body
 
   unless email and password
-    return _emailAndPasswordRequired res
+    return res.error 'AUTH_MISSING_FIELD'
 
   unless validator.isEmail email
-    return _sendEmailIsInvalid res
+    return res.error 'AUTH_INVALID_EMAIL'
 
   done = _sendResponse.bind @, res
 
   callback email, password, done
 
-_sendResponse = (res, err, statusCode, user) ->
+_sendResponse = (res, errKey, user) ->
 
-  if statusCode isnt 200 and statusCode isnt 201
-    return res.status(statusCode).json error: err
+  if errKey
+    return res.error errKey
 
   AuthService.generateToken user, (token) ->
     res.json token: token, user: user
-
-_emailAndPasswordRequired = (res) ->
-
-  data = error: App.Errors.AUTH_EMAIL_PASS_REQUIRED
-
-  res.status(400).json data
-
-_sendEmailIsInvalid = (res) ->
-
-  data = error: App.Errors.AUTH_INVALID_EMAIL
-
-  res.status(400).json data
 
 module.exports =
 
