@@ -1,5 +1,5 @@
 Feed = App.Models.Feed
-CrawlerService = App.Services.CrawlerService
+ParserService = App.Services.ParserService
 
 module.exports =
 
@@ -16,5 +16,5 @@ module.exports =
   refresh: (req, res) ->
 
     new Feed().where('id', req.params.feedId).fetch().then (feed) ->
-      CrawlerService.processFeed feed, ->
+      ParserService.processFeed feed, ->
         res.json feed.serialize()

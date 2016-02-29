@@ -1,5 +1,5 @@
 async = require 'async'
-crawler = App.Services.CrawlerService
+ParserService = App.Services.ParserService
 Feed = App.Models.Feed
 
 module.exports = ->
@@ -12,4 +12,4 @@ module.exports = ->
         setTimeout repeat, 60000
       else
         console.log 'Processing %s...', feed.get('url')
-        crawler.processFeed feed, repeat
+        ParserService.processFeed feed, repeat
