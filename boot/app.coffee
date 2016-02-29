@@ -3,8 +3,13 @@ bodyParser = require 'body-parser'
 jwt = require 'express-jwt'
 stylus = require 'stylus'
 morgan = require 'morgan'
+browserify = require 'browserify-middleware'
 config = require '../config'
 knex = require('knex') config.db
+
+browserifyOpts =
+  transform: ['coffee-reactify']
+  extensions: ['.coffee', '.cjsx']
 
 # Catch uncaught exceptions
 process.stderr.on 'data', (data) ->
@@ -33,7 +38,8 @@ unless process.env.NODE_ENV is 'production'
 app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.json()
-app.use stylus.middleware { src: 'assets/stylus', dest: 'public' }
+app.use stylus.middleware { src: 'assets/styles', dest: 'public' }
+app.get '/app.js', browserify 'assets/scripts/app.coffee', browserifyOpts
 app.use express.static 'public'
 app.use '/api', auth
 
