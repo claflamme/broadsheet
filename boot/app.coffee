@@ -4,12 +4,22 @@ jwt = require 'express-jwt'
 stylus = require 'stylus'
 morgan = require 'morgan'
 browserify = require 'browserify-middleware'
+bootstrap = require 'bootstrap-styl'
 config = require '../config'
 knex = require('knex') config.db
 
 browserifyOpts =
   transform: ['coffee-reactify']
   extensions: ['.coffee', '.cjsx']
+
+stylusOpts =
+  src: 'assets/styles'
+  dest: 'public'
+  compile: (str, path) ->
+    stylus(str)
+    .set 'filename', path
+    .set 'compress', process.env.NODE_ENV is 'production'
+    .use bootstrap()
 
 # Catch uncaught exceptions
 process.stderr.on 'data', (data) ->
@@ -38,7 +48,7 @@ unless process.env.NODE_ENV is 'production'
 app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.json()
-app.use stylus.middleware { src: 'assets/styles', dest: 'public' }
+app.use stylus.middleware stylusOpts
 app.get '/app.js', browserify 'assets/scripts/app.coffee', browserifyOpts
 app.use express.static 'public'
 app.use '/api', auth
