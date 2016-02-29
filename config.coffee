@@ -1,4 +1,4 @@
-require('dotenv').load()
+require('dotenv').load silent: true
 path = require 'path'
 
 module.exports =

@@ -15,6 +15,6 @@ module.exports =
 
   refresh: (req, res) ->
 
-    new Feed().where('id', req.params.feedId).then (feed) ->
+    new Feed().where('id', req.params.feedId).fetch().then (feed) ->
       CrawlerService.processFeed feed, ->
         res.json feed.serialize()

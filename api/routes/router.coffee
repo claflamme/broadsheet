@@ -20,3 +20,4 @@ module.exports = (router) ->
 
   router.get '/feeds', FeedController.list
   router.get '/feeds/outdated', FeedController.outdated
+  router.post '/feeds/:feedId', FeedController.refresh
