@@ -26,10 +26,12 @@
     "jsonwebtoken": "^5.7.0",
     "knex": "^0.10.0",
     "moment": "^2.11.2",
+    "morgan": "^1.7.0",
     "pg": "^4.4.6",
     "request": "^2.69.0",
     "require-dir": "^0.3.0",
     "sanitize-html": "^1.11.3",
+    "stylus": "^0.53.0",
     "validator": "^5.0.0"
   }
 }

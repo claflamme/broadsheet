@@ -1,6 +1,4 @@
 module.exports = [
-  '/auth/register'
-  '/auth/authenticate'
-  '/feeds'
-  '/feeds/outdated'
+  '/api/auth/register'
+  '/api/auth/authenticate'
 ]

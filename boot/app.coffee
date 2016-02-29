@@ -1,6 +1,8 @@
 express = require 'express'
 bodyParser = require 'body-parser'
 jwt = require 'express-jwt'
+stylus = require 'stylus'
+morgan = require 'morgan'
 config = require '../config'
 knex = require('knex') config.db
 
@@ -25,10 +27,15 @@ app = express()
 router = express.Router()
 auth = jwt(jwtOpts).unless path: require('../api/routes/unprotected')
 
+unless process.env.NODE_ENV is 'production'
+  app.use morgan 'dev'
+
 app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.json()
-app.use auth
+app.use stylus.middleware { src: 'assets/stylus', dest: 'public' }
+app.use express.static 'public'
+app.use '/api', auth
 
 # Custom error handler for express-jwt.
 app.use (err, req, res, next) ->
