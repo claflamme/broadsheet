@@ -19,6 +19,7 @@ stylusOpts =
     stylus(str)
     .set 'filename', path
     .set 'compress', process.env.NODE_ENV is 'production'
+    .set 'sourcemap', true
     .use bootstrap()
 
 # Catch uncaught exceptions
@@ -57,6 +58,9 @@ app.use '/api', auth
 app.use (err, req, res, next) ->
   if err.name is 'UnauthorizedError'
     res.status(401).json error: message: 'Invalid auth token.'
+  else
+    res.status(500).json error: message: 'Unexpected error.'
+    console.error err.stack
 
 app.use require('./errors')
 

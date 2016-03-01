@@ -1,4 +1,5 @@
-require './test'
-require './secondtest'
+{ render } = require 'react-dom'
+Router = require './Router'
 
-alert 'hi'
+if root = document.getElementById 'root'
+  render Router, root
