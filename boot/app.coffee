@@ -19,7 +19,6 @@ stylusOpts =
     stylus(str)
     .set 'filename', path
     .set 'compress', process.env.NODE_ENV is 'production'
-    .set 'sourcemap', true
     .use bootstrap()
 
 # Catch uncaught exceptions
@@ -50,7 +49,7 @@ app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.json()
 app.use stylus.middleware stylusOpts
-app.get '/app.js', browserify 'assets/scripts/app.coffee', browserifyOpts
+app.get '/app.js', browserify 'assets/scripts/Router.cjsx', browserifyOpts
 app.use express.static 'public'
 app.use '/api', auth
 

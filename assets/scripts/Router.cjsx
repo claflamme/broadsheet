@@ -4,7 +4,7 @@ React = require 'react'
 configureStore = require './store/configureStore'
 { Router, Route, IndexRoute, hashHistory } = require 'react-router'
 
-module.exports =
+routes =
 
   <Provider store={ configureStore() }>
     <Router history={ hashHistory }>
@@ -13,3 +13,6 @@ module.exports =
       </Route>
     </Router>
   </Provider>
+
+if root = document.getElementById 'root'
+  render routes, root

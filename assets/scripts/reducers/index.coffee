@@ -7,16 +7,14 @@ baseReducer = (reducer) ->
 
   (state, action) ->
 
-    newState = state or reducer.initialState
+    state or= reducer.initialState
 
     if reducer[action.type]
-      newState = reducer[action.type] newState, action
+      state = reducer[action.type] state, action
 
-    return newState
+    return state
 
 for name, reducer of reducers
   reducers[name] = baseReducer reducer
 
-rootReducer = combineReducers reducers
-
-module.exports = rootReducer
+module.exports = combineReducers reducers
