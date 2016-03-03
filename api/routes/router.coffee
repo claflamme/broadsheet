@@ -22,5 +22,9 @@ module.exports = (router) ->
   router.get '/api/feeds/outdated', FeedController.outdated
   router.post '/api/feeds/:feedId', FeedController.refresh
 
-  router.get '/test', (req, res) ->
+  router.get '/reader', (req, res) ->
+    res.render 'main'
+
+  # Catch-all route for using browserHistory in react-router.
+  router.get '*', (req, res) ->
     res.render 'main'

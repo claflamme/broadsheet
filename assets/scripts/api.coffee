@@ -5,17 +5,20 @@ module.exports =
     cb or= ->
     options.headers or= {}
 
-    options.success = (json, status, xhr) ->
-      cb null, xhr, json
-
-    options.error = (xhr, status, err) =>
-      if xhr.status is 401
-        @_refresh()
-      else
-        cb err, xhr, xhr.responseText
+    options.headers['content-type'] = 'application/json'
 
     if token = localStorage.getItem 'token'
       options.headers['Authorization'] = "Bearer #{ token }"
+
+    if options.body
+      options.body = JSON.stringify options.body
+
+    fetch(options.url, options).then (res) ->
+      if res.status is 401
+        @_refresh()
+      else
+        res.json().then (json) ->
+          cb res, json
 
   _refresh: ->
 

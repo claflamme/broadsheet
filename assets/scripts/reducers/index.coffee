@@ -1,13 +1,11 @@
 { combineReducers } = require 'redux'
 
 reducers =
-  forms: require './FormReducer'
+  auth: require './AuthReducer'
 
 baseReducer = (reducer) ->
 
-  (state, action) ->
-
-    state or= reducer.initialState
+  (state = reducer.initialState, action) ->
 
     if reducer[action.type]
       state = reducer[action.type] state, action

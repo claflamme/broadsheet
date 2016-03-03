@@ -6,6 +6,15 @@ selectState = (state) -> return state
 
 module.exports = connect(selectState) React.createClass
 
+  contextTypes:
+
+    router: React.PropTypes.object
+
+  componentWillMount: ->
+
+    if not @props.auth.token
+      @context.router.replace '/login'
+
   render: ->
 
     <Grid fluid>
