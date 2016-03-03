@@ -8,10 +8,10 @@ module.exports =
     type: constants.AUTH_TOKEN_RECEIVED
     token: token
 
-  requestToken: (email, password) ->
+  requestToken: (type, email, password) ->
 
     request =
-      url: '/api/auth/authenticate'
+      url: "/api/auth/#{ type }"
       method: 'POST'
       body: { email, password }
 
@@ -20,13 +20,10 @@ module.exports =
       api.send request, (res, json) =>
         dispatch @receieveToken json.token
 
-  createAccount: (email, password) ->
+  signIn: (email, password) ->
 
-    request =
-      url: '/api/auth/register'
-      method: 'POST'
-      body: { email, password }
+    @requestToken 'authenticate', email, password
 
-    (dispatch) =>
-      dispatch type: constants.AUTH_TOKEN_REQUESTED
-      api.send request
+  signUp: (email, password) ->
+
+    @requestToken 'register', email, password

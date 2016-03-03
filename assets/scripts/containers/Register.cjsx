@@ -25,12 +25,12 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <Grid>
       <Row>
-        <Auth onSubmit={ @_onSubmit } />
+        <Auth onSubmit={ @_onSubmit } buttonText='Register' />
       </Row>
       <Row>
         <Col xs={ 12 } className='text-center'>
           <h1></h1>
-          <Link to='register'>Create an account</Link>
+          <Link to='login'>Log in</Link>
         </Col>
       </Row>
     </Grid>
@@ -40,4 +40,4 @@ module.exports = connect(mapStateToProps) React.createClass
     if @props.loading
       return
 
-    @props.dispatch AuthActions.createAccount email, password
+    @props.dispatch AuthActions.signUp email, password

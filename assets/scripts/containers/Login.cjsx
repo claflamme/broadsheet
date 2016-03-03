@@ -25,7 +25,7 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <Grid>
       <Row>
-        <Auth onSubmit={ @_onSubmit } />
+        <Auth onSubmit={ @_onSubmit } buttonText='Log in' />
       </Row>
       <Row>
         <Col xs={ 12 } className='text-center'>
@@ -40,4 +40,4 @@ module.exports = connect(mapStateToProps) React.createClass
     if @props.loading
       return
 
-    @props.dispatch AuthActions.requestToken email, password
+    @props.dispatch AuthActions.signIn email, password

@@ -6,6 +6,7 @@ module.exports = React.createClass
   propTypes:
 
     onSubmit: React.PropTypes.func.isRequired
+    buttonText: React.PropTypes.string.isRequired
 
   getInitialState: ->
 
@@ -25,8 +26,8 @@ module.exports = React.createClass
           type='password'
           placeholder='Password...'
           onChange={ @_onChange.bind @, 'password'} />
-        <Button type='submit' bsStyle='primary' block disabled={ @props.loading }>
-          Log in
+        <Button type='submit' bsStyle='primary' block>
+          { @props.buttonText }
         </Button>
       </form>
     </Col>
