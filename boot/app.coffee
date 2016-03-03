@@ -21,10 +21,6 @@ stylusOpts =
     .set 'compress', process.env.NODE_ENV is 'production'
     .use bootstrap()
 
-# Catch uncaught exceptions
-process.stderr.on 'data', (data) ->
-  console.log data
-
 GLOBAL.App = {}
 
 App.Errors = require '../api/errors'
