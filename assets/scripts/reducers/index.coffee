@@ -2,6 +2,7 @@
 
 reducers =
   auth: require './AuthReducer'
+  subscriptions: require './SubscriptionsReducer'
 
 baseReducer = (reducer) ->
 

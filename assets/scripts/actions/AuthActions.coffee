@@ -3,7 +3,9 @@ api = require '../api'
 
 module.exports =
 
-  receieveToken: (token) ->
+  receiveToken: (token) ->
+
+    localStorage.setItem 'token', token
 
     type: constants.AUTH_TOKEN_RECEIVED
     token: token
@@ -18,7 +20,7 @@ module.exports =
     (dispatch) =>
       dispatch type: constants.AUTH_TOKEN_REQUESTED
       api.send request, (res, json) =>
-        dispatch @receieveToken json.token
+        dispatch @receiveToken json.token
 
   signIn: (email, password) ->
 

@@ -1,10 +1,14 @@
 React = require 'react'
 { Grid, Row, Col } = require 'react-bootstrap'
 { connect } = require 'react-redux'
+AuthActions = require '../actions/AuthActions'
 
-selectState = (state) -> return state
+mapStateToProps = (state) ->
 
-module.exports = connect(selectState) React.createClass
+  subscriptions: state.subscriptions
+  token: state.auth.token
+
+module.exports = connect(mapStateToProps) React.createClass
 
   contextTypes:
 
@@ -12,7 +16,7 @@ module.exports = connect(selectState) React.createClass
 
   componentWillMount: ->
 
-    if not @props.auth.token
+    if not @props.token
       @context.router.replace '/login'
 
   render: ->
