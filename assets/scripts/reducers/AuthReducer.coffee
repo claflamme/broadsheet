@@ -1,5 +1,11 @@
 module.exports =
 
+  # This module handles any events dispatched for authentication processes.
+  # Logging in or out, registration, password resets, refreshing tokens, w/e.
+  #
+  # It should not handle events for the current user, like fetching their
+  # details or updating "profile" info.
+
   initialState:
 
     # A JSON web token issued by the server.
@@ -10,8 +16,8 @@ module.exports =
 
   AUTH_TOKEN_REQUESTED: (state, action) ->
 
-    Object.assign {}, state, { loading: true }
+    Object.assign {}, state, loading: true
 
   AUTH_TOKEN_RECEIVED: (state, action) ->
 
-    Object.assign {}, state, { loading: false, token: action.token }
+    Object.assign {}, state, loading: false, token: action.token

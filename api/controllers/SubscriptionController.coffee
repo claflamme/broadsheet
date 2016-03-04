@@ -8,7 +8,7 @@ module.exports =
   list: (req, res) ->
 
     SubscriptionService.list req.user.sub, (err, statusCode, feeds) ->
-      res.status(statusCode).json feeds: feeds
+      res.status(statusCode).json feeds
 
   show: (req, res) ->
 

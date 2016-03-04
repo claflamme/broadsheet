@@ -2,6 +2,7 @@ React = require 'react'
 { Grid, Row, Col } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 AuthActions = require '../actions/AuthActions'
+Subscriptions = require '../components/Subscriptions'
 
 mapStateToProps = (state) ->
 
@@ -23,8 +24,10 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <Grid fluid>
       <Row>
-        <Col xs={ 12 }>
-          <p>Hello, friends.</p>
+        <Col xs={ 3 }>
+          <Subscriptions
+            subscriptions={ @props.subscriptions }
+            dispatch={ @props.dispatch } />
         </Col>
       </Row>
     </Grid>
