@@ -30,6 +30,7 @@ exports.up = (knex) ->
     table.increments()
     table.integer('feed_id').references('feeds.id').notNullable()
     table.text('title').unique().notNullable()
+    table.text 'summary'
     table.text 'description'
     table.text('url').notNullable()
     table.timestamps()

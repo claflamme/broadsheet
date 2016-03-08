@@ -7,21 +7,18 @@ Article = App.Models.Article
 
 parseArticle = (item) ->
 
-  # Prefer <summary> tags to full article content.
-  description = item.summary or item.description
+  summary = item.summary or item.description
+  summary = sanitize summary, { allowedTags: [] }
+  summary = summary.substring(0, 300).trim() + '...'
+  summary = summary.replace /\r?\n|\r/g, ''
 
-  # Strip out <img> tags.
-  description = sanitize description, { allowedTags: ['p'] }
-
-  # Truncate long text blobs.
-  if description.length > 500
-    description = description.substring(0, 500) + '...'
-
-  return output =
-    title: item.title
+  output =
+    title: item.title.trim()
     url: item.link
-    date: new Date item.pubdate
-    description: description
+    description: item.description.trim()
+    summary: summary
+
+  return output
 
 parseStream = (xmlStream, done) ->
 
@@ -65,11 +62,7 @@ addArticles = (articles, feed, done) ->
   numAdded = 0
 
   add = (article, cb) ->
-    article =
-      feed_id: feed.get 'id'
-      title: article.title.trim()
-      description: article.description.trim()
-      url: article.url.trim()
+    article.feed_id = feed.get 'id'
     new Article(article).save().then ->
       ++numAdded
       cb()
