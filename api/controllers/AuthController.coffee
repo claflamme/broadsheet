@@ -25,10 +25,32 @@ _sendResponse = (res, errKey, user) ->
 
 module.exports =
 
+  ###
+  @apiGroup Auth
+
+  @api { post } /api/auth/authenticate Authenticate
+  @apiParam { String } email A valid email address.
+  @apiParam { String } password Max 72 characters (bcrypt hard limit).
+
+  @apiDescription
+    Attempts to authenticate a set of credentials. Provides the user model and
+    an auth token if successful.
+  ###
   authenticate: (req, res) ->
 
     _validateAuthRequest req, res, AuthService.authenticate
 
+  ###
+  @apiGroup Auth
+
+  @api { post } /api/auth/register Register
+  @apiParam { String } email A valid email address.
+  @apiParam { String } password Max 72 characters (bcrypt hard limit).
+
+  @apiDescription
+    Creates a new user account. If successful, returns the user model and
+    an auth token.
+  ###
   register: (req, res) ->
 
     _validateAuthRequest req, res, AuthService.register

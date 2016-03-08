@@ -5,11 +5,27 @@ SubscriptionService = App.Services.SubscriptionService
 
 module.exports =
 
+  ###
+  @apiGroup Subscriptions
+
+  @api { get } /api/subscriptions List
+
+  @apiDescription
+    Returns a list of all subscriptions a user has.
+  ###
   list: (req, res) ->
 
     SubscriptionService.list req.user.sub, (err, statusCode, feeds) ->
       res.status(statusCode).json feeds
 
+  ###
+  @apiGroup Subscriptions
+
+  @api { get } /api/subscriptions/:id Articles
+
+  @apiDescription
+    Returns a single subscription and all of its articles.
+  ###
   show: (req, res) ->
 
     userId = req.user.sub
@@ -18,6 +34,16 @@ module.exports =
     SubscriptionService.show userId, subId, (err, subscription) ->
       res.json subscription
 
+  ###
+  @apiGroup Subscriptions
+
+  @api { post } /api/subscriptions/ Subscribe
+  @apiParam { String } url A URL to an RSS feed.
+
+  @apiDescription
+    Adds a new subscription to the user's account and returns its details. If
+    the feed URL is not in the system, it will be added.
+  ###
   create: (req, res) ->
 
     { url } = req.body
@@ -47,6 +73,15 @@ module.exports =
     .catch (err) ->
       res.status(500).json error: message: 'Unknown problem querying feeds.'
 
+  ###
+  @apiGroup Subscriptions
+
+  @api { delete } /api/subscriptions/:id Unsubscribe
+
+  @apiDescription
+    Unsubscribes a user from a given feed. If no more subscribers are left, the
+    feed will be removed from the system.
+  ###
   delete: (req, res) ->
 
     id = parseInt req.params.id
@@ -70,6 +105,16 @@ module.exports =
     .catch (err) ->
       res.status(500).json error: message: 'Unknown problem querying feeds.'
 
+  ###
+  @apiGroup Subscriptions
+
+  @api { patch } /api/subscriptions/:id Update
+  @apiParam { String } custom_name The name to display the feed as to the user.
+
+  @apiDescription
+    Updates a user's subscription. This does **not** update the feed for every
+    user, it just updates pivot data for the current user.
+  ###
   update: (req, res) ->
 
     feedId = parseInt req.params.id
