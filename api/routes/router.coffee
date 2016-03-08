@@ -20,7 +20,7 @@ module.exports = (router) ->
 
   router.get '/api/feeds', FeedController.list
   router.get '/api/feeds/outdated', FeedController.outdated
-  router.post '/api/feeds/:feedId', FeedController.refresh
+  router.patch '/api/feeds/:feedId', FeedController.refresh
 
   router.get '/reader', (req, res) ->
     res.render 'main'
