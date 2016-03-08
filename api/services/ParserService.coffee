@@ -33,7 +33,7 @@ parseStream = (xmlStream, done) ->
       articles.push parseArticle(item)
 
   parser.on 'end', ->
-    done null, articles
+    done null, articles, @meta
 
   parser.on 'error', (err) ->
     done err, articles
@@ -52,6 +52,13 @@ downloadFeed = (url, done) ->
       return @emit 'error', new Error('Bad status code')
     else
       done @
+
+updateFeed = (feed, meta, done) ->
+
+  feed.set 'title', meta.title or null
+  feed.set 'description', meta.description or null
+
+  feed.save().then done
 
 addArticles = (articles, feed, done) ->
 
@@ -77,7 +84,8 @@ module.exports.processFeed = (feed, done) ->
 
   feed.save(feed.timestamp({method: 'update'})).then ->
     downloadFeed feed.get('url'), (res) ->
-      parseStream res, (err, articles) ->
+      parseStream res, (err, articles, meta) ->
         if err
           throw err
-        addArticles articles, feed, done
+        updateFeed feed, meta, ->
+          addArticles articles, feed, done

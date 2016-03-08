@@ -16,6 +16,8 @@ exports.up = (knex) ->
 
   .createTable 'feeds', (table) ->
     table.increments()
+    table.text 'title'
+    table.text 'description'
     table.text('url').notNullable()
     table.timestamps()
 
