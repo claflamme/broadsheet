@@ -5,7 +5,7 @@ Feed = App.Models.Feed
 module.exports = ->
 
   async.forever (repeat) ->
-    new Feed().mostOutdated().fetch().then (feed) ->
+    new Feed().outdated().fetch().then (feed) ->
       unless feed
         console.log 'No outdated feeds found.'
         # 60000ms = 1 minute

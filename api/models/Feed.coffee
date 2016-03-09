@@ -19,11 +19,8 @@ module.exports =
 
   outdated: ->
 
-    @where 'updated_at', '<', getThreshold()
-
-  mostOutdated: ->
-
     @query (queryBuilder) ->
       queryBuilder
-      .where 'updated_at', '<', getThreshold()
+      .whereRaw 'updated_at = created_at'
+      .orWhere 'updated_at', '<', getThreshold()
       .orderBy 'updated_at', 'asc'
