@@ -21,7 +21,7 @@ exports.up = (knex) ->
     table.text('url').notNullable()
     table.timestamps()
 
-  .createTable 'feeds_users', (table) ->
+  .createTable 'subscriptions', (table) ->
     table.integer('feed_id').references 'feeds.id'
     table.integer('user_id').references 'users.id'
     table.text 'custom_name'
@@ -45,12 +45,12 @@ exports.down = (knex) ->
   .table 'articles', (table) ->
     table.dropForeign 'feeds', 'articles_feed_id_foreign'
 
-  .table 'feeds_users', (table) ->
-    table.dropForeign 'feeds', 'feeds_users_feed_id_foreign'
-    table.dropForeign 'users', 'feeds_users_user_id_foreign'
+  .table 'subscriptions', (table) ->
+    table.dropForeign 'feeds', 'subscriptions_feed_id_foreign'
+    table.dropForeign 'users', 'subscriptions_user_id_foreign'
 
   .dropTable 'articles'
-  .dropTable 'feeds_users'
+  .dropTable 'subscriptions'
   .dropTable 'tokens'
   .dropTable 'users'
   .dropTable 'feeds'

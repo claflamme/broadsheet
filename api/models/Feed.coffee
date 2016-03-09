@@ -11,7 +11,7 @@ module.exports =
 
   subscribers: ->
 
-    @belongsToMany 'User'
+    @belongsToMany 'User', 'subscriptions'
 
   articles: ->
 
