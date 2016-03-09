@@ -22,5 +22,6 @@ module.exports =
     @query (queryBuilder) ->
       queryBuilder
       .whereRaw 'updated_at = created_at'
+      .orWhere 'updated_at', null
       .orWhere 'updated_at', '<', getThreshold()
       .orderBy 'updated_at', 'asc'
