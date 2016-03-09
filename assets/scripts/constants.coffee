@@ -2,14 +2,24 @@ keymirror = require 'keymirror'
 
 module.exports = keymirror
 
+  # --- Authentication ---------------------------------------------------------
+
   # User has attempted to log in.
   AUTH_TOKEN_REQUESTED: null
 
   # Server responded with a new auth token.
   AUTH_TOKEN_RECEIVED: null
 
+  # --- Subscriptions ----------------------------------------------------------
+
   # The user's subscriptions have been requested.
   SUBSCRIPTIONS_REQUESTED: null
 
   # A list of the user's feed subscriptions has been fetched.
   SUBSCRIPTIONS_RECEIVED: null
+
+  # Sent a request to add a new subscription.
+  SUBSCRIPTIONS_ADDING_NEW: null
+
+  # New subscription added successfully.
+  SUBSCRIPTIONS_ADDED_NEW: null

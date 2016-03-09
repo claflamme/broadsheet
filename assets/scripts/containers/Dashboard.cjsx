@@ -22,7 +22,7 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <Grid fluid>
+    <Grid>
       <Row>
         <Col xs={ 3 }>
           <Subscriptions
