@@ -56,6 +56,7 @@ exports.down = (knex) ->
 
   .dropTable 'articles'
   .dropTable 'subscriptions'
+  .dropTable 'categories'
   .dropTable 'tokens'
   .dropTable 'users'
   .dropTable 'feeds'
