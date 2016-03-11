@@ -109,7 +109,7 @@ module.exports =
   @apiGroup Subscriptions
 
   @api { patch } /api/subscriptions/:id Update
-  @apiParam { String } custom_name The name to display the feed as to the user.
+  @apiParam { String } custom_title The name to display the feed as to the user.
 
   @apiDescription
     Updates a user's subscription. This does **not** update the feed for every
@@ -122,7 +122,7 @@ module.exports =
     user = new User id: userId
 
     fields =
-      custom_name: req.body.custom_name
+      custom_title: req.body.custom_title
 
     user.updateSubscription(feedId, fields).then ->
       user.subscription(feedId).fetch().then (feed) ->

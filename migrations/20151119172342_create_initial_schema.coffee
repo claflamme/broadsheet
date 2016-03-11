@@ -24,7 +24,12 @@ exports.up = (knex) ->
   .createTable 'subscriptions', (table) ->
     table.integer('feed_id').references 'feeds.id'
     table.integer('user_id').references 'users.id'
-    table.text 'custom_name'
+    table.text 'custom_title'
+
+  .createTable 'categories', (table) ->
+    table.increments()
+    table.integer('user_id').references 'users.id'
+    table.text 'title'
 
   .createTable 'articles', (table) ->
     table.increments()

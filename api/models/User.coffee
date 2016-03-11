@@ -29,7 +29,7 @@ module.exports =
 
   subscriptions: ->
 
-    @belongsToMany('Feed', 'subscriptions').withPivot ['custom_name']
+    @belongsToMany('Feed', 'subscriptions').withPivot ['custom_title']
 
   subscription: (id) ->
 

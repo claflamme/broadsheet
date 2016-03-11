@@ -37,7 +37,7 @@ module.exports = React.createClass
   _renderSubscription: (subscription, i) ->
 
     <li key={ i }>
-      { subscription._pivot_custom_name or subscription.title }
+      { subscription._pivot_custom_title or subscription.title }
     </li>
 
   _addSubscription: (form) ->
