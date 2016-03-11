@@ -59,9 +59,9 @@ module.exports =
 
     feed.fetch().then (foundFeed) ->
 
-      if foundFeed?
-        foundFeed.subscribers().query('where', 'id', '=', req.user.sub).count().then (count) ->
-          unless count is 0
+      if foundFeed
+        foundFeed.subscribers(req.user.sub).fetch().then (subscribers) ->
+          unless subscribers.length is 0
             return res.json foundFeed
           foundFeed.subscribers().attach(user).then ->
             res.json foundFeed

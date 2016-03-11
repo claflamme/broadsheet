@@ -9,9 +9,14 @@ module.exports =
   tableName: 'feeds'
   hasTimestamps: true
 
-  subscribers: ->
+  subscribers: (subscriberId) ->
 
-    @belongsToMany 'User', 'subscriptions'
+    subscribers = @belongsToMany 'User', 'subscriptions'
+
+    if subscriberId
+      subscribers = subscribers.query 'where', 'id', '=', subscriberId
+
+    return subscribers
 
   articles: ->
 
