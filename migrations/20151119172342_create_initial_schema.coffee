@@ -33,7 +33,7 @@ exports.up = (knex) ->
     table.text 'summary'
     table.text 'description'
     table.text('url').notNullable()
-    table.timestamps()
+    table.dateTime 'published_at'
 
 exports.down = (knex) ->
 

@@ -2,6 +2,7 @@ FeedParser = require 'feedparser'
 sanitize = require 'sanitize-html'
 async = require 'async'
 request = require 'request'
+moment = require 'moment'
 Feed = App.Models.Feed
 Article = App.Models.Article
 
@@ -17,6 +18,7 @@ parseArticle = (item) ->
     url: item.link
     description: item.description.trim()
     summary: summary
+    published_at: item.pubdate or moment()
 
   return output
 
