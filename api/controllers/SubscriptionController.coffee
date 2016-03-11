@@ -49,29 +49,16 @@ module.exports =
     { url } = req.body
 
     unless url
-      return res.status(400).json error: message: 'The url param is required.'
+      return res.error 'SUBSCRIPTION_URL_REQUIRED'
 
     unless validator.isURL url
-      return res.status(400).json error: message: 'Invalid URL.'
+      return res.error 'SUBSCRIPTION_URL_INVALID'
 
-    feed = new Feed url: url
-    user = new User id: req.user.sub
-
-    feed.fetch().then (foundFeed) ->
-
-      if foundFeed
-        foundFeed.subscribers(req.user.sub).fetch().then (subscribers) ->
-          unless subscribers.length is 0
-            return res.json foundFeed
-          foundFeed.subscribers().attach(user).then ->
-            res.json foundFeed
+    SubscriptionService.create req.user.sub, url, (err, feed) ->
+      if err
+        res.error 'FEED_UNKNOWN_ERROR'
       else
-        feed.save().then (newFeed) ->
-          newFeed.subscribers().attach(user).then ->
-            res.json newFeed
-
-    .catch (err) ->
-      res.status(500).json error: message: 'Unknown problem querying feeds.'
+        res.json feed
 
   ###
   @apiGroup Subscriptions

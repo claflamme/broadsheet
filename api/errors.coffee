@@ -1,5 +1,7 @@
 module.exports =
 
+  # --- Authentication ---------------------------------------------------------
+
   AUTH_MISSING_FIELD:
     message: 'Both email and password are required.'
     status: 400
@@ -27,3 +29,19 @@ module.exports =
   AUTH_UNKNOWN:
     message: 'Unknown authentication error.'
     status: 500
+
+  # --- Feeds ------------------------------------------------------------------
+
+  FEED_UNKNOWN_ERROR:
+    message: 'There was an unknown error querying feeds.'
+    status: 500
+
+  # --- Subscriptions ----------------------------------------------------------
+
+  SUBSCRIPTION_URL_REQUIRED:
+    message: 'The url field is required.'
+    status: 400
+
+  SUBSCRIPTION_URL_INVALID:
+    message: 'The provided url is invalid.'
+    status: 400
