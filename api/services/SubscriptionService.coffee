@@ -22,7 +22,7 @@ module.exports =
     user = new User id: userId
 
     user.subscriptions().fetch().then (subscriptions) ->
-      callback null, subscription.serialize()
+      callback null, subscriptions.serialize()
     .catch (err) ->
       callback 'SUBSCRIPTION_UNKNOWN_ERROR'
 
