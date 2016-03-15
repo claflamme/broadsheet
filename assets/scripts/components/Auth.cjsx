@@ -16,7 +16,6 @@ module.exports = React.createClass
   render: ->
 
     <Col md={ 4 } mdOffset={ 3 } lg={ 4 } lgOffset={ 4 } sm={ 6 } smOffset={ 3 }>
-      <img className='logo auth' src='logo.png' />
       <form onSubmit={ @_onSubmit }>
         <Input
           type='email'
