@@ -53,3 +53,13 @@ module.exports =
   SUBSCRIPTION_UNKNOWN_ERROR:
     message: 'There was an unknown error while querying subscriptions.'
     status: 500
+
+  # --- Proxy ------------------------------------------------------------------
+
+  PROXY_URL_REQUIRED:
+    message: 'The url parameter is required in the query string.'
+    status: 400
+
+  PROXY_INVALID_URL:
+    message: 'The url param must be a valid URL with an http or https protocol.'
+    status: 400

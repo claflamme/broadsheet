@@ -3,6 +3,7 @@ FeedController = App.Controllers.FeedController
 UserController = App.Controllers.UserController
 FeedController = App.Controllers.FeedController
 SubscriptionController = App.Controllers.SubscriptionController
+ProxyController = App.Controllers.ProxyController
 
 module.exports = (router) ->
 
@@ -22,8 +23,7 @@ module.exports = (router) ->
   router.get '/api/feeds/outdated', FeedController.outdated
   router.patch '/api/feeds/:feedId', FeedController.refresh
 
-  router.get '/reader', (req, res) ->
-    res.render 'main'
+  router.get '/api/proxy', ProxyController.get
 
   # Catch-all route for using browserHistory in react-router.
   router.get '*', (req, res) ->
