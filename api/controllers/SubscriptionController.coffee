@@ -15,8 +15,13 @@ module.exports =
   ###
   list: (req, res) ->
 
-    SubscriptionService.list req.user.sub, (err, statusCode, feeds) ->
-      res.status(statusCode).json feeds
+    userId = req.user.sub
+
+    SubscriptionService.list req.user.sub, (err, subscriptions) ->
+      if err
+        res.error err
+      else
+        res.json subscriptions
 
   ###
   @apiGroup Subscriptions
@@ -49,7 +54,8 @@ module.exports =
   ###
   create: (req, res) ->
 
-    { url } = req.body
+    url = req.body.url
+    userId = req.user.sub
 
     unless url
       return res.error 'SUBSCRIPTION_URL_REQUIRED'

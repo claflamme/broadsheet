@@ -10,7 +10,7 @@ module.exports =
     user.subscription(subId).fetchOne().then (subscription) ->
 
       unless subscription
-        return cb 'SUBSCRIPTION_NOT_FOUND', null
+        return cb 'SUBSCRIPTION_NOT_FOUND'
 
       subscription.articles().fetch().then (articles) ->
         subscription = subscription.serialize()
@@ -21,10 +21,10 @@ module.exports =
 
     user = new User id: userId
 
-    user.subscriptions().fetch().then (feeds) ->
-      callback null, 200, feeds.serialize()
+    user.subscriptions().fetch().then (subscriptions) ->
+      callback null, subscription.serialize()
     .catch (err) ->
-      callback err, 500, null
+      callback 'SUBSCRIPTION_UNKNOWN_ERROR'
 
   create: (userId, feedUrl, cb) ->
 
@@ -48,4 +48,4 @@ module.exports =
 
       console.log err
 
-      cb 'FEED_UNKNOWN_ERROR', null
+      cb 'FEED_UNKNOWN_ERROR'

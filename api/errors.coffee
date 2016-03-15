@@ -47,5 +47,9 @@ module.exports =
     status: 400
 
   SUBSCRIPTION_NOT_FOUND:
-    message: 'The user has not subscribe to that feed.'
+    message: 'The user has not subscribed to that feed.'
     status: 404
+
+  SUBSCRIPTION_UNKNOWN_ERROR:
+    message: 'There was an unknown error while querying subscriptions.'
+    status: 500
