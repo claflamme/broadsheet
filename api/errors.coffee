@@ -63,3 +63,13 @@ module.exports =
   PROXY_INVALID_URL:
     message: 'The url param must be a valid URL with an http or https protocol.'
     status: 400
+
+  # --- Article ----------------------------------------------------------------
+
+  ARTICLE_UNKNOWN_ERROR:
+    message: 'There was an unknown error querying articles.'
+    status: 500
+
+  ARTICLE_NOT_FOUND:
+    message: 'The requested article was not found.'
+    status: 404

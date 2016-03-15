@@ -4,6 +4,7 @@ UserController = App.Controllers.UserController
 FeedController = App.Controllers.FeedController
 SubscriptionController = App.Controllers.SubscriptionController
 ProxyController = App.Controllers.ProxyController
+ArticleController = App.Controllers.ArticleController
 
 module.exports = (router) ->
 
@@ -24,6 +25,8 @@ module.exports = (router) ->
   router.patch '/api/feeds/:feedId', FeedController.refresh
 
   router.get '/api/proxy', ProxyController.get
+
+  router.get '/api/articles/:id', ArticleController.show
 
   # Catch-all route for using browserHistory in react-router.
   router.get '*', (req, res) ->
