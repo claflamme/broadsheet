@@ -63,11 +63,11 @@ module.exports =
     unless validator.isURL url
       return res.error 'SUBSCRIPTION_URL_INVALID'
 
-    SubscriptionService.create req.user.sub, url, (err, feed) ->
+    SubscriptionService.create req.user.sub, url, (err, subscription) ->
       if err
         res.error err
       else
-        res.json feed
+        res.json subscription
 
   ###
   @apiGroup Subscriptions
@@ -121,5 +121,5 @@ module.exports =
       custom_title: req.body.custom_title
 
     user.updateSubscription(feedId, fields).then ->
-      user.subscription(feedId).fetch().then (feed) ->
+      user.subscriptions(feedId).fetchOne().then (feed) ->
         res.json feed.serialize()

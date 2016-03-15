@@ -1,13 +1,19 @@
 User = App.Models.User
 Feed = App.Models.Feed
 
+attachAndFetch = (user, feed, cb) ->
+
+  user.subscriptions().attach(feed).then ->
+    user.subscriptions(feed.get('id')).fetchOne().then (subscription) ->
+      cb null, subscription
+
 module.exports =
 
   show: (userId, subId, cb) ->
 
     user = new User id: userId
 
-    user.subscription(subId).fetchOne().then (subscription) ->
+    user.subscriptions(subId).fetchOne().then (subscription) ->
 
       unless subscription
         return cb 'SUBSCRIPTION_NOT_FOUND'
@@ -33,16 +39,16 @@ module.exports =
 
     feed.fetch().then (foundFeed) ->
 
-      if foundFeed
-        foundFeed.subscribers(req.user.sub).fetch().then (subscribers) ->
-          unless subscribers.length is 0
-            return cb null, foundFeed
-          foundFeed.subscribers().attach(user).then ->
-            return cb null, foundFeed
-      else
-        feed.save().then (newFeed) ->
-          newFeed.subscribers().attach(user).then ->
-            return cb null, newFeed
+      unless foundFeed
+        return feed.save().then (newFeed) ->
+          attachAndFetch user, newFeed, cb
+
+      foundFeedId = foundFeed.get 'id'
+
+      user.subscriptions(foundFeedId).fetchOne().then (subscription) ->
+        if subscription
+          return cb null, subscription
+        attachAndFetch user, foundFeed, cb
 
     .catch (err) ->
 
