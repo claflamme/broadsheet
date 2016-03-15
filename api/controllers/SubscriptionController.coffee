@@ -32,7 +32,10 @@ module.exports =
     subId = req.params.id
 
     SubscriptionService.show userId, subId, (err, subscription) ->
-      res.json subscription
+      if err
+        res.error err
+      else
+        res.json subscription
 
   ###
   @apiGroup Subscriptions
@@ -56,7 +59,7 @@ module.exports =
 
     SubscriptionService.create req.user.sub, url, (err, feed) ->
       if err
-        res.error 'FEED_UNKNOWN_ERROR'
+        res.error err
       else
         res.json feed
 

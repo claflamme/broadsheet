@@ -45,3 +45,7 @@ module.exports =
   SUBSCRIPTION_URL_INVALID:
     message: 'The provided url is invalid.'
     status: 400
+
+  SUBSCRIPTION_NOT_FOUND:
+    message: 'The user has not subscribe to that feed.'
+    status: 404

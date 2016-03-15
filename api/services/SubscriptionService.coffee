@@ -8,6 +8,10 @@ module.exports =
     user = new User id: userId
 
     user.subscription(subId).fetchOne().then (subscription) ->
+
+      unless subscription
+        return cb 'SUBSCRIPTION_NOT_FOUND', null
+
       subscription.articles().fetch().then (articles) ->
         subscription = subscription.serialize()
         subscription.articles = articles.serialize()
@@ -44,4 +48,4 @@ module.exports =
 
       console.log err
 
-      cb err, null
+      cb 'FEED_UNKNOWN_ERROR', null
