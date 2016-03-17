@@ -16,17 +16,17 @@ module.exports = (router) ->
   # Subscriptions are "instances" of a feed that belong to a user.
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create
-  router.get '/api/subscriptions/:id', SubscriptionController.show
-  router.patch '/api/subscriptions/:id', SubscriptionController.update
-  router.delete '/api/subscriptions/:id', SubscriptionController.delete
+  router.get '/api/subscriptions/:feedIds', SubscriptionController.show
+  router.patch '/api/subscriptions/:feedId', SubscriptionController.update
+  router.delete '/api/subscriptions/:feedId', SubscriptionController.delete
 
   router.get '/api/feeds', FeedController.list
   router.get '/api/feeds/outdated', FeedController.outdated
   router.patch '/api/feeds/:feedId', FeedController.refresh
 
-  router.get '/api/proxy', ProxyController.get
-
   router.get '/api/articles/:id', ArticleController.show
+
+  router.get '/api/proxy', ProxyController.get
 
   # Catch-all route for using browserHistory in react-router.
   router.get '*', (req, res) ->

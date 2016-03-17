@@ -27,12 +27,17 @@ module.exports =
     currentPassword = @get 'password'
     bcrypt.compareSync providedPassword, currentPassword
 
-  subscriptions: (feedId) ->
+  # The `feedIds` param can be undefined, an integer, or an array of integers.
+  subscriptions: (feedIds) ->
 
     subscriptions = @belongsToMany 'Feed', 'subscriptions'
 
-    if feedId
-      subscriptions = subscriptions.query 'where', 'id', '=', feedId
+    if feedIds
+
+      unless feedIds instanceof Array
+        feedIds = [feedIds]
+
+      subscriptions = subscriptions.query 'where', 'feed_id', 'in', feedIds
 
     return subscriptions.withPivot ['custom_title']
 
@@ -40,6 +45,6 @@ module.exports =
 
     pivotOpts =
       query: (knex) ->
-        knex.where 'feed_id', '=', feedId
+        knex.where 'feed_id', feedId
 
-    @subscription(feedId).updatePivot fields, pivotOpts
+    @subscriptions(feedId).updatePivot fields, pivotOpts

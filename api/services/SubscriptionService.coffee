@@ -1,5 +1,6 @@
 User = App.Models.User
 Feed = App.Models.Feed
+Article = App.Models.Article
 
 attachAndFetch = (user, feed, cb) ->
 
@@ -9,19 +10,24 @@ attachAndFetch = (user, feed, cb) ->
 
 module.exports =
 
-  show: (userId, subId, cb) ->
+  show: (userId, feedIds, cb) ->
 
     user = new User id: userId
 
-    user.subscriptions(subId).fetchOne().then (subscription) ->
+    user.subscriptions(feedIds).fetch().then (subscriptions) ->
 
-      unless subscription
+      unless subscriptions and subscriptions.length > 0
         return cb 'SUBSCRIPTION_NOT_FOUND'
 
-      subscription.articles().fetch().then (articles) ->
-        subscription = subscription.serialize()
-        subscription.articles = articles.serialize()
-        cb null, subscription
+      validFeedIds = subscriptions.serialize().map (subscription) ->
+        subscription.id
+
+      articles = Article.forge().query (query) ->
+        query.where 'feed_id', 'in', validFeedIds
+        .orderBy 'published_at', 'desc'
+
+      articles.fetchAll().then (articles) ->
+        cb null, subscriptions, articles
 
   list: (userId, callback) ->
 
