@@ -35,11 +35,15 @@ module.exports =
     userId = req.user.sub
     feedIds = req.params.feedIds.split ','
 
-    SubscriptionService.show userId, feedIds, (err, subscriptions, articles) ->
+    opts =
+      offset: req.query.offset
+      limit: req.query.limit
+
+    SubscriptionService.show userId, feedIds, opts,  (err, results) ->
       if err
         res.error err
       else
-        res.json { subscriptions, articles }
+        res.json results
 
     #
     # SubscriptionService.show userId, subId, (err, subscription) ->

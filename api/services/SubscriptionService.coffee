@@ -10,7 +10,7 @@ attachAndFetch = (user, feed, cb) ->
 
 module.exports =
 
-  show: (userId, feedIds, cb) ->
+  show: (userId, feedIds, opts, cb) ->
 
     user = new User id: userId
 
@@ -24,10 +24,12 @@ module.exports =
 
       articles = Article.forge().query (query) ->
         query.where 'feed_id', 'in', validFeedIds
+        .offset opts.offset or 0
+        .limit opts.limit or 20
         .orderBy 'published_at', 'desc'
 
       articles.fetchAll().then (articles) ->
-        cb null, subscriptions, articles
+        cb null, { subscriptions, articles }
 
   list: (userId, callback) ->
 
