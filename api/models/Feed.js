@@ -35,7 +35,7 @@ Schema.statics.findOutdated = function(cb) {
     }
   };
 
-  this.find(query, cb);
+  this.find(query).sort('updatedAt').exec(cb);
 
 };
 
