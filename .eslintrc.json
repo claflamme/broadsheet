@@ -9,5 +9,9 @@
   "env": {
     "node": true
   },
-  "extends": "eslint:recommended"
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-param-reassign": [2, { "props": true }],
+    "semi": [2, "always"]
+  }
 }

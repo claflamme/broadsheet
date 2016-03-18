@@ -27,7 +27,7 @@ const Schema = App.Mongoose.Schema(schema, { timestamps: true });
 
 // --- Methods -----------------------------------------------------------------
 
-Schema.statics.findOutdated = function(cb) {
+Schema.statics.findOutdated = function (cb) {
 
   const query = {
     updatedAt: {
