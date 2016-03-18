@@ -4,7 +4,7 @@ Feed = App.Models.Feed
 
 async.forever (repeat) ->
 
-  new Feed().outdated().fetch().then (feed) ->
+  Feed.findMostOutdated (err, feed) ->
 
     unless feed
       console.log 'No outdated feeds found.'

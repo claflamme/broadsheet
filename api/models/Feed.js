@@ -2,6 +2,12 @@ const moment = require('moment');
 
 /* globals App */
 
+// --- Helpers -----------------------------------------------------------------
+
+function getOutdatedThreshold () {
+  return moment().utc().subtract(10, 'minutes');
+}
+
 // --- Schema ------------------------------------------------------------------
 
 const schema = {
@@ -28,15 +34,16 @@ const Schema = App.Mongoose.Schema(schema, { timestamps: true });
 // --- Methods -----------------------------------------------------------------
 
 Schema.statics.findOutdated = function (cb) {
+  this.where('updatedAt').lt(getOutdatedThreshold()).exec(cb);
+};
 
+Schema.statics.findMostOutdated = function (cb) {
   const query = {
     updatedAt: {
-      $lt: moment().utc().subtract(10, 'minutes')
+      $lt: getOutdatedThreshold()
     }
   };
-
-  this.find(query).sort('updatedAt').exec(cb);
-
+  this.findOne(query, cb);
 };
 
 module.exports = Schema;

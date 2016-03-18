@@ -3,10 +3,20 @@
 const schema = {
 
   title: String,
-  url: String,
-  description: String,
+
+  url: {
+    type: String,
+    unique: true
+  },
+
   summary: String,
-  published_at: Date
+
+  publishedAt: Date,
+
+  feed: {
+    type: App.Mongoose.Schema.Types.ObjectId,
+    ref: 'Feed'
+  }
 
 };
 

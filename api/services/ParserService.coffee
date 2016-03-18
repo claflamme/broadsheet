@@ -16,9 +16,8 @@ parseArticle = (item) ->
   output =
     title: item.title.trim()
     url: item.link
-    description: item.description.trim()
     summary: summary
-    published_at: item.pubdate or moment()
+    publishedAt: item.pubdate or moment()
 
   return output
 
@@ -54,21 +53,20 @@ downloadFeed = (url, done) ->
 
 updateFeed = (feed, meta, done) ->
 
-  feed.set 'title', meta.title or null
-  feed.set 'description', meta.description or null
+  feed.title = meta.title or null
+  feed.description = meta.description or null
 
-  feed.save().then done
+  feed.save done
 
 addArticles = (articles, feed, done) ->
 
   numAdded = 0
 
   add = (article, cb) ->
-    article.feed_id = feed.get 'id'
-    new Article(article).save().then ->
-      ++numAdded
-      cb()
-    .catch (err) ->
+    article.feed = feed._id
+    Article.create article, (err, article) ->
+      unless err
+        ++numAdded
       cb()
 
   async.each articles, add, ->
@@ -77,10 +75,10 @@ addArticles = (articles, feed, done) ->
 
 module.exports.processFeed = (feed, done) ->
 
-  feed.save(feed.timestamp({method: 'update'})).then ->
-    downloadFeed feed.get('url'), (res) ->
+  feed.save (err, feed) ->
+    downloadFeed feed.url, (res) ->
       parseStream res, (err, articles, meta) ->
         if err
           throw err
-        updateFeed feed, meta, ->
+        updateFeed feed, meta, (err, feed) ->
           addArticles articles, feed, done
