@@ -18,13 +18,13 @@ module.exports =
     unless feedUrl
       return res.error 'FEED_URL_REQUIRED'
 
-    Feed.findOne params, (err, feed) ->
+    Feed.create params, (err, newFeed) ->
 
-      if feed
-        return res.json feed
+      if err?.code is 11000
+        return Feed.findOne params, (err, existingFeed) ->
+          res.json existingFeed
 
-      Feed.create params, (err, feed) ->
-        res.json feed
+      res.json newFeed
 
   ###
   @apiGroup Feeds
@@ -43,8 +43,8 @@ module.exports =
   ###
   outdated: (req, res) ->
 
-    new Feed().outdated().fetchAll().then (feeds) ->
-      res.json feeds.serialize()
+    App.Models.Feed.findOutdated (err, feeds) ->
+      res.json feeds
 
   ###
   @apiGroup Feeds

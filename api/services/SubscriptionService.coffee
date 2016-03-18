@@ -51,5 +51,5 @@ module.exports =
         console.log err
         return
 
-      subscription.populate 'feed user', (err, subscription) ->
+      subscription.populate 'feed', (err, subscription) ->
         cb null, subscription

@@ -1,9 +1,7 @@
-module.exports = (mongoose) ->
+module.exports = App.Mongoose.Schema
 
-  mongoose.Schema
-
-    title: String
-    url: String
-    description: String
-    summary: String
-    published_at: Date
+  title: String
+  url: String
+  description: String
+  summary: String
+  published_at: Date
