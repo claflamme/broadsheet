@@ -1,6 +1,6 @@
 requireDir = require 'require-dir'
 
-App.Mongoose.set 'debug', true
+App.Mongoose.set 'debug', process.env.NODE_ENV isnt 'production'
 App.Mongoose.connect process.env.DATABASE_URL
 
 models = requireDir App.Config.paths.models

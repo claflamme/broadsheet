@@ -33,8 +33,8 @@ module.exports =
   ###
   list: (req, res) ->
 
-    new Feed().fetchAll().then (feeds) ->
-      res.json feeds.serialize()
+    App.Models.Feed.find {}, (err, feeds) ->
+      res.json feeds
 
   ###
   @apiGroup Feeds
