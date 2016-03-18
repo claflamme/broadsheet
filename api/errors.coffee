@@ -36,6 +36,10 @@ module.exports =
     message: 'There was an unknown error querying feeds.'
     status: 500
 
+  FEED_URL_REQUIRED:
+    message: 'The url field is required for new feeds.'
+    status: 400
+
   # --- Subscriptions ----------------------------------------------------------
 
   SUBSCRIPTION_URL_REQUIRED:

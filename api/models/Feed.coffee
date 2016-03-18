@@ -6,17 +6,21 @@ getThreshold = ->
 
 module.exports = (mongoose) ->
 
-  mongoose.Schema
+  schema =
 
-    title: String
-    description: String
-    url: String
-    created_at:
-      type: Date
-      default: Date.now
-    updated_at:
-      type: Date
-      default: Date.now
+    title:
+      type: String
+      default: null
+
+    description:
+      type: String
+      default: null
+
+    url:
+      type: String
+      unique: true
+
+  Schema = mongoose.Schema schema, { timestamps: true }
 
 # module.exports =
 #

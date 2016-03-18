@@ -16,7 +16,7 @@ module.exports = (mongoose) ->
 
   # -- Schema ------------------------------------------------------------------
 
-  Schema = mongoose.Schema
+  schema =
 
     email:
       type: String
@@ -26,13 +26,7 @@ module.exports = (mongoose) ->
       type: String
       set: hashPassword
 
-    created_at:
-      type: Date
-      default: Date.now
-
-    updated_at:
-      type: Date
-      default: Date.now
+  Schema = mongoose.Schema schema, { timestamps: true }
 
   # --- Options ----------------------------------------------------------------
 

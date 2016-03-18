@@ -5,6 +5,29 @@ module.exports =
 
   ###
   @apiGroup Feeds
+  @api { post } /api/feeds Create
+  @apiDescription
+    Creates a new feed with the given URL then returns the model. If a feed with
+    that URL already exists, then the model for the existing feed is returned.
+  ###
+  create: (req, res) ->
+
+    feedUrl = req.body.url
+    params = url: feedUrl
+
+    unless feedUrl
+      return res.error 'FEED_URL_REQUIRED'
+
+    Feed.findOne params, (err, feed) ->
+
+      if feed
+        return res.json feed
+
+      Feed.create params, (err, feed) ->
+        res.json feed
+
+  ###
+  @apiGroup Feeds
   @api { get } /api/feeds List
   @apiDescription Returns a list of all feeds being indexed by the system.
   ###

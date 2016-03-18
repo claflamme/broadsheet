@@ -1,6 +1,7 @@
 User = App.Models.User
 Feed = App.Models.Feed
 Article = App.Models.Article
+Subscription = App.Models.Subscription
 
 attachAndFetch = (user, feed, cb) ->
 
@@ -40,26 +41,15 @@ module.exports =
     .catch (err) ->
       callback 'SUBSCRIPTION_UNKNOWN_ERROR'
 
-  create: (userId, feedUrl, cb) ->
+  create: (userId, feedId, cb) ->
 
-    feed = new Feed url: feedUrl
-    user = new User id: userId
+    data = user: userId, feed: feedId
 
-    feed.fetch().then (foundFeed) ->
+    Subscription.create data, (err, subscription) ->
 
-      unless foundFeed
-        return feed.save().then (newFeed) ->
-          attachAndFetch user, newFeed, cb
+      if err
+        console.log err
+        return
 
-      foundFeedId = foundFeed.get 'id'
-
-      user.subscriptions(foundFeedId).fetchOne().then (subscription) ->
-        if subscription
-          return cb null, subscription
-        attachAndFetch user, foundFeed, cb
-
-    .catch (err) ->
-
-      console.log err
-
-      cb 'FEED_UNKNOWN_ERROR'
+      subscription.populate 'feed user', (err, subscription) ->
+        cb null, subscription

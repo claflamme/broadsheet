@@ -55,23 +55,16 @@ module.exports =
   ###
   @apiGroup Subscriptions
   @api { post } /api/subscriptions/ Subscribe
-  @apiParam { String } url A URL to an RSS feed.
   @apiDescription
     Adds a new subscription to the user's account and returns its details. If
     the feed URL is not in the system, it will be added.
   ###
   create: (req, res) ->
 
-    url = req.body.url
+    feedId = req.body.feed_id
     userId = req.user.sub
 
-    unless url
-      return res.error 'SUBSCRIPTION_URL_REQUIRED'
-
-    unless validator.isURL url
-      return res.error 'SUBSCRIPTION_URL_INVALID'
-
-    SubscriptionService.create req.user.sub, url, (err, subscription) ->
+    SubscriptionService.create userId, feedId, (err, subscription) ->
       if err
         res.error err
       else
