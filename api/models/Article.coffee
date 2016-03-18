@@ -1,7 +1,9 @@
-module.exports =
+module.exports = (mongoose) ->
 
-  tableName: 'articles'
+  mongoose.Schema
 
-  feed: ->
-
-    @belongsTo 'Feed'
+    title: String
+    url: String
+    description: String
+    summary: String
+    published_at: Date

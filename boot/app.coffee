@@ -6,7 +6,6 @@ morgan = require 'morgan'
 browserify = require 'browserify-middleware'
 bootstrap = require 'bootstrap-styl'
 config = require '../config'
-knex = require('knex') config.db
 
 browserifyOpts =
   transform: ['coffee-reactify']
@@ -25,7 +24,7 @@ GLOBAL.App = {}
 
 App.Errors = require '../api/errors'
 App.Config = require '../config'
-App.Bookshelf = require './bookshelf'
+App.Mongoose = require 'mongoose'
 App.Models = require './models'
 App.Services = require './services'
 App.Controllers = require './controllers'
@@ -64,4 +63,4 @@ app.use require('../api/routes/router') router
 server = app.listen process.env.PORT, ->
   console.log 'Listening on port %s', process.env.PORT
 
-require '../workers/crawler'
+# require '../workers/crawler'

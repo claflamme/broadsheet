@@ -1,7 +1,7 @@
 validator = require 'validator'
 AuthService = App.Services.AuthService
 
-_validateAuthRequest = (req, res, callback) ->
+validateAuthRequest = (req, res, cb) ->
 
   { email, password } = req.body
 
@@ -13,7 +13,7 @@ _validateAuthRequest = (req, res, callback) ->
 
   done = _sendResponse.bind @, res
 
-  callback email, password, done
+  cb email, password, done
 
 _sendResponse = (res, errKey, user) ->
 
@@ -38,7 +38,7 @@ module.exports =
   ###
   authenticate: (req, res) ->
 
-    _validateAuthRequest req, res, AuthService.authenticate
+    validateAuthRequest req, res, AuthService.authenticate
 
   ###
   @apiGroup Auth
@@ -53,4 +53,4 @@ module.exports =
   ###
   register: (req, res) ->
 
-    _validateAuthRequest req, res, AuthService.register
+    validateAuthRequest req, res, AuthService.register

@@ -8,7 +8,7 @@
     "title": "Broadsheet"
   },
   "scripts": {
-    "start": "knex migrate:latest && coffee boot/app.coffee",
+    "start": "coffee boot/app.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -31,6 +31,7 @@
     "keymirror": "^0.1.1",
     "knex": "^0.10.0",
     "moment": "^2.12.0",
+    "mongoose": "^4.4.7",
     "morgan": "^1.7.0",
     "pg": "^4.4.6",
     "react": "^0.14.7",

@@ -1,50 +1,58 @@
 bcrypt = require 'bcryptjs'
 
-module.exports =
+module.exports = (mongoose) ->
 
-  tableName: 'users'
-  hasTimestamps: true
-  hidden: ['password']
-  rules:
-    email: ['maxLength:255']
+  # --- Helpers ----------------------------------------------------------------
 
-  initialize: (attributes, options) ->
+  transformer = (doc, ret, opts) ->
 
-    @on 'saving', @_saveHashedPassword
+    delete ret.password
+    return ret
 
-  _saveHashedPassword: ->
+  hashPassword = (password) ->
 
-    unless @hasChanged 'password'
-      return
-
-    password = @get 'password'
     salt = bcrypt.genSaltSync App.Config.auth.bcryptSaltRounds
+    bcrypt.hashSync password, salt
 
-    @set 'password', bcrypt.hashSync password, salt
+  # -- Schema ------------------------------------------------------------------
 
-  passwordIsValid: (providedPassword) ->
+  Schema = mongoose.Schema
 
-    currentPassword = @get 'password'
-    bcrypt.compareSync providedPassword, currentPassword
+    email:
+      type: String
+      unique: true
 
-  # The `feedIds` param can be undefined, an integer, or an array of integers.
-  subscriptions: (feedIds) ->
+    password:
+      type: String
+      set: hashPassword
 
-    subscriptions = @belongsToMany 'Feed', 'subscriptions'
+    created_at:
+      type: Date
+      default: Date.now
 
-    if feedIds
+    updated_at:
+      type: Date
+      default: Date.now
 
-      unless feedIds instanceof Array
-        feedIds = [feedIds]
+  # --- Options ----------------------------------------------------------------
 
-      subscriptions = subscriptions.query 'where', 'feed_id', 'in', feedIds
+  Schema.set 'toJSON', { transform: transformer }
+  Schema.set 'toObject', { transform: transformer }
 
-    return subscriptions.withPivot ['custom_title']
+  # --- Document and Model Methods ---------------------------------------------
 
-  updateSubscription: (feedId, fields) ->
+  Schema.methods =
 
-    pivotOpts =
-      query: (knex) ->
-        knex.where 'feed_id', feedId
+    passwordMatches: (providedPassword) ->
 
-    @subscriptions(feedId).updatePivot fields, pivotOpts
+      bcrypt.compareSync providedPassword, @password
+
+  Schema.statics =
+
+    passwordIsCorrectLength: (providedPassword) ->
+
+      # 72 bytes is the max length of a password allowed by bcrypt.
+      byteLength = Buffer.byteLength providedPassword, 'utf8'
+      byteLength <= 72
+
+  return Schema
