@@ -98,7 +98,7 @@ module.exports =
 
   ###
   @apiGroup Subscriptions
-  @api { patch } /api/subscriptions/:feedId Update
+  @api { patch } /api/subscriptions/:id Update
   @apiParam { String } custom_title The name to display the feed as to the user.
   @apiDescription
     Updates a user's subscription to a given feed. This does **not** update the
@@ -106,13 +106,23 @@ module.exports =
   ###
   update: (req, res) ->
 
-    feedId = parseInt req.params.feedId
+    subscriptionId = req.params.id
     userId = req.user.sub
-    user = new User id: userId
 
-    fields =
-      custom_title: req.body.custom_title
+    # Don't use findByIdAndUpdate(), since it doesn't trigger any schema
+    # middleware, validators, or transformers.
+    App.Models.Subscription
+    .findById subscriptionId
+    .exec (err, subscription) ->
 
-    user.updateSubscription(feedId, fields).then ->
-      user.subscriptions(feedId).fetchOne().then (feed) ->
-        res.json feed.serialize()
+      unless subscription
+        return res.error 'RESOURCE_NOT_FOUND'
+
+      if subscription.user.toString() isnt userId
+        return res.error 'PERMISSION_DENIED'
+
+      if req.body.customTitle
+        subscription.customTitle = req.body.customTitle
+
+      subscription.save (err, subscription) ->
+        res.json subscription

@@ -33,10 +33,12 @@ const Schema = App.Mongoose.Schema(schema, { timestamps: true });
 
 // --- Methods -----------------------------------------------------------------
 
+// Returns a collection of all feeds that should be re-indexed.
 Schema.statics.findOutdated = function (cb) {
   this.where('updatedAt').lt(getOutdatedThreshold()).exec(cb);
 };
 
+// Returns the single most outdated feed.
 Schema.statics.findMostOutdated = function (cb) {
   const query = {
     updatedAt: {

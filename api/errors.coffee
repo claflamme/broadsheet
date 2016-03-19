@@ -77,3 +77,13 @@ module.exports =
   ARTICLE_NOT_FOUND:
     message: 'The requested article was not found.'
     status: 404
+
+  # --- Generic ----------------------------------------------------------------
+
+  RESOURCE_NOT_FOUND:
+    message: 'The requested resource doesn\'t seem to exist.'
+    status: 404
+
+  PERMISSION_DENIED:
+    message: 'You don\'t have access to the requested resource.'
+    status: 403

@@ -17,7 +17,7 @@ module.exports = (router) ->
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create
   router.get '/api/subscriptions/:id', SubscriptionController.show
-  router.patch '/api/subscriptions/:feedId', SubscriptionController.update
+  router.patch '/api/subscriptions/:id', SubscriptionController.update
   router.delete '/api/subscriptions/:feedId', SubscriptionController.delete
 
   router.get '/api/feeds', FeedController.list
