@@ -11,26 +11,17 @@ attachAndFetch = (user, feed, cb) ->
 
 module.exports =
 
-  show: (userId, feedIds, opts, cb) ->
+  show: (userId, subId, cb) ->
 
-    user = new User id: userId
+    Subscription
+    .findById subId
+    .populate 'feed'
+    .exec (err, subscription) ->
 
-    user.subscriptions(feedIds).fetch().then (subscriptions) ->
-
-      unless subscriptions and subscriptions.length > 0
+      unless subscription
         return cb 'SUBSCRIPTION_NOT_FOUND'
 
-      validFeedIds = subscriptions.serialize().map (subscription) ->
-        subscription.id
-
-      articles = Article.forge().query (query) ->
-        query.where 'feed_id', 'in', validFeedIds
-        .offset opts.offset or 0
-        .limit opts.limit or 20
-        .orderBy 'published_at', 'desc'
-
-      articles.fetchAll().then (articles) ->
-        cb null, { subscriptions, articles }
+      cb null, subscription
 
   list: (userId, callback) ->
 

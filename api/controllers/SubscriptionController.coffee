@@ -33,17 +33,13 @@ module.exports =
   show: (req, res) ->
 
     userId = req.user.sub
-    feedIds = req.params.feedIds.split ','
+    subId = req.params.id
 
-    opts =
-      offset: req.query.offset
-      limit: req.query.limit
-
-    SubscriptionService.show userId, feedIds, opts,  (err, results) ->
+    SubscriptionService.show userId, subId, (err, feed) ->
       if err
         res.error err
       else
-        res.json results
+        res.json feed
 
     #
     # SubscriptionService.show userId, subId, (err, subscription) ->

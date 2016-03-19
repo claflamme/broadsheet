@@ -16,7 +16,7 @@ module.exports = (router) ->
   # Subscriptions are "instances" of a feed that belong to a user.
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create
-  router.get '/api/subscriptions/:feedIds', SubscriptionController.show
+  router.get '/api/subscriptions/:id', SubscriptionController.show
   router.patch '/api/subscriptions/:feedId', SubscriptionController.update
   router.delete '/api/subscriptions/:feedId', SubscriptionController.delete
 
