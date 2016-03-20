@@ -80,6 +80,10 @@ module.exports =
 
   # --- Generic ----------------------------------------------------------------
 
+  UNKNOWN_ERROR:
+    message: 'An unknown or unanticipated error has occured.'
+    status: 500
+
   RESOURCE_NOT_FOUND:
     message: 'The requested resource doesn\'t seem to exist.'
     status: 404

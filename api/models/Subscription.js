@@ -25,6 +25,12 @@ const schema = {
 
 const Schema = App.Mongoose.Schema(schema, { timestamps: true });
 
+// --- Methods -----------------------------------------------------------------
+
+Schema.methods.userIs = function (userId) {
+  return this.user.toString() === userId;
+};
+
 // --- Validators --------------------------------------------------------------
 
 // Feed object IDs must reference a valid feed document.
