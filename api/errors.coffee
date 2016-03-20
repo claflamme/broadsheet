@@ -95,3 +95,7 @@ module.exports =
   MISSING_REQUEST_BODY_PARAMS:
     message: 'One or more parameters were missing from the request body.'
     status: 400
+
+  MISSING_QUERY_PARAMS:
+    message: 'One or more parameters were missing from the query string.'
+    status: 400
