@@ -68,33 +68,25 @@ module.exports =
 
   ###
   @apiGroup Subscriptions
-  @api { delete } /api/subscriptions/:feedId Unsubscribe
+  @api { delete } /api/subscriptions/:id Unsubscribe
   @apiDescription
-    Unsubscribes a user from a given feed. If no more subscribers are left, the
-    feed will be removed from the system.
+    Unsubscribes a user from a given feed.
   ###
   delete: (req, res) ->
 
-    feedId = parseInt req.params.feedId
+    subscriptionId = req.params.id
+    userId = req.user.sub
 
-    unless feedId
-      return res.status(400).json error: message: 'No feed ID specified.'
+    App.Models.Subscription.findById subscriptionId, (err, subscription) ->
 
-    feed = new Feed id: feedId
+      unless subscription
+        return res.error 'RESOURCE_NOT_FOUND'
 
-    feed.fetch().then (foundFeed) ->
+      if subscription.user.toString() isnt userId
+        return res.error 'PERMISSION_DENIED'
 
-      if foundFeed?
-        foundFeed.subscribers().fetch().then (subscribers) ->
-          subscribers.detach(req.user.sub).then ->
-            if subscribers.length is 0
-              foundFeed.destroy()
-            res.status(204).send()
-      else
-        res.status(404).json error: message: 'User not subscribed to that feed.'
-
-    .catch (err) ->
-      res.status(500).json error: message: 'Unknown problem querying feeds.'
+      subscription.remove (err, subscription) ->
+        res.status(204).send()
 
   ###
   @apiGroup Subscriptions
