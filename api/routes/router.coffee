@@ -23,7 +23,7 @@ module.exports = (router) ->
   router.get '/api/feeds', FeedController.list
   router.post '/api/feeds', FeedController.create
   router.get '/api/feeds/outdated', FeedController.outdated
-  router.patch '/api/feeds/:feedId', FeedController.refresh
+  router.patch '/api/feeds/:id', FeedController.refresh
 
   router.get '/api/articles', ArticleController.search
   router.get '/api/articles/:id', ArticleController.show

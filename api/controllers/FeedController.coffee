@@ -33,7 +33,7 @@ module.exports =
   ###
   list: (req, res) ->
 
-    App.Models.Feed.find {}, (err, feeds) ->
+    Feed.find {}, (err, feeds) ->
       res.json feeds
 
   ###
@@ -43,7 +43,7 @@ module.exports =
   ###
   outdated: (req, res) ->
 
-    App.Models.Feed.findOutdated (err, feeds) ->
+    Feed.findOutdated (err, feeds) ->
       res.json feeds
 
   ###
@@ -53,6 +53,6 @@ module.exports =
   ###
   refresh: (req, res) ->
 
-    new Feed().where('id', req.params.feedId).fetch().then (feed) ->
+    Feed.findById req.params.id, (err, feed) ->
       ParserService.processFeed feed, ->
-        res.json feed.serialize()
+        res.json feed
