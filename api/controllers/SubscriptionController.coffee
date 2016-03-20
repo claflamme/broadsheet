@@ -1,7 +1,7 @@
 validator = require 'validator'
 Feed = App.Models.Feed
 User = App.Models.User
-SubscriptionService = App.Services.SubscriptionService
+Subscription = App.Models.Subscription
 
 module.exports =
 
@@ -32,21 +32,15 @@ module.exports =
   ###
   show: (req, res) ->
 
-    userId = req.user.sub
-    subId = req.params.id
+    App.Models.Subscription
+    .findById req.params.id
+    .populate 'feed'
+    .exec (err, subscription) ->
 
-    SubscriptionService.show userId, subId, (err, feed) ->
-      if err
-        res.error err
-      else
-        res.json feed
+      unless subscription
+        return res.error 'RESOURCE_NOT_FOUND'
 
-    #
-    # SubscriptionService.show userId, subId, (err, subscription) ->
-    #   if err
-    #     res.error err
-    #   else
-    #     res.json subscription
+      res.json subscription
 
   ###
   @apiGroup Subscriptions
@@ -59,15 +53,15 @@ module.exports =
 
     feedId = req.body.feedId
     userId = req.user.sub
+    data = user: userId, feed: feedId
 
     unless feedId
       return res.error 'MISSING_REQUEST_BODY_PARAMS', 'feedId'
 
-    SubscriptionService.create userId, feedId, (err, subscription) ->
-      if err
-        res.error err
-      else
-        res.json subscription
+    App.Models.Subscription.create data, (err, subscription) ->
+
+      subscription.populate 'feed', (err, subscription) ->
+      res.json subscription
 
   ###
   @apiGroup Subscriptions
