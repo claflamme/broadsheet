@@ -11,12 +11,14 @@ const schema = {
 
   user: {
     type: App.Mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
 
   feed: {
     type: App.Mongoose.Schema.Types.ObjectId,
-    ref: 'Feed'
+    ref: 'Feed',
+    required: true
   }
 
 };

@@ -14,11 +14,11 @@ module.exports =
 
     userId = req.user.sub
 
-    SubscriptionService.list req.user.sub, (err, subscriptions) ->
-      if err
-        res.error err
-      else
-        res.json subscriptions
+    App.Models.Subscription
+    .find user: userId
+    .populate 'feed'
+    .exec (err, subscriptions) ->
+      res.json subscriptions
 
   ###
   @apiGroup Subscriptions
@@ -57,8 +57,11 @@ module.exports =
   ###
   create: (req, res) ->
 
-    feedId = req.body.feed_id
+    feedId = req.body.feedId
     userId = req.user.sub
+
+    unless feedId
+      return res.error 'MISSING_REQUEST_BODY_PARAMS', 'feedId'
 
     SubscriptionService.create userId, feedId, (err, subscription) ->
       if err

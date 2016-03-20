@@ -87,3 +87,7 @@ module.exports =
   PERMISSION_DENIED:
     message: 'You don\'t have access to the requested resource.'
     status: 403
+
+  MISSING_REQUEST_BODY_PARAMS:
+    message: 'One or more parameters were missing from the request body.'
+    status: 400
