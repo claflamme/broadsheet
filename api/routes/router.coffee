@@ -25,9 +25,6 @@ module.exports = (router) ->
   router.get '/api/feeds/outdated', FeedController.outdated
   router.patch '/api/feeds/:id', FeedController.refresh
 
-  router.get '/api/articles', ArticleController.search
-  router.get '/api/articles/:id', ArticleController.show
-
   router.get '/api/proxy', ProxyController.get
 
   # Catch-all route for using browserHistory in react-router.
