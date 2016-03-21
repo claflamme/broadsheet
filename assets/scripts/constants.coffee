@@ -18,6 +18,12 @@ module.exports = keymirror
   # A list of the user's feed subscriptions has been fetched.
   SUBSCRIPTIONS_RECEIVED: null
 
+  # User has requested that the "New Subscription" prompt be shown.
+  SUBSCRIPTIONS_PROMPT_OPENING: null
+
+  # User has closed the "New Subscription" prompt.
+  SUBSCRIPTIONS_PROMPT_CLOSING: null
+
   # Sent a request to add a new subscription.
   SUBSCRIPTIONS_ADDING_NEW: null
 

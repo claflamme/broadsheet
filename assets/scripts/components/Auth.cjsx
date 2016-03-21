@@ -16,6 +16,7 @@ module.exports = React.createClass
   render: ->
 
     <Col md={ 4 } mdOffset={ 3 } lg={ 4 } lgOffset={ 4 } sm={ 6 } smOffset={ 3 }>
+      <h1>&nbsp;</h1>
       <form onSubmit={ @_onSubmit }>
         <Input
           type='email'

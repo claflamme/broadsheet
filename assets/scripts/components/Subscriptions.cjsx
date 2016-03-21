@@ -8,36 +8,40 @@ module.exports = React.createClass
   propTypes:
 
     subscriptions: React.PropTypes.array.isRequired
+    showNewSubscriptionPrompt: React.PropTypes.bool
     dispatch: React.PropTypes.func.isRequired
 
   componentWillMount: ->
 
     @props.dispatch SubscriptionActions.fetchSubscriptions()
 
-  getInitialState: ->
+  getDefaultProps: ->
 
-    showNewSubscription: false
+    showNewSubscriptionPrompt: false
 
   render: ->
 
     <div>
-      <h4>Subscriptions</h4>
-      <ul>
+      <ul className='subscriptionsList'>
         { @props.subscriptions.map @_renderSubscription }
       </ul>
       <Button onClick={ @_showNewSubscription }>
         Add Subscription
       </Button>
       <SubscriptionsNew
-        show={ @state.showNewSubscription }
+        show={ @props.showNewSubscriptionPrompt }
         onHide={ @_hideNewSubscription }
         onSubmit={ @_addSubscription } />
     </div>
 
   _renderSubscription: (subscription, i) ->
 
+    fallbackTitle = subscription.feed.title or subscription.feed.url
+
     <li key={ i }>
-      { subscription._pivot_custom_title or subscription.title }
+      <a href=''>
+        { subscription.customTitle or fallbackTitle }
+      </a>
     </li>
 
   _addSubscription: (form) ->
@@ -46,8 +50,8 @@ module.exports = React.createClass
 
   _showNewSubscription: ->
 
-    @setState showNewSubscription: true
+    @props.dispatch SubscriptionActions.showNewPrompt()
 
   _hideNewSubscription: ->
 
-    @setState showNewSubscription: false
+    @props.dispatch SubscriptionActions.hideNewPrompt()

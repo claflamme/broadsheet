@@ -8,6 +8,7 @@ mapStateToProps = (state) ->
 
   subscriptions: state.subscriptions
   token: state.auth.token
+  showNewSubscriptionPrompt: state.modals.showNewSubscriptionPrompt
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -23,11 +24,16 @@ module.exports = connect(mapStateToProps) React.createClass
   render: ->
 
     <Grid>
+      <h4>&nbsp;</h4>
       <Row>
         <Col xs={ 3 }>
           <Subscriptions
             subscriptions={ @props.subscriptions }
+            showNewSubscriptionPrompt={ @props.showNewSubscriptionPrompt }
             dispatch={ @props.dispatch } />
+        </Col>
+        <Col xs={ 9 }>
+          { @props.children }
         </Col>
       </Row>
     </Grid>

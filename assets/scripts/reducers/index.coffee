@@ -3,6 +3,8 @@
 reducers =
   auth: require './AuthReducer'
   subscriptions: require './SubscriptionsReducer'
+  modals: require './ModalsReducer'
+  articles: require './ArticlesReducer'
 
 baseReducer = (reducer) ->
 
