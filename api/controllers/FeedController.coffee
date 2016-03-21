@@ -20,11 +20,14 @@ module.exports =
 
     Feed.create params, (err, newFeed) ->
 
+      # 11000 is the code for errors due to duplicate unique indices. In our
+      # case, the `url` field is unique.
       if err?.code is 11000
         return Feed.findOne params, (err, existingFeed) ->
           res.json existingFeed
 
-      res.json newFeed
+      ParserService.processFeed newFeed, ->
+        res.json newFeed
 
   ###
   @apiGroup Feeds
