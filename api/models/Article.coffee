@@ -13,4 +13,4 @@ schema =
     type: App.Mongoose.Schema.Types.ObjectId
     ref: 'Feed'
 
-module.exports = App.Mongoose.Schema Schema
+module.exports = App.Mongoose.Schema schema

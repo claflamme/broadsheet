@@ -25,7 +25,7 @@ module.exports =
 
     query.populate('feed').exec (err, subscription) ->
       unless subscription
-        return res.error'RESOURCE_NOT_FOUND'
+        return res.error 'RESOURCE_NOT_FOUND'
       res.json subscription
 
   ###
