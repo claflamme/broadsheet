@@ -23,7 +23,11 @@ module.exports = React.createClass
   render: ->
 
     <div>
-      <Button block bsStyle='primary' onClick={ @_showNewSubscription }>
+      <Button
+        block
+        bsStyle='primary'
+        className='newSubscriptionBtn'
+        onClick={ @_showNewSubscription }>
         Add Subscription
       </Button>
       <ul className='subscriptionsList'>
