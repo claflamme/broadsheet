@@ -1,4 +1,5 @@
 React = require 'react'
+{ Link } = require 'react-router'
 { Button } = require 'react-bootstrap'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionsNew = require './SubscriptionsNew'
@@ -25,7 +26,7 @@ module.exports = React.createClass
       <ul className='subscriptionsList'>
         { @props.subscriptions.map @_renderSubscription }
       </ul>
-      <Button onClick={ @_showNewSubscription }>
+      <Button bsStyle='primary' onClick={ @_showNewSubscription }>
         Add Subscription
       </Button>
       <SubscriptionsNew
@@ -39,9 +40,9 @@ module.exports = React.createClass
     fallbackTitle = subscription.feed.title or subscription.feed.url
 
     <li key={ i }>
-      <a href=''>
+      <Link to={ "/subscriptions/#{ subscription._id }"}>
         { subscription.customTitle or fallbackTitle }
-      </a>
+      </Link>
     </li>
 
   _addSubscription: (form) ->

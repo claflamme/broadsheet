@@ -1,55 +1,16 @@
 constants = require '../constants'
 api = require '../api'
 
-createFeed = (url, cb) ->
-
-  request =
-    url: '/api/feeds'
-    method: 'post'
-    body: { url }
-
-  api.send request, cb
-
-createSubscription = (feedId, cb) ->
-
-  request =
-    url: '/api/subscriptions'
-    method: 'post'
-    body: { feedId }
-
-  api.send request, cb
-
 module.exports =
 
-  receiveSubscriptions: (subscriptions) ->
-
-    type: constants.SUBSCRIPTIONS_RECEIVED
-    subscriptions: subscriptions
-
-  fetchSubscriptions: ->
+  fetchAll: ->
 
     request =
-      url: '/api/subscriptions'
+      url: '/api/subscriptions/articles'
 
-    (dispatch) =>
-      dispatch type: constants.SUBSCRIPTIONS_REQUESTED
-      api.send request, (res, json) =>
-        dispatch @receiveSubscriptions json
-
-  add: (url) ->
-
-    (dispatch) =>
-      dispatch type: constants.SUBSCRIPTIONS_ADDING_NEW
-      createFeed url, (res, feed) =>
-        createSubscription feed._id, (res, subscription) =>
-          dispatch type: constants.SUBSCRIPTIONS_ADDED_NEW
-          dispatch @hideNewPrompt()
-          dispatch @fetchSubscriptions()
-
-  showNewPrompt: ->
-
-    type: constants.SUBSCRIPTIONS_PROMPT_OPENING
-
-  hideNewPrompt: ->
-
-    type: constants.SUBSCRIPTIONS_PROMPT_CLOSING
+    (dispatch) ->
+      api.send request, (res, articles) ->
+        action =
+          type: constants.ARTICLES_RECEIVED
+          articles: articles
+        dispatch action

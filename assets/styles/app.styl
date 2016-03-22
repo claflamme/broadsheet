@@ -3,6 +3,7 @@
 
 body
   font-weight 300
+  height 100%
 
 .btn-primary
   background-image linear-gradient(25deg, rgba(64,136,196,1) -35%,rgba(110,205,177,1) 135%)
@@ -15,3 +16,48 @@ body
   margin 0
   padding 0
   list-style-type none
+
+  li > a
+    display block
+    line-height 2.5em
+
+.articlesList
+  margin 0
+  padding 0
+  list-style-type none
+
+  li
+    border-bottom 1px solid borderColor
+    margin 0 ($grid-gutter-width / 2) * -1
+    padding ($grid-gutter-width / 2)
+    transition background-color 100ms
+    cursor pointer
+
+  li:hover
+    background-color #fafafa
+
+.articleTitle
+  display block
+  margin 0
+  white-space nowrap
+  overflow-x hidden
+  font-weight 400
+
+  &:hover
+    text-decoration none
+    color $brand-primary
+
+.dashboardGrid
+  position absolute
+  top 0
+  bottom 0
+  width 100%
+  overflow hidden
+
+  .row
+    height 100%
+
+.dashboardCol
+  height 100%
+  overflow-y auto
+  border-right 1px solid borderColor

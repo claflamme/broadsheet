@@ -1,5 +1,5 @@
 React = require 'react'
-{ Grid, Row, Col } = require 'react-bootstrap'
+{ Grid, Row, Col, Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 AuthActions = require '../actions/AuthActions'
 Subscriptions = require '../components/Subscriptions'
@@ -23,16 +23,15 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <Grid>
-      <h4>&nbsp;</h4>
+    <Grid fluid className='dashboardGrid'>
       <Row>
-        <Col xs={ 3 }>
+        <Col xs={ 2 } className='dashboardCol'>
           <Subscriptions
             subscriptions={ @props.subscriptions }
             showNewSubscriptionPrompt={ @props.showNewSubscriptionPrompt }
             dispatch={ @props.dispatch } />
         </Col>
-        <Col xs={ 9 }>
+        <Col xs={ 4 } className='dashboardCol'>
           { @props.children }
         </Col>
       </Row>
