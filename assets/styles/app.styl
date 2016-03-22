@@ -12,6 +12,9 @@ body
   &:hover
     opacity 0.8
 
+.subscriptions
+  padding-top 15px
+
 .subscriptionsList
   margin 0
   padding 0
@@ -20,6 +23,13 @@ body
   li > a
     display block
     line-height 2.5em
+
+    &:link, &:visited, &:active
+      color $navbar-default-color
+
+    &.active
+      color $brand-primary
+      font-weight 400
 
 .articlesList
   margin 0
@@ -51,7 +61,8 @@ body
   position absolute
   top 0
   bottom 0
-  width 100%
+  left 0
+  right 0
   overflow hidden
 
   .row

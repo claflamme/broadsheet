@@ -25,14 +25,16 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <Grid fluid className='dashboardGrid'>
       <Row>
-        <Col xs={ 2 } className='dashboardCol'>
+        <Col xs={ 2 } className='dashboardCol subscriptions'>
           <Subscriptions
             subscriptions={ @props.subscriptions }
             showNewSubscriptionPrompt={ @props.showNewSubscriptionPrompt }
             dispatch={ @props.dispatch } />
         </Col>
-        <Col xs={ 4 } className='dashboardCol'>
+        <Col xs={ 4 } className='dashboardCol articleListCol'>
           { @props.children }
+        </Col>
+        <Col xs={ 6 } className='dashboardCol'>
         </Col>
       </Row>
     </Grid>

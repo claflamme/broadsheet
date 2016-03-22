@@ -23,12 +23,12 @@ module.exports = React.createClass
   render: ->
 
     <div>
+      <Button block bsStyle='primary' onClick={ @_showNewSubscription }>
+        Add Subscription
+      </Button>
       <ul className='subscriptionsList'>
         { @props.subscriptions.map @_renderSubscription }
       </ul>
-      <Button bsStyle='primary' onClick={ @_showNewSubscription }>
-        Add Subscription
-      </Button>
       <SubscriptionsNew
         show={ @props.showNewSubscriptionPrompt }
         onHide={ @_hideNewSubscription }
@@ -40,7 +40,9 @@ module.exports = React.createClass
     fallbackTitle = subscription.feed.title or subscription.feed.url
 
     <li key={ i }>
-      <Link to={ "/subscriptions/#{ subscription._id }"}>
+      <Link
+        to={ "/reader/subscriptions/#{ subscription._id }"}
+        activeClassName='active'>
         { subscription.customTitle or fallbackTitle }
       </Link>
     </li>

@@ -18,6 +18,7 @@ module.exports = (router) ->
   router.post '/api/subscriptions', SubscriptionController.create
   router.get '/api/subscriptions/articles', ArticleController.all
   router.get '/api/subscriptions/:id', SubscriptionController.show
+  router.get '/api/subscriptions/:id/articles', ArticleController.bySubscription
   router.patch '/api/subscriptions/:id', SubscriptionController.update
   router.delete '/api/subscriptions/:id', SubscriptionController.delete
 
