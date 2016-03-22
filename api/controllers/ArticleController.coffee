@@ -19,6 +19,6 @@ module.exports =
         subscription.feed
 
       Article.find { feed: { $in: feedIds } }
-      .sort 'publishedAt'
+      .sort '-publishedAt'
       .exec (err, articles) ->
         res.json articles or []
