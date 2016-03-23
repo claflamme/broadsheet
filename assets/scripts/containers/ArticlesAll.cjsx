@@ -5,9 +5,8 @@ ArticleActions = require '../actions/ArticleActions'
 ArticleList = require '../components/ArticleList.cjsx'
 
 mapStateToProps = (state) ->
-  
+
   articles: state.articles
-  subscriptions: state.subscriptions
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -17,6 +16,4 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <ArticleList
-      articles={ @props.articles }
-      subscriptions={ @props.subscriptions } />
+    <ArticleList articles={ @props.articles } />
