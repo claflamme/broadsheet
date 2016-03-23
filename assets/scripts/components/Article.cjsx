@@ -1,4 +1,5 @@
 React = require 'react'
+{ Row, Col } = require 'react-bootstrap'
 moment = require 'moment'
 
 module.exports = React.createClass
@@ -10,17 +11,22 @@ module.exports = React.createClass
 
   render: ->
 
-    <div>
-      <a href='' className='articleTitle'>
-        { @props.article.title }
-      </a>
-      <div className='text-muted'>
-        <small>
+    <Row>
+      <Col xs={ 1 } className='articleSubscriptionTitle'>
+        <span className='text-muted'>
           { @props.subscription.customTitle or @props.subscription.feed.title }
-        </small>
-        <span>&nbsp;&bull;&nbsp;</span>
-        <small>
-          { moment(@props.article.publishedAt).fromNow() }
-        </small>
-      </div>
-    </div>
+        </span>
+      </Col>
+      <Col xs={ 10 } className='articleSummary'>
+        <span className='articleTitle'>
+          { @props.article.title }
+        </span>
+        &nbsp;
+        <span className='text-muted articlePreview'>
+          { @props.article.summary }
+        </span>
+      </Col>
+      <Col xs={ 1 } className='text-muted'>
+        <span>{ moment(@props.article.publishedAt).fromNow true }</span>
+      </Col>
+    </Row>

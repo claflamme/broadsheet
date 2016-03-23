@@ -3,6 +3,8 @@ module.exports =
   send: (options, cb) ->
 
     cb or= ->
+      undefined
+      
     options.headers or= {}
 
     options.headers['content-type'] = 'application/json'

@@ -31,10 +31,8 @@ module.exports = connect(mapStateToProps) React.createClass
             showNewSubscriptionPrompt={ @props.showNewSubscriptionPrompt }
             dispatch={ @props.dispatch } />
         </Col>
-        <Col xs={ 4 } className='dashboardCol articleListCol'>
+        <Col xs={ 10 } className='dashboardCol articleListCol'>
           { @props.children }
-        </Col>
-        <Col xs={ 6 } className='dashboardCol'>
         </Col>
       </Row>
     </Grid>

@@ -12,6 +12,7 @@ body
     opacity 0.8
 
 .subscriptions
+  background #fbfbfb
   padding-top ($grid-gutter-width / 2)
 
 .subscriptionsList
@@ -33,7 +34,7 @@ body
       text-decoration none
 
     &.active
-      background-color #f6f6f6
+      background-color #f2f2f2
       font-weight 400
       color $brand-primary
 
@@ -45,22 +46,23 @@ body
   li
     border-bottom 1px solid borderColor
     margin 0 ($grid-gutter-width / 2) * -1
-    padding ($grid-gutter-width / 2)
-    transition background-color 100ms
+    padding 8px ($grid-gutter-width / 2)
+    transition all 200ms
     cursor pointer
 
   li:hover
     background-color #fafafa
 
 .articleTitle
-  display block
+  color #444
+  font-weight 700
   margin 0
   white-space nowrap
   overflow-x hidden
 
-  &:hover
-    text-decoration none
-    color $brand-primary
+.articleSubscriptionTitle, .articleSummary
+  white-space nowrap
+  overflow hidden
 
 .dashboardGrid
   position absolute
