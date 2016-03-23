@@ -12,7 +12,7 @@ module.exports = React.createClass
   render: ->
 
     <Row>
-      <Col xs={ 1 } className='articleSubscriptionTitle'>
+      <Col xs={ 2 } className='articleSubscriptionTitle'>
         <span className='text-muted'>
           { @props.subscription.customTitle or @props.subscription.feed.title }
         </span>
@@ -25,8 +25,5 @@ module.exports = React.createClass
         <span className='text-muted articlePreview'>
           { @props.article.summary }
         </span>
-      </Col>
-      <Col xs={ 1 } className='text-muted'>
-        <span>{ moment(@props.article.publishedAt).fromNow true }</span>
       </Col>
     </Row>
