@@ -3,6 +3,9 @@ path = require 'path'
 
 module.exports =
 
+  db:
+    debug: process.env.NODE_ENV isnt 'production'
+
   urls:
     baseUrl: process.env.BASE_URL or 'http://coolsite.com'
 

@@ -1,6 +1,11 @@
 requireDir = require 'require-dir'
+paginator = require 'mongoose-paginate'
 
-App.Mongoose.set 'debug', process.env.NODE_ENV isnt 'production'
+# Some global defaults for pagination
+paginator.paginate.options =
+  limit: 50
+
+App.Mongoose.set 'debug', App.Config.db.debug or false
 App.Mongoose.connect process.env.DATABASE_URL
 
 models = requireDir App.Config.paths.models
