@@ -16,4 +16,12 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <ArticleList articles={ @props.articles } />
+    <ArticleList
+      loadMore={ @_loadMore }
+      articles={ @props.articles } />
+
+  _loadMore: ->
+
+    nextPage = @props.articles.page + 1
+
+    @props.dispatch ArticleActions.fetchAll nextPage

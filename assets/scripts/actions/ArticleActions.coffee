@@ -8,20 +8,33 @@ fetchArticles = (request, dispatch) ->
     dispatch type: constants.ARTICLES_RECEIVED, articles: articles
     document.querySelector('.articleListCol').scrollTop = 0
 
+updateArticles = (request, dispatch) ->
+
+  api.send request, (res, articles) ->
+    dispatch type: constants.ARTICLES_UPDATED, articles: articles
+
 module.exports =
 
-  fetchAll: ->
+  fetchAll: (page = 1) ->
 
     request =
       url: '/api/subscriptions/articles'
+      query: { page }
 
     (dispatch) ->
-      fetchArticles request, dispatch
+      if page is 1
+        fetchArticles request, dispatch
+      else
+        updateArticles request, dispatch
 
-  fetchBySubscription: (subscriptionId) ->
+  fetchBySubscription: (subscriptionId, page = 1) ->
 
     request =
       url: "/api/subscriptions/#{ subscriptionId }/articles"
+      query: { page }
 
     (dispatch) ->
-      fetchArticles request, dispatch
+      if page is 1
+        fetchArticles request, dispatch
+      else
+        updateArticles request, dispatch

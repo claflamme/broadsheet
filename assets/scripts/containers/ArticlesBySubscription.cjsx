@@ -23,9 +23,16 @@ module.exports = connect(mapStateToProps) React.createClass
   render: ->
 
     <ArticleList
-      articles={ @props.articles }
-      subscriptions={ @props.subscriptions } />
+      loadMore={ @_loadMore }
+      articles={ @props.articles } />
 
   _reload: (subscriptionId) ->
 
     @props.dispatch ArticleActions.fetchBySubscription subscriptionId
+
+  _loadMore: ->
+
+    nextPage = @props.articles.page + 1
+    subscriptionId = @props.params.subscriptionId
+
+    @props.dispatch ArticleActions.fetchBySubscription subscriptionId, nextPage
