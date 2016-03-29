@@ -1,6 +1,6 @@
 FeedParser = require 'feedparser'
 sanitize = require 'sanitize-html'
-async = require 'async'
+each = require 'async/each'
 request = require 'request'
 moment = require 'moment'
 Feed = App.Models.Feed
@@ -8,9 +8,12 @@ Article = App.Models.Article
 
 parseArticle = (item) ->
 
+  # Full article data is fetched at "read time", so we don't need to store any
+  # more than a brief summary. Text is truncated to 300 characters, paragraph
+  # text only, no line breaks.
   summary = item.summary or item.description
   summary = sanitize summary, { allowedTags: [] }
-  summary = summary.substring(0, 300).trim() + '...'
+  summary = summary.substring(0, 300).trim()
   summary = summary.replace /\r?\n|\r/g, ''
 
   output =
@@ -58,20 +61,21 @@ updateFeed = (feed, meta, done) ->
 
   feed.save done
 
-addArticles = (articles, feed, done) ->
+addArticles = (parsedArticles, feed, done) ->
 
-  numAdded = 0
+  urls = parsedArticles.map (article) -> article.url
 
-  add = (article, cb) ->
-    article.feed = feed._id
-    Article.create article, (err, article) ->
-      unless err
-        ++numAdded
-      cb()
+  Article.find url: { $in: urls }, (err, foundArticles) ->
 
-  async.each articles, add, ->
-    console.log 'Done! Added %d articles.', numAdded
-    done()
+    foundUrls = foundArticles.map (article) -> article.url
+
+    # Remove any articles that are already in the DB.
+    articlesToInsert = parsedArticles.filter (parsedArticle) ->
+      foundUrls.indexOf(parsedArticle.url) is -1
+
+    Article.create articlesToInsert, (err) ->
+      console.log 'Done! Added %d articles.', articlesToInsert.length
+      done()
 
 module.exports.processFeed = (feed, done) ->
 

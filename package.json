@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "^2.0.0-rc.2",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "bootstrap-styl": "^5.0.5",

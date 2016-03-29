@@ -21,7 +21,7 @@ Schema = App.Mongoose.Schema schema, timestamps: true
 # --- Helpers ------------------------------------------------------------------
 
 getOutdatedThreshold = ->
-  moment().utc().subtract 10, 'minutes'
+  moment().utc().subtract App.Config.crawler.outdatedThreshold, 'minutes'
 
 # --- Methods ------------------------------------------------------------------
 
