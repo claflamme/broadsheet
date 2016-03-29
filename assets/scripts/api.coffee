@@ -2,9 +2,8 @@ module.exports =
 
   send: (options, cb) ->
 
-    cb or= ->
-      undefined
-      
+    cb or= -> undefined
+
     options.headers or= {}
 
     options.headers['content-type'] = 'application/json'
@@ -14,6 +13,12 @@ module.exports =
 
     if options.body
       options.body = JSON.stringify options.body
+
+    if options.query
+      queryParams = []
+      for k, v of options.query
+        queryParams.push "#{ k }=#{ v }"
+      options.url += "?#{ queryParams.join '&' }"
 
     fetch(options.url, options).then (res) ->
       if res.status is 401
