@@ -7,16 +7,16 @@ module.exports = React.createClass
 
   propTypes:
 
-    articles: React.PropTypes.array
+    articles: React.PropTypes.object
 
   getDefaultProps: ->
 
-    articles: []
+    articles: {}
 
   render: ->
 
     <ul className='articlesList'>
-      { @props.articles.map @_renderArticle }
+      { @props.articles.docs.map @_renderArticle }
     </ul>
 
   _renderArticle: (article, i) ->

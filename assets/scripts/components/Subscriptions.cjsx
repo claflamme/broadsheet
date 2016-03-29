@@ -1,5 +1,5 @@
 React = require 'react'
-{ Link } = require 'react-router'
+{ Link, IndexLink } = require 'react-router'
 { Button } = require 'react-bootstrap'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionsNew = require './SubscriptionsNew'
@@ -31,6 +31,10 @@ module.exports = React.createClass
         Add Subscription
       </Button>
       <ul className='subscriptionsList'>
+        <li>
+          <IndexLink to='/reader' activeClassName='active'>All</IndexLink>
+        </li>
+        <li>&nbsp;</li>
         { @props.subscriptions.map @_renderSubscription }
       </ul>
       <SubscriptionsNew

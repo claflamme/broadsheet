@@ -1,3 +1,5 @@
+mongoosePaginate = require 'mongoose-paginate'
+
 schema =
 
   title: String
@@ -13,4 +15,8 @@ schema =
     type: App.Mongoose.Schema.Types.ObjectId
     ref: 'Feed'
 
-module.exports = App.Mongoose.Schema schema
+Schema = App.Mongoose.Schema schema
+
+Schema.plugin mongoosePaginate
+
+module.exports = Schema

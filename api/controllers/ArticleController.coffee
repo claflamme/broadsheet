@@ -18,9 +18,10 @@ module.exports =
       feedIds = subscriptions.map (subscription) ->
         subscription.feed
 
-      Article.find { feed: { $in: feedIds } }
-      .sort '-publishedAt'
-      .exec (err, articles) ->
+      query = feed: { $in: feedIds }
+      options = sort: '-publishedAt'
+
+      Article.paginate query, options, (err, articles) ->
         res.json articles or []
 
   ###
@@ -35,7 +36,8 @@ module.exports =
       unless subscription
         return res.json []
 
-      Article.find feed: subscription.feed
-      .sort '-publishedAt'
-      .exec (err, articles) ->
+      query = feed: subscription.feed
+      options = sort: '-publishedAt'
+
+      Article.paginate query, options, (err, articles) ->
         res.json articles or []
