@@ -16,7 +16,6 @@ ArticleList = (props, context) ->
 ArticleList.propTypes =
   articles: React.PropTypes.object.isRequired
   loadMore: React.PropTypes.func.isRequired
-  durf: React.PropTypes.func.isRequired
 
 renderArticle = (article, i) ->
 
