@@ -10,13 +10,10 @@ module.exports =
 
   ARTICLES_RECEIVED: (state, action) ->
 
-    action.articles.page = parseInt action.articles.page
-
     action.articles
 
   ARTICLES_UPDATED: (state, action) ->
 
     articles = state.docs.concat action.articles.docs
-    page = parseInt action.articles.page
 
-    Object.assign {}, state, { docs: articles, page: page }
+    Object.assign {}, state, { docs: articles, page: action.articles.page }

@@ -12,7 +12,6 @@ module.exports =
     query = Subscription.find user: req.user.sub
 
     query.populate('feed').exec (err, subscriptions) ->
-      console.log err
       res.json subscriptions
 
   ###
