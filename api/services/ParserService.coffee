@@ -73,6 +73,11 @@ addArticles = (parsedArticles, feed, done) ->
     articlesToInsert = parsedArticles.filter (parsedArticle) ->
       foundUrls.indexOf(parsedArticle.url) is -1
 
+    # Add the feed ID to remaining articles.
+    articlesToInsert = articlesToInsert.map (parsedArticle) ->
+      parsedArticle.feed = feed._id
+      parsedArticle
+
     Article.create articlesToInsert, (err) ->
       console.log 'Done! Added %d articles.', articlesToInsert.length
       done()
