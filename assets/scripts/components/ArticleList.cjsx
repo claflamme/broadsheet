@@ -1,40 +1,39 @@
 React = require 'react'
 { Button } = require 'react-bootstrap'
-ArticleActions = require '../actions/ArticleActions'
 Article = require './Article'
 
-module.exports = React.createClass
+ArticleList = (props, context) ->
 
-  propTypes:
+  <div>
+    <ul className='articlesList'>
+      { props.articles.docs.map renderArticle }
+    </ul>
+    <p></p>
+    { renderLoadMore props }
+    <p></p>
+  </div>
 
-    articles: React.PropTypes.object.isRequired
-    loadMore: React.PropTypes.func.isRequired
+ArticleList.propTypes =
+  articles: React.PropTypes.object.isRequired
+  loadMore: React.PropTypes.func.isRequired
+  durf: React.PropTypes.func.isRequired
 
-  render: ->
+renderArticle = (article, i) ->
 
-    <div>
-      <ul className='articlesList'>
-        { @props.articles.docs.map @_renderArticle }
-      </ul>
-      <p></p>
-      { @_renderLoadMore() }
-      <p></p>
-    </div>
+  <li key={ i }>
+    <Article article={ article } />
+  </li>
 
-  _renderArticle: (article, i) ->
+renderLoadMore = (props) ->
 
-    <li key={ i }>
-      <Article article={ article } />
-    </li>
+  text = 'Load more...'
+  finished = props.articles.page is props.articles.pages
 
-  _renderLoadMore: ->
+  if finished
+    text = 'That\'s all, folks!'
 
-    text = 'Load more...'
-    finished = @props.articles.page is @props.articles.pages
+  <Button disabled={ finished } block onClick={ props.loadMore }>
+    { text }
+  </Button>
 
-    if finished
-      text = 'That\'s all, folks!'
-
-    <Button disabled={ finished } block onClick={ @props.loadMore }>
-      { text }
-    </Button>
+module.exports = ArticleList
