@@ -86,3 +86,48 @@ body
   height 100%
   overflow-y auto
   border-right 1px solid borderColor
+
+.articleListCol
+  transition width 200ms
+
+.articleContent
+  width 50%
+  transform translateX(100%)
+  transition transform 200ms
+  position absolute
+  right 0
+  padding halfGutter() ($grid-gutter-width * 1.5)
+
+  .illustrationPreview
+    text-align center
+    display inline-block
+    float right
+    max-width 50%
+    margin-left ($grid-gutter-width * 1.5)
+
+    img
+      width 100%
+
+  p
+    font-size 16px
+    line-height 1.5em
+    margin-bottom 25px
+
+  p.caption
+    font-size 0.95em
+    font-style italic
+    margin 1em
+    text-align center
+
+.closeArticleContent
+  position absolute
+  top halfGutter()
+  right halfGutter()
+
+.dashboardGrid.articleOpen
+
+  .articleListCol
+    width 33.333%
+
+  .articleContent
+    transform translateX(0)

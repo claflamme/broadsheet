@@ -5,6 +5,7 @@ reducers =
   subscriptions: require './SubscriptionsReducer'
   modals: require './ModalsReducer'
   articles: require './ArticlesReducer'
+  reader: require './ReaderReducer'
 
 baseReducer = (reducer) ->
 

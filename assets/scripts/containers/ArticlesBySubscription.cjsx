@@ -24,7 +24,8 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <ArticleList
       loadMore={ @_loadMore }
-      articles={ @props.articles } />
+      articles={ @props.articles }
+      onClick={ @_onClick } />
 
   _reload: (subscriptionId) ->
 
@@ -36,3 +37,7 @@ module.exports = connect(mapStateToProps) React.createClass
     subscriptionId = @props.params.subscriptionId
 
     @props.dispatch ArticleActions.fetchBySubscription subscriptionId, nextPage
+
+  _onClick: (article) ->
+
+    @props.dispatch ArticleActions.fetchContent article

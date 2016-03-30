@@ -28,3 +28,27 @@ module.exports =
 
     (dispatch) ->
       fetchArticles request, dispatch
+
+  fetchContent: (article) ->
+
+    request =
+      url: '/api/proxy/article'
+      query: { url: article.url }
+
+    contentRequestedAction =
+      type: constants.ARTICLE_CONTENT_REQUESTED
+      article: article
+      visible: true
+
+    (dispatch) ->
+      dispatch contentRequestedAction
+      api.send request, (res, content) ->
+        action =
+          type: constants.ARTICLE_CONTENT_RECEIVED
+          body: content.body
+          article: article
+        dispatch action
+
+  hideContent: ->
+
+    type: constants.ARTICLE_CONTENT_HIDDEN

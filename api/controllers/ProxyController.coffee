@@ -1,5 +1,6 @@
 request = require 'request'
 validator = require 'validator'
+read = require 'node-readability'
 
 module.exports =
 
@@ -24,4 +25,11 @@ module.exports =
     unless validator.isURL url, validatorConfig
       return res.error 'PROXY_INVALID_URL'
 
-    request.get(url).pipe res
+    request url, (err, httpRes, body) ->
+      res.json status: httpRes.statusCode, body: body
+
+  getArticle: (req, res) ->
+
+    read req.query.url, (err, article, httpRes) ->
+      res.json { body: article.content }
+      article.close()

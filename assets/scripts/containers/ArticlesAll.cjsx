@@ -18,10 +18,15 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <ArticleList
       loadMore={ @_loadMore }
-      articles={ @props.articles } />
+      articles={ @props.articles }
+      onClick={ @_onClick } />
 
   _loadMore: ->
 
     nextPage = @props.articles.page + 1
 
     @props.dispatch ArticleActions.fetchAll nextPage
+
+  _onClick: (article) ->
+
+    @props.dispatch ArticleActions.fetchContent article

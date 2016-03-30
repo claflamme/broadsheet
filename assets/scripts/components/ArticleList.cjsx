@@ -9,7 +9,7 @@ ArticleList = (props, context) ->
 
   <div>
     <ul className='articlesList'>
-      { props.articles.docs.map renderArticle }
+      { props.articles.docs.map renderArticle.bind(null, props.onClick) }
     </ul>
     <p></p>
     { renderLoadMore props }
@@ -23,13 +23,14 @@ ArticleList.propTypes =
 
   articles: React.PropTypes.object.isRequired
   loadMore: React.PropTypes.func.isRequired
+  onClick: React.PropTypes.func.isRequired
 
 # Helpers
 # ------------------------------------------------------------------------------
 
-renderArticle = (article, i) ->
+renderArticle = (onClick, article, i) ->
 
-  <li key={ i }>
+  <li key={ i } onClick={ onClick.bind null, article }>
     <Article article={ article } />
   </li>
 

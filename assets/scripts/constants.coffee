@@ -35,3 +35,13 @@ module.exports = keymirror
   # A list of articles has been fetched from the server. These articles should
   # overwrite the current list.
   ARTICLES_RECEIVED: null
+
+  # Sent a request to the server to fetch some cleaned up article HTML.
+  ARTICLE_CONTENT_REQUESTED: null
+
+  # The cleaned up, HTML body content of an article has been fetched from
+  # the server.
+  ARTICLE_CONTENT_RECEIVED: null
+
+  # Article reader panel is being hidden.
+  ARTICLE_CONTENT_HIDDEN: null
