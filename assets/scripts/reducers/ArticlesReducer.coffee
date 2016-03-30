@@ -10,10 +10,10 @@ module.exports =
 
   ARTICLES_RECEIVED: (state, action) ->
 
-    action.articles
-
-  ARTICLES_UPDATED: (state, action) ->
+    if action.articles.page is 1
+      return action.articles
 
     articles = state.docs.concat action.articles.docs
+    newData = docs: articles, page: action.articles.page
 
-    Object.assign {}, state, { docs: articles, page: action.articles.page }
+    return Object.assign {}, state, newData

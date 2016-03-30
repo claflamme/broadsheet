@@ -35,7 +35,3 @@ module.exports = keymirror
   # A list of articles has been fetched from the server. These articles should
   # overwrite the current list.
   ARTICLES_RECEIVED: null
-
-  # An additional page of articles has been fetched. These articles should be
-  # concatenated to the current list.
-  ARTICLES_UPDATED: null
