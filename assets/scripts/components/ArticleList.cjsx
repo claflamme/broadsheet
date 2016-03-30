@@ -2,6 +2,9 @@ React = require 'react'
 { Button } = require 'react-bootstrap'
 Article = require './Article'
 
+# Main render Method
+# ------------------------------------------------------------------------------
+
 ArticleList = (props, context) ->
 
   <div>
@@ -13,9 +16,16 @@ ArticleList = (props, context) ->
     <p></p>
   </div>
 
+# Component metadata
+# ------------------------------------------------------------------------------
+
 ArticleList.propTypes =
+
   articles: React.PropTypes.object.isRequired
   loadMore: React.PropTypes.func.isRequired
+
+# Helpers
+# ------------------------------------------------------------------------------
 
 renderArticle = (article, i) ->
 

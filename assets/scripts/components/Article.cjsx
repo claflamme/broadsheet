@@ -1,23 +1,28 @@
 React = require 'react'
 { Row, Col } = require 'react-bootstrap'
-moment = require 'moment'
 
-module.exports = React.createClass
+# Main render Method
+# ------------------------------------------------------------------------------
 
-  propTypes:
+Article = (props, context) ->
 
-    article: React.PropTypes.object.isRequired
+  <Row>
+    <Col xs={ 12 } className='articleSummary'>
+      <span className='articleTitle'>
+        { props.article.title }
+      </span>
+      &nbsp;
+      <span className='text-muted articlePreview'>
+        { props.article.summary }
+      </span>
+    </Col>
+  </Row>
 
-  render: ->
+# Component metadata
+# ------------------------------------------------------------------------------
 
-    <Row>
-      <Col xs={ 12 } className='articleSummary'>
-        <span className='articleTitle'>
-          { @props.article.title }
-        </span>
-        &nbsp;
-        <span className='text-muted articlePreview'>
-          { @props.article.summary }
-        </span>
-      </Col>
-    </Row>
+Article.propTypes =
+
+  article: React.PropTypes.object.isRequired
+
+module.exports = Article
