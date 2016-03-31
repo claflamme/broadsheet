@@ -102,11 +102,26 @@ h1, h2, h3, h4, h5, h6
   transition transform 200ms
   position absolute
   right 0
-  padding $grid-gutter-width * 1.5
+  padding 0
+  padding-left $grid-gutter-width * 1.5
+  overflow hidden
+  box-shadow 0 0 45px rgba(0, 0, 0, 0.2)
+  font-size 16px
 
   .articleWrapper
-    max-width 650px
+    height 100%
+    overflow-y auto
+    padding $grid-gutter-width * 1.5
+
+  .articleBody
+    max-width 700px
     margin auto
+    font-weight 300
+
+    [class*='caption']
+      font-size 14px
+      font-style italic
+      padding 0 $grid-gutter-width
 
   img
     max-width 100%
@@ -119,15 +134,31 @@ h1, h2, h3, h4, h5, h6
     a:link, a:visited, a:active
       color #000
 
-  p
-    font-size 16px
-    line-height 1.5em
-    margin-bottom 25px
+  h2, h3, h4, h5, h6
+    margin $grid-gutter-width 0
+
+  p, ul, ol
+    margin-bottom $grid-gutter-width
 
 .closeArticleContent
+  background #fbfbfb
+  cursor pointer
   position absolute
-  top halfGutter()
-  left halfGutter()
+  height 100%
+  top 0
+  left 0
+  width $grid-gutter-width * 1.5
+  text-align center
+  border-right 1px solid borderColor
+  transition background-color 200ms
+
+  &:hover
+    background-color #f6f6f6
+
+  .closeButton
+    position relative
+    top 50%
+    transform translateY(-50%)
 
 .dashboardGrid.articleOpen
 
