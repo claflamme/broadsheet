@@ -40,12 +40,14 @@ module.exports = connect(mapStateToProps) React.createClass
         </Col>
         <Col xs={ 5 } className='dashboardCol articleContent'>
           <span className='closeArticleContent' onClick={ @_hideReader }>X</span>
-          <h3>
-            <a href={ @props.article?.url or '' } target='_blank'>
-              { @props.article?.title or '' }
-            </a>
-          </h3>
-          <div dangerouslySetInnerHTML={ { __html: @props.articleBody } }></div>
+          <div className='articleWrapper'>
+            <h1>
+              <a href={ @props.article?.url or '' } target='_blank'>
+                { @props.article?.title or '' }
+              </a>
+            </h1>
+            <div dangerouslySetInnerHTML={ { __html: @props.articleBody } }></div>
+          </div>
         </Col>
       </Row>
     </Grid>

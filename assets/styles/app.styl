@@ -4,6 +4,9 @@
 body
   height 100%
 
+h1, h2, h3, h4, h5, h6
+  letter-spacing -0.05em
+
 .btn-primary
   background-image linear-gradient(25deg, rgba(64,136,196,1) -35%,rgba(110,205,177,1) 135%)
   transition opacity 200ms
@@ -54,7 +57,7 @@ body
 
 .articleTitle
   color #444
-  font-weight 700
+  font-weight 500
   margin 0
   white-space nowrap
   overflow-x hidden
@@ -96,7 +99,7 @@ body
   transition transform 200ms
   position absolute
   right 0
-  padding halfGutter() ($grid-gutter-width * 1.5)
+  padding $grid-gutter-width * 1.5
 
   .illustrationPreview
     text-align center
@@ -107,6 +110,12 @@ body
 
     img
       width 100%
+
+  .articleWrapper
+    max-width 600px
+
+  h1
+    margin 0 0 $grid-gutter-width 0
 
   p
     font-size 16px
