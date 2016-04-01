@@ -32,7 +32,7 @@ module.exports = React.createClass
       </Button>
       <ul className='subscriptionsList'>
         <li>
-          <IndexLink to='/reader' activeClassName='active'>All</IndexLink>
+          <IndexLink to='/' activeClassName='active'>All</IndexLink>
         </li>
         <li>&nbsp;</li>
         { @props.subscriptions.map @_renderSubscription }
@@ -49,7 +49,7 @@ module.exports = React.createClass
 
     <li key={ i }>
       <Link
-        to={ "/reader/subscriptions/#{ subscription._id }"}
+        to={ "/subscriptions/#{ subscription._id }"}
         activeClassName='active'>
         { subscription.customTitle or fallbackTitle }
       </Link>

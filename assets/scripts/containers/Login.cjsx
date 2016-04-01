@@ -19,7 +19,7 @@ module.exports = connect(mapStateToProps) React.createClass
   componentWillReceiveProps: (nextProps) ->
 
     if nextProps.token
-      @context.router.push '/reader'
+      @context.router.push '/'
 
   render: ->
 

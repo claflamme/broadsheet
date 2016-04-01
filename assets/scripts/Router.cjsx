@@ -8,7 +8,7 @@ routes =
 
   <Provider store={ configureStore() }>
     <Router history={ browserHistory }>
-      <Route path='/reader' component={ require './containers/Dashboard' }>
+      <Route path='/' component={ require './containers/Dashboard' }>
         <IndexRoute component={ require './containers/ArticlesAll' } />
         <Route path='subscriptions/:subscriptionId' component={ require './containers/ArticlesBySubscription' } />
       </Route>

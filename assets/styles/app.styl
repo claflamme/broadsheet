@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6
     opacity 0.8
 
 .subscriptions
-  background #fbfbfb
+  background $gray-darker
   padding-top halfGutter()
 
 .subscriptionsList
@@ -32,17 +32,17 @@ h1, h2, h3, h4, h5, h6
     padding 4px halfGutter()
 
     &:link, &:visited, &:active
-      color $navbar-default-color
+      color $brand-primary
       text-decoration none
 
     &:hover
-      background-color #f6f6f6
+      background-color #1C505F
       text-decoration none
 
     &.active
-      background-color #f2f2f2
+      background-color #1E5D6F
       font-weight 400
-      color $brand-primary
+      color #fff
 
 .articlesList
   margin 0
@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6
     background-color #fafafa
 
 .articleTitle
-  color #444
+  color $gray-darker
   font-weight 500
   margin 0
   white-space nowrap
@@ -145,6 +145,11 @@ h1, h2, h3, h4, h5, h6
 
   p, ul, ol, img
     margin-bottom $grid-gutter-width
+
+  // Sometimes images are inside of their own P tag, in which case they would
+  // get the margin applied twice.
+  p img
+    margin 0
 
 .closeArticleContent
   background #fbfbfb
