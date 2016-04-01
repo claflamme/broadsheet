@@ -108,6 +108,10 @@ h1, h2, h3, h4, h5, h6
   box-shadow 0 0 45px rgba(0, 0, 0, 0.2)
   font-size 16px
 
+  a:link, a:visited, a:active
+    color $gray-dark
+    text-decoration underline
+
   .articleWrapper
     height 100%
     overflow-y auto
@@ -117,14 +121,16 @@ h1, h2, h3, h4, h5, h6
     max-width 600px
     margin auto
     font-weight 300
+    -webkit-font-smoothing antialiased
 
     [class*='caption']
+      text-align center
       font-size 14px
       font-style italic
       padding 0 $grid-gutter-width
 
   img
-    max-width 100%
+    width 100%
     height auto
 
   h1
@@ -133,11 +139,12 @@ h1, h2, h3, h4, h5, h6
 
     a:link, a:visited, a:active
       color #000
+      text-decoration none
 
   h2, h3, h4, h5, h6
     margin $grid-gutter-width 0
 
-  p, ul, ol
+  p, ul, ol, img
     margin-bottom $grid-gutter-width
 
 .closeArticleContent
