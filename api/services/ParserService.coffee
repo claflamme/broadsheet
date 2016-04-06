@@ -84,6 +84,8 @@ addArticles = (parsedArticles, feed, done) ->
 
 module.exports.processFeed = (feed, done) ->
 
+  feed.updatedAt = new Date()
+
   feed.save (err, feed) ->
     downloadFeed feed.url, (res) ->
       parseStream res, (err, articles, meta) ->
