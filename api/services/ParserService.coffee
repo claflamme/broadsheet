@@ -50,9 +50,11 @@ downloadFeed = (url, done) ->
 
   req.on 'response', (res) ->
     if res.statusCode isnt 200
-      return @emit 'error', new Error('Bad status code')
+      err = new Error('Bad status code')
+      @emit 'error', err
+      return done err, @
     else
-      done @
+      done null, @
 
 updateFeed = (feed, meta, done) ->
 
@@ -87,7 +89,9 @@ module.exports.processFeed = (feed, done) ->
   feed.updatedAt = new Date()
 
   feed.save (err, feed) ->
-    downloadFeed feed.url, (res) ->
+    downloadFeed feed.url, (err, res) ->
+      if err
+        return done()
       parseStream res, (err, articles, meta) ->
         if err
           throw err
