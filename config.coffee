@@ -22,8 +22,8 @@ module.exports =
   crawler:
     # The time in minutes before a feed is considered outdated. If a feed hasn't
     # been checked for this long, it will be updated in the next crawl.
-    outdatedThreshold: 10
+    outdatedThreshold: 30
     # The time in minutes to wait before polling for outdated feeds. Once no
     # more outdated feeds are found, the crawler will wait this long before
     # checking again.
-    pollingInterval: 1
+    pollingInterval: 10
