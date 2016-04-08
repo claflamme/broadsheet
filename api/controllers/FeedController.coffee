@@ -41,16 +41,6 @@ module.exports =
 
   ###
   @apiGroup Feeds
-  @api { get } /api/feeds/outdated Outdated
-  @apiDescription Returns a list of all feeds that need to be re-indexed.
-  ###
-  outdated: (req, res) ->
-
-    Feed.findOutdated (err, feeds) ->
-      res.json feeds
-
-  ###
-  @apiGroup Feeds
   @api { patch } /api/feeds/:id Refresh
   @apiDescription Forces a given feed to immediately re-index
   ###

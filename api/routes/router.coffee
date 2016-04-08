@@ -13,7 +13,6 @@ module.exports = (router) ->
 
   router.get '/api/user', UserController.get
 
-  # Subscriptions are "instances" of a feed that belong to a user.
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create
   router.get '/api/subscriptions/articles', ArticleController.all
@@ -24,7 +23,6 @@ module.exports = (router) ->
 
   router.get '/api/feeds', FeedController.list
   router.post '/api/feeds', FeedController.create
-  router.get '/api/feeds/outdated', FeedController.outdated
   router.patch '/api/feeds/:id', FeedController.refresh
 
   router.get '/api/proxy', ProxyController.get
