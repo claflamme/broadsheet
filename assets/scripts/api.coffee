@@ -1,3 +1,8 @@
+refresh = ->
+
+  localStorage.clear()
+  window.location.reload()
+
 module.exports =
 
   send: (options, cb) ->
@@ -22,12 +27,7 @@ module.exports =
 
     fetch(options.url, options).then (res) ->
       if res.status is 401
-        @_refresh()
+        refresh()
       else
         res.json().then (json) ->
           cb res, json
-
-  _refresh: ->
-
-    localStorage.clear()
-    window.location.reload()

@@ -22,10 +22,13 @@ module.exports = connect(mapStateToProps) React.createClass
 
   componentWillMount: ->
 
-    if not @props.token
+    unless @props.token
       @context.router.replace '/login'
 
   render: ->
+
+    unless @props.token
+      return null
 
     <Grid fluid className="dashboardGrid #{ if @props.articleVisible then 'articleOpen' }">
       <Row>
