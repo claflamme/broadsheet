@@ -1,6 +1,6 @@
 React = require 'react'
 { Button } = require 'react-bootstrap'
-Article = require './Article'
+ArticleListItem = require './ArticleListItem'
 
 # Main render Method
 # ------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ ArticleList.propTypes =
 renderArticle = (onClick, article, i) ->
 
   <li key={ i } onClick={ onClick.bind null, article }>
-    <Article article={ article } />
+    <ArticleListItem article={ article } />
   </li>
 
 renderLoadMore = (props) ->
