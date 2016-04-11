@@ -48,8 +48,8 @@ module.exports =
 
   showNewPrompt: ->
 
-    type: constants.SUBSCRIPTIONS_PROMPT_OPENING
+    type: constants.MODAL_NEW_SUBSCRIPTION_TOGGLED, show: true
 
   hideNewPrompt: ->
 
-    type: constants.SUBSCRIPTIONS_PROMPT_CLOSING
+    type: constants.MODAL_NEW_SUBSCRIPTION_TOGGLED, show: false

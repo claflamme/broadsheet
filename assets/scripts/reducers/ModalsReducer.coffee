@@ -1,12 +1,18 @@
 module.exports =
 
   initialState:
-    showNewSubscriptionPrompt: false
+    newSubscription:
+      show: false
+    editSubscription:
+      show: false
 
-  SUBSCRIPTIONS_PROMPT_OPENING: (state, action) ->
+  MODAL_NEW_SUBSCRIPTION_TOGGLED: (state, action) ->
 
-    Object.assign {}, state, showNewSubscriptionPrompt: true
+    newState = @initialState
 
-  SUBSCRIPTIONS_PROMPT_CLOSING: (state, action) ->
+    if action.show
+      newState =
+        newSubscription:
+          show: action.show
 
-    Object.assign {}, state, showNewSubscriptionPrompt: false
+    Object.assign {}, state, newState

@@ -9,7 +9,7 @@ mapStateToProps = (state) ->
 
   subscriptions: state.subscriptions
   token: state.auth.token
-  showNewSubscriptionPrompt: state.modals.showNewSubscriptionPrompt
+  showNewSubscriptionPrompt: state.modals.newSubscription.show
   articleBody: state.reader.body
   article: state.reader.article
   articleVisible: state.reader.visible
