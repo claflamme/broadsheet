@@ -20,10 +20,10 @@ module.exports =
     (dispatch) ->
       fetchArticles request, dispatch
 
-  fetchBySubscription: (subscriptionId, page = 1) ->
+  fetchByFeed: (feedId, page = 1) ->
 
     request =
-      url: "/api/subscriptions/#{ subscriptionId }/articles"
+      url: "/api/feeds/#{ feedId }/articles"
       query: { page }
 
     (dispatch) ->

@@ -13,12 +13,12 @@ module.exports = connect(mapStateToProps) React.createClass
 
   componentWillMount: ->
 
-    @_reload @props.params.subscriptionId
+    @_reload @props.params.feedId
 
   componentWillReceiveProps: (nextProps) ->
 
-    if nextProps.params.subscriptionId isnt @props.params.subscriptionId
-      @_reload nextProps.params.subscriptionId
+    if nextProps.params.feedId isnt @props.params.feedId
+      @_reload nextProps.params.feedId
 
   render: ->
 
@@ -27,16 +27,16 @@ module.exports = connect(mapStateToProps) React.createClass
       articles={ @props.articles }
       onClick={ @_onClick } />
 
-  _reload: (subscriptionId) ->
+  _reload: (feedId) ->
 
-    @props.dispatch ArticleActions.fetchBySubscription subscriptionId
+    @props.dispatch ArticleActions.fetchByFeed feedId
 
   _loadMore: ->
 
     nextPage = @props.articles.page + 1
-    subscriptionId = @props.params.subscriptionId
+    feedId = @props.params.feedId
 
-    @props.dispatch ArticleActions.fetchBySubscription subscriptionId, nextPage
+    @props.dispatch ArticleActions.fetchByFeed feedId, nextPage
 
   _onClick: (article) ->
 

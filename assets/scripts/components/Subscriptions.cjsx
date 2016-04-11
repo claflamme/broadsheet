@@ -49,7 +49,7 @@ module.exports = React.createClass
 
     <li key={ i }>
       <Link
-        to={ "/subscriptions/#{ subscription._id }"}
+        to={ "/feeds/#{ subscription.feed._id }"}
         activeClassName='active'>
         { subscription.customTitle or fallbackTitle }
       </Link>

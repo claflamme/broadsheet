@@ -10,7 +10,7 @@ routes =
     <Router history={ browserHistory }>
       <Route path='/' component={ require './containers/Dashboard' }>
         <IndexRoute component={ require './containers/ArticlesAll' } />
-        <Route path='subscriptions/:subscriptionId' component={ require './containers/ArticlesBySubscription' } />
+        <Route path='feeds/:feedId' component={ require './containers/ArticlesByFeed' } />
       </Route>
       <Route path='/login' component={ require './containers/Login' } />
       <Route path='/register' component={ require './containers/Register' } />

@@ -29,15 +29,10 @@ module.exports =
   @api { get } /api/subscriptions/:id/articles By subscription
   @apiDescription Fetches all articles belonging to a given subscription.
   ###
-  bySubscription: (req, res) ->
+  byFeed: (req, res) ->
 
-    Subscription.findById req.params.id, (err, subscription) ->
+    query = feed: req.params.id
+    options = sort: '-publishedAt', page: parseInt(req.query.page)
 
-      unless subscription
-        return res.json []
-
-      query = feed: subscription.feed
-      options = sort: '-publishedAt', page: parseInt(req.query.page)
-
-      Article.paginate query, options, (err, articles) ->
-        res.json articles or []
+    Article.paginate query, options, (err, articles) ->
+      res.json articles or []
