@@ -19,7 +19,8 @@ module.exports = connect(mapStateToProps) React.createClass
     <ArticleList
       loadMore={ @_loadMore }
       articles={ @props.articles }
-      onClick={ @_onClick } />
+      onClick={ @_onClick }
+      title='All subscriptions' />
 
   _loadMore: ->
 

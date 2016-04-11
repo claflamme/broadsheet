@@ -22,10 +22,13 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
+    subscriptionTitle = @_getSubscriptionTitleFromFeedId @props.params.feedId
+
     <ArticleList
       loadMore={ @_loadMore }
       articles={ @props.articles }
-      onClick={ @_onClick } />
+      onClick={ @_onClick }
+      title={ subscriptionTitle } />
 
   _reload: (feedId) ->
 
@@ -41,3 +44,15 @@ module.exports = connect(mapStateToProps) React.createClass
   _onClick: (article) ->
 
     @props.dispatch ArticleActions.fetchContent article
+
+  # Attempts to get the title of the current subscription. If there are no
+  # subscriptions in the store it'll return a blank string.
+  _getSubscriptionTitleFromFeedId: (feedId) ->
+
+    sub = @props.subscriptions.find (subscription, i) =>
+      subscription.feed._id is feedId
+
+    unless sub
+      return ''
+
+    sub.customTitle or sub.feed.title

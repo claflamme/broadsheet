@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6
   list-style-type none
 
   li
-    border-bottom 1px solid borderColor
+    border-top 1px solid borderColor
     margin 0 halfGutter() * -1
     padding 8px halfGutter()
     transition all 200ms
@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6
   right 0
   overflow hidden
 
-  .row
+  & > .row
     height 100%
 
 .dashboardCol
@@ -96,6 +96,9 @@ h1, h2, h3, h4, h5, h6
 
 .articleListCol
   transition width 200ms
+
+  .feedTitleBar .feedTitle
+    margin halfGutter() 0
 
 .articleContent
   width 50%
