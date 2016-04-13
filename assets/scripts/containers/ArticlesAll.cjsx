@@ -2,7 +2,8 @@ React = require 'react'
 { Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 ArticleActions = require '../actions/ArticleActions'
-ArticleList = require '../components/ArticleList.cjsx'
+ArticleList = require '../components/ArticleList'
+FeedTitleBar = require '../components/FeedTitleBar'
 
 mapStateToProps = (state) ->
 
@@ -16,11 +17,13 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <ArticleList
-      loadMore={ @_loadMore }
-      articles={ @props.articles }
-      onClick={ @_onClick }
-      title='All subscriptions' />
+    <div>
+      <FeedTitleBar title='All subscriptions' />
+      <ArticleList
+        loadMore={ @_loadMore }
+        articles={ @props.articles }
+        onClick={ @_onClick } />
+    </div>
 
   _loadMore: ->
 

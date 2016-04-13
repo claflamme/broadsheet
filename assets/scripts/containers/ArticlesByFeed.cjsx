@@ -2,12 +2,15 @@ React = require 'react'
 { Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 ArticleActions = require '../actions/ArticleActions'
-ArticleList = require '../components/ArticleList.cjsx'
+ArticleList = require '../components/ArticleList'
+FeedTitleBar = require '../components/FeedTitleBar'
+SubscriptionEditWindow = require '../components/SubscriptionEditWindow'
 
 mapStateToProps = (state) ->
 
   articles: state.articles
   subscriptions: state.subscriptions
+  edit: state.modals.editSubscription
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -24,11 +27,16 @@ module.exports = connect(mapStateToProps) React.createClass
 
     subscriptionTitle = @_getSubscriptionTitleFromFeedId @props.params.feedId
 
-    <ArticleList
-      loadMore={ @_loadMore }
-      articles={ @props.articles }
-      onClick={ @_onClick }
-      title={ subscriptionTitle } />
+    <div>
+      <FeedTitleBar title={ subscriptionTitle } showControls={ true } />
+      <ArticleList
+        loadMore={ @_loadMore }
+        articles={ @props.articles }
+        onClick={ @_onClick } />
+      <SubscriptionEditWindow
+        show={ @props.edit.show }
+        subscription={ @props.edit.subscription } />
+    </div>
 
   _reload: (feedId) ->
 

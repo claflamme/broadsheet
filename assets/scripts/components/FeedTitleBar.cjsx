@@ -14,10 +14,6 @@ FeedTitle.propTypes =
 
 renderControls = ->
 
-  <span>
-    <span>[ Edit ]</span>
-    &nbsp;
-    <span>[ Delete ]</span>
-  </span>
+  <span>[ Edit ]</span>
 
 module.exports = FeedTitle
