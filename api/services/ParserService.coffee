@@ -9,12 +9,11 @@ Article = App.Models.Article
 parseArticle = (item) ->
 
   # Full article data is fetched at "read time", so we don't need to store any
-  # more than a brief summary. Text is truncated to 300 characters, paragraph
-  # text only, no line breaks.
+  # more than a brief summary. In this case, that's the first sentence.
   summary = item.summary or item.description
   summary = sanitize summary, { allowedTags: [] }
-  summary = summary.substring(0, 300).trim()
-  summary = summary.replace /\r?\n|\r/g, ''
+  summary = summary.split('.')[0] + '.'
+  summary = summary.replace(/\r?\n|\r/g, '').trim()
 
   output =
     title: item.title.trim()
