@@ -4,7 +4,6 @@ React = require 'react'
 ArticleActions = require '../actions/ArticleActions'
 ArticleList = require '../components/ArticleList'
 FeedTitleBar = require '../components/FeedTitleBar'
-SubscriptionEditWindow = require '../components/SubscriptionEditWindow'
 
 mapStateToProps = (state) ->
 
@@ -25,17 +24,22 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    subscriptionTitle = @_getSubscriptionTitleFromFeedId @props.params.feedId
+    subscription = @_getActiveSubscription @props.params.feedId
+
+    unless subscription
+      return null
 
     <div>
-      <FeedTitleBar title={ subscriptionTitle } showControls={ true } />
+      <FeedTitleBar
+        title={ subscription.customTitle or subscription.feed.title }
+        showControls={ true }
+        subscription={ subscription }
+        showEdit={ @props.edit.show }
+        dispatch={ @props.dispatch } />
       <ArticleList
         loadMore={ @_loadMore }
         articles={ @props.articles }
         onClick={ @_onClick } />
-      <SubscriptionEditWindow
-        show={ @props.edit.show }
-        subscription={ @props.edit.subscription } />
     </div>
 
   _reload: (feedId) ->
@@ -53,12 +57,16 @@ module.exports = connect(mapStateToProps) React.createClass
 
     @props.dispatch ArticleActions.fetchContent article
 
+  _getActiveSubscription: (feedId) ->
+
+    @props.subscriptions.find (subscription, i) ->
+      subscription.feed._id is feedId
+
   # Attempts to get the title of the current subscription. If there are no
   # subscriptions in the store it'll return a blank string.
-  _getSubscriptionTitleFromFeedId: (feedId) ->
+  _getActiveSubscriptionTitle: (feedId) ->
 
-    sub = @props.subscriptions.find (subscription, i) =>
-      subscription.feed._id is feedId
+    sub = @_getSubscription feedId
 
     unless sub
       return ''

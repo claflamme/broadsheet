@@ -44,3 +44,6 @@ module.exports = keymirror
 
   # The "new subscription" window has been toggled open or closed.
   MODAL_NEW_SUBSCRIPTION_TOGGLED: null
+
+  # The "edit subscription" window has been opened or closed.
+  MODAL_EDIT_SUBSCRIPTION_TOGGLED: null
