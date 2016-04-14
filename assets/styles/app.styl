@@ -3,10 +3,9 @@
 
 body
   height 100%
-  letter-spacing -0.02em
 
 h1, h2, h3, h4, h5, h6
-  letter-spacing -0.04em
+  letter-spacing -0.03em
 
 .btn
   border none
@@ -57,26 +56,16 @@ h1, h2, h3, h4, h5, h6
     cursor pointer
 
   li:hover
-    background-color #fafafa
+    background-color lighten($gray-light, 22)
 
 .articleTitle
   color $gray-darker
-  font-weight 500
+  font-weight 600
   margin 0
-  white-space nowrap
-  overflow-x hidden
+  font-size 1.1em
 
-.articleSubscriptionTitle, .articleSummary
-  white-space nowrap
-  overflow hidden
-
-.articleSubscriptionTitle:after
-  content: ''
-  height 100%
-  width 10px
-  position absolute
-  box-shadow 0px 0px 15px 5px #fff
-  right -10px
+.articlePreview
+  font-weight 300
 
 .dashboardGrid
   position absolute
@@ -94,24 +83,14 @@ h1, h2, h3, h4, h5, h6
   overflow-y auto
   border-right 1px solid borderColor
 
-.articleListCol
-  transition width 200ms
-
-  .feedTitleBar .feedTitle
-    margin halfGutter()
-    margin-left 0
-    display inline-block
+.feedTitleBar .feedTitle
+  margin halfGutter()
+  margin-left 0
+  display inline-block
 
 .articleContent
-  width 50%
-  transform translateX(100%)
-  transition transform 200ms
-  position absolute
-  right 0
   padding 0
-  padding-left $grid-gutter-width * 1.5
   overflow hidden
-  box-shadow 0 0 45px rgba(0, 0, 0, 0.2)
   font-size 16px
 
   a:link, a:visited, a:active
@@ -155,31 +134,3 @@ h1, h2, h3, h4, h5, h6
   // get the margin applied twice.
   p img
     margin 0
-
-.closeArticleContent
-  background #fbfbfb
-  cursor pointer
-  position absolute
-  height 100%
-  top 0
-  left 0
-  width $grid-gutter-width * 1.5
-  text-align center
-  border-right 1px solid borderColor
-  transition background-color 200ms
-
-  &:hover
-    background-color #f6f6f6
-
-  .closeButton
-    position relative
-    top 50%
-    transform translateY(-50%)
-
-.dashboardGrid.articleOpen
-
-  .articleListCol
-    width 33.333%
-
-  .articleContent
-    transform translateX(0)

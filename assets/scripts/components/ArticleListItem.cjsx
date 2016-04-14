@@ -8,10 +8,9 @@ Article = (props, context) ->
 
   <Row>
     <Col xs={ 12 } className='articleSummary'>
-      <span className='articleTitle'>
+      <div className='articleTitle'>
         { props.article?.title }
-      </span>
-      &nbsp;
+      </div>
       <span className='text-muted articlePreview'>
         { props.article.summary }
       </span>

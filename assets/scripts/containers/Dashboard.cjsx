@@ -30,7 +30,7 @@ module.exports = connect(mapStateToProps) React.createClass
     unless @props.token
       return null
 
-    <Grid fluid className="dashboardGrid #{ if @props.articleVisible then 'articleOpen' }">
+    <Grid fluid className='dashboardGrid'>
       <Row>
         <Col xs={ 2 } className='dashboardCol subscriptions'>
           <Subscriptions
@@ -38,13 +38,10 @@ module.exports = connect(mapStateToProps) React.createClass
             showNewSubscriptionPrompt={ @props.showNewSubscriptionPrompt }
             dispatch={ @props.dispatch } />
         </Col>
-        <Col xs={ 10 } className='dashboardCol articleListCol'>
+        <Col xs={ 4 } className='dashboardCol articleListCol'>
           { @props.children }
         </Col>
-        <Col xs={ 5 } className='dashboardCol articleContent'>
-          <span className='closeArticleContent' onClick={ @_hideReader }>
-            <div className='closeButton'>></div>
-          </span>
+        <Col xs={ 6 } className='dashboardCol articleContent'>
           <div className='articleWrapper'>
             <div className='articleBody'>
               <h1>
