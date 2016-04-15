@@ -20,10 +20,8 @@ FeedTitleBar.propTypes =
 
 renderControls = (props) ->
 
-  props.dispatch { type: 'hello' }
-
   <span>
-    <span onClick={ -> }>
+    <span onClick={ -> props.dispatch ModalActions.showSubscriptionEdit() }>
       [ Edit ]
     </span>
     &nbsp;
@@ -35,6 +33,7 @@ renderModals = (props) ->
   <div>
     <SubscriptionEditWindow
       show={ props.showEdit }
+      onHide={ -> props.dispatch ModalActions.hideSubscriptionEdit() }
       subscription={ props.subscription } />
     <SubscriptionDeleteWindow
       show={ false }

@@ -20,12 +20,8 @@ module.exports =
 
   MODAL_EDIT_SUBSCRIPTION_TOGGLED: (state, action) ->
 
-    newState = @initialState
+    newState =
+      editSubscription:
+        show: action.show
 
-    if action.show
-      newState =
-        editSubscription:
-          show: action.show
-          subscription: action.subscription
-
-    Object.assign {}, state, newState
+    Object.assign {}, @initialState, newState
