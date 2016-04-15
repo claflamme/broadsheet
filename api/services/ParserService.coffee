@@ -11,13 +11,11 @@ parseArticle = (item) ->
   # Full article data is fetched at "read time", so we don't need to store any
   # more than a brief summary. In this case, that's the first sentence.
   summary = item.summary or item.description
-  summary = summary.split(/\.[ |<]/, 1)[0]
-  summary = sanitize summary, { allowedTags: [] } + '.'
+  summary = summary.split('</p>', 1)[0]
+  summary = sanitize summary, allowedTags: []
 
   if summary.length > 200
-    summary = "#{ summary.substring 0, 200 }..."
-
-  summary = summary.replace(/\r?\n|\r/g, '').trim() + '.'
+    summary = "#{ summary.substring(0, 200).trim() }..."
 
   output =
     title: item.title.trim()

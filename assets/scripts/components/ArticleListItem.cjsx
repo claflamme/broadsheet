@@ -8,11 +8,13 @@ Article = (props, context) ->
 
   <Row>
     <Col xs={ 12 } className='articleSummary'>
-      <div className='articleTitle'>
-        { props.article?.title }
+      <div
+        className='articleTitle'
+        dangerouslySetInnerHTML={{ __html: props.article?.title }}>
       </div>
-      <span className='text-muted articlePreview'>
-        { props.article.summary }
+      <span
+        className='text-muted articlePreview'
+        dangerouslySetInnerHTML={{ __html: props.article.summary }}>
       </span>
     </Col>
   </Row>

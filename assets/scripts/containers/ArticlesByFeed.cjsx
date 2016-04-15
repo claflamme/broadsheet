@@ -9,7 +9,7 @@ mapStateToProps = (state) ->
 
   articles: state.articles
   subscriptions: state.subscriptions
-  edit: state.modals.editSubscription
+  showEditSub: state.modals.showEditSub
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -34,7 +34,7 @@ module.exports = connect(mapStateToProps) React.createClass
         title={ subscription.customTitle or subscription.feed.title }
         showControls={ true }
         subscription={ subscription }
-        showEdit={ @props.edit.show }
+        showEditSub={ @props.showEditSub }
         dispatch={ @props.dispatch } />
       <ArticleList
         loadMore={ @_loadMore }

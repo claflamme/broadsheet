@@ -9,7 +9,7 @@ module.exports = React.createClass
   propTypes:
 
     subscriptions: React.PropTypes.array.isRequired
-    showNewSubscriptionPrompt: React.PropTypes.bool
+    showNewSub: React.PropTypes.bool
     dispatch: React.PropTypes.func.isRequired
 
   componentWillMount: ->
@@ -18,7 +18,7 @@ module.exports = React.createClass
 
   getDefaultProps: ->
 
-    showNewSubscriptionPrompt: false
+    showNewSub: false
 
   render: ->
 
@@ -38,7 +38,7 @@ module.exports = React.createClass
         { @props.subscriptions.map @_renderSubscription }
       </ul>
       <SubscriptionsNew
-        show={ @props.showNewSubscriptionPrompt }
+        show={ @props.showNewSub }
         onHide={ @_hideNewSubscription }
         onSubmit={ @_addSubscription } />
     </div>

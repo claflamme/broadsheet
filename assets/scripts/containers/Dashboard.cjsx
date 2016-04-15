@@ -9,7 +9,7 @@ mapStateToProps = (state) ->
 
   subscriptions: state.subscriptions
   token: state.auth.token
-  showNewSubscriptionPrompt: state.modals.newSubscription.show
+  showNewSub: state.modals.showNewSub
   articleBody: state.reader.body
   article: state.reader.article
   articleVisible: state.reader.visible
@@ -35,7 +35,7 @@ module.exports = connect(mapStateToProps) React.createClass
         <Col xs={ 2 } className='dashboardCol subscriptions'>
           <Subscriptions
             subscriptions={ @props.subscriptions }
-            showNewSubscriptionPrompt={ @props.showNewSubscriptionPrompt }
+            showNewSub={ @props.showNewSub }
             dispatch={ @props.dispatch } />
         </Col>
         <Col xs={ 4 } className='dashboardCol articleListCol'>
@@ -45,8 +45,10 @@ module.exports = connect(mapStateToProps) React.createClass
           <div className='articleWrapper'>
             <div className='articleBody'>
               <h1>
-                <a href={ @props.article?.url or '' } target='_blank'>
-                  { @props.article?.title or '' }
+                <a
+                  href={ @props.article?.url or '' }
+                  target='_blank'
+                  dangerouslySetInnerHTML={{ __html: @props.article?.title or '' }}>
                 </a>
               </h1>
               <div dangerouslySetInnerHTML={ { __html: @props.articleBody } }></div>
