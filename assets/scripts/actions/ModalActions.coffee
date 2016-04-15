@@ -9,3 +9,7 @@ module.exports =
   hideSubscriptionEdit: ->
 
     type: 'MODAL_EDIT_SUBSCRIPTION_TOGGLED', show: false
+
+  editSubscription: (subscription) ->
+
+    type: 'SUBSCRIPTION_EDITED', subscription: subscription
