@@ -2,7 +2,6 @@
 
 reducers =
   auth: require './AuthReducer'
-  activeSubscription: require './ActiveSubscriptionReducer'
   subscriptions: require './SubscriptionsReducer'
   modals: require './ModalsReducer'
   articles: require './ArticlesReducer'

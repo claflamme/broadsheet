@@ -24,6 +24,9 @@ module.exports = keymirror
   # New subscription added successfully.
   SUBSCRIPTIONS_ADDED_NEW: null
 
+  # One or more subscriptions were edited.
+  SUBSCRIPTIONS_EDITED: null
+
   # --- Articles ---------------------------------------------------------------
 
   # A list of articles has been fetched from the server. These articles should

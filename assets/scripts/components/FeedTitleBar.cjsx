@@ -1,7 +1,7 @@
 React = require 'react'
 SubscriptionEditWindow = require './SubscriptionEditWindow'
 SubscriptionDeleteWindow = require './SubscriptionDeleteWindow'
-ModalActions = require '../actions/ModalActions'
+SubscriptionActions = require '../actions/SubscriptionActions'
 
 # The small little bar at the top of the list of articles. Contains the title of
 # the current feed (e.g. "All subscriptions", or "CBC World News"), as well as
@@ -25,7 +25,7 @@ FeedTitleBar.propTypes =
 renderControls = (props) ->
 
   <span>
-    <span onClick={ -> props.dispatch ModalActions.showSubscriptionEdit() }>
+    <span onClick={ -> props.dispatch SubscriptionActions.showEditPrompt() }>
       [ Edit ]
     </span>
     &nbsp;
@@ -37,11 +37,16 @@ renderModals = (props) ->
   <div>
     <SubscriptionEditWindow
       show={ props.showEditSub }
-      onHide={ -> props.dispatch ModalActions.hideSubscriptionEdit() }
-      subscription={ props.subscription } />
+      onHide={ -> props.dispatch SubscriptionActions.hideEditPrompt() }
+      initialSubscription={ props.subscription }
+      onSubmit={ (subscription) -> onSubEdited props, subscription } />
     <SubscriptionDeleteWindow
       show={ false }
       subscription={ props.subscription } />
   </div>
+
+onSubEdited = (props, subscription) ->
+
+  props.dispatch SubscriptionActions.edit subscription
 
 module.exports = FeedTitleBar

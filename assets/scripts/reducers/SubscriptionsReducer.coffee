@@ -7,11 +7,9 @@ module.exports =
 
     action.subscriptions
 
-  SUBSCRIPTION_EDITED: (state, action) ->
+  SUBSCRIPTIONS_EDITED: (state, action) ->
 
-    alert 'sub edited'
-
-    state.subscriptions.map (sub) ->
+    state.map (sub) ->
       if sub._id is action.subscription._id
         action.subscription
       else

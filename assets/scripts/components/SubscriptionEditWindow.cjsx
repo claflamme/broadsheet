@@ -2,29 +2,53 @@ React = require 'react'
 Modal = require 'react-bootstrap/lib/Modal'
 Button = require 'react-bootstrap/lib/Button'
 Input = require 'react-bootstrap/lib/Input'
+SubscriptionActions = require '../actions/SubscriptionActions'
 
-SubscriptionEditWindow = (props, context) ->
+SubscriptionEditWindow = React.createClass
 
-  unless props.subscription
-    return null
+  propTypes:
 
-  <Modal bsSize='small' show={ props.show or false } onHide={ props.onHide }>
-    <Modal.Header closeButton>
-      <Modal.Title>Edit subscription</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <Input label='Name:' type='text' placeholder={ props.subscription.feed.title } />
-    </Modal.Body>
-    <Modal.Footer>
-      <Button bsStyle='danger' onClick={ props.onHide }>Cancel</Button>
-      <Button bsStyle='primary' onClick={ -> }>Save</Button>
-    </Modal.Footer>
-  </Modal>
+    initialSubscription: React.PropTypes.object.isRequired
+    show: React.PropTypes.bool
+    onHide: React.PropTypes.func
 
-SubscriptionEditWindow.propTypes =
+  getInitialState: ->
 
-  subscription: React.PropTypes.object
-  show: React.PropTypes.bool
-  onHide: React.PropTypes.func
+    subscription: @props.initialSubscription
+
+  render: ->
+
+    <Modal bsSize='small' show={ @props.show or false } onHide={ @props.onHide }>
+      <form onSubmit={ @_editSubscription }>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit subscription</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Input
+            type='text'
+            placeholder={ @state.subscription.feed.title }
+            value={ @state.subscription.customTitle or '' }
+            onChange={ @_onTitleChange } />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button bsStyle='danger' onClick={ @props.onHide }>Cancel</Button>
+          <Button bsStyle='primary' type='submit'>Save</Button>
+        </Modal.Footer>
+      </form>
+    </Modal>
+
+  _editSubscription: (e) ->
+
+    e.preventDefault()
+
+    @props.onSubmit @state.subscription
+
+  _onTitleChange: (e) ->
+
+    updatedSubscription = Object.assign {}, @state.subscription
+    updatedSubscription.customTitle = e.target.value
+
+    @setState subscription: updatedSubscription
+
 
 module.exports = SubscriptionEditWindow

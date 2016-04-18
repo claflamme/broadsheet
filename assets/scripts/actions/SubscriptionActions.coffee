@@ -53,3 +53,17 @@ module.exports =
   hideNewPrompt: ->
 
     type: constants.MODAL_NEW_SUBSCRIPTION_TOGGLED, show: false
+
+  showEditPrompt: ->
+
+    type: constants.MODAL_EDIT_SUBSCRIPTION_TOGGLED, show: true
+
+  hideEditPrompt: ->
+
+    type: constants.MODAL_EDIT_SUBSCRIPTION_TOGGLED, show: false
+
+  edit: (subscription) ->
+
+    (dispatch) =>
+      dispatch type: constants.SUBSCRIPTIONS_EDITED, subscription: subscription
+      dispatch @hideEditPrompt()
