@@ -12,6 +12,11 @@ SubscriptionEditWindow = React.createClass
     show: React.PropTypes.bool
     onHide: React.PropTypes.func
 
+  componentWillReceiveProps: (nextProps) ->
+
+    if nextProps.initialSubscription
+      @setState subscription: nextProps.initialSubscription
+
   getInitialState: ->
 
     subscription: @props.initialSubscription
@@ -26,6 +31,7 @@ SubscriptionEditWindow = React.createClass
         <Modal.Body>
           <Input
             type='text'
+            ref={ @_focus }
             placeholder={ @state.subscription.feed.title }
             value={ @state.subscription.customTitle or '' }
             onChange={ @_onTitleChange } />
@@ -36,6 +42,11 @@ SubscriptionEditWindow = React.createClass
         </Modal.Footer>
       </form>
     </Modal>
+
+  _focus: (Input) ->
+
+    if Input
+      Input.refs.input.focus()
 
   _editSubscription: (e) ->
 
