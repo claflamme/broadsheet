@@ -67,3 +67,11 @@ module.exports =
     (dispatch) =>
       dispatch type: constants.SUBSCRIPTIONS_EDITED, subscription: subscription
       dispatch @hideEditPrompt()
+
+      request =
+        url: "/api/subscriptions/#{ subscription._id }"
+        method: 'PATCH'
+        body:
+          customTitle: subscription.customTitle
+
+      api.send request
