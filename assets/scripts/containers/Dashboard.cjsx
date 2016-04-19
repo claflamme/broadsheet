@@ -4,6 +4,7 @@ React = require 'react'
 AuthActions = require '../actions/AuthActions'
 ArticleActions = require '../actions/ArticleActions'
 Subscriptions = require '../components/Subscriptions'
+ArticleReader = require '../components/ArticleReader'
 
 mapStateToProps = (state) ->
 
@@ -44,18 +45,9 @@ module.exports = connect(mapStateToProps) React.createClass
           { React.cloneElement @props.children, childProps }
         </Col>
         <Col xs={ 6 } className='dashboardCol articleContent'>
-          <div className='articleWrapper'>
-            <div className='articleBody'>
-              <h1>
-                <a
-                  href={ @props.article?.url or '' }
-                  target='_blank'
-                  dangerouslySetInnerHTML={{ __html: @props.article?.title or '' }}>
-                </a>
-              </h1>
-              <div dangerouslySetInnerHTML={ { __html: @props.articleBody } }></div>
-            </div>
-          </div>
+          <ArticleReader
+            article={ @props.article }
+            articleBody={ @props.articleBody } />
         </Col>
       </Row>
     </Grid>
