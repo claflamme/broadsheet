@@ -62,6 +62,14 @@ module.exports =
 
     type: constants.MODAL_EDIT_SUBSCRIPTION_TOGGLED, show: false
 
+  showDeletePrompt: ->
+
+    type: constants.MODAL_DELETE_SUBSCRIPTION_TOGGLED, show: true
+
+  hideDeletePrompt: ->
+
+    type: constants.MODAL_DELETE_SUBSCRIPTION_TOGGLED, show: false
+
   edit: (subscription) ->
 
     (dispatch) =>

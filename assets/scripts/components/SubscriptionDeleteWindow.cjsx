@@ -4,17 +4,18 @@ Button = require 'react-bootstrap/lib/Button'
 
 SubscriptionDeleteWindow = (props, context) ->
 
-  unless props.subscription.title
-    return null
+  title = props.subscription.customTitle or props.subscription.feed.title
 
-  <Modal show={ props.show or false } onHide={ -> }>
+  <Modal show={ props.show or false } onHide={ props.onHide }>
     <Modal.Header closeButton>
-      <Modal.Title>{ props.subscription.title }</Modal.Title>
+      <Modal.Title>Unsubscribe</Modal.Title>
     </Modal.Header>
     <Modal.Body>
+      Are you sure you want to unsubscribe from <strong>{ title }</strong>?
     </Modal.Body>
     <Modal.Footer>
-      <Button onClick={ -> }>Close</Button>
+      <Button bsStyle='danger' onClick={ props.onHide }>Cancel</Button>
+      <Button bsStyle='primary'>Unsubscribe</Button>
     </Modal.Footer>
   </Modal>
 
@@ -22,5 +23,6 @@ SubscriptionDeleteWindow.propTypes =
 
   subscription: React.PropTypes.object
   show: React.PropTypes.bool
+  onHide: React.PropTypes.func
 
 module.exports = SubscriptionDeleteWindow

@@ -21,6 +21,7 @@ FeedTitleBar.propTypes =
   showControls: React.PropTypes.bool
   subscription: React.PropTypes.object
   showEditSub: React.PropTypes.bool
+  showDeleteSub: React.PropTypes.bool
 
 renderControls = (props) ->
 
@@ -29,7 +30,9 @@ renderControls = (props) ->
       [ Edit ]
     </span>
     &nbsp;
-    <span>[ Unsubscribe ]</span>
+    <span onClick={ -> props.dispatch SubscriptionActions.showDeletePrompt() }>
+      [ Unsubscribe ]
+    </span>
   </span>
 
 renderModals = (props) ->
@@ -41,7 +44,8 @@ renderModals = (props) ->
       initialSubscription={ props.subscription }
       onSubmit={ (subscription) -> onSubEdited props, subscription } />
     <SubscriptionDeleteWindow
-      show={ false }
+      show={ props.showDeleteSub }
+      onHide={ -> props.dispatch SubscriptionActions.hideDeletePrompt() }
       subscription={ props.subscription } />
   </div>
 

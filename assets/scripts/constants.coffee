@@ -50,3 +50,6 @@ module.exports = keymirror
 
   # The "edit subscription" window has been opened or closed.
   MODAL_EDIT_SUBSCRIPTION_TOGGLED: null
+
+  # The "unsubscribe" window has been opened or closed.
+  MODAL_DELETE_SUBSCRIPTION_TOGGLED: null

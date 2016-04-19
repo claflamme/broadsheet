@@ -23,7 +23,7 @@ SubscriptionEditWindow = React.createClass
 
   render: ->
 
-    <Modal bsSize='small' show={ @props.show or false } onHide={ @props.onHide }>
+    <Modal show={ @props.show or false } onHide={ @props.onHide }>
       <form onSubmit={ @_editSubscription }>
         <Modal.Header closeButton>
           <Modal.Title>Edit subscription</Modal.Title>
