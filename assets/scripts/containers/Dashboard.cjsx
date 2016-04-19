@@ -30,6 +30,8 @@ module.exports = connect(mapStateToProps) React.createClass
     unless @props.token
       return null
 
+    childProps = currentArticle: @props.article
+
     <Grid fluid className='dashboardGrid'>
       <Row>
         <Col xs={ 2 } className='dashboardCol subscriptions'>
@@ -39,7 +41,7 @@ module.exports = connect(mapStateToProps) React.createClass
             dispatch={ @props.dispatch } />
         </Col>
         <Col xs={ 4 } className='dashboardCol articleListCol'>
-          { @props.children }
+          { React.cloneElement @props.children, childProps }
         </Col>
         <Col xs={ 6 } className='dashboardCol articleContent'>
           <div className='articleWrapper'>

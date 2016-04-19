@@ -6,7 +6,7 @@ ArticleList = (props, context) ->
 
   <div className='articlesListContainer'>
     <ul className='articlesList'>
-      { props.articles.docs.map renderArticle.bind null, props.onClick }
+      { props.articles.docs.map renderArticle.bind null, props }
     </ul>
     <p></p>
     { renderLoadMore props }
@@ -19,9 +19,14 @@ ArticleList.propTypes =
   loadMore: React.PropTypes.func.isRequired
   onClick: React.PropTypes.func.isRequired
 
-renderArticle = (onClick, article, i) ->
+renderArticle = (props, article, i) ->
 
-  <li key={ i } onClick={ onClick.bind null, article }>
+  className = if article._id is props.currentArticle?._id then 'active' else ''
+
+  <li
+    key={ i }
+    onClick={ props.onClick.bind null, article }
+    className="#{ className }">
     <ArticleListItem article={ article } />
   </li>
 

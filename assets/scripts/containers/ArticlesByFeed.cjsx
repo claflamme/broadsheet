@@ -39,6 +39,7 @@ module.exports = connect(mapStateToProps) React.createClass
       <ArticleList
         loadMore={ @_loadMore }
         articles={ @props.articles }
+        currentArticle={ @props.currentArticle }
         onClick={ @_onClick } />
     </div>
 

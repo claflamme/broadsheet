@@ -11,6 +11,12 @@ mapStateToProps = (state) ->
 
 module.exports = connect(mapStateToProps) React.createClass
 
+  propTypes:
+
+    dispatch: React.PropTypes.func.isRequired
+    articles: React.PropTypes.array
+    currentArticle: React.PropTypes.object
+
   componentWillMount: ->
 
     @props.dispatch ArticleActions.fetchAll()
@@ -22,6 +28,7 @@ module.exports = connect(mapStateToProps) React.createClass
       <ArticleList
         loadMore={ @_loadMore }
         articles={ @props.articles }
+        currentArticle={ @props.currentArticle }
         onClick={ @_onClick } />
     </div>
 
