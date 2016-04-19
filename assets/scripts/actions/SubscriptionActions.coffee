@@ -1,5 +1,6 @@
 constants = require '../constants'
 api = require '../api'
+{ browserHistory } = require 'react-router'
 
 createFeed = (url, cb) ->
 
@@ -81,5 +82,18 @@ module.exports =
         method: 'PATCH'
         body:
           customTitle: subscription.customTitle
+
+      api.send request
+
+  unsubscribe: (subscription) ->
+
+    (dispatch) =>
+      dispatch type: constants.SUBSCRIPTIONS_DELETED, subscription: subscription
+      dispatch @hideDeletePrompt()
+      browserHistory.push '/'
+
+      request =
+        url: "/api/subscriptions/#{ subscription._id }"
+        method: 'DELETE'
 
       api.send request

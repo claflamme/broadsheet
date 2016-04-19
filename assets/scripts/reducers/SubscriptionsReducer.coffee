@@ -14,3 +14,8 @@ module.exports =
         action.subscription
       else
         sub
+
+  SUBSCRIPTIONS_DELETED: (state, action) ->
+
+    state.filter (sub) ->
+      sub._id isnt action.subscription._id

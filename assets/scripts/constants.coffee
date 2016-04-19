@@ -27,6 +27,9 @@ module.exports = keymirror
   # One or more subscriptions were edited.
   SUBSCRIPTIONS_EDITED: null
 
+  # One or more subscriptions were deleted.
+  SUBSCRIPTIONS_DELETED: null
+
   # --- Articles ---------------------------------------------------------------
 
   # A list of articles has been fetched from the server. These articles should

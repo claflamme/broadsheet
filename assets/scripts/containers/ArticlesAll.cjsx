@@ -14,7 +14,7 @@ module.exports = connect(mapStateToProps) React.createClass
   propTypes:
 
     dispatch: React.PropTypes.func.isRequired
-    articles: React.PropTypes.array
+    articles: React.PropTypes.object
     currentArticle: React.PropTypes.object
 
   componentWillMount: ->

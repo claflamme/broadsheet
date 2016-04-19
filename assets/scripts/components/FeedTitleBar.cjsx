@@ -42,15 +42,20 @@ renderModals = (props) ->
       show={ props.showEditSub }
       onHide={ -> props.dispatch SubscriptionActions.hideEditPrompt() }
       initialSubscription={ props.subscription }
-      onSubmit={ (subscription) -> onSubEdited props, subscription } />
+      onSubmit={ (subscription) -> editSub props, subscription } />
     <SubscriptionDeleteWindow
       show={ props.showDeleteSub }
       onHide={ -> props.dispatch SubscriptionActions.hideDeletePrompt() }
-      subscription={ props.subscription } />
+      subscription={ props.subscription }
+      onSubmit={ (subscription) -> deleteSub props, subscription} />
   </div>
 
-onSubEdited = (props, subscription) ->
+editSub = (props, subscription) ->
 
   props.dispatch SubscriptionActions.edit subscription
+
+deleteSub = (props, subscription) ->
+
+  props.dispatch SubscriptionActions.unsubscribe subscription
 
 module.exports = FeedTitleBar
