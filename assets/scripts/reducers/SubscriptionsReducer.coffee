@@ -1,21 +1,31 @@
 module.exports =
 
   # This reducer's state is just an array of subscriptions.
-  initialState: []
+  initialState:
+    docs: []
+    loading: false
 
   SUBSCRIPTIONS_RECEIVED: (state, action) ->
 
-    action.subscriptions
+    newState =
+      docs: action.subscriptions
+      loading: false
+
+    Object.assign {}, state, newState
 
   SUBSCRIPTIONS_EDITED: (state, action) ->
 
-    state.map (sub) ->
+    docs = state.docs.map (sub) ->
       if sub._id is action.subscription._id
         action.subscription
       else
         sub
 
+    Object.assign {}, state, { docs }
+
   SUBSCRIPTIONS_DELETED: (state, action) ->
 
-    state.filter (sub) ->
+    docs = state.docs.filter (sub) ->
       sub._id isnt action.subscription._id
+
+    Object.assign {}, state, { docs }

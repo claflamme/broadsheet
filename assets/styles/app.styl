@@ -1,5 +1,6 @@
 @import 'variables'
 @import 'bootstrap'
+@import 'loading'
 
 body
   height 100%
@@ -114,6 +115,17 @@ h1, h2, h3, h4, h5, h6
       font-size 14px
       font-style italic
       padding 0 $grid-gutter-width
+
+    .hidden
+      transition all 300ms ease-out
+      opacity 0
+      transform translateY(60px)
+      display block !important
+
+    .visible
+      transition all 300ms
+      opacity 1
+      transform translateY(0)
 
   img
     width 100%

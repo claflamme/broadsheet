@@ -1,33 +1,37 @@
 React = require 'react'
+Loader = require './Loader'
 
 ArticleReader = (props, context) ->
 
-  unless props.article
+  unless props.reader.doc
     return renderPlaceholder()
 
   <div className='articleWrapper'>
     <div className='articleBody'>
       <h1>
         <a
-          href={ props.article?.url or '' }
+          href={ props.reader.doc?.url or '' }
           target='_blank'
-          dangerouslySetInnerHTML={{ __html: props.article?.title or '' }}>
+          dangerouslySetInnerHTML={{ __html: props.reader.doc?.title or '' }}>
         </a>
       </h1>
-      <div dangerouslySetInnerHTML={ { __html: props.articleBody } }></div>
+      <Loader show={ props.reader.loading } />
+      <div
+        className={ if props.reader.body then 'visible' else 'hidden' }
+        dangerouslySetInnerHTML={ { __html: props.reader.body } }>
+      </div>
     </div>
   </div>
 
 ArticleReader.propTypes =
 
-  article: React.PropTypes.object
-  articleBody: React.PropTypes.string
+  reader: React.PropTypes.object
 
 renderPlaceholder = ->
 
   <div className='articlePlaceholder'>
     <p className='text-muted'>
-      Select an article from the left to read it.
+      Select an article from the left.
     </p>
   </div>
 

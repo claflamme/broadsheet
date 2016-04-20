@@ -37,8 +37,7 @@ module.exports =
 
     contentRequestedAction =
       type: constants.ARTICLE_CONTENT_REQUESTED
-      article: article
-      visible: true
+      doc: article
 
     (dispatch) ->
       dispatch contentRequestedAction
@@ -46,9 +45,5 @@ module.exports =
         action =
           type: constants.ARTICLE_CONTENT_RECEIVED
           body: content.body
-          article: article
+          doc: article
         dispatch action
-
-  hideContent: ->
-
-    type: constants.ARTICLE_CONTENT_HIDDEN

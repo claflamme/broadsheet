@@ -1,23 +1,24 @@
 module.exports =
 
   initialState:
-    body: ''
-    article: null
-    visible: false
+    body: null
+    doc: null
+    loading: false
 
   ARTICLE_CONTENT_RECEIVED: (state, action) ->
 
-    Object.assign {}, state, { body: action.body, article: action.article }
+    newState =
+      body: action.body
+      doc: action.doc
+      loading: false
+
+    Object.assign {}, state, newState
 
   ARTICLE_CONTENT_REQUESTED: (state, action) ->
 
-    newData =
-      article: action.article
-      visible: action.visible
-      body: ''
+    newState =
+      body: @initialState.body
+      doc: action.doc
+      loading: true
 
-    Object.assign {}, state, newData
-
-  ARTICLE_CONTENT_HIDDEN: (state, action) ->
-
-    Object.assign {}, state, { visible: false }
+    Object.assign {}, state, newState

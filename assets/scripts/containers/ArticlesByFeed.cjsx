@@ -62,7 +62,7 @@ module.exports = connect(mapStateToProps) React.createClass
 
   _getActiveSubscription: (feedId) ->
 
-    @props.subscriptions.find (subscription, i) ->
+    @props.subscriptions.docs.find (subscription, i) ->
       subscription.feed._id is feedId
 
   # Attempts to get the title of the current subscription. If there are no

@@ -11,9 +11,7 @@ mapStateToProps = (state) ->
   subscriptions: state.subscriptions
   token: state.auth.token
   showNewSub: state.modals.showNewSub
-  articleBody: state.reader.body
-  article: state.reader.article
-  articleVisible: state.reader.visible
+  reader: state.reader
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -31,13 +29,13 @@ module.exports = connect(mapStateToProps) React.createClass
     unless @props.token
       return null
 
-    childProps = currentArticle: @props.article
+    childProps = currentArticle: @props.reader.doc
 
     <Grid fluid className='dashboardGrid'>
       <Row>
         <Col xs={ 2 } className='dashboardCol subscriptions'>
           <Subscriptions
-            subscriptions={ @props.subscriptions }
+            subscriptions={ @props.subscriptions.docs }
             showNewSub={ @props.showNewSub }
             dispatch={ @props.dispatch } />
         </Col>
@@ -45,13 +43,7 @@ module.exports = connect(mapStateToProps) React.createClass
           { React.cloneElement @props.children, childProps }
         </Col>
         <Col xs={ 6 } className='dashboardCol articleContent'>
-          <ArticleReader
-            article={ @props.article }
-            articleBody={ @props.articleBody } />
+          <ArticleReader reader={ @props.reader } />
         </Col>
       </Row>
     </Grid>
-
-  _hideReader: ->
-
-    @props.dispatch ArticleActions.hideContent()
