@@ -32,6 +32,9 @@ module.exports = keymirror
 
   # --- Articles ---------------------------------------------------------------
 
+  # A request was sent to fetch an article list.
+  ARTICLES_REQUESTED: null
+
   # A list of articles has been fetched from the server. These articles should
   # overwrite the current list.
   ARTICLES_RECEIVED: null

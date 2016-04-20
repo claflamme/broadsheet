@@ -3,6 +3,8 @@ api = require '../api'
 
 fetchArticles = (request, dispatch) ->
 
+  dispatch type: constants.ARTICLES_REQUESTED
+
   # Pretty sloppy to reset scroll position this way, but it works for now.
   api.send request, (res, articles) ->
     dispatch type: constants.ARTICLES_RECEIVED, articles: articles

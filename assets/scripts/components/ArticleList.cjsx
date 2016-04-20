@@ -1,10 +1,12 @@
 React = require 'react'
 { Button } = require 'react-bootstrap'
 ArticleListItem = require './ArticleListItem'
+Loader = require './Loader'
 
 ArticleList = (props, context) ->
 
   <div className='articlesListContainer'>
+    <Loader show={ props.articles.loading } />
     <ul className='articlesList'>
       { props.articles.docs.map renderArticle.bind null, props }
     </ul>
@@ -31,6 +33,9 @@ renderArticle = (props, article, i) ->
   </li>
 
 renderLoadMore = (props) ->
+
+  if props.articles.loading
+    return null
 
   text = 'Load more...'
   finished = props.articles.page is props.articles.pages

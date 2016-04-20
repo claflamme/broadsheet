@@ -7,13 +7,20 @@ module.exports =
     page: 1
     pages: 1
     total: 10
+    loading: false
 
   ARTICLES_RECEIVED: (state, action) ->
 
     if action.articles.page is 1
       return action.articles
 
-    articles = state.docs.concat action.articles.docs
-    newData = docs: articles, page: action.articles.page
+    newData =
+      docs: state.docs.concat action.articles.docs
+      page: action.articles.page
+      loading: false
 
-    return Object.assign {}, state, newData
+    Object.assign {}, state, newData
+
+  ARTICLES_REQUESTED: (state, action) ->
+
+    Object.assign {}, state, { loading: true, docs: @initialState.docs }
