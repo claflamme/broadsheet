@@ -17,7 +17,7 @@ ArticleReader = (props, context) ->
       </h1>
       <Loader show={ props.reader.loading } />
       <div
-        className={ if props.reader.body then 'visible' else 'hidden' }
+        className={ "slide #{ if props.reader.body then 'up' }" }
         dangerouslySetInnerHTML={ { __html: props.reader.body } }>
       </div>
     </div>

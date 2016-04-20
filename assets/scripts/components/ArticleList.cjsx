@@ -5,9 +5,11 @@ Loader = require './Loader'
 
 ArticleList = (props, context) ->
 
+  hasDocs = props.articles.docs.length > 0
+
   <div className='articlesListContainer'>
     <Loader show={ props.articles.loading } />
-    <ul className='articlesList'>
+    <ul className={ "articlesList slide #{ if hasDocs then 'up' }" }>
       { props.articles.docs.map renderArticle.bind null, props }
     </ul>
     <p></p>

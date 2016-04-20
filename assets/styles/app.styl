@@ -116,17 +116,6 @@ h1, h2, h3, h4, h5, h6
       font-style italic
       padding 0 $grid-gutter-width
 
-    .hidden
-      transition all 400ms ease-out
-      opacity 0
-      transform translateY(50px)
-      display block !important
-
-    .visible
-      transition all 400ms
-      opacity 1
-      transform translateY(0)
-
   img
     width 100%
     height auto
@@ -149,3 +138,14 @@ h1, h2, h3, h4, h5, h6
   // get the margin applied twice.
   p img
     margin 0
+
+.slide
+  transition all 300ms ease-out
+  opacity 0
+  transform translateY(50px)
+  display block !important
+
+  &.up
+    transition all 300ms
+    opacity 1
+    transform translateY(0)
