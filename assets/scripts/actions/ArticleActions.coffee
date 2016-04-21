@@ -1,35 +1,33 @@
 constants = require '../constants'
 api = require '../api'
 
-fetchArticles = (request, dispatch) ->
+fetchArticles = (path, dispatch, opts = {}) ->
 
-  dispatch type: constants.ARTICLES_REQUESTED
+  opts = Object.assign { page: 1, clearDocs: false }, opts
 
-  # Pretty sloppy to reset scroll position this way, but it works for now.
+  request =
+    url: path
+    query: { page: opts.page }
+
+  dispatch type: constants.ARTICLES_REQUESTED, clearDocs: opts.clearDocs
+
   api.send request, (res, articles) ->
     dispatch type: constants.ARTICLES_RECEIVED, articles: articles
     if articles.page is 1
+      # Pretty sloppy to reset scroll position this way, but it works for now.
       document.querySelector('.articleListCol').scrollTop = 0
 
 module.exports =
 
-  fetchAll: (page = 1) ->
-
-    request =
-      url: '/api/subscriptions/articles'
-      query: { page }
+  fetchAll: (opts) ->
 
     (dispatch) ->
-      fetchArticles request, dispatch
+      fetchArticles '/api/subscriptions/articles', dispatch, opts
 
-  fetchByFeed: (feedId, page = 1) ->
-
-    request =
-      url: "/api/feeds/#{ feedId }/articles"
-      query: { page }
+  fetchByFeed: (feedId, opts) ->
 
     (dispatch) ->
-      fetchArticles request, dispatch
+      fetchArticles "/api/feeds/#{ feedId }/articles", dispatch, opts
 
   fetchContent: (article) ->
 

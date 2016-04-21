@@ -12,7 +12,7 @@ module.exports =
   ARTICLES_RECEIVED: (state, action) ->
 
     if action.articles.page is 1
-      return action.articles
+      return Object.assign {}, state, { loading: false }, action.articles
 
     newData =
       docs: state.docs.concat action.articles.docs
@@ -23,4 +23,11 @@ module.exports =
 
   ARTICLES_REQUESTED: (state, action) ->
 
-    Object.assign {}, state, { loading: true, docs: @initialState.docs }
+    newState =
+      loading: true
+      docs: state.docs
+
+    if action.clearDocs
+      newState.docs = @initialState.docs
+
+    Object.assign {}, state, newState

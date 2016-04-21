@@ -8,7 +8,7 @@ ArticleList = (props, context) ->
   hasDocs = props.articles.docs.length > 0
 
   <div className='articlesListContainer'>
-    <Loader show={ props.articles.loading } />
+    <Loader show={ props.articles.loading and not hasDocs } />
     <ul className={ "articlesList slide #{ if hasDocs then 'up' }" }>
       { props.articles.docs.map renderArticle.bind null, props }
     </ul>
@@ -36,16 +36,19 @@ renderArticle = (props, article, i) ->
 
 renderLoadMore = (props) ->
 
-  if props.articles.loading
-    return null
-
   text = 'Load more...'
   finished = props.articles.page is props.articles.pages
+
+  if props.articles.loading
+    text = 'Loading...'
 
   if finished
     text = 'That\'s all, folks!'
 
-  <Button disabled={ finished } block onClick={ props.loadMore }>
+  <Button
+    disabled={ finished or props.articles.loading }
+    block
+    onClick={ props.loadMore }>
     { text }
   </Button>
 

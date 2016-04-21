@@ -47,14 +47,14 @@ module.exports = connect(mapStateToProps) React.createClass
 
   _reload: (feedId) ->
 
-    @props.dispatch ArticleActions.fetchByFeed feedId
+    @props.dispatch ArticleActions.fetchByFeed feedId, { clearDocs: true }
 
   _loadMore: ->
 
     nextPage = @props.articles.page + 1
     feedId = @props.params.feedId
 
-    @props.dispatch ArticleActions.fetchByFeed feedId, nextPage
+    @props.dispatch ArticleActions.fetchByFeed feedId, { page: nextPage }
 
   _onClick: (article) ->
 

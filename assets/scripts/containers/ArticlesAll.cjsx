@@ -36,7 +36,7 @@ module.exports = connect(mapStateToProps) React.createClass
 
     nextPage = @props.articles.page + 1
 
-    @props.dispatch ArticleActions.fetchAll nextPage
+    @props.dispatch ArticleActions.fetchAll page: nextPage
 
   _onClick: (article) ->
 
