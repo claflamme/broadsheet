@@ -36,17 +36,20 @@ renderArticle = (props, article, i) ->
 
 renderLoadMore = (props) ->
 
+  if props.articles.loading and props.articles.docs.length is 0
+    return null
+
   text = 'Load more...'
-  finished = props.articles.page is props.articles.pages
+  isFinished = props.articles.page is props.articles.pages
 
   if props.articles.loading
     text = 'Loading...'
 
-  if finished
+  if isFinished
     text = 'That\'s all, folks!'
 
   <Button
-    disabled={ finished or props.articles.loading }
+    disabled={ isFinished or props.articles.loading }
     block
     onClick={ props.loadMore }>
     { text }
