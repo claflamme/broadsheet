@@ -11,7 +11,10 @@ parseArticle = (item) ->
   # Full article data is fetched at "read time", so we don't need to store any
   # more than a brief summary. In this case, that's the first sentence.
   summary = item.summary or item.description
-  summary = summary.split('</p>', 1)[0]
+
+  summary = summary.split('</p>').find (p) ->
+    sanitize(p, allowedTags: []) isnt ''
+
   summary = sanitize summary, allowedTags: []
 
   if summary.length > 200

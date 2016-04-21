@@ -1,3 +1,4 @@
+validator = require 'validator'
 Feed = App.Models.Feed
 ParserService = App.Services.ParserService
 
@@ -13,10 +14,22 @@ module.exports =
   create: (req, res) ->
 
     feedUrl = req.body.url
-    params = url: feedUrl
 
     unless feedUrl
       return res.error 'FEED_URL_REQUIRED'
+
+    unless feedUrl.search(/https?:\/\//) is 0
+      feedUrl = "http://#{ feedUrl }"
+
+    validatorConfig =
+      require_protocol: true
+      require_valid_prototcol: true
+      protocols: ['http', 'https']
+
+    unless validator.isURL feedUrl, validatorConfig
+      return res.error 'INVALID_REQUEST_BODY_PARAMS', 'url'
+
+    params = url: feedUrl
 
     Feed.create params, (err, newFeed) ->
 

@@ -51,6 +51,7 @@ renderLoadMore = (props) ->
   <Button
     disabled={ isFinished or props.articles.loading }
     block
+    bsStyle='primary'
     onClick={ props.loadMore }>
     { text }
   </Button>
