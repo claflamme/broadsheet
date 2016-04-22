@@ -1,6 +1,5 @@
 AuthController = App.Controllers.AuthController
 FeedController = App.Controllers.FeedController
-UserController = App.Controllers.UserController
 FeedController = App.Controllers.FeedController
 SubscriptionController = App.Controllers.SubscriptionController
 ProxyController = App.Controllers.ProxyController
@@ -10,8 +9,6 @@ module.exports = (router) ->
 
   router.post '/api/auth/authenticate', AuthController.authenticate
   router.post '/api/auth/register', AuthController.register
-
-  router.get '/api/user', UserController.get
 
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create

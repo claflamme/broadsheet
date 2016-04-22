@@ -1,6 +1,7 @@
 @import 'variables'
 @import 'bootstrap'
 @import 'loading'
+@import 'subscriptions'
 
 body
   height 100%
@@ -18,32 +19,6 @@ h1, h2, h3, h4, h5, h6
   &:hover
     opacity 0.8
 
-.subscriptions
-  background $gray-darker
-  padding-top halfGutter()
-
-.subscriptionsList
-  list-style-type none
-  margin 0 halfGutter() * -1
-  padding halfGutter()0 0 0
-
-  li > a
-    display block
-    padding 4px halfGutter()
-
-    &:link, &:visited, &:active
-      color $brand-primary
-      text-decoration none
-
-    &:hover
-      background-color $gray-dark
-      text-decoration none
-
-    &.active
-      background-color lighten($gray-dark, 10)
-      font-weight 400
-      color #fff
-
 .articlesList
   margin 0
   padding 0
@@ -57,13 +32,16 @@ h1, h2, h3, h4, h5, h6
     cursor pointer
 
   li:hover, li.active
-    background-color lighten($gray-light, 22)
+    background-color $gray-lighter
 
 .articleTitle
-  color $gray-darker
-  font-weight 600
+  color $gray-dark
+  font-weight 500
   margin 0
-  font-size 1.1em
+
+.articlePreview
+  color $gray-light
+  font-weight 300
 
 .dashboardGrid
   position absolute
@@ -79,7 +57,6 @@ h1, h2, h3, h4, h5, h6
 .dashboardCol
   height 100%
   overflow-y auto
-  border-right 1px solid borderColor
 
 .feedTitleBar .feedTitle
   margin halfGutter()
@@ -87,6 +64,7 @@ h1, h2, h3, h4, h5, h6
   display inline-block
 
 .articleContent
+  border-left 1px solid borderColor
   padding 0
   overflow hidden
   font-size 16px
@@ -126,7 +104,7 @@ h1, h2, h3, h4, h5, h6
     font-weight 600
 
     a:link, a:visited, a:active
-      color #000
+      color $gray-darker
       text-decoration none
 
   h2, h3, h4, h5, h6
@@ -156,7 +134,7 @@ blockquote
   font-weight 300
   font-style italic
   color $gray-light
-  border-left 5px solid lighten($gray-light, 20)
+  border-left 5px solid $gray-lighter
 
   b, strong
     font-weight 500

@@ -1,0 +1,24 @@
+.subscriptions
+  background $gray-lighter
+  padding-top halfGutter()
+
+.subscriptionsList
+  list-style-type none
+  margin 0 halfGutter() * -1
+  padding halfGutter()0 0 0
+
+  li > a
+    display block
+    padding 4px halfGutter()
+
+    &:link, &:visited, &:active
+      color $gray
+      text-decoration none
+
+    &:hover
+      background-color darken($gray-lighter, 5)
+      text-decoration none
+
+    &.active
+      color $gray-dark
+      background-color darken($gray-lighter, 10)

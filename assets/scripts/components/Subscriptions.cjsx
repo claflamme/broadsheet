@@ -28,11 +28,17 @@ module.exports = React.createClass
         bsStyle='primary'
         className='newSubscriptionBtn'
         onClick={ @_showNewSubscription }>
-        Add Subscription
+        <span>Add Subscription</span>
+        &nbsp;
+        <i className='fa fa-plus'></i>
       </Button>
       <ul className='subscriptionsList'>
         <li>
-          <IndexLink to='/' activeClassName='active'>All</IndexLink>
+          <IndexLink to='/' activeClassName='active'>
+            <i className='fa fa-fw fa-rss'></i>
+            &nbsp;
+            All
+          </IndexLink>
         </li>
         <li>&nbsp;</li>
         { @props.subscriptions.map @_renderSubscription }
