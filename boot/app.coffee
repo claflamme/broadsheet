@@ -44,7 +44,7 @@ app.set 'views', App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.json()
 app.use stylus.middleware stylusOpts
-app.get '/app.js', browserify 'assets/scripts/Router.cjsx', browserifyOpts
+app.get '/app.js', browserify 'assets/scripts/App.cjsx', browserifyOpts
 app.use express.static 'public'
 app.use '/api', auth
 
