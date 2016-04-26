@@ -25,14 +25,18 @@ FeedTitleBar.propTypes =
 
 renderControls = (props) ->
 
-  <span>
-    <span onClick={ -> props.dispatch SubscriptionActions.showEditPrompt() }>
-      [ Edit ]
-    </span>
+  <span className='feedTitleBarIcons'>
+    <a
+      title='Edit subscription'
+      onClick={ -> props.dispatch SubscriptionActions.showEditPrompt() }>
+      <i className='fa fa-fw fa-pencil'></i>
+    </a>
     &nbsp;
-    <span onClick={ -> props.dispatch SubscriptionActions.showDeletePrompt() }>
-      [ Unsubscribe ]
-    </span>
+    <a
+      title='Unsubscribe'
+      onClick={ -> props.dispatch SubscriptionActions.showDeletePrompt() }>
+      <i className='fa fa-fw fa-times'></i>
+    </a>
   </span>
 
 renderModals = (props) ->
