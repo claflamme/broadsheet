@@ -4,16 +4,20 @@
 @import 'subscriptions'
 
 body
+  font $fontSize/$lineHeight $fontFamilyBody
   height 100%
+  color $paletteNeutral
 
 h1, h2, h3, h4, h5, h6
+  font-family $fontFamilyHeader
   letter-spacing -0.03em
+  color $paletteDark
 
 .btn
   border none
 
 .btn-primary
-  background-image linear-gradient(25deg, rgba(64,136,196,1) -35%,rgba(110,205,177,1) 135%)
+  background-image linear-gradient(25deg, $paletteAccentDark -35%, $paletteAccentLight 135%)
   transition opacity 200ms
 
   &:hover
@@ -25,18 +29,18 @@ h1, h2, h3, h4, h5, h6
   list-style-type none
 
   li
-    border-top 1px solid borderColor
+    border-top 1px solid $borderColor
     margin 0 halfGutter() * -1
     padding 8px halfGutter()
     cursor pointer
     transition all 200ms
 
   li:hover .articleSummary
-    transform translate(-3px, -3px)
+    transform translateX(5px)
 
   li.active
     background-image linear-gradient(rgba(0,0,0,0.05), rgba(0, 0, 0, 0) 3px)
-    background-color $gray-lighter
+    background-color $paletteLighter
 
     .articleSummary
       transform translate(0)
@@ -45,12 +49,12 @@ h1, h2, h3, h4, h5, h6
   transition 200ms all
 
 .articleTitle
-  color $gray-dark
+  color $paletteDark
   font-weight 500
   margin 0
 
 .articlePreview
-  color $gray-light
+  color $paletteLight
   font-weight 300
 
 .dashboardGrid
@@ -81,19 +85,19 @@ h1, h2, h3, h4, h5, h6
 
   .fa
     cursor pointer
-    color $gray-light
+    color $paletteLight
 
   .fa:hover
-    color $gray
+    color $paletteNeutral
 
 .articleContent
-  border-left 1px solid borderColor
+  border-left 1px solid $borderColor
   padding 0
   overflow hidden
   font-size 16px
 
   a:link, a:visited, a:active
-    color $gray-dark
+    color $paletteDark
     text-decoration underline
 
   .articlePlaceholder
@@ -127,7 +131,7 @@ h1, h2, h3, h4, h5, h6
     font-weight 600
 
     a:link, a:visited, a:active
-      color $gray-darker
+      color $paletteDarker
       text-decoration none
 
   h2, h3, h4, h5, h6
@@ -156,8 +160,8 @@ blockquote
   font-size 1.2em
   font-weight 300
   font-style italic
-  color $gray-light
-  border-left 5px solid $gray-lighter
+  color $paletteLight
+  border-left 5px solid $paletteLighter
 
   b, strong
     font-weight 500

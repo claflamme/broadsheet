@@ -1,22 +1,26 @@
-borderColor = #F1F2F3
+// Base colour palette
+$paletteBase ?= #263c42
+$paletteDarker ?= #344A50
+$paletteDark ?= #466269
+$paletteNeutral ?= #738286
+$paletteLight ?= #B3C0C3
+$paletteLighter ?= #f5f8f9
+$paletteAccentLight ?= #6ecdb1
+$paletteAccentDark ?= #4088c4
 
-// Bootstrap overrides ---------------------------------------------------------
+$borderColor ?= #F1F2F3
 
-// Base component colours
+// Typography
+$fontFamilyBody ?= 'Fira Sans', Helvetica, Arial, sans-serif
+$fontFamilyHeader ?= $fontFamilyBody
+$fontSize ?= 14px
+$lineHeight ?= 1.75
 
-$gray-base =           #263c42
-$gray-darker =         #344A50
-$gray-dark =           #466269
-$gray =                #738286
-$gray-light =          #B3C0C3
-$gray-lighter =        #f5f8f9
+// Bootstrap overrides
 
-
-$font-family-sans-serif = 'Fira Sans', Helvetica, Arial, sans-serif
-$panel-default-border = borderColor
-$input-border = borderColor
+$panel-default-border = $borderColor
+$input-border = $borderColor
 $input-border-focus = rgba(88, 171, 186, 0.6)
-$line-height-base = 1.75 // 28 divided by 16
 $input-color-placeholder = #ccc
 $btn-primary-bg = #4088C4
 $brand-primary = #4F6A73

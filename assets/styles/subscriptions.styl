@@ -1,5 +1,5 @@
 .subscriptions
-  background $gray-lighter
+  background $paletteLighter
   padding-top halfGutter()
 
 .subscriptionsList
@@ -13,13 +13,13 @@
     border-radius 0 5px 5px 0
 
     &:link, &:visited, &:active
-      color $gray
+      color $paletteNeutral
       text-decoration none
 
     &:hover
-      background-color darken($gray-lighter, 5)
+      background-color darken($paletteLighter, 5)
       text-decoration none
 
     &.active
-      color $gray-dark
-      background-color darken($gray-lighter, 10)
+      color $paletteDark
+      background-color darken($paletteLighter, 10)
