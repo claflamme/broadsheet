@@ -3,31 +3,36 @@ refresh = ->
   localStorage.clear()
   window.location.reload()
 
+stringifyQueryObject = (queryObject) ->
+
+  queryParams = []
+
+  for k, v of queryObject
+    queryParams.push "#{ k }=#{ v }"
+
+  "?#{ queryParams.join '&' }"
+
 module.exports =
 
-  send: (options, cb) ->
+  send: (options, cb = ->) ->
 
-    cb or= -> undefined
+    defaults = method: 'get', body: null, query: {}, url: ''
+    config = Object.assign {}, defaults, options
 
-    options.headers or= {}
+    config.url += stringifyQueryObject config.query
 
-    options.headers['content-type'] = 'application/json'
+    req = new XMLHttpRequest()
+    req.open config.method, config.url, true
+    req.setRequestHeader 'content-type', 'application/json'
 
     if token = localStorage.getItem 'token'
-      options.headers['Authorization'] = "Bearer #{ token }"
+      req.setRequestHeader 'Authorization', "Bearer #{ token }"
 
-    if options.body
-      options.body = JSON.stringify options.body
+    req.onreadystatechange = ->
+      if req.status is 401
+        return refresh()
+      if req.readyState isnt 4 or req.status isnt 200
+        return
+      cb req.response, JSON.parse req.responseText
 
-    if options.query
-      queryParams = []
-      for k, v of options.query
-        queryParams.push "#{ k }=#{ v }"
-      options.url += "?#{ queryParams.join '&' }"
-
-    fetch(options.url, options).then (res) ->
-      if res.status is 401
-        refresh()
-      else
-        res.json().then (json) ->
-          cb res, json
+    req.send JSON.stringify config.body
