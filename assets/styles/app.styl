@@ -28,14 +28,21 @@ h1, h2, h3, h4, h5, h6
     border-top 1px solid borderColor
     margin 0 halfGutter() * -1
     padding 8px halfGutter()
-    transition all 200ms
     cursor pointer
+    transition all 200ms
 
-  li:hover, li.active
-    background-color $gray-lighter
+  li:hover .articleSummary
+    transform translate(-3px, -3px)
 
   li.active
-    background-image linear-gradient(rgba(0,0,0,0.05), rgba(0, 0, 0, 0) 5px)
+    background-image linear-gradient(rgba(0,0,0,0.05), rgba(0, 0, 0, 0) 3px)
+    background-color $gray-lighter
+
+    .articleSummary
+      transform translate(0)
+
+.articleSummary
+  transition 200ms all
 
 .articleTitle
   color $gray-dark
