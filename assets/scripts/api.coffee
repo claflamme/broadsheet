@@ -36,3 +36,5 @@ module.exports =
       cb req.response, JSON.parse req.responseText
 
     req.send JSON.stringify config.body
+
+    return req

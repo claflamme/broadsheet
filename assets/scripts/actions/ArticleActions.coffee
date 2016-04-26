@@ -35,15 +35,17 @@ module.exports =
       url: '/api/proxy/article'
       query: { url: article.url }
 
-    contentRequestedAction =
-      type: constants.ARTICLE_CONTENT_REQUESTED
-      doc: article
-
     (dispatch) ->
-      dispatch contentRequestedAction
-      api.send request, (res, content) ->
+      req = api.send request, (res, content) ->
         action =
           type: constants.ARTICLE_CONTENT_RECEIVED
           body: content.body
           doc: article
         dispatch action
+
+      contentRequestedAction =
+        type: constants.ARTICLE_CONTENT_REQUESTED
+        doc: article
+        req: req
+
+      dispatch contentRequestedAction
