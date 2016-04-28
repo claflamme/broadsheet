@@ -3,21 +3,23 @@
 @import 'loading'
 @import 'subscriptions'
 
+@import 'elements/button'
+
 body
-  font $fontSize/$lineHeight $fontFamilyBody
+  font $font-size/$line-height $font-family-body
   height 100%
-  color $paletteNeutral
+  color $palette-neutral
 
 h1, h2, h3, h4, h5, h6
-  font-family $fontFamilyHeader
+  font-family $font-family-header
   letter-spacing -0.03em
-  color $paletteDark
+  color $palette-dark
 
 .btn
   border none
 
 .btn-primary
-  background-image linear-gradient(25deg, $paletteAccentDark -35%, $paletteAccentLight 135%)
+  background-image linear-gradient(25deg, $palette-accent-secondary -35%, $palette-accent-primary 135%)
   transition opacity 200ms
 
   &:hover
@@ -29,7 +31,7 @@ h1, h2, h3, h4, h5, h6
   list-style-type none
 
   li
-    border-top 1px solid $borderColor
+    border-top 1px solid $border-color
     margin 0 halfGutter() * -1
     padding 8px halfGutter()
     cursor pointer
@@ -40,7 +42,7 @@ h1, h2, h3, h4, h5, h6
 
   li.active
     background-image linear-gradient(rgba(0,0,0,0.05), rgba(0, 0, 0, 0) 3px)
-    background-color $paletteLighter
+    background-color $palette-lighter
 
     .articleSummary
       transform translate(0)
@@ -49,12 +51,12 @@ h1, h2, h3, h4, h5, h6
   transition 200ms all
 
 .articleTitle
-  color $paletteDark
+  color $palette-dark
   font-weight 500
   margin 0
 
 .articlePreview
-  color $paletteLight
+  color $palette-light
   font-weight 300
 
 .dashboardGrid
@@ -85,19 +87,19 @@ h1, h2, h3, h4, h5, h6
 
   .fa
     cursor pointer
-    color $paletteLight
+    color $palette-light
 
   .fa:hover
-    color $paletteNeutral
+    color $palette-neutral
 
 .articleContent
-  border-left 1px solid $borderColor
+  border-left 1px solid $border-color
   padding 0
   overflow hidden
   font-size 16px
 
   a:link, a:visited, a:active
-    color $paletteDark
+    color $palette-dark
     text-decoration underline
 
   .articlePlaceholder
@@ -131,7 +133,7 @@ h1, h2, h3, h4, h5, h6
     font-weight 600
 
     a:link, a:visited, a:active
-      color $paletteDarker
+      color $palette-darker
       text-decoration none
 
   h2, h3, h4, h5, h6
@@ -160,8 +162,8 @@ blockquote
   font-size 1.2em
   font-weight 300
   font-style italic
-  color $paletteLight
-  border-left 5px solid $paletteLighter
+  color $palette-light
+  border-left 5px solid $palette-lighter
 
   b, strong
     font-weight 500

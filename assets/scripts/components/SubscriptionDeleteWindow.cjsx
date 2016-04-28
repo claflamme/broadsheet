@@ -1,7 +1,7 @@
 React = require 'react'
 Modal = require 'react-bootstrap/lib/Modal'
-Button = require 'react-bootstrap/lib/Button'
 SubscriptionActions = require '../actions/SubscriptionActions'
+Button = require '../elements/Button'
 
 SubscriptionDeleteWindow = (props, context) ->
 
@@ -16,8 +16,8 @@ SubscriptionDeleteWindow = (props, context) ->
         Are you sure you want to unsubscribe from <strong>{ title }</strong>?
       </Modal.Body>
       <Modal.Footer>
-        <Button bsStyle='danger' onClick={ props.onHide }>Cancel</Button>
-        <Button bsStyle='primary' type='submit'>Unsubscribe</Button>
+        <Button variant='danger' onClick={ props.onHide }>Cancel</Button>
+        <Button variant='primary' type='submit'>Unsubscribe</Button>
       </Modal.Footer>
     </form>
   </Modal>

@@ -1,8 +1,8 @@
 React = require 'react'
 Modal = require 'react-bootstrap/lib/Modal'
-Button = require 'react-bootstrap/lib/Button'
 Input = require 'react-bootstrap/lib/Input'
 SubscriptionActions = require '../actions/SubscriptionActions'
+Button = require '../elements/Button'
 
 SubscriptionEditWindow = React.createClass
 
@@ -37,8 +37,8 @@ SubscriptionEditWindow = React.createClass
             onChange={ @_onTitleChange } />
         </Modal.Body>
         <Modal.Footer>
-          <Button bsStyle='danger' onClick={ @props.onHide }>Cancel</Button>
-          <Button bsStyle='primary' type='submit'>Save</Button>
+          <Button variant='danger' onClick={ @props.onHide }>Cancel</Button>
+          <Button variant='primary' type='submit'>Save</Button>
         </Modal.Footer>
       </form>
     </Modal>

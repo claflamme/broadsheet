@@ -1,5 +1,6 @@
 React = require 'react'
-{ Grid, Row, Col, Panel, Input, Button } = require 'react-bootstrap'
+{ Grid, Row, Col, Panel, Input } = require 'react-bootstrap'
+Button = require '../elements/Button'
 
 module.exports = React.createClass
 
@@ -26,7 +27,7 @@ module.exports = React.createClass
           type='password'
           placeholder='Password...'
           onChange={ @_onChange.bind @, 'password'} />
-        <Button type='submit' bsStyle='primary' block>
+        <Button type='submit' variant='primary' block>
           { @props.buttonText }
         </Button>
       </form>

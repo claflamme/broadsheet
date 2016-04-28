@@ -1,25 +1,38 @@
-// Base colour palette
-$paletteBase ?= #263c42
-$paletteDarker ?= #344A50
-$paletteDark ?= #466269
-$paletteNeutral ?= #738286
-$paletteLight ?= #B3C0C3
-$paletteLighter ?= #f5f8f9
-$paletteAccentLight ?= #6ecdb1
-$paletteAccentDark ?= #4088c4
+// --- Color Palette -----------------------------------------------------------
 
-$borderColor ?= #F1F2F3
+// Base colours
+$palette-base ?= #263c42
+$palette-darker ?= #344A50
+$palette-dark ?= #466269
+$palette-neutral ?= #738286
+$palette-light ?= #B3C0C3
+$palette-lighter ?= #f5f8f9
+
+// Accents
+$palette-accent-primary ?= #52BB9C
+$palette-accent-secondary ?= #4088c4
+
+// Contextual colours
+$palette-danger ?= #D65151
+
+$border-color ?= #F1F2F3
 
 // Typography
-$fontFamilyBody ?= 'Fira Sans', Helvetica, Arial, sans-serif
-$fontFamilyHeader ?= $fontFamilyBody
-$fontSize ?= 14px
-$lineHeight ?= 1.75
+$font-family-body ?= 'Fira Sans', Helvetica, Arial, sans-serif
+$font-family-header ?= $font-family-body
+$font-size ?= 14px
+$line-height ?= 1.75
+
+// Animation & transitions
+$animation-speed ?= 200ms
+
+// Structure & layout
+$gutter ?= 15px
 
 // Bootstrap overrides
 
-$panel-default-border = $borderColor
-$input-border = $borderColor
+$panel-default-border = $border-color
+$input-border = $border-color
 $input-border-focus = rgba(88, 171, 186, 0.6)
 $input-color-placeholder = #ccc
 $btn-primary-bg = #4088C4

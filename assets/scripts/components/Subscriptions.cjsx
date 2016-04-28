@@ -1,6 +1,6 @@
 React = require 'react'
 { Link, IndexLink } = require 'react-router'
-{ Button } = require 'react-bootstrap'
+Button = require '../elements/Button'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionsNew = require './SubscriptionsNew'
 
@@ -24,8 +24,8 @@ module.exports = React.createClass
 
     <div>
       <Button
+        variant='primary'
         block
-        bsStyle='primary'
         className='newSubscriptionBtn'
         onClick={ @_showNewSubscription }>
         <span>Add Subscription</span>

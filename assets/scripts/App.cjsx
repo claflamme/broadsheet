@@ -3,18 +3,31 @@ React = require 'react'
 { Provider } = require 'react-redux'
 { createStore, applyMiddleware, combineReducers } = require 'redux'
 thunk = require('redux-thunk').default
-reducers = require  './reducers'
 Router = require './Router'
 
-# Add redux middleware here. They'll be invoked in the order they're listed.
+# --- Redux Middleware ---------------------------------------------------------
+# Middleware will be invoked in the order they're listed.
+# ------------------------------------------------------------------------------
+
 middleware = [
   thunk
 ]
 
-# Modules in the `./reducers` folder must export a plain object containing a
-# property called "initialState". This method converts a module to a reducer
-# function. When an action is dispatched, the function will attempt to invoke
-# any methods with the same name as the action type.
+# --- Redux Reducers -----------------------------------------------------------
+# Reducer modules export a plain object with an `initialState` property and
+# methods named after redux actions. The named methods are called when an action
+# with that name is dispatched.
+# ------------------------------------------------------------------------------
+
+reducers =
+  auth: require './reducers/AuthReducer'
+  subscriptions: require './reducers/SubscriptionsReducer'
+  modals: require './reducers/ModalsReducer'
+  articles: require './reducers/ArticlesReducer'
+  reader: require './reducers/ReaderReducer'
+
+# ------------------------------------------------------------------------------
+
 createReducer = (reducer) ->
   (state = reducer.initialState, action) ->
     if reducer[action.type]

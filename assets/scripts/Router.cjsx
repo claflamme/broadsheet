@@ -10,5 +10,6 @@ module.exports = ->
     </Route>
     <Route path='/login' component={ require './containers/Login' } />
     <Route path='/register' component={ require './containers/Register' } />
+    <Route path='/styleguide' component={ require './containers/Styleguide' } />
     <Route path='*' component={ require './containers/404' } />
   </Router>
