@@ -8,7 +8,7 @@ module.exports =
 
     payload = {}
     secret = process.env.JWT_SECRET
-    options = subject: user._id
+    options = subject: user._id.toString()
 
     jwt.sign payload, secret, options, callback
 

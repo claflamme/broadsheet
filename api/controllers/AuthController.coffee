@@ -19,7 +19,7 @@ sendResponse = (res, errKey, user) ->
   if errKey
     return res.error errKey
 
-  AuthService.generateToken user, (token) ->
+  AuthService.generateToken user, (err, token) ->
     res.json token: token, user: user
 
 module.exports =
