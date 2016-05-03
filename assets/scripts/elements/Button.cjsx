@@ -2,18 +2,18 @@ React = require 'react'
 
 Button = (props, context) ->
 
-  classNames = ['button']
+  classNamesList = ['button', props.className]
 
   if props.variant
-    classNames.push props.variant
+    classNamesList.push props.variant
 
   if props.block
-    classNames.push 'block'
+    classNamesList.push 'block'
 
   <button
-    className={ classNames.join ' ' }
-    onClick={ props.onClick }
-    type={ props.type }>
+    {...props}
+    className={ classNamesList.join ' ' }
+    onClick={ props.onClick }>
     { props.children }
   </button>
 
@@ -30,5 +30,6 @@ Button.defaultProps =
   variant: null
   block: false
   type: 'button'
+  className: ''
 
 module.exports = Button

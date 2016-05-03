@@ -15,16 +15,6 @@ h1, h2, h3, h4, h5, h6
   letter-spacing -0.03em
   color $palette-dark
 
-.btn
-  border none
-
-.btn-primary
-  background-image linear-gradient(25deg, $palette-accent-secondary -35%, $palette-accent-primary 135%)
-  transition opacity 200ms
-
-  &:hover
-    opacity 0.8
-
 .articlesList
   margin 0
   padding 0
@@ -35,14 +25,13 @@ h1, h2, h3, h4, h5, h6
     margin 0 halfGutter() * -1
     padding 8px halfGutter()
     cursor pointer
-    transition all 200ms
+    transition all 100ms
 
-  li:hover .articleSummary
-    transform translateX(5px)
+  li:hover
+    box-shadow inset 3px 0 0 0 $palette-light
 
   li.active
-    background-image linear-gradient(rgba(0,0,0,0.05), rgba(0, 0, 0, 0) 3px)
-    background-color $palette-lighter
+    box-shadow inset 3px 0 0 0 $palette-accent-primary
 
     .articleSummary
       transform translate(0)
