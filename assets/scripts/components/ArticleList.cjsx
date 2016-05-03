@@ -1,6 +1,6 @@
 React = require 'react'
-{ Button } = require 'react-bootstrap'
 ArticleListItem = require './ArticleListItem'
+Button = require '../elements/Button'
 Loader = require './Loader'
 
 ArticleList = (props, context) ->

@@ -12,8 +12,7 @@ Button = (props, context) ->
 
   <button
     {...props}
-    className={ classNamesList.join ' ' }
-    onClick={ props.onClick }>
+    className={ classNamesList.join ' ' }>
     { props.children }
   </button>
 

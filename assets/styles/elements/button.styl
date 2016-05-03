@@ -1,4 +1,8 @@
-button
+button-focus($button-color)
+  box-shadow 0 0 0 3px lighten($button-color, 20)
+
+button-focus-active($button-color)
+  box-shadow 0 0 0 3px lighten($button-color, 20), inset 0 3px 5px rgba(0, 0, 0, 0.3)
 
 .button
   display inline-block
@@ -19,16 +23,19 @@ button
 
   &:focus
     outline none
-    box-shadow 0 0 0 3px lighten($palette-accent-secondary, 20)
-
-  &:focus:active
-    box-shadow inset 0 3px 5px rgba(0, 0, 0, 0.3), 0 0 0 3px lighten($palette-accent-secondary, 20)
+    button-focus($palette-accent-secondary)
 
 .button.primary
   background-color $palette-accent-primary
 
   &:hover
     background-color darken($palette-accent-primary, 5)
+
+  &:focus
+    button-focus($palette-accent-primary)
+
+  &:focus:active
+    button-focus-active($palette-accent-primary)
 
 .button.danger
   background-color $palette-danger
