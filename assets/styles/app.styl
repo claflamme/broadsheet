@@ -21,17 +21,17 @@ h1, h2, h3, h4, h5, h6
   list-style-type none
 
   li
-    border-top 1px solid $border-color
+    border-bottom 1px solid $palette-border
     margin 0 halfGutter() * -1
     padding 8px halfGutter()
     cursor pointer
     transition all 100ms
 
   li:hover
-    box-shadow inset 3px 0 0 0 $palette-light
+    box-shadow inset 5px 0 0 0 darken($palette-lighter, 10)
 
   li.active
-    box-shadow inset 3px 0 0 0 $palette-accent-primary
+    box-shadow inset 5px 0 0 0 $palette-accent-primary
 
     .articleSummary
       transform translate(0)
@@ -63,26 +63,40 @@ h1, h2, h3, h4, h5, h6
   height 100%
   overflow-y auto
 
-.feedTitleBar .feedTitle
-  margin halfGutter()
-  margin-left 0
-  display inline-block
+.feedTitleBar
+  margin 0 halfGutter() * -1
+  padding halfGutter()
+  border-bottom 1px solid $palette-border
+
+  h3
+    margin 0 0 (halfGutter() / 2)
 
 .feedTitleBarIcons
-  display inline-block
-  float right
   font-size ($font-size-h3 / 1.5)
-  line-height $font-size-h3 + $grid-gutter-width
+  margin 0 halfGutter() * -1
+  padding 0 halfGutter()
+  list-style-type none
+  overflow hidden
+
+  li
+    display inline-block
+    float left
+    margin-right halfGutter()
+    line-height 0
 
   .fa
+    margin-right (halfGutter() / 3)
+
+  a
     cursor pointer
     color $palette-light
 
-  .fa:hover
+  a:hover
     color $palette-neutral
+    text-decoration none
 
 .articleContent
-  border-left 1px solid $border-color
+  border-left 1px solid $palette-border
   padding 0
   overflow hidden
   font-size 16px
@@ -152,7 +166,7 @@ blockquote
   font-weight 300
   font-style italic
   color $palette-light
-  border-left 5px solid $palette-lighter
+  border-left 5px solid $palette-border
 
   b, strong
     font-weight 500
