@@ -1,0 +1,22 @@
+$columns = 12
+
+$breakpoints = {
+  sm: 0,
+  md: 768px,
+  lg: 992px,
+  hg: 1200px
+}
+
+.grid
+  display flex
+
+  for $name, $pixels in $breakpoints
+
+    @media screen and (min-width: $pixels)
+
+      & > .{ $name }
+        flex 1
+
+      for $num in 1..$columns
+        & > .{ $name }-{ $num }
+          flex 0 0 (($num / $columns) * 100)%
