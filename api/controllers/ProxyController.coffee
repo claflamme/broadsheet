@@ -31,5 +31,6 @@ module.exports =
   getArticle: (req, res) ->
 
     read req.query.url, (err, article, httpRes) ->
-      res.json { body: article.content }
+      body = article?.content or 'There was an error fetching this article.'
+      res.json { body }
       article.close()
