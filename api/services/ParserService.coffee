@@ -3,6 +3,7 @@ sanitize = require 'sanitize-html'
 each = require 'async/each'
 request = require 'request'
 moment = require 'moment'
+faviconoclast = require 'faviconoclast'
 Feed = App.Models.Feed
 Article = App.Models.Article
 
@@ -65,7 +66,9 @@ updateFeed = (feed, meta, done) ->
   feed.title = meta.title or null
   feed.description = meta.description or null
 
-  feed.save done
+  faviconoclast meta.link or url, (err, iconUrl) ->
+    feed.iconUrl = iconUrl
+    feed.save done
 
 addArticles = (parsedArticles, feed, done) ->
 

@@ -57,6 +57,7 @@ module.exports = React.createClass
       <Link
         to={ "/feeds/#{ subscription.feed._id }"}
         activeClassName='active'>
+        <img className='subscriptionIcon' src={ subscription.feed.iconUrl } />
         { subscription.customTitle or fallbackTitle }
       </Link>
     </li>

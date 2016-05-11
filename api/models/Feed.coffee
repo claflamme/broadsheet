@@ -16,6 +16,9 @@ schema =
     type: String
     unique: true
 
+  iconUrl:
+    type: String
+
 Schema = App.Mongoose.Schema schema, timestamps: true
 
 # --- Helpers ------------------------------------------------------------------
