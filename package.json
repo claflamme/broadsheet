@@ -30,7 +30,7 @@
     "jsonwebtoken": "^6.2.0",
     "keymirror": "^0.1.1",
     "moment": "^2.13.0",
-    "mongoose": "^4.4.16",
+    "mongoose": "^4.4.17",
     "mongoose-paginate": "^5.0.0",
     "morgan": "^1.7.0",
     "node-readability": "^2.2.0",

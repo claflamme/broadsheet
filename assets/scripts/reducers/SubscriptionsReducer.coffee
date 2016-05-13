@@ -1,9 +1,12 @@
 module.exports =
 
-  # This reducer's state is just an array of subscriptions.
   initialState:
+    # List of subscriptions.
     docs: []
+    # The list of subscriptions is being fetched.
     loading: false
+    # A new subscription is being added.
+    adding: false
 
   SUBSCRIPTIONS_RECEIVED: (state, action) ->
 
@@ -29,3 +32,11 @@ module.exports =
       sub._id isnt action.subscription._id
 
     Object.assign {}, state, { docs }
+
+  SUBSCRIPTIONS_ADDING_NEW: (state, actions) ->
+
+    Object.assign {}, state, { adding: true }
+
+  SUBSCRIPTIONS_ADDED_NEW: (state, actions) ->
+
+    Object.assign {}, state, { adding: false }
