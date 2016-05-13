@@ -16,7 +16,7 @@ module.exports =
 
   send: (options, cb = ->) ->
 
-    defaults = method: 'get', body: null, query: {}, url: ''
+    defaults = method: 'get', query: {}, url: ''
     config = Object.assign {}, defaults, options
 
     config.url += stringifyQueryObject config.query
