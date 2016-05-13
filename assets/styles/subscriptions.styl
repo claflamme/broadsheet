@@ -2,30 +2,30 @@
   background $palette-lighter
   padding-top halfGutter()
 
-.subscriptionsList
-  list-style-type none
-  margin 0 0 0 halfGutter() * -1
-  padding halfGutter() 0 0 0
+  ul
+    list-style-type none
+    margin 0 0 0 halfGutter() * -1
+    padding halfGutter() 0 0 0
 
-  li > a
-    display block
-    padding 4px halfGutter()
-    border-radius 0 5px 5px 0
+    li > a
+      display block
+      padding 4px halfGutter()
+      border-radius 0 5px 5px 0
 
-    &:link, &:visited, &:active
-      color $palette-neutral
-      text-decoration none
+      &:link, &:visited, &:active
+        color $palette-neutral
+        text-decoration none
 
-    &:hover
-      background-color darken($palette-lighter, 5)
-      text-decoration none
+      &:hover
+        background-color darken($palette-lighter, 5)
+        text-decoration none
 
-    &.active
-      color $palette-dark
-      background-color darken($palette-lighter, 10)
+      &.active
+        color $palette-dark
+        background-color darken($palette-lighter, 10)
 
-    .subscriptionIcon
-      width 16px
-      height 16px
-      margin-right halfGutter()
-      border-radius 4px
+      .subscriptionIcon
+        width 16px
+        height 16px
+        margin-right halfGutter()
+        border-radius 4px

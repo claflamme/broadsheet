@@ -32,7 +32,7 @@ module.exports = React.createClass
         &nbsp;
         <i className='fa fa-plus'></i>
       </Button>
-      <ul className='subscriptionsList'>
+      <ul>
         <li>
           <IndexLink to='/' activeClassName='active'>
             <i className='fa fa-fw fa-rss'></i>
@@ -42,6 +42,13 @@ module.exports = React.createClass
         </li>
         <li>&nbsp;</li>
         { @props.subscriptions.map @_renderSubscription }
+      </ul>
+      <ul>
+        <li>
+          <a>
+            Create a new category
+          </a>
+        </li>
       </ul>
       <SubscriptionsNew
         show={ @props.showNewSub }

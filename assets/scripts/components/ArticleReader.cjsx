@@ -8,17 +8,19 @@ ArticleReader = (props, context) ->
 
   <div className='articleWrapper'>
     <div className='articleBody'>
-      <h1>
-        <a
-          href={ props.reader.doc?.url or '' }
-          target='_blank'
-          dangerouslySetInnerHTML={{ __html: props.reader.doc?.title or '' }}>
-        </a>
-      </h1>
       <Loader show={ props.reader.loading } />
-      <div
-        className={ "slide #{ if props.reader.body then 'up' }" }
-        dangerouslySetInnerHTML={ { __html: props.reader.body } }>
+      <div className={ "slide #{ if props.reader.body then 'up' }" }>
+        <h1>
+          <a
+            href={ props.reader.doc?.url or '' }
+            target='_blank'>
+              { props.reader.doc?.title or '' }
+          </a>
+        </h1>
+        <div
+          onClick={ onArticleClick }
+          dangerouslySetInnerHTML={{ __html: props.reader.body }}>
+        </div>
       </div>
     </div>
   </div>
@@ -34,5 +36,11 @@ renderPlaceholder = ->
       Select an article from the left.
     </p>
   </div>
+
+onArticleClick = (e) ->
+
+  if e.target.href
+    e.preventDefault()
+    window.open e.target.href
 
 module.exports = ArticleReader

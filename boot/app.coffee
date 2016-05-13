@@ -20,7 +20,7 @@ stylusOpts =
     .set 'compress', process.env.NODE_ENV is 'production'
     .use bootstrap()
 
-GLOBAL.App = {}
+global.App = {}
 
 App.Errors = require '../api/errors'
 App.Config = require '../config'
