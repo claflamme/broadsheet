@@ -1,6 +1,5 @@
 FeedParser = require 'feedparser'
 sanitize = require 'sanitize-html'
-each = require 'async/each'
 request = require 'request'
 moment = require 'moment'
 faviconoclast = require 'faviconoclast'
@@ -66,8 +65,8 @@ updateFeed = (feed, meta, done) ->
   feed.title = meta.title or null
   feed.description = meta.description or null
 
-  faviconoclast meta.link or url, (err, iconUrl) ->
-    feed.iconUrl = iconUrl
+  faviconoclast meta.link, (err, iconUrl) ->
+    feed.iconUrl = iconUrl or null
     feed.save done
 
 addArticles = (parsedArticles, feed, done) ->
