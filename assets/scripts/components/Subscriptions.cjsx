@@ -8,7 +8,7 @@ module.exports = React.createClass
 
   propTypes:
 
-    subscriptions: React.PropTypes.array.isRequired
+    subscriptions: React.PropTypes.object.isRequired
     showNewSub: React.PropTypes.bool
     dispatch: React.PropTypes.func.isRequired
 
@@ -41,19 +41,13 @@ module.exports = React.createClass
           </IndexLink>
         </li>
         <li>&nbsp;</li>
-        { @props.subscriptions.map @_renderSubscription }
-      </ul>
-      <ul>
-        <li>
-          <a>
-            Create a new category
-          </a>
-        </li>
+        { @props.subscriptions.docs.map @_renderSubscription }
       </ul>
       <SubscriptionsNew
         show={ @props.showNewSub }
         onHide={ @_hideNewSubscription }
-        onSubmit={ @_addSubscription } />
+        onSubmit={ @_addSubscription }
+        loading={ @props.subscriptions.adding } />
     </div>
 
   _renderSubscription: (subscription, i) ->

@@ -35,7 +35,7 @@ module.exports = connect(mapStateToProps) React.createClass
       <Row>
         <Col xs={ 2 } className='dashboardCol subscriptions'>
           <Subscriptions
-            subscriptions={ @props.subscriptions.docs }
+            subscriptions={ @props.subscriptions }
             showNewSub={ @props.showNewSub }
             dispatch={ @props.dispatch } />
         </Col>

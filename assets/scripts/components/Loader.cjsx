@@ -12,7 +12,9 @@ Loader = (props, context) ->
   </div>
 
 Loader.propTypes =
-
   show: React.PropTypes.bool
+
+Loader.defaultProps =
+  show: false
 
 module.exports = Loader

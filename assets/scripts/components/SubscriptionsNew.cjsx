@@ -1,5 +1,5 @@
 React = require 'react'
-{ Modal, Input } = require 'react-bootstrap'
+{ Modal } = require 'react-bootstrap'
 Button = require '../elements/Button'
 
 module.exports = React.createClass
@@ -9,6 +9,7 @@ module.exports = React.createClass
     show: React.PropTypes.bool.isRequired
     onHide: React.PropTypes.func.isRequired
     onSubmit: React.PropTypes.func.isRequired
+    loading: React.PropTypes.bool.isRequired
 
   getInitialState: ->
 
@@ -22,8 +23,7 @@ module.exports = React.createClass
           <Modal.Title>Add a subscription</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Input
-            standalone
+          <input
             type='text'
             placeholder='http://examplesite.com/rss.xml'
             ref={ @_focus }
@@ -31,16 +31,26 @@ module.exports = React.createClass
             onChange={ @_onChange } />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='danger' onClick={ @props.onHide }>Cancel</Button>
-          <Button variant='primary' type='submit'>Add</Button>
+          <Button
+            variant='danger'
+            disabled={ @props.loading }
+            onClick={ @props.onHide }>
+            Cancel
+          </Button>
+          <Button
+            variant='primary'
+            disabled={ @props.loading }
+            type='submit'>
+            Add
+          </Button>
         </Modal.Footer>
       </form>
     </Modal>
 
-  _focus: (Input) ->
+  _focus: (inputNode) ->
 
-    if Input
-      Input.refs.input.focus()
+    if inputNode
+      inputNode.focus()
 
   _onChange: (e) ->
 
