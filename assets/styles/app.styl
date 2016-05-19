@@ -25,8 +25,8 @@ h1, h2, h3, h4, h5, h6
 
   li
     border-bottom 1px solid $palette-border
-    margin 0 halfGutter() * -1
-    padding 8px halfGutter()
+    margin 0 $gutter-size * -1
+    padding 8px $gutter-size
     cursor pointer
     transition all 100ms
 
@@ -70,8 +70,8 @@ h1, h2, h3, h4, h5, h6
     margin-top 100px
 
 .feedTitleBar
-  margin 0 halfGutter() * -1
-  padding halfGutter()
+  margin 0 $gutter-size * -1
+  padding $gutter-size
   border-bottom 1px solid $palette-border
 
   .feedTitle
@@ -79,19 +79,19 @@ h1, h2, h3, h4, h5, h6
 
 .feedTitleBarIcons
   font-size ($font-size-h3 / 1.5)
-  margin 10px halfGutter() * -1 0
-  padding 0 halfGutter()
+  margin 10px $gutter-size * -1 0
+  padding 0 $gutter-size
   list-style-type none
   overflow hidden
 
   li
     display inline-block
     float left
-    margin-right halfGutter()
+    margin-right $gutter-size
     line-height 0
 
   .fa
-    margin-right (halfGutter() / 3)
+    margin-right ($gutter-size/ 3)
 
   a
     cursor pointer

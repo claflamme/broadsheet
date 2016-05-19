@@ -1,15 +1,15 @@
 .subscriptions
   background $palette-lighter
-  padding-top halfGutter()
+  padding-top $gutter-size
 
   ul
     list-style-type none
-    margin 0 0 0 halfGutter() * -1
-    padding halfGutter() 0 0 0
+    margin 0 0 0 $gutter-size* -1
+    padding $gutter-size 0 0 0
 
     li > a
       display block
-      padding 4px halfGutter()
+      padding 4px $gutter-size
       border-radius 0 5px 5px 0
 
       &:link, &:visited, &:active
@@ -27,5 +27,5 @@
       .subscriptionIcon
         width 16px
         height 16px
-        margin-right halfGutter()
+        margin-right $gutter-size
         border-radius 4px
