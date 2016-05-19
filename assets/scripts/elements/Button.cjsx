@@ -1,20 +1,19 @@
 React = require 'react'
+BaseElement = require './BaseElement'
 
 Button = (props, context) ->
 
-  classNamesList = ['button', props.className]
+  classList = ['button']
 
   if props.variant
-    classNamesList.push props.variant
+    classList.push props.variant
 
   if props.block
-    classNamesList.push 'block'
+    classList.push 'block'
 
-  <button
-    {...props}
-    className={ classNamesList.join ' ' }>
+  <BaseElement {...props} nodeType='button' classList={ classList }>
     { props.children }
-  </button>
+  </BaseElement>
 
 Button.propTypes =
 
