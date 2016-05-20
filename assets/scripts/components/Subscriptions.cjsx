@@ -1,6 +1,7 @@
 React = require 'react'
 { Link, IndexLink } = require 'react-router'
 Button = require '../elements/Button'
+Badge = require '../elements/Badge'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionsNew = require './SubscriptionsNew'
 
@@ -23,6 +24,7 @@ module.exports = React.createClass
   render: ->
 
     <div>
+      <Badge text='me@corylaflamme.com' />
       <Button
         variant='primary'
         block
