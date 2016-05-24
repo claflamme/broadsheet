@@ -1,14 +1,19 @@
-$columns = 12
-
-$breakpoints = {
-  sm: 0,
-  md: 768px,
-  lg: 992px,
-  hg: 1200px
-}
-
 .grid
   display flex
+
+  // The only direct descendants of a grid should be cells. This is just an
+  // easier way to select them.
+  & > *
+    padding $gutter-size
+
+  // For "admin panel" style websites, where the UI takes over the whole screen.
+  // Not necessarily full width, but the <body> isn't scrollable.
+  &.full-height
+    height 100vh
+
+    & > *
+      height 100vh
+      overflow-y auto
 
   for $name, $pixels in $breakpoints
 

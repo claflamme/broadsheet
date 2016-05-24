@@ -31,19 +31,17 @@ module.exports = connect(mapStateToProps) React.createClass
 
     childProps = currentArticle: @props.reader.doc
 
-    <Grid fluid className='dashboardGrid'>
-      <Row>
-        <Col xs={ 2 } className='dashboardCol subscriptions'>
-          <Subscriptions
-            subscriptions={ @props.subscriptions }
-            showNewSub={ @props.showNewSub }
-            dispatch={ @props.dispatch } />
-        </Col>
-        <Col xs={ 4 } className='dashboardCol articleListCol'>
-          { React.cloneElement @props.children, childProps }
-        </Col>
-        <Col xs={ 6 } className='dashboardCol articleContent'>
-          <ArticleReader reader={ @props.reader } />
-        </Col>
-      </Row>
-    </Grid>
+    <div className='grid full-height'>
+      <div className='sm-2 subscriptions'>
+        <Subscriptions
+          subscriptions={ @props.subscriptions }
+          showNewSub={ @props.showNewSub }
+          dispatch={ @props.dispatch } />
+      </div>
+      <div className='sm-4 articleListCol'>
+        { React.cloneElement @props.children, childProps }
+      </div>
+      <div className='sm-6 articleContent'>
+        <ArticleReader reader={ @props.reader } />
+      </div>
+    </div>

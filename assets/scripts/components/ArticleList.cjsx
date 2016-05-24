@@ -14,7 +14,6 @@ ArticleList = (props, context) ->
     </ul>
     <p></p>
     { renderLoadMore props }
-    <p></p>
   </div>
 
 ArticleList.propTypes =

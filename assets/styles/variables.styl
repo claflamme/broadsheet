@@ -18,17 +18,28 @@ $palette-accent-secondary ?= #73A7DC
 // Contextual colours
 $palette-danger ?= #D65151
 
-// Typography
+// --- Typography --------------------------------------------------------------
+
+// The basics
 $font-family-body ?= 'Fira Sans', Helvetica, Arial, sans-serif
 $font-family-header ?= $font-family-body
 $font-size ?= 14px
 $line-height ?= 1.75
 
+// --- Structure & Layout ------------------------------------------------------
+
+// Grid settings
+$gutter-size ?= 15px
+$columns ?= 12
+$breakpoints = {
+  sm: 0,
+  md: 768px,
+  lg: 992px,
+  hg: 1200px
+}
+
 // Animation & transitions
 $animation-speed ?= 200ms
-
-// Structure & layout
-$gutter-size ?= 15px
 
 textFieldPlaceholder()
   &::-webkit-input-placeholder
