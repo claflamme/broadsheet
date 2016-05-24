@@ -1,11 +1,11 @@
-@keyframes loaderPulseDelay
+@keyframes loading-block
   0%, 80%, 100%
     transform scale(0)
   40%
     transform scale(1.0)
 
 .loader
-  margin 0 auto
+  margin 100px auto 0
   width 100px
   text-align center
 
@@ -13,10 +13,10 @@
   width 16px
   height 16px
   margin 0 5px
-  background-color $palette-light
+  background-color $palette-accent-primary
   border-radius 100%
   display inline-block
-  animation loaderPulseDelay 1.4s infinite ease-in-out both
+  animation loading-block 1.4s infinite ease-in-out both
 
 .loader .bounce1
   animation-delay -0.32s

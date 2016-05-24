@@ -11,20 +11,23 @@ Button = (props, context) ->
   if props.block
     classList.push 'block'
 
-  <BaseElement {...props} nodeType='button' classList={ classList }>
+  if props.loading
+    classList.push 'loading'
+
+  <BaseElement {...props} nodeType='button' disabled={ props.loading } classList={ classList }>
     { props.children }
   </BaseElement>
 
 Button.propTypes =
-
   onClick: React.PropTypes.func
   variant: React.PropTypes.string
   block: React.PropTypes.bool
+  loading: React.PropTypes.bool
 
 Button.defaultProps =
-
   onClick: ->
   variant: null
   block: false
+  loading: false
 
 module.exports = Button

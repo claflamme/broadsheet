@@ -33,13 +33,12 @@ module.exports = React.createClass
         <Modal.Footer>
           <Button
             variant='danger'
-            disabled={ @props.loading }
             onClick={ @props.onHide }>
             Cancel
           </Button>
           <Button
             variant='primary'
-            disabled={ @props.loading }
+            loading={ @props.loading }
             type='submit'>
             Add
           </Button>

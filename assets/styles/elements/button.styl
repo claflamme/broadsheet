@@ -4,7 +4,16 @@ button-focus($button-color)
 button-focus-active($button-color)
   box-shadow 0 0 0 3px lighten($button-color, 20), inset 0 3px 5px rgba(0, 0, 0, 0.3)
 
+@keyframes button-loading
+  0%
+    -webkit-transform rotate(0deg)
+    transform rotate(0deg)
+  100%
+    -webkit-transform rotate(360deg)
+    transform rotate(360deg)
+
 .button
+  position relative
   display inline-block
   background-color $palette-accent-secondary
   text-align center
@@ -49,6 +58,25 @@ button-focus-active($button-color)
 .button.block
   display block
   width 100%
+
+.button.loading
+  color transparent
+
+  &::after
+    animation button-loading 500ms infinite linear
+    border .2rem solid $palette-lighter
+    border-radius .8rem
+    border-right-color transparent
+    border-top-color transparent
+    content ''
+    display block
+    height 1.6rem
+    left 50%
+    margin-left -.8rem
+    margin-top -.8rem
+    position absolute
+    top 50%
+    width 1.6rem
 
 // --- Other Contexts ----------------------------------------------------------
 
