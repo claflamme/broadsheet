@@ -8,7 +8,7 @@
     "title": "Broadsheet"
   },
   "scripts": {
-    "start": "coffee boot/app.coffee",
+    "start": "node_modules/.bin/coffee boot/app.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
