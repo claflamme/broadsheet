@@ -2,10 +2,14 @@
   background $palette-lighter
   padding-top $gutter-size
 
+  .subscriptions-section
+    padding-top ($gutter-size / 2)
+    padding-bottom ($gutter-size / 2)
+
   ul
     list-style-type none
     margin 0 0 0 $gutter-size* -1
-    padding $gutter-size 0 0 0
+    padding 0
 
     li > a
       display block
@@ -23,7 +27,8 @@
 
       &.active
         color $palette-dark
-        background-color darken($palette-lighter, 10)
+        background-color darken($palette-lighter, 5)
+        font-weight 500
 
       .subscriptionIcon
         width 16px

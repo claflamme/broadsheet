@@ -25,26 +25,28 @@ module.exports = React.createClass
 
     <div>
       <Badge text='me@corylaflamme.com' />
-      <Button
-        variant='primary'
-        block
-        className='newSubscriptionBtn'
-        onClick={ @_showNewSubscription }>
-        <span>Add Subscription</span>
-        &nbsp;
-        <i className='fa fa-plus'></i>
-      </Button>
-      <ul>
-        <li>
-          <IndexLink to='/' activeClassName='active'>
-            <i className='fa fa-fw fa-rss'></i>
-            &nbsp;
-            All
-          </IndexLink>
-        </li>
-        <li>&nbsp;</li>
-        { @props.subscriptions.docs.map @_renderSubscription }
-      </ul>
+      <div className='subscriptions-section'>
+        <ul>
+          <li>
+            <IndexLink to='/' activeClassName='active'>
+              <i className='fa fa-fw fa-rss subscriptionIcon'></i>
+              All
+            </IndexLink>
+          </li>
+          { @props.subscriptions.docs.map @_renderSubscription }
+        </ul>
+      </div>
+      <div className='subscriptions-section'>
+        <Button
+          variant='primary'
+          block
+          className='newSubscriptionBtn'
+          onClick={ @_showNewSubscription }>
+          <span>Add Subscription</span>
+          &nbsp;
+          <i className='fa fa-plus'></i>
+        </Button>
+      </div>
       <SubscriptionsNew
         show={ @props.showNewSub }
         onHide={ @_hideNewSubscription }
