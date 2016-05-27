@@ -17,12 +17,17 @@ Badge.propTypes =
 
 setExpanded = (e) ->
 
-  e.target.classList.add 'expanded'
+  e.preventDefault()
 
-  bodyClickHandler = ->
-    document.body.removeEventListener 'click', bodyClickHandler
-    document.querySelectorAll('.user-badge')[0].classList.remove 'expanded'
+  target = e.currentTarget
+  classList = target.classList
 
-  document.body.addEventListener 'click', bodyClickHandler
+  # One-time handler that gets removed after firing
+  closeDropdown = (closeEvent) ->
+    document.body.removeEventListener 'click', closeDropdown
+    classList.remove 'opened'
+
+  target.classList.add 'opened'
+  document.body.addEventListener 'click', closeDropdown
 
 module.exports = Badge

@@ -24,7 +24,14 @@ module.exports = React.createClass
   render: ->
 
     <div>
-      <Badge text='me@corylaflamme.com' />
+      <Badge text='yourusename@email.com'>
+        <li>
+          <a href=''>Account Settings</a>
+        </li>
+        <li>
+          <Link to='/logout'>Log out</Link>
+        </li>
+      </Badge>
       <div className='subscriptions-section'>
         <ul>
           <li>

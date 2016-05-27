@@ -11,8 +11,14 @@ ul.dropdown-list
   opacity 0
   transform translateY($gutter-size * -1)
   transition all $animation-speed
+  font-weight 400
 
-.user-badge.expanded .dropdown-list
+  & > li > a
+    listItemPadding()
+    margin 0 ($gutter-size * -1)
+    border-radius 0
+
+.user-badge.opened .dropdown-list
   transform translateY($gutter-size / 2)
   visibility visible
   opacity 1
