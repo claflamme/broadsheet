@@ -24,14 +24,7 @@ module.exports = React.createClass
   render: ->
 
     <div>
-      <Badge text='yourusename@email.com'>
-        <li>
-          <a href=''>Account Settings</a>
-        </li>
-        <li>
-          <Link to='/logout'>Log out</Link>
-        </li>
-      </Badge>
+      { @_renderUserBadge() }
       <div className='subscriptions-section'>
         <ul>
           <li>
@@ -60,6 +53,20 @@ module.exports = React.createClass
         onSubmit={ @_addSubscription }
         loading={ @props.subscriptions.adding } />
     </div>
+
+  _renderUserBadge: ->
+
+    unless @props.user
+      return
+
+    <Badge text={ @props.user?.email or ''}>
+      <li>
+        <a href=''>Account Settings</a>
+      </li>
+      <li>
+        <Link to='/logout'>Log out</Link>
+      </li>
+    </Badge>
 
   _renderSubscription: (subscription, i) ->
 

@@ -9,6 +9,7 @@ module.exports = (router) ->
 
   router.post '/api/auth/authenticate', AuthController.authenticate
   router.post '/api/auth/register', AuthController.register
+  router.get '/api/auth/user/', AuthController.getAuthenticatedUser
 
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create

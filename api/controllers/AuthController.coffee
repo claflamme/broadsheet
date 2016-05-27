@@ -1,5 +1,6 @@
 validator = require 'validator'
 AuthService = App.Services.AuthService
+User = App.Models.User
 
 validateAuthRequest = (req, res, cb) ->
 
@@ -20,7 +21,7 @@ sendResponse = (res, errKey, user) ->
     return res.error errKey
 
   AuthService.generateToken user, (err, token) ->
-    res.json token: token, user: user
+    res.json token: token
 
 module.exports =
 
@@ -51,3 +52,8 @@ module.exports =
   register: (req, res) ->
 
     validateAuthRequest req, res, AuthService.register
+
+  getAuthenticatedUser: (req, res) ->
+
+    User.findById req.user.sub, (err, user) ->
+      return res.json { user }

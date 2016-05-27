@@ -10,6 +10,7 @@ mapStateToProps = (state) ->
 
   subscriptions: state.subscriptions
   token: state.auth.token
+  user: state.auth.user
   showNewSub: state.modals.showNewSub
   reader: state.reader
 
@@ -24,6 +25,8 @@ module.exports = connect(mapStateToProps) React.createClass
     unless @props.token
       @context.router.replace '/login'
 
+    @props.dispatch AuthActions.fetchUser()
+
   render: ->
 
     unless @props.token
@@ -36,6 +39,7 @@ module.exports = connect(mapStateToProps) React.createClass
         <Subscriptions
           subscriptions={ @props.subscriptions }
           showNewSub={ @props.showNewSub }
+          user={ @props.user }
           dispatch={ @props.dispatch } />
       </div>
       <div className='sm-4 articleListCol'>

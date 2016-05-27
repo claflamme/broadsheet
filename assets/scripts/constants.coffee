@@ -10,6 +10,12 @@ module.exports = keymirror
   # Server responded with a new auth token.
   AUTH_TOKEN_RECEIVED: null
 
+  # Requested the user model of the token bearer.
+  AUTH_USER_REQUESTED: null
+
+  # Got a user model.
+  AUTH_USER_RECEIVED: null
+
   # --- Subscriptions ----------------------------------------------------------
 
   # The user's subscriptions have been requested.
