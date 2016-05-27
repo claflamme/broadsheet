@@ -4,15 +4,15 @@ ul.dropdown-list
   background white
   min-width 200px
   box-shadow 0 0 10px rgba(0, 0, 0, 0.1)
-  left $gutter-size
-  padding $gutter-size
+  left $gutter-size * 2
+  padding ($gutter-size / 2) $gutter-size
   border-radius $border-radius
   z-index 10
   opacity 0
   transform translateY($gutter-size * -1)
   transition all $animation-speed
 
-  &.visible
-    transform translateY(0)
-    visibility visible
-    opacity 1
+.user-badge.expanded .dropdown-list
+  transform translateY($gutter-size / 2)
+  visibility visible
+  opacity 1
