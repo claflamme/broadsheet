@@ -25,6 +25,10 @@ module.exports =
 
     Object.assign {}, state, loading: false, token: action.token
 
+  AUTH_TOKEN_FAILED: (state, action) ->
+
+    Object.assign {}, state, loading: false
+
   AUTH_USER_RECEIVED: (state, action) ->
 
     Object.assign {}, state, user: action.user

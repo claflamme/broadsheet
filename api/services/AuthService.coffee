@@ -20,7 +20,7 @@ module.exports =
     User.findOne { email: email }, (err, user) ->
 
       if err
-        return cb 'AUTH_UNKNOWN'
+        return cb 'UNKNOWN_ERROR'
 
       unless user
         return cb 'AUTH_USER_NOT_FOUND'
@@ -40,7 +40,6 @@ module.exports =
         return cb 'AUTH_EMAIL_EXISTS'
 
       if err
-        console.err
-        return cb 'AUTH_UNKNOWN'
+        return cb 'UNKNOWN_ERROR'
 
       cb null, newUser

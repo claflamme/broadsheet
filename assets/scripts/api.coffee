@@ -31,7 +31,7 @@ module.exports =
     req.onreadystatechange = ->
       if req.status is 401
         return refresh()
-      if req.readyState isnt 4 or req.status isnt 200
+      if req.readyState isnt 4
         return
       cb req.response, JSON.parse req.responseText
 

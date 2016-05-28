@@ -5,10 +5,13 @@ module.exports =
 
   receiveToken: (token) ->
 
-    localStorage.setItem 'token', token
+    action = type: constants.AUTH_TOKEN_RECEIVED
 
-    type: constants.AUTH_TOKEN_RECEIVED
-    token: token
+    if token
+      localStorage.setItem 'token', token
+      action.token = token
+
+    action
 
   requestToken: (type, email, password) ->
 
@@ -20,7 +23,10 @@ module.exports =
     (dispatch) =>
       dispatch type: constants.AUTH_TOKEN_REQUESTED
       api.send request, (res, json) =>
-        dispatch @receiveToken json.token
+        if json.error
+          dispatch  type: constants.AUTH_TOKEN_FAILED
+        else
+          dispatch @receiveToken json.token
 
   signIn: (email, password) ->
 
