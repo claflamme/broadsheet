@@ -1,3 +1,4 @@
+path = require 'path'
 requireDir = require 'require-dir'
 paginator = require 'mongoose-paginate'
 
@@ -7,7 +8,7 @@ paginator.paginate.options =
 
 App.Mongoose.set 'debug', App.Config.db.debug
 
-models = requireDir App.Config.paths.models
+models = requireDir path.resolve App.Config.paths.root, App.Config.paths.models
 
 for name, schema of models
   models[name] = App.Mongoose.model name, schema

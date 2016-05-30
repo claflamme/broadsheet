@@ -1,3 +1,4 @@
+path = require 'path'
 express = require 'express'
 bodyParser = require 'body-parser'
 jwt = require 'express-jwt'
@@ -22,7 +23,7 @@ stylusOpts =
 
 global.App = {}
 
-App.Errors = require '../api/errors'
+App.Errors = require '../app/errors'
 App.Config = require '../config'
 App.Mongoose = require 'mongoose'
 App.Models = require './models'
@@ -35,12 +36,12 @@ jwtOpts = secret: process.env.JWT_SECRET
 # ------------------------------------------------------------------------------
 app = express()
 router = express.Router()
-auth = jwt(jwtOpts).unless path: require('../api/routes/unprotected')
+auth = jwt(jwtOpts).unless path: require('../app/routes/unprotected')
 
 unless process.env.NODE_ENV is 'production'
   app.use morgan 'dev'
 
-app.set 'views', App.Config.paths.views
+app.set 'views', path.resolve App.Config.paths.root, App.Config.paths.views
 app.set 'view engine', 'jade'
 app.use bodyParser.json()
 app.use stylus.middleware stylusOpts
@@ -58,7 +59,7 @@ app.use (err, req, res, next) ->
 
 app.use require('./errors')
 
-app.use require('../api/routes/router') router
+app.use require('../app/routes/router') router
 
 console.log 'Connecting to database...'
 App.Mongoose.connect process.env.DATABASE_URL, (err) ->

@@ -1,4 +1,4 @@
-errors = require '../api/errors'
+errors = require '../app/errors'
 
 module.exports = (req, res, next) ->
 

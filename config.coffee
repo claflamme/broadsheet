@@ -10,11 +10,11 @@ module.exports =
     baseUrl: process.env.BASE_URL or 'http://coolsite.com'
 
   paths:
-    controllers: path.resolve __dirname, 'api', 'controllers'
-    models: path.resolve __dirname, 'api', 'models'
-    views: path.resolve __dirname, 'api', 'views'
-    routers: path.resolve __dirname, 'api', 'routers'
-    services: path.resolve __dirname, 'api', 'services'
+    root: process.cwd()
+    controllers: 'app/controllers'
+    models: 'app/models'
+    views: 'app/views'
+    services: 'app/services'
 
   auth:
     bcryptSaltRounds: 10
