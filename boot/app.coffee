@@ -60,7 +60,13 @@ app.use require('./errors')
 
 app.use require('../api/routes/router') router
 
-server = app.listen process.env.PORT, ->
-  console.log 'Listening on port %s', process.env.PORT
-
-require '../workers/crawler'
+console.log 'Connecting to database...'
+App.Mongoose.connect process.env.DATABASE_URL, (err) ->
+  if err
+    console.error '!!!', err.message, '!!!'
+    throw err
+  else
+    console.log '...connected!'
+    require '../workers/crawler'
+    server = app.listen process.env.PORT, ->
+      console.log 'Listening on port %s', process.env.PORT

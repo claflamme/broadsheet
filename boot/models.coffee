@@ -6,7 +6,6 @@ paginator.paginate.options =
   limit: 50
 
 App.Mongoose.set 'debug', App.Config.db.debug
-App.Mongoose.connect process.env.DATABASE_URL
 
 models = requireDir App.Config.paths.models
 
