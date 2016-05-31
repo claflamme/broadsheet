@@ -1,29 +1,30 @@
 validator = require 'validator'
-AuthService = App.Services.AuthService
-User = App.Models.User
 
-validateAuthRequest = (req, res, cb) ->
+module.exports = (app) ->
 
-  email = req.body.email
-  password = req.body.password
+  AuthService = app.services.AuthService
+  User = app.models.User
 
-  unless email and password
-    return res.error 'AUTH_MISSING_FIELD'
+  validateAuthRequest = (req, res, cb) ->
 
-  unless validator.isEmail email
-    return res.error 'AUTH_INVALID_EMAIL'
+    email = req.body.email
+    password = req.body.password
 
-  cb email, password, sendResponse.bind(@, res)
+    unless email and password
+      return res.error 'AUTH_MISSING_FIELD'
 
-sendResponse = (res, errKey, user) ->
+    unless validator.isEmail email
+      return res.error 'AUTH_INVALID_EMAIL'
 
-  if errKey
-    return res.error errKey
+    cb email, password, sendResponse.bind(@, res)
 
-  AuthService.generateToken user, (err, token) ->
-    res.json token: token
+  sendResponse = (res, errKey, user) ->
 
-module.exports =
+    if errKey
+      return res.error errKey
+
+    AuthService.generateToken user, (err, token) ->
+      res.json token: token
 
   ###
   @apiGroup Auth

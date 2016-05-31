@@ -1,50 +1,52 @@
 bcrypt = require 'bcryptjs'
 
-# --- Helpers ------------------------------------------------------------------
+module.exports = (app) ->
 
-transformer = (doc, ret, opts) ->
+  # --- Helpers ----------------------------------------------------------------
 
-  delete ret.password
-  return ret
+  transformer = (doc, ret, opts) ->
 
-hashPassword = (password) ->
+    delete ret.password
+    return ret
 
-  salt = bcrypt.genSaltSync App.Config.auth.bcryptSaltRounds
-  bcrypt.hashSync password, salt
+  hashPassword = (password) ->
 
-# -- Schema --------------------------------------------------------------------
+    salt = bcrypt.genSaltSync app.config.auth.bcryptSaltRounds
+    bcrypt.hashSync password, salt
 
-schema =
+  # -- Schema ------------------------------------------------------------------
 
-  email:
-    type: String
-    unique: true
+  schema =
 
-  password:
-    type: String
-    set: hashPassword
+    email:
+      type: String
+      unique: true
 
-Schema = App.Mongoose.Schema schema, timestamps: true
+    password:
+      type: String
+      set: hashPassword
 
-# --- Options ------------------------------------------------------------------
+  Schema = app.mongoose.Schema schema, timestamps: true
 
-Schema.set 'toJSON', transform: transformer
-Schema.set 'toObject', transform: transformer
+  # --- Options ----------------------------------------------------------------
 
-# --- Document and Model Methods -----------------------------------------------
+  Schema.set 'toJSON', transform: transformer
+  Schema.set 'toObject', transform: transformer
 
-Schema.methods =
+  # --- Document and Model Methods ---------------------------------------------
 
-  passwordMatches: (providedPassword) ->
+  Schema.methods =
 
-    bcrypt.compareSync providedPassword, @password
+    passwordMatches: (providedPassword) ->
 
-Schema.statics =
+      bcrypt.compareSync providedPassword, @password
 
-  passwordIsCorrectLength: (providedPassword) ->
+  Schema.statics =
 
-    # 72 bytes is the max length of a password allowed by bcrypt.
-    byteLength = Buffer.byteLength providedPassword, 'utf8'
-    byteLength <= 72
+    passwordIsCorrectLength: (providedPassword) ->
 
-module.exports = Schema
+      # 72 bytes is the max length of a password allowed by bcrypt.
+      byteLength = Buffer.byteLength providedPassword, 'utf8'
+      byteLength <= 72
+
+  return Schema

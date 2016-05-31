@@ -1,8 +1,9 @@
 jwt = require 'jsonwebtoken'
 bcrypt = require 'bcryptjs'
-User = App.Models.User
 
-module.exports =
+module.exports = (app) ->
+
+  User = app.models.User
 
   generateToken: (user, callback) ->
 

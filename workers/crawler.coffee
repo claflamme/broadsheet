@@ -1,16 +1,19 @@
 forever = require 'async/forever'
-ParserService = App.Services.ParserService
-Feed = App.Models.Feed
 
-forever (repeat) ->
+module.exports = (app) ->
 
-  Feed.findMostOutdated (err, feed) ->
+  ParserService = app.services.ParserService
+  Feed = app.models.Feed
 
-    unless feed
-      console.log 'No outdated feeds found.'
-      console.log 'Waiting %d minute(s)...', App.Config.crawler.pollingInterval
-      # 60,000 milliseconds in a minute.
-      setTimeout repeat, App.Config.crawler.pollingInterval * 60000
-    else
-      console.log 'Processing %s...', feed.get('url')
-      ParserService.processFeed feed, repeat
+  forever (repeat) ->
+
+    Feed.findMostOutdated (err, feed) ->
+
+      unless feed
+        console.log 'No outdated feeds found.'
+        console.log 'Waiting %d minute(s)...', app.config.crawler.pollingInterval
+        # 60,000 milliseconds in a minute.
+        setTimeout repeat, app.config.crawler.pollingInterval * 60000
+      else
+        console.log 'Processing %s...', feed.get('url')
+        ParserService.processFeed feed, repeat

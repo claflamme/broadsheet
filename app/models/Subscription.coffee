@@ -1,38 +1,40 @@
-# --- Schema -------------------------------------------------------------------
+module.exports = (app) ->
 
-schema =
+  # --- Schema -----------------------------------------------------------------
 
-  customTitle:
-    type: String
-    default: null
+  schema =
 
-  user:
-    type: App.Mongoose.Schema.Types.ObjectId
-    ref: 'User'
-    required: true
+    customTitle:
+      type: String
+      default: null
 
-  feed:
-    type: App.Mongoose.Schema.Types.ObjectId
-    ref: 'Feed'
-    required: true
+    user:
+      type: app.mongoose.Schema.Types.ObjectId
+      ref: 'User'
+      required: true
 
-Schema = App.Mongoose.Schema schema, timestamps: true
+    feed:
+      type: app.mongoose.Schema.Types.ObjectId
+      ref: 'Feed'
+      required: true
 
-# --- Methods ------------------------------------------------------------------
+  Schema = app.mongoose.Schema schema, timestamps: true
 
-Schema.methods.userIs = (userId) ->
-  @user.toString() is userId
+  # --- Methods ----------------------------------------------------------------
 
-# --- Validators ---------------------------------------------------------------
+  Schema.methods.userIs = (userId) ->
+    @user.toString() is userId
 
-# Feed object IDs must reference a valid feed document.
-Schema.path('feed').validate (feedObjectId, respond) ->
-  App.Models.Feed.findById feedObjectId, (err, feed) ->
-    respond (not err) and feed
+  # --- Validators -------------------------------------------------------------
 
-# User object IDs must reference a valid user document.
-Schema.path('user').validate (userObjectId, respond) ->
-  App.Models.User.findById userObjectId, (err, user) ->
-    respond (not err) and user
+  # Feed object IDs must reference a valid feed document.
+  Schema.path('feed').validate (feedObjectId, respond) ->
+    app.models.Feed.findById feedObjectId, (err, feed) ->
+      respond (not err) and feed
 
-module.exports = Schema
+  # User object IDs must reference a valid user document.
+  Schema.path('user').validate (userObjectId, respond) ->
+    app.models.User.findById userObjectId, (err, user) ->
+      respond (not err) and user
+
+  return Schema

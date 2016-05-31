@@ -2,7 +2,7 @@ request = require 'request'
 validator = require 'validator'
 read = require 'node-readability'
 
-module.exports =
+module.exports = (app) ->
 
   ###
   @apiGroup Proxy

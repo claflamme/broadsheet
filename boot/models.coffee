@@ -6,11 +6,13 @@ paginator = require 'mongoose-paginate'
 paginator.paginate.options =
   limit: 50
 
-App.Mongoose.set 'debug', App.Config.db.debug
+module.exports = (app) ->
 
-models = requireDir path.resolve App.Config.paths.root, App.Config.paths.models
+  app.mongoose.set 'debug', app.config.db.debug
 
-for name, schema of models
-  models[name] = App.Mongoose.model name, schema
+  models = requireDir path.resolve app.config.paths.root, app.config.paths.models
 
-module.exports = models
+  for name, schema of models
+    models[name] = app.mongoose.model name, schema(app)
+
+  models

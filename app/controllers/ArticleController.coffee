@@ -1,7 +1,7 @@
-Article = App.Models.Article
-Subscription = App.Models.Subscription
+module.exports = (app) ->
 
-module.exports =
+  Article = app.models.Article
+  Subscription = app.models.Subscription
 
   ###
   @apiGroup Articles

@@ -1,42 +1,44 @@
 moment = require 'moment'
 
-# --- Schema -------------------------------------------------------------------
+module.exports = (app) ->
 
-schema =
+  # --- Schema -----------------------------------------------------------------
 
-  title:
-    type: String
-    default: null
+  schema =
 
-  description:
-    type: String
-    default: null
+    title:
+      type: String
+      default: null
 
-  url:
-    type: String
-    unique: true
+    description:
+      type: String
+      default: null
 
-  iconUrl:
-    type: String
+    url:
+      type: String
+      unique: true
 
-Schema = App.Mongoose.Schema schema, timestamps: true
+    iconUrl:
+      type: String
 
-# --- Helpers ------------------------------------------------------------------
+  Schema = app.mongoose.Schema schema, timestamps: true
 
-getOutdatedThreshold = ->
-  moment().utc().subtract App.Config.crawler.outdatedThreshold, 'minutes'
+  # --- Helpers ----------------------------------------------------------------
 
-# --- Methods ------------------------------------------------------------------
+  getOutdatedThreshold = ->
+    moment().utc().subtract app.config.crawler.outdatedThreshold, 'minutes'
 
-# Returns a collection of all feeds that should be re-indexed.
-Schema.statics.findOutdated = (cb) ->
-  @where 'updatedAt'
-  .lt getOutdatedThreshold()
-  .exec cb
+  # --- Methods ----------------------------------------------------------------
 
-# Returns the single most outdated feed.
-Schema.statics.findMostOutdated = (cb) ->
-  query = updatedAt: $lt: getOutdatedThreshold()
-  @findOne query, cb
+  # Returns a collection of all feeds that should be re-indexed.
+  Schema.statics.findOutdated = (cb) ->
+    @where 'updatedAt'
+    .lt getOutdatedThreshold()
+    .exec cb
 
-module.exports = Schema
+  # Returns the single most outdated feed.
+  Schema.statics.findMostOutdated = (cb) ->
+    query = updatedAt: $lt: getOutdatedThreshold()
+    @findOne query, cb
+
+  return Schema

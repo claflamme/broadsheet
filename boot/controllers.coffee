@@ -1,7 +1,14 @@
 path = require 'path'
 requireDir = require 'require-dir'
 
-paths = App.Config.paths
-controllersPath = path.resolve paths.root, paths.controllers
+module.exports = (app) ->
 
-module.exports = requireDir controllersPath
+  paths = app.config.paths
+  controllersPath = path.resolve paths.root, paths.controllers
+
+  controllers = requireDir controllersPath
+
+  for name, controller of controllers
+    controllers[name] = controller(app)
+
+  controllers

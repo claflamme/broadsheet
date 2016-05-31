@@ -1,8 +1,9 @@
 validator = require 'validator'
-Feed = App.Models.Feed
-ParserService = App.Services.ParserService
 
-module.exports =
+module.exports = (app) ->
+
+  Feed = app.models.Feed
+  ParserService = app.services.ParserService
 
   ###
   @apiGroup Feeds

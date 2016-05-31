@@ -3,103 +3,106 @@ sanitize = require 'sanitize-html'
 request = require 'request'
 moment = require 'moment'
 faviconoclast = require 'faviconoclast'
-Feed = App.Models.Feed
-Article = App.Models.Article
 
-parseArticle = (item) ->
+module.exports = (app) ->
 
-  # Full article data is fetched at "read time", so we don't need to store any
-  # more than a brief summary. In this case, that's the first sentence.
-  summary = item.summary or item.description
+  Feed = app.models.Feed
+  Article = app.models.Article
 
-  summary = summary.split('</p>').find (p) ->
-    sanitize(p, allowedTags: []) isnt ''
+  parseArticle = (item) ->
 
-  summary = sanitize summary, allowedTags: []
+    # Full article data is fetched at "read time", so we don't need to store any
+    # more than a brief summary. In this case, that's the first sentence.
+    summary = item.summary or item.description
 
-  if summary.length > 200
-    summary = "#{ summary.substring(0, 200).trim() }..."
+    summary = summary.split('</p>').find (p) ->
+      sanitize(p, allowedTags: []) isnt ''
 
-  output =
-    title: item.title.trim()
-    url: item.link
-    summary: summary
-    publishedAt: item.pubdate or moment()
+    summary = sanitize summary, allowedTags: []
 
-  return output
+    if summary.length > 200
+      summary = "#{ summary.substring(0, 200).trim() }..."
 
-parseStream = (xmlStream, done) ->
+    output =
+      title: item.title.trim()
+      url: item.link
+      summary: summary
+      publishedAt: item.pubdate or moment()
 
-  parser = new FeedParser()
-  articles = []
+    return output
 
-  parser.on 'readable', ->
-    while item = @read()
-      articles.push parseArticle(item)
+  parseStream = (xmlStream, done) ->
 
-  parser.on 'end', ->
-    done null, articles, @meta
+    parser = new FeedParser()
+    articles = []
 
-  parser.on 'error', (err) ->
-    done err, articles
+    parser.on 'readable', ->
+      while item = @read()
+        articles.push parseArticle(item)
 
-  xmlStream.pipe parser
+    parser.on 'end', ->
+      done null, articles, @meta
 
-downloadFeed = (url, done) ->
+    parser.on 'error', (err) ->
+      done err, articles
 
-  req = request url
+    xmlStream.pipe parser
 
-  req.on 'error', (err) ->
-    console.log err.message
+  downloadFeed = (url, done) ->
 
-  req.on 'response', (res) ->
-    if res.statusCode isnt 200
-      err = new Error('Bad status code')
-      @emit 'error', err
-      return done err, @
-    else
-      done null, @
+    req = request url
 
-updateFeed = (feed, meta, done) ->
+    req.on 'error', (err) ->
+      console.log err.message
 
-  feed.title = meta.title or null
-  feed.description = meta.description or null
+    req.on 'response', (res) ->
+      if res.statusCode isnt 200
+        err = new Error('Bad status code')
+        @emit 'error', err
+        return done err, @
+      else
+        done null, @
 
-  faviconoclast meta.link, (err, iconUrl) ->
-    feed.iconUrl = iconUrl or null
-    feed.save done
+  updateFeed = (feed, meta, done) ->
 
-addArticles = (parsedArticles, feed, done) ->
+    feed.title = meta.title or null
+    feed.description = meta.description or null
 
-  urls = parsedArticles.map (article) -> article.url
+    faviconoclast meta.link, (err, iconUrl) ->
+      feed.iconUrl = iconUrl or null
+      feed.save done
 
-  Article.find url: { $in: urls }, (err, foundArticles) ->
+  addArticles = (parsedArticles, feed, done) ->
 
-    foundUrls = foundArticles.map (article) -> article.url
+    urls = parsedArticles.map (article) -> article.url
 
-    # Remove any articles that are already in the DB.
-    articlesToInsert = parsedArticles.filter (parsedArticle) ->
-      foundUrls.indexOf(parsedArticle.url) is -1
+    Article.find url: { $in: urls }, (err, foundArticles) ->
 
-    # Add the feed ID to remaining articles.
-    articlesToInsert = articlesToInsert.map (parsedArticle) ->
-      parsedArticle.feed = feed._id
-      parsedArticle
+      foundUrls = foundArticles.map (article) -> article.url
 
-    Article.create articlesToInsert, (err) ->
-      console.log 'Done! Added %d articles.', articlesToInsert.length
-      done()
+      # Remove any articles that are already in the DB.
+      articlesToInsert = parsedArticles.filter (parsedArticle) ->
+        foundUrls.indexOf(parsedArticle.url) is -1
 
-module.exports.processFeed = (feed, done) ->
+      # Add the feed ID to remaining articles.
+      articlesToInsert = articlesToInsert.map (parsedArticle) ->
+        parsedArticle.feed = feed._id
+        parsedArticle
 
-  feed.updatedAt = new Date()
+      Article.create articlesToInsert, (err) ->
+        console.log 'Done! Added %d articles.', articlesToInsert.length
+        done()
 
-  feed.save (err, feed) ->
-    downloadFeed feed.url, (err, res) ->
-      if err
-        return done()
-      parseStream res, (err, articles, meta) ->
+  processFeed: (feed, done) ->
+
+    feed.updatedAt = new Date()
+
+    feed.save (err, feed) ->
+      downloadFeed feed.url, (err, res) ->
         if err
-          throw err
-        updateFeed feed, meta, (err, feed) ->
-          addArticles articles, feed, done
+          return done()
+        parseStream res, (err, articles, meta) ->
+          if err
+            throw err
+          updateFeed feed, meta, (err, feed) ->
+            addArticles articles, feed, done

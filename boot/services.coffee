@@ -1,6 +1,13 @@
 path = require 'path'
 requireDir = require 'require-dir'
 
-paths = App.Config.paths
 
-module.exports = requireDir path.resolve paths.root, paths.services
+module.exports = (app) ->
+
+  paths = app.config.paths
+  services = requireDir path.resolve paths.root, paths.services
+
+  for name, service of services
+    services[name] = service app
+
+  services

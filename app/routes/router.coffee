@@ -1,11 +1,11 @@
-AuthController = App.Controllers.AuthController
-FeedController = App.Controllers.FeedController
-FeedController = App.Controllers.FeedController
-SubscriptionController = App.Controllers.SubscriptionController
-ProxyController = App.Controllers.ProxyController
-ArticleController = App.Controllers.ArticleController
+module.exports = (app, router) ->
 
-module.exports = (router) ->
+  AuthController = app.controllers.AuthController
+  FeedController = app.controllers.FeedController
+  FeedController = app.controllers.FeedController
+  SubscriptionController = app.controllers.SubscriptionController
+  ProxyController = app.controllers.ProxyController
+  ArticleController = app.controllers.ArticleController
 
   router.post '/api/auth/authenticate', AuthController.authenticate
   router.post '/api/auth/register', AuthController.register

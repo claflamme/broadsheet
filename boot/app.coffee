@@ -21,53 +21,54 @@ stylusOpts =
     .set 'compress', process.env.NODE_ENV is 'production'
     .use bootstrap()
 
-global.App = {}
+app = {}
 
-App.Errors = require '../app/errors'
-App.Config = require '../config'
-App.Mongoose = require 'mongoose'
-App.Models = require './models'
-App.Services = require './services'
-App.Controllers = require './controllers'
+app.config = require '../config'
+app.mongoose = require 'mongoose'
+app.models = require('./models') app
+app.services = require('./services') app
+app.controllers = require('./controllers') app
+app.express = express()
+app.server = {}
+app.utils = require('./utils') app
 
 jwtOpts = secret: process.env.JWT_SECRET
 
 # Start the server
 # ------------------------------------------------------------------------------
-app = express()
 router = express.Router()
 auth = jwt(jwtOpts).unless path: require('../app/routes/unprotected')
 
 unless process.env.NODE_ENV is 'production'
-  app.use morgan 'dev'
+  app.express.use morgan 'dev'
 
-app.set 'views', path.resolve App.Config.paths.root, App.Config.paths.views
-app.set 'view engine', 'jade'
-app.use bodyParser.json()
-app.use stylus.middleware stylusOpts
-app.get '/app.js', browserify 'assets/scripts/App.cjsx', browserifyOpts
-app.use express.static 'public'
-app.use '/api', auth
+app.express.set 'views', app.utils.getPath app.config.paths.views
+app.express.set 'view engine', 'jade'
+app.express.use bodyParser.json()
+app.express.use stylus.middleware stylusOpts
+app.express.get '/app.js', browserify app.utils.getPath('assets/scripts/App.cjsx'), browserifyOpts
+app.express.use express.static 'public'
+app.express.use '/api', auth
 
 # Custom error handler for express-jwt.
-app.use (err, req, res, next) ->
+app.express.use (err, req, res, next) ->
   if err.name is 'UnauthorizedError'
     res.status(401).json error: message: 'Invalid auth token.'
   else
     res.status(500).json error: message: 'Unexpected error.'
     console.error err.stack
 
-app.use require('./errors')
+app.express.use require('./errors')
 
-app.use require('../app/routes/router') router
+app.express.use require('../app/routes/router') app, router
 
 console.log 'Connecting to database...'
-App.Mongoose.connect process.env.DATABASE_URL, (err) ->
+app.mongoose.connect process.env.DATABASE_URL, (err) ->
   if err
     console.error '!!!', err.message, '!!!'
     throw err
   else
     console.log '...connected!'
-    require '../workers/crawler'
-    server = app.listen process.env.PORT, ->
+    require('../workers/crawler') app
+    app.server = app.express.listen process.env.PORT, ->
       console.log 'Listening on port %s', process.env.PORT

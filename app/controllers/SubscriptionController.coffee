@@ -1,6 +1,6 @@
-Subscription = App.Models.Subscription
+module.exports = (app) ->
 
-module.exports =
+  Subscription = app.models.Subscription
 
   ###
   @apiGroup Subscriptions
