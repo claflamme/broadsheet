@@ -9,7 +9,7 @@ module.exports = React.createClass
   componentWillMount: ->
 
     localStorage.clear()
-    @context.router.push '/'
+    @context.router.push '/login'
 
   render: ->
 
