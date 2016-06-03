@@ -1,5 +1,6 @@
 jwt = require 'jsonwebtoken'
 bcrypt = require 'bcryptjs'
+uuid = require 'node-uuid'
 
 module.exports = (app) ->
 
@@ -9,7 +10,9 @@ module.exports = (app) ->
 
     payload = {}
     secret = process.env.JWT_SECRET
-    options = subject: user._id.toString()
+    options =
+      subject: user._id.toString()
+      jwtid: uuid.v4()
 
     jwt.sign payload, secret, options, callback
 

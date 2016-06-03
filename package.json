@@ -34,6 +34,7 @@
     "mongoose-paginate": "^5.0.0",
     "morgan": "^1.7.0",
     "node-readability": "^2.2.0",
+    "node-uuid": "^1.4.7",
     "react": "^15.0.2",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.0.2",
