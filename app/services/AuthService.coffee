@@ -5,6 +5,7 @@ uuid = require 'node-uuid'
 module.exports = (app) ->
 
   User = app.models.User
+  Token = app.models.Token
 
   generateToken: (user, callback) ->
 
@@ -14,7 +15,26 @@ module.exports = (app) ->
       subject: user._id.toString()
       jwtid: uuid.v4()
 
-    jwt.sign payload, secret, options, callback
+    # TODO: this is all garbage.
+    jwt.sign payload, secret, options, (err, signedToken) ->
+      if err
+        return callback err
+      decodedToken = jwt.decode signedToken
+      # .skip() doesn't work with .remove(), so this has to be done the hard way
+      Token
+      .find user: user._id
+      .sort '-iat'
+      .skip 4
+      .exec (err, tokenDocList) ->
+        ids = tokenDocList.map (tokenDoc) -> tokenDoc._id
+        # TODO: don't call remove() if ids[] is empty.
+        Token.remove _id: { $in: ids }, (err) ->
+          newTokenDoc =
+            jti: decodedToken.jti
+            iat: decodedToken.iat
+            user: user._id
+          Token.create newTokenDoc, (err) ->
+            callback err, signedToken
 
   authenticate: (email, password, cb) ->
 
