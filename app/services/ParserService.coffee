@@ -74,6 +74,13 @@ module.exports = (app) ->
 
   addArticles = (parsedArticles, feed, done) ->
 
+    # TODO: this could be redone to pull the X most recent articles in the DB
+    # and only compare those URLs (X is the number of items in the feed).
+    # - pull the feed, it has 50 items
+    # - query the 50 latest articles in the DB for that feed
+    # - check the new article URLs against the results from the DB, instead of
+    #   querying the entire DB for a list of 10-50 URLs.
+
     urls = parsedArticles.map (article) -> article.url
 
     Article.find url: { $in: urls }, (err, foundArticles) ->
