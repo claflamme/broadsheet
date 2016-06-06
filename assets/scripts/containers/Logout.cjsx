@@ -9,7 +9,7 @@ module.exports = React.createClass
   componentWillMount: ->
 
     localStorage.clear()
-    @context.router.push '/login'
+    window.location.href = '/login'
 
   render: ->
 
