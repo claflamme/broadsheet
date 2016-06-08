@@ -1,10 +1,12 @@
+textFieldPlaceholder()
+  &::-webkit-input-placeholder
+    {block}
+  &::-moz-placeholder
+    {block}
+  &:-ms-input-placeholder
+    {block}
+
 input[type='text']
-  display block
-  width 100%
-  padding ($gutter-size / 2) $gutter-size
-  border 3px solid $palette-border
-  border-radius ($gutter-size / 3)
-  color $palette-neutral
 
   +textFieldPlaceholder()
     color $palette-light

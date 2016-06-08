@@ -1,5 +1,5 @@
 React = require 'react'
-{ Modal, Button } = require 'react-bootstrap'
+{ Modal, Button, Input } = require 'react-bootstrap'
 
 module.exports = React.createClass
 
@@ -22,7 +22,7 @@ module.exports = React.createClass
           <Modal.Title>Add a subscription</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input
+          <Input
             type='text'
             placeholder='http://examplesite.com/rss.xml'
             ref={ @_focus }
@@ -40,10 +40,10 @@ module.exports = React.createClass
       </form>
     </Modal>
 
-  _focus: (inputNode) ->
+  _focus: (Input) ->
 
-    if inputNode
-      inputNode.focus()
+    if Input
+      Input.refs.input.focus()
 
   _onChange: (e) ->
 
