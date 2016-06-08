@@ -2,7 +2,18 @@ button-focus($button-color)
   box-shadow 0 0 0 3px lighten($button-color, 20)
 
 button-focus-active($button-color)
+  background-color darken($button-color, 5)
   box-shadow 0 0 0 3px lighten($button-color, 20), inset 0 3px 5px rgba(0, 0, 0, 0.3)
+
+build-button-variant($name, $color)
+  .btn.btn-{ $name }
+    background-color $color
+    &:hover
+      background-color darken($color, 5)
+    &:focus
+      button-focus($color)
+    &:active:focus
+      button-focus-active($color)
 
 @keyframes button-loading
   0%
@@ -12,54 +23,29 @@ button-focus-active($button-color)
     -webkit-transform rotate(360deg)
     transform rotate(360deg)
 
-.button
+.btn
   position relative
-  display inline-block
   background-color $palette-accent-secondary
-  text-align center
-  vertical-align middle
-  cursor pointer
   border none
   border-radius ($gutter-size / 3)
-  white-space nowrap
-  user-select none
-  padding ($gutter-size / 2) $gutter-size
   color $palette-lighter
-  transition all ($animation-speed / 2)
+  transition $animation-speed all
 
   &:hover
+    color #fff
     background-color darken($palette-accent-secondary, 5)
 
-  &:focus
+  &:focus, &:active:focus
     outline none
     button-focus($palette-accent-secondary)
 
   &[disabled]
     opacity 0.5
 
-.button.primary
-  background-color $palette-accent-primary
+build-button-variant('primary', $palette-accent-primary)
+build-button-variant('danger', $palette-danger)
 
-  &:hover
-    background-color darken($palette-accent-primary, 5)
-
-  &:focus
-    button-focus($palette-accent-primary)
-
-  &:focus:active
-    button-focus-active($palette-accent-primary)
-
-.button.danger
-  background-color $palette-danger
-
-  &:hover
-    background-color darken($palette-danger, 5)
-
-.button.block
-  display block
-  width 100%
-
-.button.loading
+.btn.loading
   color transparent
 
   &::after
@@ -77,8 +63,3 @@ button-focus-active($button-color)
     position absolute
     top 50%
     width 1.6rem
-
-// --- Other Contexts ----------------------------------------------------------
-
-.modal-footer .button + .button
-  margin-left ($gutter-size / 3)

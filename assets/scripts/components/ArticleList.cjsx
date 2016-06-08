@@ -1,6 +1,6 @@
 React = require 'react'
+{ Button } = require 'react-bootstrap'
 ArticleListItem = require './ArticleListItem'
-Button = require '../elements/Button'
 Loader = require './Loader'
 
 ArticleList = (props, context) ->
@@ -50,7 +50,6 @@ renderLoadMore = (props) ->
   <Button
     disabled={ isFinished or props.articles.loading }
     block
-    bsStyle='primary'
     onClick={ props.loadMore }>
     { text }
   </Button>

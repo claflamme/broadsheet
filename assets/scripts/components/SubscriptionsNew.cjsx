@@ -1,6 +1,5 @@
 React = require 'react'
-{ Modal } = require 'react-bootstrap'
-Button = require '../elements/Button'
+{ Modal, Button } = require 'react-bootstrap'
 
 module.exports = React.createClass
 
@@ -31,15 +30,10 @@ module.exports = React.createClass
             onChange={ @_onChange } />
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant='danger'
-            onClick={ @props.onHide }>
+          <Button bsStyle='danger' onClick={ @props.onHide }>
             Cancel
           </Button>
-          <Button
-            variant='primary'
-            loading={ @props.loading }
-            type='submit'>
+          <Button bsStyle='primary' loading={ @props.loading } type='submit'>
             Add
           </Button>
         </Modal.Footer>
