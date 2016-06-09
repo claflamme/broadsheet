@@ -1,18 +1,11 @@
-.user-badge
+button.user-badge
   display block
-  margin $gutter-size * -1
-  margin-bottom 0
-  padding $gutter-size
-  position relative
   font-weight 600
   color $palette-dark
-  cursor pointer
   transition background-color $animation-speed
+  padding 0
+  margin-bottom $gutter-size
 
-  &:hover, &.opened
-    background-color darken($palette-lighter, 5)
-
-  .fa
-    display inline-block
-    float right
-    margin-top 4px
+  &:hover, &:focus
+    color $palette-dark
+    text-decoration none

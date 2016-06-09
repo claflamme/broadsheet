@@ -24,6 +24,7 @@ module.exports = React.createClass
         <Modal.Body>
           <Input
             type='text'
+            standalone
             placeholder='http://examplesite.com/rss.xml'
             ref={ @_focus }
             value={ @state.url }

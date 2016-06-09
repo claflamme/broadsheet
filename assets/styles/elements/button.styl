@@ -11,6 +11,7 @@ build-button-variant($name, $color)
     &:hover
       background-color darken($color, 5)
     &:focus
+      outline none
       button-focus($color)
     &:active:focus
       button-focus-active($color)
@@ -25,19 +26,10 @@ build-button-variant($name, $color)
 
 .btn
   position relative
-  background-color $palette-accent-secondary
   border none
   border-radius ($gutter-size / 3)
-  color $palette-lighter
   transition $animation-speed all
-
-  &:hover
-    color #fff
-    background-color darken($palette-accent-secondary, 5)
-
-  &:focus, &:active:focus
-    outline none
-    button-focus($palette-accent-secondary)
+  padding ($gutter-size / 2) $gutter-size
 
   &[disabled]
     opacity 0.5
