@@ -1,0 +1,4 @@
+const path = require('path');
+const gunpowder = require('gunpowder');
+
+gunpowder(__dirname, path.resolve(__dirname, 'config'));

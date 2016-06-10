@@ -1,6 +1,3 @@
-require('dotenv').load silent: true
-path = require 'path'
-
 module.exports =
 
   db:
@@ -10,14 +7,29 @@ module.exports =
     baseUrl: process.env.BASE_URL or 'http://coolsite.com'
 
   paths:
-    root: process.cwd()
+    routes: 'app/routes'
     controllers: 'app/controllers'
     models: 'app/models'
     views: 'app/views'
     services: 'app/services'
+    workers: 'app/workers'
+    public: 'public'
 
   auth:
     bcryptSaltRounds: 10
+
+  browserify: [
+    {
+      inputPath: 'assets/scripts/App.cjsx'
+      outputPath: 'app.js' # Relative to the public folder.
+      options:
+        transform: ['coffee-reactify']
+        extensions: ['.coffee', '.cjsx']
+    }
+  ]
+
+  stylus:
+    inputPath: 'assets/styles'
 
   crawler:
     # The time in minutes before a feed is considered outdated. If a feed hasn't
