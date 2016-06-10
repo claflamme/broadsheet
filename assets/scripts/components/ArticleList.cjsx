@@ -30,8 +30,15 @@ renderArticle = (props, article, i) ->
     key={ i }
     onClick={ props.onClick.bind null, article }
     className="#{ className }">
-    <ArticleListItem article={ article } />
+    <a href={ article.url } onClick={ onArticleClick }>
+      <ArticleListItem article={ article } />
+    </a>
   </li>
+
+onArticleClick = (e) ->
+
+  unless e.metaKey
+    e.preventDefault()
 
 renderLoadMore = (props) ->
 
