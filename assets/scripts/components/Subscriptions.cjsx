@@ -26,7 +26,7 @@ module.exports = React.createClass
     <div>
       { @_renderUserBadge() }
       <div className='subscriptions-section'>
-        <ul>
+        <ul className='subscriptions-list'>
           <li>
             <IndexLink to='/' activeClassName='active'>
               <i className='fa fa-fw fa-rss subscriptionIcon'></i>
@@ -58,13 +58,13 @@ module.exports = React.createClass
     unless @props.user
       return
 
-    <DropdownButton title={ @props.user?.email or ''} bsStyle='link' className='user-badge'>
-      <MenuItem>
-        <Link to='/settings'>Account Settings</Link>
-      </MenuItem>
-      <MenuItem>
-        <Link to='/logout'>Log Out</Link>
-      </MenuItem>
+    <DropdownButton
+      id='user-badge'
+      title={ @props.user?.email or ''}
+      bsStyle='link'
+      className='user-badge'>
+      <MenuItem href='/settings'>Account Settings</MenuItem>
+      <MenuItem href='/logout'>Log Out</MenuItem>
     </DropdownButton>
 
   _renderSubscription: (subscription, i) ->
