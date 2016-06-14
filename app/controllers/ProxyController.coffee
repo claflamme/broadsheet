@@ -25,8 +25,7 @@ module.exports = (app) ->
     unless validator.isURL url, validatorConfig
       return res.error 'PROXY_INVALID_URL'
 
-    request url, (err, httpRes, body) ->
-      res.json status: httpRes.statusCode, body: body
+    request(url).pipe res
 
   getArticle: (req, res) ->
 

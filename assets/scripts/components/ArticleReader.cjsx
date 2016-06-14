@@ -1,6 +1,46 @@
 React = require 'react'
 Loader = require './Loader'
 
+# --- Helpers ------------------------------------------------------------------
+
+# Some sites use lazy loaders that store image src/srcset attributes in data
+# attributes. This function pulls those out, assigns them to their non-data
+# equivalents, and proxies requests for insecure images.
+adjustImages = ->
+
+  imageNodesList = document.querySelectorAll '.articleBody img'
+
+  Array.prototype.slice.call(imageNodesList).forEach (imageNode) ->
+
+    ['src', 'srcset'].forEach (attr) ->
+      if imageNode.dataset[attr]
+        imageNode[attr] = imageNode.dataset[attr]
+
+    imageNode.src = fixInsecureSrc imageNode.src
+    imageNode.srcset = fixInsecureSrcSet imageNode.srcset
+
+# Replaces an insecure image src with a proxy URL.
+fixInsecureSrc = (src) ->
+
+  if src.substring(0, 7) isnt 'http://'
+    return src
+
+  "/api/proxy?url=#{ src }"
+
+# Parses out the srcset and fixes up and insecure src attributes.
+fixInsecureSrcSet = (srcset) ->
+
+  sizeList = srcset.split ','
+
+  sizeList = sizeList.map (size) ->
+    size = size.trim().split ' '
+    size[0] = fixInsecureSrc size[0]
+    size.join ' '
+
+  sizeList.join ','
+
+# --- Component ----------------------------------------------------------------
+
 ArticleReader = React.createClass
 
   propTypes:
@@ -8,12 +48,12 @@ ArticleReader = React.createClass
 
   componentDidUpdate: ->
 
-    adjustLazyLoadedImages()
+    adjustImages()
 
   render: ->
 
     unless @props.reader.doc
-      return renderPlaceholder()
+      return @renderPlaceholder()
 
     <div className='articleWrapper'>
       <div className='articleBody'>
@@ -27,37 +67,25 @@ ArticleReader = React.createClass
             </a>
           </h1>
           <div
-            onClick={ onArticleClick }
+            onClick={ @onArticleClick }
             dangerouslySetInnerHTML={{ __html: @props.reader.body }}>
           </div>
         </div>
       </div>
     </div>
 
-# This is a quick fix for sites using plugins like "lazysizes" to lazy-load
-# their images. It converts data attributes for `src` and `srcset` to their
-# normal non-data attributes.
-adjustLazyLoadedImages = ->
+  renderPlaceholder: ->
 
-  imageNodesList = document.querySelectorAll '.articleBody img'
+    <div className='articlePlaceholder'>
+      <p className='text-muted'>
+        Select an article from the left.
+      </p>
+    </div>
 
-  Array.prototype.slice.call(imageNodesList).forEach (imageNode) ->
-    ['src', 'srcset'].forEach (attr) ->
-      if imageNode.dataset[attr]
-        imageNode[attr] = imageNode.dataset[attr]
+  onArticleClick: (e) ->
 
-renderPlaceholder = ->
-
-  <div className='articlePlaceholder'>
-    <p className='text-muted'>
-      Select an article from the left.
-    </p>
-  </div>
-
-onArticleClick = (e) ->
-
-  if e.target.href
-    e.preventDefault()
-    window.open e.target.href
+    if e.target.href
+      e.preventDefault()
+      window.open e.target.href
 
 module.exports = ArticleReader
