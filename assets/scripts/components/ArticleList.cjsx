@@ -56,6 +56,7 @@ renderLoadMore = (props) ->
 
   <Button
     disabled={ isFinished or props.articles.loading }
+    className='load-more-articles'
     block
     onClick={ props.loadMore }>
     { text }
