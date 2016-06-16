@@ -8,6 +8,7 @@ module.exports =
 
   paths:
     routes: 'app/routes'
+    helpers: 'app/helpers'
     controllers: 'app/controllers'
     models: 'app/models'
     views: 'app/views'
