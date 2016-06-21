@@ -26,7 +26,7 @@ module.exports = (app) ->
     output =
       title: item.title.trim()
       url: item.link
-      summary: summary
+      summary: summary.trim()
       publishedAt: item.pubdate or moment()
 
     return output
