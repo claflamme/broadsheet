@@ -10,14 +10,14 @@ SubscriptionActions = require '../actions/SubscriptionActions'
 FeedTitleBar = (props, context) ->
 
   <div className='feedTitleBar'>
-    <h3 className='feedTitle'>{ props.title }</h3>
+    <h3 className='feedTitle'>{ props.title or <span>&nbsp;</span> }</h3>
     { if props.showControls then renderControls props }
     { if props.subscription then renderModals props }
   </div>
 
 FeedTitleBar.propTypes =
 
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string
   showControls: React.PropTypes.bool
   subscription: React.PropTypes.object
   showEditSub: React.PropTypes.bool

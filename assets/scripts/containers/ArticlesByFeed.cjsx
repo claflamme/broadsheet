@@ -1,18 +1,9 @@
 React = require 'react'
-{ Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 ArticleActions = require '../actions/ArticleActions'
-ArticleList = require '../components/ArticleList'
-FeedTitleBar = require '../components/FeedTitleBar'
+Reader = require '../components/Reader'
 
-mapStateToProps = (state) ->
-
-  articles: state.articles
-  subscriptions: state.subscriptions
-  showEditSub: state.modals.showEditSub
-  showDeleteSub: state.modals.showDeleteSub
-
-module.exports = connect(mapStateToProps) React.createClass
+module.exports = ArticlesByFeed = React.createClass
 
   componentWillMount: ->
 
@@ -27,23 +18,14 @@ module.exports = connect(mapStateToProps) React.createClass
 
     subscription = @_getActiveSubscription @props.params.feedId
 
-    unless subscription
-      return null
+    childProps =
+      title: subscription?.customTitle or subscription?.feed.title
+      loadMoreArticles: @_loadMore
+      onArticleClick: @_onClick
+      showControls: true
+      subscription: subscription
 
-    <div>
-      <FeedTitleBar
-        title={ subscription.customTitle or subscription.feed.title }
-        showControls={ true }
-        subscription={ subscription }
-        showEditSub={ @props.showEditSub }
-        showDeleteSub={ @props.showDeleteSub }
-        dispatch={ @props.dispatch } />
-      <ArticleList
-        loadMore={ @_loadMore }
-        articles={ @props.articles }
-        currentArticle={ @props.currentArticle }
-        onClick={ @_onClick } />
-    </div>
+    React.createElement Reader, Object.assign(childProps, @props)
 
   _reload: (feedId) ->
 

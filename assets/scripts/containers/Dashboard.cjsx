@@ -6,13 +6,7 @@ ArticleActions = require '../actions/ArticleActions'
 Subscriptions = require '../components/Subscriptions'
 ArticleReader = require '../components/ArticleReader'
 
-mapStateToProps = (state) ->
-
-  subscriptions: state.subscriptions
-  token: state.auth.token
-  user: state.auth.user
-  showNewSub: state.modals.showNewSub
-  reader: state.reader
+mapStateToProps = (state) -> state
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -22,32 +16,23 @@ module.exports = connect(mapStateToProps) React.createClass
 
   componentWillMount: ->
 
-    unless @props.token
-      @context.router.replace '/login'
+    unless @props.auth.token
+      return @context.router.replace '/login'
 
     @props.dispatch AuthActions.fetchUser()
 
   render: ->
 
-    unless @props.token
+    childProps =
+      dispatch: @props.dispatch
+      articles: @props.articles
+      auth: @props.auth
+      modals: @props.modals
+      reader: @props.reader
+      subscriptions: @props.subscriptions
+
+    # Prevent any "flicker" when redirecting to login screen.
+    unless @props.auth.token
       return null
 
-    childProps = currentArticle: @props.reader.doc
-
-    <Grid fluid className='dashboardGrid'>
-      <Row>
-        <Col xs={ 2 } className='subscriptions dashboardCol'>
-          <Subscriptions
-            subscriptions={ @props.subscriptions }
-            showNewSub={ @props.showNewSub }
-            user={ @props.user }
-            dispatch={ @props.dispatch } />
-        </Col>
-        <Col xs={ 4 } className='articleListCol dashboardCol'>
-          { React.cloneElement @props.children, childProps }
-        </Col>
-        <Col xs={ 6 } className='articleContent dashboardCol'>
-          <ArticleReader reader={ @props.reader } />
-        </Col>
-      </Row>
-    </Grid>
+    React.cloneElement @props.children, childProps

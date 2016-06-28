@@ -1,21 +1,9 @@
 React = require 'react'
-{ Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 ArticleActions = require '../actions/ArticleActions'
-ArticleList = require '../components/ArticleList'
-FeedTitleBar = require '../components/FeedTitleBar'
+Reader = require '../components/Reader'
 
-mapStateToProps = (state) ->
-
-  articles: state.articles
-
-module.exports = connect(mapStateToProps) React.createClass
-
-  propTypes:
-
-    dispatch: React.PropTypes.func.isRequired
-    articles: React.PropTypes.object
-    currentArticle: React.PropTypes.object
+module.exports = ArticlesAll = React.createClass
 
   componentWillMount: ->
 
@@ -23,14 +11,12 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <div>
-      <FeedTitleBar title='All subscriptions' />
-      <ArticleList
-        loadMore={ @_loadMore }
-        articles={ @props.articles }
-        currentArticle={ @props.currentArticle }
-        onClick={ @_onClick } />
-    </div>
+    childProps =
+      title: 'All subscriptions'
+      loadMoreArticles: @_loadMore
+      onArticleClick: @_onClick
+
+    React.createElement Reader, Object.assign(childProps, @props)
 
   _loadMore: ->
 
