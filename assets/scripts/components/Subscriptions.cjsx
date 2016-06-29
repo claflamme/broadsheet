@@ -1,7 +1,7 @@
 React = require 'react'
 { Link, IndexLink } = require 'react-router'
-{ Button, DropdownButton, MenuItem } = require 'react-bootstrap'
-Badge = require '../elements/Badge'
+{ Button  } = require 'react-bootstrap'
+UserBadge = require '../components/UserBadge'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionsNew = require './SubscriptionsNew'
 
@@ -24,7 +24,7 @@ module.exports = React.createClass
   render: ->
 
     <div>
-      { @_renderUserBadge() }
+      <UserBadge title={ @props.user?.email } />
       <div className='subscriptions-section'>
         <ul className='subscriptions-list'>
           <li>
@@ -52,20 +52,6 @@ module.exports = React.createClass
         onSubmit={ @_addSubscription }
         loading={ @props.subscriptions.adding } />
     </div>
-
-  _renderUserBadge: ->
-
-    unless @props.user
-      return
-
-    <DropdownButton
-      id='user-badge'
-      title={ @props.user?.email or ''}
-      bsStyle='link'
-      className='user-badge'>
-      <MenuItem href='/settings'>Account Settings</MenuItem>
-      <MenuItem href='/logout'>Log Out</MenuItem>
-    </DropdownButton>
 
   _renderSubscription: (subscription, i) ->
 

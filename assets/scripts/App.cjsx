@@ -26,6 +26,11 @@ reducers =
   articles: require './reducers/ArticlesReducer'
   reader: require './reducers/ReaderReducer'
 
+# --- Bootstrapping...here be dragons -------------------------------------------
+# This section sets up all the reducers then renders the app. Each module in the
+# `reducers` folder should export an object with the property `initialState`.
+# Other properties should be functions named after events, which are invoked
+# when that even is fired (with the signature `state, action`).
 # ------------------------------------------------------------------------------
 
 createReducer = (reducer) ->
