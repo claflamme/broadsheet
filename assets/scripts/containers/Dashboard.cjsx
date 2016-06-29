@@ -1,14 +1,13 @@
 React = require 'react'
-{ Grid, Row, Col, Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
+pick = require 'lodash/pick'
 AuthActions = require '../actions/AuthActions'
-ArticleActions = require '../actions/ArticleActions'
-Subscriptions = require '../components/Subscriptions'
-ArticleReader = require '../components/ArticleReader'
 
 mapStateToProps = (state) -> state
 
 module.exports = connect(mapStateToProps) React.createClass
+
+  displayName: 'Dashboard'
 
   contextTypes:
 
@@ -23,16 +22,14 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    childProps =
-      dispatch: @props.dispatch
-      articles: @props.articles
-      auth: @props.auth
-      modals: @props.modals
-      reader: @props.reader
-      subscriptions: @props.subscriptions
-
     # Prevent any "flicker" when redirecting to login screen.
     unless @props.auth.token
       return null
 
-    React.cloneElement @props.children, childProps
+    # Any authenticated components (i.e. children of this one) will receive
+    # these as props.
+    authenticatedProps = pick @props, [
+      'dispatch', 'auth', 'articles', 'modals', 'reader', 'subscriptions'
+    ]
+
+    React.cloneElement @props.children, authenticatedProps
