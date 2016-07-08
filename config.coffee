@@ -32,6 +32,11 @@ module.exports =
   stylus:
     inputPath: 'assets/styles'
 
+  mail:
+    mailgun:
+      secretKey: process.env.MAILGUN_SECRET_KEY
+      domain: process.env.MAILGUN_DOMAIN 
+
   crawler:
     # The time in minutes before a feed is considered outdated. If a feed hasn't
     # been checked for this long, it will be updated in the next crawl.
