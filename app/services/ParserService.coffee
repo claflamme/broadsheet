@@ -4,6 +4,13 @@ request = require 'request'
 moment = require 'moment'
 faviconoclast = require 'faviconoclast'
 
+# Articles sometimes have dates set in the future. Sites will do this to "pin"
+# an item until the date has passed. Obviously, we don't want this in a feed,
+# so any future dates should be set to when the article is first found.
+normalizeArticleDate = (articleDate) ->
+
+  moment Math.min articleDate, moment()
+
 module.exports = (app) ->
 
   Feed = app.models.Feed
@@ -23,13 +30,10 @@ module.exports = (app) ->
     if summary.length > 200
       summary = "#{ summary.substring(0, 200).trim() }..."
 
-    output =
-      title: item.title.trim()
-      url: item.link
-      summary: summary.trim()
-      publishedAt: item.pubdate or moment()
-
-    return output
+    title: item.title.trim()
+    url: item.link
+    summary: summary.trim()
+    publishedAt: normalizeArticleDate item.pubdate
 
   parseStream = (xmlStream, done) ->
 
