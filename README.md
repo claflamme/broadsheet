@@ -2,16 +2,19 @@
 
 # Broadsheet
 
-Broadsheet is a news reader that does less, knows less, and cares less. If you're sick of modern software, you might like it.
+Broadsheet is a news reader that does less for you and knows less about you. If you're sick of modern software, you might like it.
 
-### Less is Less
+#### 👉 No recommendations
+Add sources without harassment from a shitty "recommendation engine". Broadsheet doesn't monitor or analyze your reading habits.
 
-How much bullshit do you need to read the news?
+#### 👉 No social media integration
+No one cares that you read an article. It's how social media sites target you with interest-based ads and build up demographic data to sell to marketers.
 
-- **No recommendations.** Add sources without harassment from a shitty "recommendation engine". Broadsheet doesn't monitor or analyze your reading habits.
-- **No social media integration.** No one cares that you read an article. It's how facebook targets you with interest-based ads, and it's how other products get personal profile info about you.
-- **No Pocket/Instapaper/Evernote** News is ephemeral. If it's important, you'll remember. Broadsheet already lets you read articles inline with no ads.
-- **No user tracking or analytics.** Broadsheet doesn't track your behaviour. It doesn't matter how many times you click a link or whatever dumb metric marketers care about.
+#### 👉 No Pocket/Instapaper/Evernote integration
+News is ephemeral - if it's important, you'll remember. No need to tell another company what you like to read.
+
+#### 👉 No user tracking or analytics
+Broadsheet doesn't track your behaviour. It doesn't matter how many times you click a link or whatever dumb metric marketers care about.
 
 ### Privacy
 
