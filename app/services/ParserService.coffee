@@ -9,7 +9,10 @@ faviconoclast = require 'faviconoclast'
 # so any future dates should be set to when the article is first found.
 normalizeArticleDate = (articleDate) ->
 
-  moment Math.min articleDate, moment()
+  currentDate = moment()
+  articleDate or= currentDate
+
+  moment Math.min articleDate, currentDate
 
 module.exports = (app) ->
 
