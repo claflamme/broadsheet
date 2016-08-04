@@ -1,16 +1,19 @@
 React = require 'react'
 { Form, FormGroup, FormControl, Col, ControlLabel, Button } = require 'react-bootstrap'
+_ = require 'lodash'
+
 api = require '../api'
 
 module.exports = SettingsPasswordReset = React.createClass
 
   propTypes:
+
     dispatch: React.PropTypes.func.isRequired
 
   getInitialState: ->
 
-    currentPassword: ''
-    newPassword: ''
+    currentPass: ''
+    newPass: ''
     saving: false
     saved: false
     err: null
@@ -23,7 +26,9 @@ module.exports = SettingsPasswordReset = React.createClass
           Current Password
         </Col>
         <Col sm={ 4 }>
-          <FormControl type='password' onChange={ @setCurrentPassword } />
+          <FormControl
+            type='password'
+            onChange={ @onChange.bind @, 'currentPass' } />
         </Col>
       </FormGroup>
       <FormGroup>
@@ -31,7 +36,9 @@ module.exports = SettingsPasswordReset = React.createClass
           New Password
         </Col>
         <Col sm={ 4 }>
-          <FormControl type='password' onChange={ @setNewPassword } />
+          <FormControl
+            type='password'
+            onChange={ @onChange.bind @, 'newPass' } />
         </Col>
       </FormGroup>
       <FormGroup>
@@ -41,15 +48,32 @@ module.exports = SettingsPasswordReset = React.createClass
           </Button>
         </Col>
       </FormGroup>
+      <FormGroup>
+        <Col smOffset={ 2 } sm={ 2 }>
+          { @renderMessage() }
+        </Col>
+      </FormGroup>
     </Form>
 
-  setCurrentPassword: (e) ->
+  renderMessage: ->
 
-    @setState currentPassword: e.target.value
+    console.log @state
 
-  setNewPassword: (e) ->
+    unless @state.saved or @state.err
+      return
 
-    @setState newPassword: e.target.value
+    if @state.err
+      return <strong className='text-danger'>{ @state.err.message }</strong>
+
+    if @state.saved
+      return <strong className='text-success'>Great success!</strong>
+
+  onChange: (key, e) ->
+
+    newState = saved: false
+    newState[key] = e.target.value
+
+    @setState newState
 
   setPassword: (e) ->
 
@@ -62,9 +86,9 @@ module.exports = SettingsPasswordReset = React.createClass
       url: '/api/auth/password'
       method: 'PATCH'
       body:
-        currentPassword: @state.currentPassword
-        newPassword: @state.newPassword
+        currentPassword: @state.currentPass
+        newPassword: @state.newPass
 
     @setState saving: true, =>
       api.send request, (err, res) =>
-        @setState saving: false, saved: not err
+        @setState saving: false, saved: true, err: err
