@@ -9,6 +9,7 @@ mapStateToProps = (state) ->
 
   token: state.auth.token
   loading: state.auth.loading
+  emailSent: state.auth.emailSent
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -22,6 +23,9 @@ module.exports = connect(mapStateToProps) React.createClass
       @context.router.push '/'
 
   render: ->
+
+    if @props.emailSent
+      return <p>Check your email!</p>
 
     <Grid>
       <Row>
