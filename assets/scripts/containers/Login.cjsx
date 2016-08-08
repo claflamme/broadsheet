@@ -9,6 +9,7 @@ mapStateToProps = (state) ->
 
   token: state.auth.token
   loading: state.auth.loading
+  emailSent: state.auth.emailSent
 
 module.exports = connect(mapStateToProps) React.createClass
 
@@ -23,6 +24,9 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
+    if @props.emailSent
+      return <p>Check your email!</p>
+
     <Grid>
       <Row>
         <Auth onSubmit={ @_onSubmit } buttonText='Log in' />
@@ -35,9 +39,9 @@ module.exports = connect(mapStateToProps) React.createClass
       </Row>
     </Grid>
 
-  _onSubmit: (email, password) ->
+  _onSubmit: (email) ->
 
     if @props.loading
       return
 
-    @props.dispatch AuthActions.signIn email, password
+    @props.dispatch AuthActions.signIn email

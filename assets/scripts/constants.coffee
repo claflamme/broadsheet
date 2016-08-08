@@ -13,6 +13,9 @@ module.exports = keymirror
   # Auth or registration request was rejected.
   AUTH_TOKEN_FAILED: null
 
+  # Auth token request was completed successfully - an email has been sent.
+  AUTH_TOKEN_SUCCESS: null
+
   # Requested the user model of the token bearer.
   AUTH_USER_REQUESTED: null
 

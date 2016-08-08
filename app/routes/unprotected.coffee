@@ -3,4 +3,5 @@ module.exports = [
   '/api/auth/authenticate'
   '/api/proxy'
   '/api/auth/reset_password'
+  '/api/auth/redeem'
 ]

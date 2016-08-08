@@ -9,6 +9,7 @@ module.exports = ->
       <Route path='feeds/:feedId' component={ require './containers/ArticlesByFeed' } />
       <Route path='settings' component={ require './containers/Settings' } />
     </Route>
+    <Route path='/callback' component={ require './containers/AuthCallback' } />
     <Route path='/login' component={ require './containers/Login' } />
     <Route path='/logout' component={ require './containers/Logout' } />
     <Route path='/register' component={ require './containers/Register' } />

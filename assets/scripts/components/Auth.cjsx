@@ -11,7 +11,6 @@ module.exports = React.createClass
   getInitialState: ->
 
     email: ''
-    password: ''
 
   render: ->
 
@@ -22,10 +21,6 @@ module.exports = React.createClass
           type='email'
           placeholder='Email address...'
           onChange={ @_onChange.bind @, 'email' } />
-        <Input
-          type='password'
-          placeholder='Password...'
-          onChange={ @_onChange.bind @, 'password'} />
         <Button type='submit' bsStyle='primary' block>
           { @props.buttonText }
         </Button>
@@ -41,4 +36,4 @@ module.exports = React.createClass
 
     e.preventDefault()
 
-    @props.onSubmit @state.email, @state.password
+    @props.onSubmit @state.email
