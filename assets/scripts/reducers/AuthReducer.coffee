@@ -34,7 +34,7 @@ module.exports =
 
   AUTH_TOKEN_SUCCESS: (state, action) ->
 
-    Object.assign {}, state, emailSent: true
+    Object.assign {}, state, emailSent: true, loading: false
 
   AUTH_USER_RECEIVED: (state, action) ->
 

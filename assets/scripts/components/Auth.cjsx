@@ -21,7 +21,12 @@ module.exports = React.createClass
           type='email'
           placeholder='Email address...'
           onChange={ @_onChange.bind @, 'email' } />
-        <Button type='submit' bsStyle='primary' block>
+        <Button
+          type='submit'
+          bsStyle='primary'
+          className={ if @props.loading then 'loading' else '' }
+          disabled={ @props.loading }
+          block>
           { @props.buttonText }
         </Button>
       </form>

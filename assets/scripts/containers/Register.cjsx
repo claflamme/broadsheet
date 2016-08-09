@@ -29,7 +29,10 @@ module.exports = connect(mapStateToProps) React.createClass
 
     <Grid>
       <Row>
-        <Auth onSubmit={ @_onSubmit } buttonText='Register' />
+        <Auth
+          onSubmit={ @_onSubmit }
+          buttonText='Register'
+          loading={ @props.loading } />
       </Row>
       <Row>
         <Col xs={ 12 } className='text-center'>

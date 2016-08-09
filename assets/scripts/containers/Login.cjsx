@@ -4,6 +4,7 @@ React = require 'react'
 { Link } = require 'react-router'
 AuthActions = require '../actions/AuthActions'
 Auth = require '../components/Auth'
+EmailServices = require '../components/EmailServices'
 
 mapStateToProps = (state) ->
 
@@ -25,11 +26,14 @@ module.exports = connect(mapStateToProps) React.createClass
   render: ->
 
     if @props.emailSent
-      return <p>Check your email!</p>
+      return <EmailServices />
 
     <Grid>
       <Row>
-        <Auth onSubmit={ @_onSubmit } buttonText='Log in' />
+        <Auth
+          onSubmit={ @_onSubmit }
+          buttonText='Log in'
+          loading={ @props.loading } />
       </Row>
       <Row>
         <Col xs={ 12 } className='text-center'>
