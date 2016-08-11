@@ -13,21 +13,6 @@ receiveToken = (token) ->
 
 module.exports =
 
-  requestToken: (type, email) ->
-
-    request =
-      url: "/api/auth/#{ type }"
-      method: 'POST'
-      body: { email }
-
-    (dispatch) =>
-      dispatch type: constants.AUTH_TOKEN_REQUESTED
-      api.send request, (res, json) =>
-        if json.error
-          dispatch type: constants.AUTH_TOKEN_FAILED
-        else
-          dispatch type: constants.AUTH_TOKEN_SUCCESS
-
   redeemNonce: (nonce) ->
 
     request =
@@ -41,11 +26,18 @@ module.exports =
 
   signIn: (email) ->
 
-    @requestToken 'authenticate', email
+    request =
+      url: '/api/auth/authenticate'
+      method: 'POST'
+      body: { email }
 
-  signUp: (email, password) ->
-
-    @requestToken 'register', email, password
+    (dispatch) =>
+      dispatch type: constants.AUTH_TOKEN_REQUESTED
+      api.send request, (res, json) =>
+        if json.error
+          dispatch type: constants.AUTH_TOKEN_FAILED
+        else
+          dispatch type: constants.AUTH_TOKEN_SUCCESS
 
   fetchUser: ->
 

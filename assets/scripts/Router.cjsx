@@ -10,8 +10,7 @@ module.exports = ->
       <Route path='settings' component={ require './containers/Settings' } />
     </Route>
     <Route path='/callback' component={ require './containers/AuthCallback' } />
-    <Route path='/login' component={ require './containers/Login' } />
+    <Route path='/authenticate' component={ require './containers/Auth' } />
     <Route path='/logout' component={ require './containers/Logout' } />
-    <Route path='/register' component={ require './containers/Register' } />
     <Route path='*' component={ require './containers/404' } />
   </Router>
