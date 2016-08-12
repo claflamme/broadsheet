@@ -9,7 +9,7 @@ module.exports = React.createClass
   componentWillMount: ->
 
     localStorage.clear()
-    window.location.href = '/login'
+    window.location.href = '/authenticate'
 
   render: ->
 

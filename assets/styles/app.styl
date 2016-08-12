@@ -4,13 +4,15 @@
 @import 'subscriptions'
 @import 'code'
 
-@import 'grid'
-
 @import 'elements/button'
 @import 'elements/input'
 @import 'elements/badge'
 
+html
+  height: 100%
+
 body
+  background linear-gradient(to bottom, #fff 0%, $palette-lighter 100%);
   margin 0
   font $font-size/$line-height $font-family-body
   font-weight 300
@@ -70,6 +72,7 @@ button.load-more-articles
   font-weight 300
 
 .dashboardGrid
+  background #fff
   position absolute
   top 0
   bottom 0

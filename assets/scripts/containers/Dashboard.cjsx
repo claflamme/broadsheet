@@ -16,7 +16,7 @@ module.exports = connect(mapStateToProps) React.createClass
   componentWillMount: ->
 
     unless @props.auth.token
-      return @context.router.replace '/login'
+      return @context.router.replace '/authenticate'
 
     @props.dispatch AuthActions.fetchUser()
 
