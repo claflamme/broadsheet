@@ -3,7 +3,6 @@ React = require 'react'
 { connect } = require 'react-redux'
 { Link } = require 'react-router'
 AuthActions = require '../actions/AuthActions'
-EmailServices = require '../components/EmailServices'
 
 mapStateToProps = (state) ->
 

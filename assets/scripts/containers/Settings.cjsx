@@ -1,7 +1,6 @@
 React = require 'react'
 { Link } = require 'react-router'
 { Navbar, Nav, NavItem, Grid, Row, Col } = require 'react-bootstrap'
-SettingsPasswordReset = require '../components/SettingsPasswordReset'
 
 Settings = (props) ->
 
@@ -21,13 +20,6 @@ Settings = (props) ->
         </Row>
       </Grid>
     </Navbar>
-    <Grid>
-      <Row>
-        <Col xs={ 12 }>
-          <SettingsPasswordReset dispatch={ props.dispatch } />
-        </Col>
-      </Row>
-    </Grid>
   </div>
 
 Settings.propTypes =
