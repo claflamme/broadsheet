@@ -1,4 +1,6 @@
 React = require 'react'
+moment = require 'moment'
+
 Loader = require './Loader'
 
 # --- Helpers ------------------------------------------------------------------
@@ -66,6 +68,7 @@ ArticleReader = React.createClass
                 { @props.reader.doc?.title or '' }
             </a>
           </h1>
+          { @renderDate @props.reader.doc?.publishedAt }
           <div
             onClick={ @onArticleClick }
             dangerouslySetInnerHTML={{ __html: @props.reader.body }}>
@@ -87,5 +90,16 @@ ArticleReader = React.createClass
     if e.target.href
       e.preventDefault()
       window.open e.target.href
+
+  renderDate: (date) ->
+
+    verbose = moment(date).format 'dddd, MMMM Do, YYYY'
+    short = moment(date).fromNow()
+
+    <p className='text-muted'>
+      <em>
+        { verbose }&mdash;{ short }
+      </em>
+    </p>
 
 module.exports = ArticleReader
