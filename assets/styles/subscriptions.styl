@@ -1,14 +1,14 @@
 .subscriptions
-  background $palette-lighter
-  padding-top $gutter-size
+  background $gray-lighter
+  padding-top halfGutter()
 
   .subscriptions-section
-    padding-top ($gutter-size / 2)
-    padding-bottom ($gutter-size / 2)
+    padding-top (halfGutter() / 2)
+    padding-bottom (halfGutter() / 2)
 
   ul.subscriptions-list
     list-style-type none
-    margin 0 0 0 $gutter-size* -1
+    margin 0 0 0 halfGutter()* -1
     padding 0
 
     li > a
@@ -18,20 +18,20 @@
       transition background-color $animation-speed
 
       &:link, &:visited, &:active
-        color $palette-neutral
+        color $gray-neutral
         text-decoration none
 
       &:hover
-        background-color darken($palette-lighter, 5)
+        background-color darken($gray-lighter, 5)
         text-decoration none
 
       &.active
-        color $palette-dark
-        background-color darken($palette-lighter, 5)
+        color $gray-dark
+        background-color darken($gray-lighter, 5)
         font-weight 500
 
       .subscriptionIcon
         width 16px
         height 16px
-        margin-right $gutter-size
+        margin-right halfGutter()
         border-radius 4px

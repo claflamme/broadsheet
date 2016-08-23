@@ -1,22 +1,20 @@
 // --- Color Palette -----------------------------------------------------------
 
-// Base colours
-$palette-base ?= #263c42
-$palette-darker ?= #344A50
-$palette-dark ?= #466269
-$palette-neutral ?= #738286
-$palette-light ?= #B3C0C3
-$palette-lighter ?= #f5f8f9
-
 // Border
-$palette-border ?= #F1F2F3
+$gray-border ?= #F1F2F3
 
-// Accents
-$palette-accent-primary ?= #78CAB1
-$palette-accent-secondary ?= #73A7DC
+// --- Bootstrap Overrides -----------------------------------------------------
 
-// Contextual colours
-$palette-danger ?= #D65151
+// Colours
+$gray-base = #263C42
+$gray-darker = #344A50
+$gray-dark = #466269
+$gray-neutral = #738286
+$gray-light = #B3C0C3
+$gray-lighter = #F5F8F9
+
+$brand-primary = #78CAB1
+$brand-danger = #D65151
 
 // --- Typography --------------------------------------------------------------
 
@@ -28,20 +26,11 @@ $line-height ?= 1.75
 
 // --- Structure & Layout ------------------------------------------------------
 
-// Grid settings
-$gutter-size ?= 15px
-$columns ?= 12
-$breakpoints ?= {
-  sm: 0,
-  md: 768px,
-  lg: 992px,
-  hg: 1200px
-}
-
-$border-radius ?= 5px
-
 // Animation & transitions
 $animation-speed ?= 200ms
 
 listItemPadding()
-  padding 4px $gutter-size
+  padding 4px halfGutter()
+
+halfGutter()
+  $grid-gutter-width / 2

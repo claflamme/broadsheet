@@ -4,7 +4,7 @@
 @import 'subscriptions'
 @import 'code'
 
-@import 'elements/button'
+// @import 'elements/button'
 @import 'elements/input'
 @import 'elements/badge'
 
@@ -12,28 +12,21 @@ html
   height: 100%
 
 body
-  background linear-gradient(to bottom, #fff 0%, $palette-lighter 100%);
+  background linear-gradient(to bottom, #fff 0%, $gray-lighter 100%);
   margin 0
   font $font-size/$line-height $font-family-body
   font-weight 300
   height 100%
-  color $palette-neutral
+  color $gray-neutral
 
 h1, h2, h3, h4, h5, h6
   font-family $font-family-header
   letter-spacing -0.03em
-  color $palette-dark
+  color $gray-dark
   font-weight 500
 
 b, strong
   font-weight 500
-
-a, a:link
-  color $palette-accent-secondary
-
-a:visited
-  color $palette-accent-secondary
-  text-decoration underline
 
 .articlesList
   margin 0
@@ -41,17 +34,17 @@ a:visited
   list-style-type none
 
   li
-    border-bottom 1px solid $palette-border
-    margin 0 $gutter-size * -1
-    padding 8px $gutter-size
+    border-bottom 1px solid $gray-border
+    margin 0 halfGutter() * -1
+    padding 8px halfGutter()
     cursor pointer
     transition all 100ms
 
   li:hover
-    box-shadow inset 5px 0 0 0 darken($palette-lighter, 10)
+    box-shadow inset 5px 0 0 0 darken($gray-lighter, 10)
 
   li.active
-    box-shadow inset 5px 0 0 0 $palette-accent-primary
+    box-shadow inset 5px 0 0 0 $brand-primary
 
     .articleSummary
       transform translate(0)
@@ -63,12 +56,12 @@ button.load-more-articles
   transition 200ms all
 
 .articleTitle
-  color $palette-dark
+  color $gray-dark
   font-weight 500
   margin 0
 
 .articlePreview
-  color $palette-light
+  color $gray-light
   font-weight 300
 
 .dashboardGrid
@@ -88,46 +81,45 @@ button.load-more-articles
   overflow-y auto
 
 .feedTitleBar
-  margin 0 $gutter-size * -1
-  padding $gutter-size
-  border-bottom 1px solid $palette-border
+  margin 0 halfGutter() * -1
+  padding halfGutter()
+  border-bottom 1px solid $gray-border
 
   .feedTitle
     margin 0
 
 .feedTitleBarIcons
   font-size 1.1em
-  margin 10px $gutter-size * -1 0
-  padding 0 $gutter-size
+  margin 10px halfGutter() * -1 0
+  padding 0 halfGutter()
   list-style-type none
   overflow hidden
 
   li
     display inline-block
     float left
-    margin-right $gutter-size
+    margin-right halfGutter()
     line-height 0
 
   .fa
-    margin-right ($gutter-size/ 3)
+    margin-right (halfGutter()/ 3)
 
   a
     cursor pointer
-    color $palette-light
+    color $gray-light
 
   a:hover
-    color $palette-neutral
+    color $gray-neutral
     text-decoration none
 
 .articleContent
-  border-left 1px solid $palette-border
+  border-left 1px solid $gray-border
   padding 0
   overflow hidden
   font-size 16px
   font-weight 300
 
-  a:link, a:visited, a:active
-    color $palette-dark
+  a
     text-decoration underline
 
   .articlePlaceholder
@@ -139,7 +131,7 @@ button.load-more-articles
   .articleWrapper
     height 100%
     overflow-y auto
-    padding $gutter-size * 3
+    padding halfGutter() * 3
 
   .articleBody
     max-width 600px
@@ -149,8 +141,8 @@ button.load-more-articles
       text-align center
       font-size 14px
       font-style italic
-      padding 0 $gutter-size * 2
-      margin-bottom $gutter-size * 2
+      padding 0 $grid-gutter-width
+      margin-bottom $grid-gutter-width
 
   img
     width 100%
@@ -158,19 +150,19 @@ button.load-more-articles
     border-radius 5px
 
   h1
-    margin 0 0 ($gutter-size * 2) 0
+    margin 0 0 ($grid-gutter-width) 0
     font-weight 500
 
     a:link, a:visited, a:active
-      color $palette-darker
+      color $gray-darker
       text-decoration none
 
   h2, h3, h4, h5, h6
-    margin ($gutter-size * 2) 0
+    margin ($grid-gutter-width) 0
     line-height 1.5em
 
   p, ul, ol, img
-    margin-bottom ($gutter-size * 2)
+    margin-bottom ($grid-gutter-width)
 
   // Sometimes images are inside of their own P tag, in which case they would
   // get the margin applied twice.
@@ -179,11 +171,11 @@ button.load-more-articles
 
   table
     font-size 0.9em
-    margin-bottom ($gutter-size * 2)
+    margin-bottom ($grid-gutter-width)
     width 100%
 
     thead
-      border-bottom 1px solid $palette-border
+      border-bottom 1px solid $gray-border
 
     th
       font-weight 500
@@ -206,12 +198,12 @@ blockquote
   font-size 1.2em
   font-weight 300
   font-style italic
-  color $palette-light
-  border-left 5px solid $palette-border
+  color $gray-light
+  border-left 5px solid $gray-border
 
 .dropdown-menu
   border none
 
 .dropdown-menu > li > a
   padding 5px 10px
-  color $palette-dark
+  color $gray-dark

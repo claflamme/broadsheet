@@ -27,22 +27,22 @@ build-button-variant($name, $color)
 .btn
   position relative
   border none
-  border-radius ($gutter-size / 3)
+  border-radius (halfGutter() / 3)
   transition $animation-speed all
-  padding ($gutter-size / 2) $gutter-size
+  padding (halfGutter() / 2) halfGutter()
 
   &[disabled]
     opacity 0.5
 
-build-button-variant('primary', $palette-accent-primary)
-build-button-variant('danger', $palette-danger)
+build-button-variant('primary', $brand-primary)
+build-button-variant('danger', $brand-danger)
 
 .btn.loading
   color transparent
 
   &::after
     animation button-loading 500ms infinite linear
-    border .2rem solid $palette-lighter
+    border .2rem solid $gray-lighter
     border-radius .8rem
     border-right-color transparent
     border-top-color transparent
