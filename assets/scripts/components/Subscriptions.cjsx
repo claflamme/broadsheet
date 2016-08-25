@@ -56,12 +56,16 @@ module.exports = React.createClass
   _renderSubscription: (subscription, i) ->
 
     fallbackTitle = subscription.feed.title or subscription.feed.url
+    iconUrl = subscription.feed.iconUrl
+
+    if iconUrl.startsWith 'http://'
+      iconUrl = "/api/proxy?url=#{ iconUrl }"
 
     <li key={ i }>
       <Link
         to={ "/feeds/#{ subscription.feed._id }"}
         activeClassName='active'>
-        <img className='subscriptionIcon' src={ subscription.feed.iconUrl } />
+        <img className='subscriptionIcon' src={ iconUrl } />
         { subscription.customTitle or fallbackTitle }
       </Link>
     </li>
