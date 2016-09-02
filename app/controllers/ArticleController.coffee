@@ -19,7 +19,7 @@ module.exports = (app) ->
         subscription.feed
 
       query = feed: { $in: feedIds }
-      options = sort: '-publishedAt', page: parseInt(req.query.page)
+      options = sort: '-publishedAt', page: parseInt(req.query.page), limit: 20
 
       Article.paginate query, options, (err, articles) ->
         res.json articles or []
@@ -32,7 +32,7 @@ module.exports = (app) ->
   byFeed: (req, res) ->
 
     query = feed: req.params.id
-    options = sort: '-publishedAt', page: parseInt(req.query.page)
+    options = sort: '-publishedAt', page: parseInt(req.query.page), limit: 20
 
     Article.paginate query, options, (err, articles) ->
       res.json articles or []
