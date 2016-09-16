@@ -1,5 +1,5 @@
 React = require 'react'
-{ Modal, Input, Button } = require 'react-bootstrap'
+{ Modal, FormControl, Button } = require 'react-bootstrap'
 SubscriptionActions = require '../actions/SubscriptionActions'
 
 SubscriptionEditWindow = React.createClass
@@ -27,10 +27,9 @@ SubscriptionEditWindow = React.createClass
           <Modal.Title>Edit subscription</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Input
+          <FormControl
             type='text'
-            standalone
-            ref={ @_focus }
+            autoFocus
             placeholder={ @state.subscription.feed.title }
             value={ @state.subscription.customTitle or '' }
             onChange={ @_onTitleChange } />
@@ -41,11 +40,6 @@ SubscriptionEditWindow = React.createClass
         </Modal.Footer>
       </form>
     </Modal>
-
-  _focus: (Input) ->
-
-    if Input
-      Input.refs.input.focus()
 
   _editSubscription: (e) ->
 

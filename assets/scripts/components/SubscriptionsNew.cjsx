@@ -1,5 +1,5 @@
 React = require 'react'
-{ Modal, Button, Input } = require 'react-bootstrap'
+{ Modal, Button, FormControl } = require 'react-bootstrap'
 
 module.exports = React.createClass
 
@@ -22,11 +22,10 @@ module.exports = React.createClass
           <Modal.Title>Add a subscription</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Input
+          <FormControl
             type='text'
-            standalone
+            autoFocus
             placeholder='http://examplesite.com/rss.xml'
-            ref={ @_focus }
             value={ @state.url }
             onChange={ @_onChange } />
         </Modal.Body>
@@ -34,17 +33,12 @@ module.exports = React.createClass
           <Button bsStyle='danger' onClick={ @props.onHide }>
             Cancel
           </Button>
-          <Button bsStyle='primary' loading={ @props.loading } type='submit'>
+          <Button bsStyle='primary' type='submit'>
             Add
           </Button>
         </Modal.Footer>
       </form>
     </Modal>
-
-  _focus: (Input) ->
-
-    if Input
-      Input.refs.input.focus()
 
   _onChange: (e) ->
 
