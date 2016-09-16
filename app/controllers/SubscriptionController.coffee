@@ -65,7 +65,7 @@ module.exports = (app) ->
       subscription.remove (err) ->
         if err
           return res.error 'UNKNOWN_ERROR'
-        res.status(204).send()
+        res.json message: 'Unsubscribed'
 
   ###
   @apiGroup Subscriptions

@@ -90,10 +90,10 @@ module.exports =
     (dispatch) =>
       dispatch type: constants.SUBSCRIPTIONS_DELETED, subscription: subscription
       dispatch @hideDeletePrompt()
-      browserHistory.push '/'
 
       request =
         url: "/api/subscriptions/#{ subscription._id }"
         method: 'DELETE'
 
-      api.send request
+      api.send request, ->
+        browserHistory.push '/'
