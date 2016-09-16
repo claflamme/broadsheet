@@ -1,5 +1,5 @@
 React = require 'react'
-{ Grid, Row, Col, Panel, Input, Button} = require 'react-bootstrap'
+{ Grid, Row, Col, Panel, FormControl, FormGroup, Button} = require 'react-bootstrap'
 { connect } = require 'react-redux'
 { Link } = require 'react-router'
 AuthActions = require '../actions/AuthActions'
@@ -51,10 +51,13 @@ module.exports = connect(mapStateToProps) React.createClass
       return
 
     <form onSubmit={ @_onSubmit }>
-      <Input
-        type='email'
-        placeholder='Email address...'
-        onChange={ @_onChange.bind @, 'email' } />
+      <FormGroup>
+        <FormControl
+          type='email'
+          autoFocus
+          placeholder='Email address...'
+          onChange={ @_onChange.bind @, 'email' } />
+      </FormGroup>
       <Button
         type='submit'
         bsStyle='primary'
