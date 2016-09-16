@@ -10,10 +10,6 @@ UserBadge = (props) ->
       noCaret
       title={ renderTitle(props.title) }
       bsStyle='link'>
-      <MenuItem href='/settings'>
-        <i className='fa fa-fw fa-gear'></i>
-        <span>Settings</span>
-      </MenuItem>
       <MenuItem href='/logout'>
         <i className='fa fa-fw fa-sign-out'></i>
         <span>Log Out</span>
