@@ -117,6 +117,6 @@ module.exports = (app) ->
           return done()
         parseStream res, (err, articles, meta) ->
           if err
-            throw err
+            return done()
           updateFeed feed, meta, (err, feed) ->
             addArticles articles, feed, done
