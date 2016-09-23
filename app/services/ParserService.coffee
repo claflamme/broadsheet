@@ -73,7 +73,7 @@ module.exports = (app) ->
   updateFeed = (feed, meta, done) ->
 
     unless meta?.link
-      return new Error "No metadata for feed: #{ feed.url }"
+      return new Error "Invalid feed - no metadata: #{ feed.url }"
 
     feed.title = meta.title or null
     feed.description = meta.description or null
