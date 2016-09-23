@@ -72,6 +72,9 @@ module.exports = (app) ->
 
   updateFeed = (feed, meta, done) ->
 
+    unless meta?.link
+      return new Error "No metadata for feed: #{ feed.url }"
+
     feed.title = meta.title or null
     feed.description = meta.description or null
 
@@ -119,4 +122,6 @@ module.exports = (app) ->
           if err
             return done()
           updateFeed feed, meta, (err, feed) ->
+            if err
+              return done()
             addArticles articles, feed, done
