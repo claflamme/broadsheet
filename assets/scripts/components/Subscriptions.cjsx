@@ -11,6 +11,7 @@ module.exports = React.createClass
 
     subscriptions: React.PropTypes.object.isRequired
     showNewSub: React.PropTypes.bool
+    newSubError: React.PropTypes.bool
     dispatch: React.PropTypes.func.isRequired
 
   componentWillMount: ->
@@ -48,6 +49,7 @@ module.exports = React.createClass
       </div>
       <SubscriptionsNew
         show={ @props.showNewSub }
+        hasError={ @props.newSubError }
         onHide={ @_hideNewSubscription }
         onSubmit={ @_addSubscription }
         loading={ @props.subscriptions.adding } />

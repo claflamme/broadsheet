@@ -42,7 +42,9 @@ module.exports =
     (dispatch) =>
       dispatch type: constants.SUBSCRIPTIONS_ADDING_NEW
       createFeed url, (res, feed) =>
-        createSubscription feed._id, (res, subscription) =>
+        createSubscription feed._id, (res, json) =>
+          if json.error
+            return dispatch type: constants.MODAL_NEW_SUBSCRIPTION_RETURNED_ERROR
           dispatch type: constants.SUBSCRIPTIONS_ADDED_NEW
           dispatch @hideNewPrompt()
           dispatch @fetchSubscriptions()

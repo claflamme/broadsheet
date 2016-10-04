@@ -14,6 +14,7 @@ Reader = (props) ->
         <Subscriptions
           subscriptions={ props.subscriptions }
           showNewSub={ props.modals.showNewSub }
+          newSubError={ props.modals.newSubError }
           user={ props.auth.user }
           dispatch={ props.dispatch } />
       </Col>

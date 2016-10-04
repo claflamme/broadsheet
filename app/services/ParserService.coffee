@@ -61,6 +61,7 @@ module.exports = (app) ->
 
     req.on 'error', (err) ->
       console.log err.message
+      return done err, @
 
     req.on 'response', (res) ->
       if res.statusCode isnt 200
@@ -114,14 +115,15 @@ module.exports = (app) ->
 
     feed.updatedAt = new Date()
 
+    # @TODO: Refactor to async waterfall.
     feed.save (err, feed) ->
       downloadFeed feed.url, (err, res) ->
         if err
-          return done()
+          return done err
         parseStream res, (err, articles, meta) ->
           if err
-            return done()
+            return done err
           updateFeed feed, meta, (err, feed) ->
             if err
-              return done()
+              return done err
             addArticles articles, feed, done

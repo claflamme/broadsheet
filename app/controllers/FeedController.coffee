@@ -31,6 +31,7 @@ module.exports = (app) ->
       return res.error 'INVALID_REQUEST_BODY_PARAMS', 'url'
 
     params = url: feedUrl
+    feed = new Feed params
 
     Feed.create params, (err, newFeed) ->
 
@@ -40,8 +41,13 @@ module.exports = (app) ->
         return Feed.findOne params, (err, existingFeed) ->
           res.json existingFeed
 
-      ParserService.processFeed newFeed, ->
-        res.json newFeed
+      ParserService.processFeed newFeed, (err) ->
+
+        unless err
+          return res.json newFeed
+
+        newFeed.remove ->
+          return res.error 'SUBSCRIPTION_UNKNOWN_ERROR'
 
   ###
   @apiGroup Feeds

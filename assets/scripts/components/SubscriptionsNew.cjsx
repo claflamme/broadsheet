@@ -1,11 +1,12 @@
 React = require 'react'
-{ Modal, Button, FormControl } = require 'react-bootstrap'
+{ Modal, Button, FormControl, Alert } = require 'react-bootstrap'
 
 module.exports = React.createClass
 
   propTypes:
 
     show: React.PropTypes.bool.isRequired
+    hasError: React.PropTypes.bool.isRequired
     onHide: React.PropTypes.func.isRequired
     onSubmit: React.PropTypes.func.isRequired
     loading: React.PropTypes.bool.isRequired
@@ -22,6 +23,7 @@ module.exports = React.createClass
           <Modal.Title>Add a subscription</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          { @_renderError @props }
           <FormControl
             type='text'
             autoFocus
@@ -39,6 +41,15 @@ module.exports = React.createClass
         </Modal.Footer>
       </form>
     </Modal>
+
+  _renderError: (props) ->
+
+    unless props.hasError
+      return
+
+    <Alert bsStyle='danger'>
+      Uh oh, I don't think that's a valid RSS feed.
+    </Alert>
 
   _onChange: (e) ->
 
