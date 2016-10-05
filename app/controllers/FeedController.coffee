@@ -17,7 +17,7 @@ module.exports = (app) ->
     feedUrl = req.body.url
 
     unless feedUrl
-      return res.error 'FEED_URL_REQUIRED'
+      return res.error 'MISSING_REQUEST_BODY_PARAMS', 'url'
 
     unless feedUrl.search(/https?:\/\//) is 0
       feedUrl = "http://#{ feedUrl }"
@@ -47,7 +47,7 @@ module.exports = (app) ->
           return res.json newFeed
 
         newFeed.remove ->
-          return res.error 'SUBSCRIPTION_UNKNOWN_ERROR'
+          return res.error 'INVALID_REQUEST_BODY_PARAMS', 'url'
 
   ###
   @apiGroup Feeds
