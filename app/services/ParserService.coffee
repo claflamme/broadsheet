@@ -57,7 +57,12 @@ module.exports = (app) ->
 
   downloadFeed = (url, done) ->
 
-    req = request url
+    requestOpts =
+      url: url
+      headers:
+        'user-agent': 'Broadsheet RSS Reader'
+
+    req = request requestOpts
 
     req.on 'error', (err) ->
       console.log err.message
