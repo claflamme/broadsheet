@@ -65,14 +65,13 @@ module.exports = (app) ->
     req = request requestOpts
 
     req.on 'error', (err) ->
-      console.log err.message
-      return done err, @
+      console.error url, err
+      return done null, @
 
     req.on 'response', (res) ->
       if res.statusCode isnt 200
         err = new Error('Bad status code')
         @emit 'error', err
-        return done err, @
       else
         done null, @
 
@@ -124,11 +123,11 @@ module.exports = (app) ->
     feed.save (err, feed) ->
       downloadFeed feed.url, (err, res) ->
         if err
-          return done err
+          return done()
         parseStream res, (err, articles, meta) ->
           if err
-            return done err
+            return done()
           updateFeed feed, meta, (err, feed) ->
             if err
-              return done err
+              return done()
             addArticles articles, feed, done
