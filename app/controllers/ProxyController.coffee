@@ -29,7 +29,11 @@ module.exports = (app) ->
 
   getArticle: (req, res) ->
 
-    read req.query.url, (err, article, httpRes) ->
+    requestOpts =
+      headers:
+        'user-agent': 'Broadsheet RSS Reader (github.com/claflamme/broadsheet)'
+
+    read req.query.url, requestOpts, (err, article, httpRes) ->
       body = article?.content or 'There was an error fetching this article.'
       res.json { body }
       article.close()
