@@ -58,7 +58,7 @@ module.exports = React.createClass
   _renderSubscription: (subscription, i) ->
 
     fallbackTitle = subscription.feed.title or subscription.feed.url
-    iconUrl = subscription.feed.iconUrl
+    iconUrl = subscription.feed.iconUrl or ''
 
     if iconUrl.startsWith 'http://'
       iconUrl = "/api/proxy?url=#{ iconUrl }"
