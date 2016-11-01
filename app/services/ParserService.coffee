@@ -123,11 +123,11 @@ module.exports = (app) ->
     feed.save (err, feed) ->
       downloadFeed feed.url, (err, res) ->
         if err
-          return done()
+          return done err
         parseStream res, (err, articles, meta) ->
           if err
-            return done()
+            return done err
           updateFeed feed, meta, (err, feed) ->
             if err
-              return done()
+              return done err
             addArticles articles, feed, done

@@ -16,4 +16,5 @@ module.exports = (app) ->
         setTimeout repeat, app.config.crawler.pollingInterval * 60000
       else
         console.log 'Processing %s...', feed.get('url')
-        ParserService.processFeed feed, repeat
+        ParserService.processFeed feed, (err) ->
+          repeat()
