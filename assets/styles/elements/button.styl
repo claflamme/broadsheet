@@ -1,20 +1,8 @@
-button-focus($button-color)
-  box-shadow 0 0 0 3px lighten($button-color, 20)
-
-button-focus-active($button-color)
-  background-color darken($button-color, 5)
-  box-shadow 0 0 0 3px lighten($button-color, 20), inset 0 3px 5px rgba(0, 0, 0, 0.3)
-
 build-button-variant($name, $color)
   .btn.btn-{ $name }
     background-color $color
     &:hover
       background-color darken($color, 5)
-    &:focus
-      outline none
-      button-focus($color)
-    &:active:focus
-      button-focus-active($color)
 
 @keyframes button-loading
   0%
