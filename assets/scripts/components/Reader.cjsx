@@ -33,7 +33,9 @@ Reader = (props) ->
           onClick={ props.onArticleClick } />
       </Col>
       <Col xs={ 6 } className='articleContent dashboardCol'>
-        <ArticleReader reader={ props.reader } />
+        <ArticleReader
+          reader={ props.reader }
+          subscriptions={ props.subscriptions  } />
       </Col>
     </Row>
   </Grid>

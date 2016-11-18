@@ -68,6 +68,7 @@ ArticleReader = React.createClass
                 { @props.reader.doc?.title or '' }
             </a>
           </h1>
+          { @renderSubscription() }
           { @renderDate @props.reader.doc?.publishedAt }
           <div
             onClick={ @onArticleClick }
@@ -98,8 +99,17 @@ ArticleReader = React.createClass
 
     <p className='text-muted'>
       <em>
-        { verbose }&mdash;{ short }
+        { short }&mdash;{ verbose }
       </em>
     </p>
+
+  renderSubscription: ->
+
+    sub = @props.subscriptions.docs.find (sub) =>
+      sub.feed._id is @props.reader.doc.feed
+
+    <div className='text-muted' style={{textTransform:'uppercase'}}>
+      { sub.customTitle or sub.feed.title }
+    </div>
 
 module.exports = ArticleReader
