@@ -18,6 +18,10 @@ module.exports =
 
   auth:
     bcryptSaltRounds: 10
+    email:
+      from: 'Broadsheet <noreply@broadsheet.ca>'
+      subject: 'Login Request'
+      callbackUrl: "#{ process.env.BASE_URL }/callback"
 
   browserify: [
     {
@@ -35,7 +39,7 @@ module.exports =
   mail:
     mailgun:
       secretKey: process.env.MAILGUN_SECRET_KEY
-      domain: process.env.MAILGUN_DOMAIN 
+      domain: process.env.MAILGUN_DOMAIN
 
   crawler:
     # The time in minutes before a feed is considered outdated. If a feed hasn't
