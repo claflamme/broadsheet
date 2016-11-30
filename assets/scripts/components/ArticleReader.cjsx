@@ -1,4 +1,5 @@
 React = require 'react'
+{ Button } = require 'react-bootstrap'
 moment = require 'moment'
 
 Loader = require './Loader'
@@ -10,7 +11,7 @@ Loader = require './Loader'
 # equivalents, and proxies requests for insecure images.
 adjustImages = ->
 
-  imageNodesList = document.querySelectorAll '.articleBody img'
+  imageNodesList = document.querySelectorAll '.article-body img'
 
   Array.prototype.slice.call(imageNodesList).forEach (imageNode) ->
 
@@ -47,6 +48,8 @@ ArticleReader = React.createClass
 
   propTypes:
     reader: React.PropTypes.object
+    show: React.PropTypes.bool
+    hideReader: React.PropTypes.func
 
   componentDidUpdate: ->
 
@@ -57,10 +60,18 @@ ArticleReader = React.createClass
     unless @props.reader.doc
       return @renderPlaceholder()
 
-    <div className='articleWrapper'>
-      <div className='articleBody'>
+    <div className="article-wrapper #{ if @props.show then 'show-mobile-reader' else '' }">
+      <div className='article-body'>
         <Loader show={ @props.reader.loading } />
         <div className={ "slide #{ if @props.reader.body then 'up' }" }>
+          <Button
+            block
+            bsStyle='primary'
+            className='article-close-button text-center'
+            onClick={ @props.onHide }>
+            <i className='fa fa-arrow-left'>&nbsp;</i>
+            Back
+          </Button>
           <h1>
             <a
               href={ @props.reader.doc?.url or '' }

@@ -34,3 +34,11 @@ listItemPadding()
 
 halfGutter()
   $grid-gutter-width / 2
+
+xs()
+  @media(max-width $screen-xs-max)
+    { block }
+
+sm()
+  @media(min-width $screen-sm-min)
+    { block }

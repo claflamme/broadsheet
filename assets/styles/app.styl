@@ -40,9 +40,12 @@ hr
   li
     border-bottom 1px solid $gray-border
     margin 0 halfGutter() * -1
-    padding 8px halfGutter()
+    padding halfGutter()
     cursor pointer
     transition all 100ms
+
+    +sm()
+      padding 8px halfGutter()
 
   li:hover
     box-shadow inset 5px 0 0 0 darken($gray-lighter, 10)
@@ -50,25 +53,32 @@ hr
   li.active
     box-shadow inset 5px 0 0 0 $brand-primary
 
-    .articleSummary
+    .article-summary
       transform translate(0)
 
 button.load-more-articles
   margin 50px 0
 
-.articleSummary
+.article-summary
   transition 200ms all
 
-.articleTitle
+.article-title
   color $gray-dark
-  font-weight 500
+  font-weight 400
   margin 0
   overflow hidden
   text-overflow ellipsis
 
-.articlePreview
+  +sm()
+    font-weight 500
+
+.article-preview
   color $gray-light
   font-weight 300
+  display none
+
+  +sm()
+    display inline
 
 .dashboardGrid
   background #fff
@@ -82,24 +92,49 @@ button.load-more-articles
   & > .row
     height 100%
 
-.dashboardCol
+.dashboard-col
   height 100%
   overflow-y auto
+
+.article-list-col
+  transition transform 200ms
 
 .feedTitleBar
   margin 0 halfGutter() * -1
   padding halfGutter()
+  padding-left halfGutter() * 3
   border-bottom 1px solid $gray-border
 
-  .feedTitle
-    margin 0
+  +sm()
+    padding-left halfGutter()
 
-.feedTitleBarIcons
+  .mobile-menu-button
+    position absolute
+    left halfGutter()
+    font-size 24px
+
+    &.fa-times
+      display none
+
+    +sm()
+      display none
+
+  .feed-title
+    margin 0
+    overflow-x hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+.feed-title-bar-icons
   font-size 1.1em
   margin 10px halfGutter() * -1 0
   padding 0 halfGutter()
   list-style-type none
   overflow hidden
+  display none
+
+  +sm()
+    display block
 
   li
     display inline-block
@@ -134,12 +169,27 @@ button.load-more-articles
     top 50%
     transform translateY(-50%)
 
-  .articleWrapper
+  .article-wrapper
+    position fixed
+    background-color #fff
+    top 0
+    left 0
     height 100%
     overflow-y auto
-    padding halfGutter() * 3
+    padding halfGutter()
+    transition transform $animation-speed
+    transform translateX(100%)
 
-  .articleBody
+    &.show-mobile-reader
+      transform translateX(0)
+
+    +sm()
+      position static
+      background-color transparent
+      transform translateX(0)
+      padding halfGutter() * 3
+
+  .article-body
     max-width 600px
     margin auto
 
@@ -149,6 +199,12 @@ button.load-more-articles
       font-style italic
       padding 0 $grid-gutter-width
       margin-bottom $grid-gutter-width
+
+    .article-close-button
+      margin-bottom halfGutter()
+
+      +sm()
+        display none
 
   img
     width 100%
@@ -213,3 +269,17 @@ blockquote
 .dropdown-menu > li > a
   padding 5px 10px
   color $gray-dark
+
+.auth-prompt
+  +sm()
+    margin-top halfGutter() * 5
+
+.show-mobile-menu
+  .feedTitleBar
+    .fa-times
+      display inline
+    .fa-bars
+      display none
+  +xs()
+    .article-list-col
+      transform translateX(250px)

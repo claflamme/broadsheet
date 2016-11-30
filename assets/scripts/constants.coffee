@@ -58,6 +58,9 @@ module.exports = keymirror
   # the server.
   ARTICLE_CONTENT_RECEIVED: null
 
+  # The article reader has been closed by the user.
+  ARTICLE_CONTENT_HIDDEN: null
+
   # --- Modal windows ----------------------------------------------------------
 
   # The "new subscription" window has been toggled open or closed.

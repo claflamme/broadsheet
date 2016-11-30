@@ -10,7 +10,15 @@ SubscriptionActions = require '../actions/SubscriptionActions'
 FeedTitleBar = (props, context) ->
 
   <div className='feedTitleBar'>
-    <h3 className='feedTitle'>{ props.title or <span>&nbsp;</span> }</h3>
+    <i
+      className='fa fa-bars mobile-menu-button'
+      onClick={ toggleMobileMenu }>
+    </i>
+    <i
+      className='fa fa-times mobile-menu-button'
+      onClick={ toggleMobileMenu }>
+    </i>
+    <h3 className='feed-title'>{ props.title or <span>&nbsp;</span> }</h3>
     { if props.showControls then renderControls props }
     { if props.subscription then renderModals props }
   </div>
@@ -23,9 +31,13 @@ FeedTitleBar.propTypes =
   showEditSub: React.PropTypes.bool
   showDeleteSub: React.PropTypes.bool
 
+toggleMobileMenu = (e) ->
+
+  document.body.classList.toggle 'show-mobile-menu'
+
 renderControls = (props) ->
 
-  <ul className='feedTitleBarIcons'>
+  <ul className='feed-title-bar-icons'>
     <li>
       <a
         title='Edit subscription'

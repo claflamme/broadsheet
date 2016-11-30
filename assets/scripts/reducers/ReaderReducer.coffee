@@ -5,6 +5,7 @@ module.exports =
     doc: null
     loading: false
     req: null
+    showMobileReader: false
 
   ARTICLE_CONTENT_RECEIVED: (state, action) ->
 
@@ -13,6 +14,7 @@ module.exports =
       doc: action.doc
       loading: false
       req: @initialState.req
+      showMobileReader: true
 
     Object.assign {}, state, newState
 
@@ -26,5 +28,10 @@ module.exports =
       doc: action.doc
       loading: true
       req: action.req
+      showMobileReader: true
 
     Object.assign {}, state, newState
+
+  ARTICLE_CONTENT_HIDDEN: (state, action) ->
+
+    Object.assign {}, state, { showMobileReader: false }

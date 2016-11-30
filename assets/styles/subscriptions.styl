@@ -1,6 +1,13 @@
 .subscriptions
   background $gray-lighter
   padding-top halfGutter()
+  z-index 1
+  transition left $animation-speed
+
+  +xs()
+    position absolute
+    width 250px
+    left -250px
 
   .subscriptions-section
     padding-top (halfGutter() / 2)
@@ -38,3 +45,8 @@
         height 16px
         margin-right halfGutter()
         border-radius 4px
+
+.show-mobile-menu
+  +xs()
+    .subscriptions
+      left 0

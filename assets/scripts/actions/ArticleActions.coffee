@@ -15,7 +15,7 @@ fetchArticles = (path, dispatch, opts = {}) ->
     dispatch type: constants.ARTICLES_RECEIVED, articles: articles
     if articles.page is 1
       # Pretty sloppy to reset scroll position this way, but it works for now.
-      document.querySelector('.articleListCol').scrollTop = 0
+      document.querySelector('.article-list-col').scrollTop = 0
 
 module.exports =
 
@@ -49,3 +49,7 @@ module.exports =
         req: req
 
       dispatch contentRequestedAction
+
+  hideReader: ->
+
+    { type: constants.ARTICLE_CONTENT_HIDDEN }

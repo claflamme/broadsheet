@@ -7,13 +7,13 @@ React = require 'react'
 Article = (props, context) ->
 
   <Row>
-    <Col xs={ 12 } className='articleSummary'>
+    <Col xs={ 12 } className='article-summary'>
       <div
-        className='articleTitle'
+        className='article-title'
         dangerouslySetInnerHTML={{ __html: props.article?.title }}>
       </div>
       <span
-        className='text-muted articlePreview'
+        className='text-muted article-preview'
         dangerouslySetInnerHTML={{ __html: props.article.summary }}>
       </span>
     </Col>

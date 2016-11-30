@@ -10,7 +10,7 @@ Reader = (props) ->
 
   <Grid fluid className='dashboardGrid'>
     <Row>
-      <Col xs={ 2 } className='subscriptions dashboardCol'>
+      <Col xs={ 12 } sm={ 3 } lg={ 2 } className='subscriptions dashboard-col'>
         <Subscriptions
           subscriptions={ props.subscriptions }
           showNewSub={ props.modals.showNewSub }
@@ -18,7 +18,7 @@ Reader = (props) ->
           user={ props.auth.user }
           dispatch={ props.dispatch } />
       </Col>
-      <Col xs={ 4 } className='articleListCol dashboardCol'>
+      <Col xs={ 12 } sm={ 9 } lg={ 4 } className='article-list-col dashboard-col'>
         <FeedTitleBar
           title={ props.title }
           dispatch={ props.dispatch }
@@ -32,8 +32,10 @@ Reader = (props) ->
           currentArticle={ props.reader.doc }
           onClick={ props.onArticleClick } />
       </Col>
-      <Col xs={ 6 } className='articleContent dashboardCol'>
+      <Col xs={ 12 } lg={ 6 } className='articleContent dashboard-col'>
         <ArticleReader
+          show={ props.reader.showMobileReader }
+          onHide={ props.hideReader }
           reader={ props.reader }
           subscriptions={ props.subscriptions  } />
       </Col>
@@ -44,6 +46,7 @@ Reader.propTypes =
   title: React.PropTypes.string
   loadMoreArticles: React.PropTypes.func
   onArticleClick: React.PropTypes.func
+  hideReader: React.PropTypes.func
   showControls: React.PropTypes.bool
   subscription: React.PropTypes.object
 

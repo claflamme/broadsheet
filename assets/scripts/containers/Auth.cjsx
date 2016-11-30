@@ -27,10 +27,9 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <Grid>
+    <Grid className='auth-prompt'>
       <Row>
         <Col md={ 4 } mdOffset={ 3 } lg={ 4 } lgOffset={ 4 } sm={ 6 } smOffset={ 3 }>
-          <h1>&nbsp;</h1>
           <div className='text-center'>
             <h1>
               <i className='fa fa-user fa-2x'></i>
@@ -51,7 +50,7 @@ module.exports = connect(mapStateToProps) React.createClass
       return
 
     <form onSubmit={ @_onSubmit }>
-      <FormGroup>
+      <FormGroup bsSize='large'>
         <FormControl
           type='email'
           autoFocus
@@ -61,6 +60,7 @@ module.exports = connect(mapStateToProps) React.createClass
       <Button
         type='submit'
         bsStyle='primary'
+        bsSize='large'
         className={ if @props.loading then 'loading' else '' }
         disabled={ @props.loading }
         block>

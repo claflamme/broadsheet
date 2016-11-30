@@ -15,6 +15,7 @@ module.exports = ArticlesAll = React.createClass
       title: 'All subscriptions'
       loadMoreArticles: @_loadMore
       onArticleClick: @_onClick
+      hideReader: @_hideReader
 
     React.createElement Reader, Object.assign(childProps, @props)
 
@@ -27,3 +28,7 @@ module.exports = ArticlesAll = React.createClass
   _onClick: (article) ->
 
     @props.dispatch ArticleActions.fetchContent article
+
+  _hideReader: ->
+
+    @props.dispatch ArticleActions.hideReader()

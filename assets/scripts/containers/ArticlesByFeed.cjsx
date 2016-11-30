@@ -22,6 +22,7 @@ module.exports = ArticlesByFeed = React.createClass
       title: subscription?.customTitle or subscription?.feed.title
       loadMoreArticles: @_loadMore
       onArticleClick: @_onClick
+      hideReader: @_hideReader
       showControls: true
       subscription: subscription
 
@@ -57,3 +58,7 @@ module.exports = ArticlesByFeed = React.createClass
       return ''
 
     sub.customTitle or sub.feed.title
+
+  _hideReader: ->
+
+    @props.dispatch ArticleActions.hideReader()
