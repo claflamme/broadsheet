@@ -14,10 +14,13 @@ html
 body
   background linear-gradient(to bottom, #fff 0%, $gray-lighter 100%);
   margin 0
-  font $font-size/$line-height $font-family-body
+  font ($font-size * 1.3)/$line-height $font-family-body
   font-weight 300
   height 100%
   color $gray
+
+  +sm()
+    font-size $font-size
 
 h1, h2, h3, h4, h5, h6
   font-family $font-family-header
@@ -42,25 +45,19 @@ hr
     margin 0 halfGutter() * -1
     padding halfGutter()
     cursor pointer
-    transition all 100ms
+    transition box-shadow 100ms
 
     +sm()
       padding 8px halfGutter()
 
-  li:hover
-    box-shadow inset 5px 0 0 0 darken($gray-lighter, 10)
+    &:hover
+      box-shadow inset 5px 0 0 0 darken($gray-lighter, 10)
 
   li.active
     box-shadow inset 5px 0 0 0 $brand-primary
 
-    .article-summary
-      transform translate(0)
-
 button.load-more-articles
   margin 50px 0
-
-.article-summary
-  transition 200ms all
 
 .article-title
   color $gray-dark
@@ -95,9 +92,6 @@ button.load-more-articles
 .dashboard-col
   height 100%
   overflow-y auto
-
-.article-list-col
-  transition transform 200ms
 
 .feedTitleBar
   margin 0 halfGutter() * -1
@@ -175,6 +169,7 @@ button.load-more-articles
     top 0
     left 0
     height 100%
+    width 100%
     overflow-y auto
     padding halfGutter()
     transition transform $animation-speed
@@ -184,6 +179,7 @@ button.load-more-articles
       transform translateX(0)
 
     +sm()
+      width auto
       position static
       background-color transparent
       transform translateX(0)
@@ -252,7 +248,7 @@ button.load-more-articles
   display block !important
 
   &.up
-    transition all 300ms ease-out
+    transition transform 300ms ease-out
     opacity 1
     transform translateY(0)
 

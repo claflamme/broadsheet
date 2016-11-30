@@ -67,6 +67,7 @@ ArticleReader = React.createClass
           <Button
             block
             bsStyle='primary'
+            bsSize='large'
             className='article-close-button text-center'
             onClick={ @props.onHide }>
             <i className='fa fa-arrow-left'>&nbsp;</i>
