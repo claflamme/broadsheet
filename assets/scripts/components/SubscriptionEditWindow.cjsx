@@ -1,5 +1,5 @@
 React = require 'react'
-{ Modal, FormControl, Button } = require 'react-bootstrap'
+{ Modal, FormGroup, FormControl, ControlLabel, HelpBlock, Button } = require 'react-bootstrap'
 SubscriptionActions = require '../actions/SubscriptionActions'
 
 SubscriptionEditWindow = React.createClass
@@ -9,6 +9,7 @@ SubscriptionEditWindow = React.createClass
     initialSubscription: React.PropTypes.object.isRequired
     show: React.PropTypes.bool
     onHide: React.PropTypes.func
+    feedUrl: React.PropTypes.string
 
   componentWillReceiveProps: (nextProps) ->
 
@@ -27,12 +28,19 @@ SubscriptionEditWindow = React.createClass
           <Modal.Title>Edit subscription</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormControl
-            type='text'
-            autoFocus
-            placeholder={ @state.subscription.feed.title }
-            value={ @state.subscription.customTitle or '' }
-            onChange={ @_onTitleChange } />
+          <FormGroup>
+            <ControlLabel>Name:</ControlLabel>
+            <FormControl
+              type='text'
+              autoFocus
+              placeholder={ @state.subscription.feed.title }
+              value={ @state.subscription.customTitle or '' }
+              onChange={ @_onTitleChange } />
+          </FormGroup>
+          <FormGroup bsSize='small'>
+            <ControlLabel>Feed URL:</ControlLabel>
+            <FormControl type='text' readOnly value={ @props.feedUrl } />
+          </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <Button bsStyle='danger' onClick={ @props.onHide }>Cancel</Button>

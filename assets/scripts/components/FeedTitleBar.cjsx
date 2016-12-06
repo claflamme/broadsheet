@@ -63,7 +63,8 @@ renderModals = (props) ->
       show={ props.showEditSub }
       onHide={ -> props.dispatch SubscriptionActions.hideEditPrompt() }
       initialSubscription={ props.subscription }
-      onSubmit={ (subscription) -> editSub props, subscription } />
+      onSubmit={ (subscription) -> editSub props, subscription }
+      feedUrl={ props.subscription.feed.url } />
     <SubscriptionDeleteWindow
       show={ props.showDeleteSub }
       onHide={ -> props.dispatch SubscriptionActions.hideDeletePrompt() }
