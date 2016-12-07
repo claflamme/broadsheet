@@ -25,9 +25,6 @@ module.exports =
 
     newState =
       loading: true
-      docs: state.docs
-
-    if action.clearDocs
-      newState.docs = @initialState.docs
+      docs: @initialState.docs
 
     Object.assign {}, state, newState

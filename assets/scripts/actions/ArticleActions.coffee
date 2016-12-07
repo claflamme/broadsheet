@@ -3,13 +3,13 @@ api = require '../api'
 
 fetchArticles = (path, dispatch, opts = {}) ->
 
-  opts = Object.assign { page: 1, clearDocs: false }, opts
+  opts = Object.assign { page: 1 }, opts
 
   request =
     url: path
     query: { page: opts.page }
 
-  dispatch type: constants.ARTICLES_REQUESTED, clearDocs: opts.clearDocs
+  dispatch type: constants.ARTICLES_REQUESTED
 
   api.send request, (res, articles) ->
     dispatch type: constants.ARTICLES_RECEIVED, articles: articles

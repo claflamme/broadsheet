@@ -30,7 +30,7 @@ module.exports = ArticlesByFeed = React.createClass
 
   _reload: (feedId) ->
 
-    @props.dispatch ArticleActions.fetchByFeed feedId, { clearDocs: true }
+    @props.dispatch ArticleActions.fetchByFeed feedId
 
   _loadMore: ->
 
