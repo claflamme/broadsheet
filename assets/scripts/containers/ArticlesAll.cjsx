@@ -8,7 +8,7 @@ module.exports = ArticlesAll = React.createClass
 
   componentWillMount: ->
 
-    @props.dispatch ArticleActions.fetchAll()
+    @props.dispatch ArticleActions.fetchAll clearDocs: true
 
   render: ->
 
@@ -28,7 +28,7 @@ module.exports = ArticlesAll = React.createClass
 
     nextPage = @props.articles.page + 1
 
-    @props.dispatch ArticleActions.fetchAll page: nextPage, clearDocs: true
+    @props.dispatch ArticleActions.fetchAll page: nextPage
 
   _onClick: (article) ->
 
