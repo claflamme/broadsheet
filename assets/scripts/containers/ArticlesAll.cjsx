@@ -28,7 +28,7 @@ module.exports = ArticlesAll = React.createClass
 
     nextPage = @props.articles.page + 1
 
-    @props.dispatch ArticleActions.fetchAll page: nextPage
+    @props.dispatch ArticleActions.fetchAll page: nextPage, clearDocs: true
 
   _onClick: (article) ->
 
