@@ -29,7 +29,10 @@ module.exports = React.createClass
       <div className='subscriptions-section'>
         <ul className='subscriptions-list'>
           <li>
-            <IndexLink to='/' activeClassName='active'>
+            <IndexLink
+              to='/'
+              activeClassName='active'
+              onClick={ @_onLinkClicked }>
               <i className='fa fa-fw fa-rss subscriptionIcon'></i>
               All
             </IndexLink>
@@ -66,7 +69,8 @@ module.exports = React.createClass
     <li key={ i }>
       <Link
         to={ "/feeds/#{ subscription.feed._id }"}
-        activeClassName='active'>
+        activeClassName='active'
+        onClick={ @_onLinkClicked }>
         <img className='subscriptionIcon' src={ iconUrl } />
         { subscription.customTitle or fallbackTitle }
       </Link>
@@ -83,3 +87,7 @@ module.exports = React.createClass
   _hideNewSubscription: ->
 
     @props.dispatch SubscriptionActions.hideNewPrompt()
+
+  _onLinkClicked: ->
+
+    document.body.classList.remove 'show-mobile-menu'
