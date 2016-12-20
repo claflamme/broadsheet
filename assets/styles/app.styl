@@ -157,11 +157,14 @@ button.load-more-articles
   a
     text-decoration underline
 
-  .articlePlaceholder
-    text-align center
-    position relative
-    top 50%
-    transform translateY(-50%)
+  .article-placeholder
+    transform translateX(100%)
+
+    +sm()
+      text-align center
+      position relative
+      top 50%
+      transform translateY(-50%)
 
   .article-wrapper
     position fixed
@@ -184,6 +187,7 @@ button.load-more-articles
       background-color transparent
       transform translateX(0)
       padding halfGutter() * 3
+      transition none
 
   .article-body
     max-width 600px

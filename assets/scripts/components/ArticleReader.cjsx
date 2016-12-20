@@ -92,7 +92,7 @@ ArticleReader = React.createClass
 
   renderPlaceholder: ->
 
-    <div className='articlePlaceholder'>
+    <div className='article-placeholder'>
       <p className='text-muted'>
         Select an article from the left.
       </p>
