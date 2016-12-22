@@ -1,5 +1,9 @@
 module.exports =
 
+  env:
+    silent: process.env.NODE_ENV is 'production'
+    path: '.env' # Path to the env file, from the project root.
+
   db:
     debug: process.env.NODE_ENV isnt 'production'
 
@@ -7,6 +11,7 @@ module.exports =
     baseUrl: process.env.BASE_URL or 'http://coolsite.com'
 
   paths:
+    root: process.cwd()
     routes: 'app/routes'
     helpers: 'app/helpers'
     controllers: 'app/controllers'
