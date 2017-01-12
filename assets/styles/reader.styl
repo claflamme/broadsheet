@@ -1,0 +1,109 @@
+.articleContent
+  border-left 1px solid $gray-border
+  padding 0
+  overflow hidden
+  font-size 16px
+  font-weight 300
+
+  a
+    text-decoration underline
+
+  .article-placeholder
+    transform translateX(100%)
+
+    +sm()
+      text-align center
+      position relative
+      top 50%
+      transform translateY(-50%)
+
+  .article-wrapper
+    position fixed
+    background-color #fff
+    top 0
+    left 0
+    height 100%
+    width 100%
+    overflow-y auto
+    padding halfGutter()
+    transition transform $animation-speed
+    transform translateX(100%)
+
+    &.show-mobile-reader
+      transform translateX(0)
+
+    +sm()
+      width auto
+      position static
+      background-color transparent
+      transform translateX(0)
+      padding halfGutter() * 3
+      transition none
+
+  .article-body
+    max-width 600px
+    margin auto
+
+    [class*='caption'], figcaption
+      text-align center
+      font-size 14px
+      font-style italic
+      padding 0 $grid-gutter-width
+      margin-bottom $grid-gutter-width
+
+    .article-close-button
+      margin-bottom halfGutter()
+
+      +sm()
+        display none
+
+  img
+    width 100%
+    height auto
+    border-radius 5px
+
+  h1
+    margin 0 0 ($grid-gutter-width) 0
+    font-weight 600
+
+    a:link, a:visited, a:active
+      color $gray-darker
+      text-decoration none
+
+  h2, h3, h4, h5, h6
+    margin ($grid-gutter-width) 0
+    line-height 1.5em
+
+  p, ul, ol, img
+    margin-bottom ($grid-gutter-width)
+
+  // Sometimes images are inside of their own P tag, in which case they would
+  // get the margin applied twice.
+  p img
+    margin 0
+
+  table
+    font-size 0.9em
+    margin-bottom ($grid-gutter-width)
+    width 100%
+
+    thead
+      border-bottom 1px solid $gray-border
+
+    th
+      font-weight 500
+
+    th, td
+      padding 5px 0
+
+  pre
+    background transparent
+    border none
+    border-radius 0
+    border-left 5px solid $gray-border
+    padding 0 0 0 $grid-gutter-width
+    margin-bottom $grid-gutter-width
+    color $gray-dark
+
+  pre, code
+    font-family 'Fira Mono', monospace

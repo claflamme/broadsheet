@@ -6,9 +6,9 @@ Loader = (props, context) ->
     return null
 
   <div className='loader'>
-    <div className='bounce1'></div>
-    <div className='bounce2'></div>
-    <div className='bounce3'></div>
+    <div className='loader-ball bounce1'></div>
+    <div className='loader-ball bounce2'></div>
+    <div className='loader-ball bounce3'></div>
   </div>
 
 Loader.propTypes =
