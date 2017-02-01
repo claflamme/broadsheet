@@ -1,11 +1,14 @@
 React = require 'react'
-{ Link, IndexLink } = require 'react-router'
+HTML5Backend = require 'react-dnd-html5-backend'
+{ DragDropContext } = require 'react-dnd'
+{ IndexLink } = require 'react-router'
 { Button  } = require 'react-bootstrap'
 UserBadge = require '../components/UserBadge'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionsNew = require './SubscriptionsNew'
+SubscriptionListItem = require './SubscriptionListItem'
 
-module.exports = React.createClass
+module.exports = DragDropContext(HTML5Backend) React.createClass
 
   propTypes:
 
@@ -23,6 +26,8 @@ module.exports = React.createClass
     showNewSub: false
 
   render: ->
+
+    @props.subscriptions.docs.sort (a, b) -> a.index - b.index
 
     <div>
       <UserBadge title={ @props.user?.email } />
@@ -60,21 +65,16 @@ module.exports = React.createClass
 
   _renderSubscription: (subscription, i) ->
 
-    fallbackTitle = subscription.feed.title or subscription.feed.url
-    iconUrl = subscription.feed.iconUrl or ''
-
-    if iconUrl.startsWith 'http://'
-      iconUrl = "/api/proxy?url=#{ iconUrl }"
-
-    <li key={ i }>
-      <Link
-        to={ "/feeds/#{ subscription.feed._id }"}
-        activeClassName='active'
-        onClick={ @_onLinkClicked }>
-        <img className='subscriptionIcon' src={ iconUrl } />
-        { subscription.customTitle or fallbackTitle }
-      </Link>
-    </li>
+    <SubscriptionListItem
+      key={ i }
+      index={ subscription.index }
+      title={ subscription.customTitle or subscription.feed.title  }
+      feedUrl={ subscription.feed.url }
+      iconUrl={ subscription.feed.iconUrl }
+      feedId={ subscription.feed._id }
+      subId={ subscription._id }
+      onClick={ @_onLinkClicked }
+      onMove={ @_onSubscriptionMoved } />
 
   _addSubscription: (form) ->
 
@@ -91,3 +91,7 @@ module.exports = React.createClass
   _onLinkClicked: ->
 
     document.body.classList.remove 'show-mobile-menu'
+
+  _onSubscriptionMoved: (dragIndex, hoverIndex)->
+
+    @props.dispatch SubscriptionActions.move dragIndex, hoverIndex

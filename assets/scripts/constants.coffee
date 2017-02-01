@@ -42,6 +42,9 @@ module.exports = keymirror
   # One or more subscriptions were deleted.
   SUBSCRIPTIONS_DELETED: null
 
+  # A subscription has been moved around via drag-and-drop.
+  SUBSCRIPTIONS_REORDERED: null
+
   # --- Articles ---------------------------------------------------------------
 
   # A request was sent to fetch an article list.

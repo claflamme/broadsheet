@@ -10,8 +10,12 @@ module.exports =
 
   SUBSCRIPTIONS_RECEIVED: (state, action) ->
 
+    subscriptions = action.subscriptions.map (sub, i) ->
+      sub.index or= i
+      sub
+
     newState =
-      docs: action.subscriptions
+      docs: subscriptions
       loading: false
 
     Object.assign {}, state, newState
@@ -40,3 +44,17 @@ module.exports =
   SUBSCRIPTIONS_ADDED_NEW: (state, actions) ->
 
     Object.assign {}, state, { adding: false }
+
+  SUBSCRIPTIONS_REORDERED: (state, action) ->
+
+    docs = state.docs.slice()
+    dragSub = docs[action.dragIndex]
+
+    docs.splice action.dragIndex, 1
+    docs.splice action.hoverIndex, 0, dragSub
+
+    docs = docs.map (doc, i) ->
+      doc.index = i
+      doc
+
+    Object.assign {}, state, { docs }

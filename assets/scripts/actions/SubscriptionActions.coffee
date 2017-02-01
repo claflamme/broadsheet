@@ -99,3 +99,9 @@ module.exports =
 
       api.send request, ->
         browserHistory.push '/'
+
+  move: (dragIndex, hoverIndex) ->
+
+    type: constants.SUBSCRIPTIONS_REORDERED
+    dragIndex: dragIndex
+    hoverIndex: hoverIndex
