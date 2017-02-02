@@ -100,8 +100,29 @@ module.exports =
       api.send request, ->
         browserHistory.push '/'
 
-  move: (dragIndex, hoverIndex) ->
+  move: (docs, dragIndex, hoverIndex) ->
 
-    type: constants.SUBSCRIPTIONS_REORDERED
-    dragIndex: dragIndex
-    hoverIndex: hoverIndex
+    dragSub = docs[dragIndex]
+
+    docs.splice dragIndex, 1
+    docs.splice hoverIndex, 0, dragSub
+
+    docs = docs.map (doc, i) ->
+      doc.index = i
+      doc
+
+    type: constants.SUBSCRIPTIONS_RECEIVED
+    subscriptions: docs
+
+  saveOrder: (subscriptions) ->
+
+    subscriptions = subscriptions.map (sub) ->
+      { _id: sub._id, index: sub.index }
+
+    request =
+      url: '/api/subscriptions'
+      method: 'PATCH'
+      body: { subscriptions }
+
+    (dispatch) ->
+      api.send request

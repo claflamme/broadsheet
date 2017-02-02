@@ -18,6 +18,10 @@ module.exports = (app) ->
       ref: 'Feed'
       required: true
 
+    index:
+      type: Number
+      default: null
+
   Schema = app.mongoose.Schema schema, timestamps: true
 
   # --- Methods ----------------------------------------------------------------

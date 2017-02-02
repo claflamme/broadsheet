@@ -10,6 +10,15 @@ module.exports =
 
   SUBSCRIPTIONS_RECEIVED: (state, action) ->
 
+    action.subscriptions.sort (a, b) ->
+      if a.index is null and b.index is null
+        return 0
+      if a.index is null
+        return 1
+      if b.index is null
+        return -1
+      a.index - b.index
+
     subscriptions = action.subscriptions.map (sub, i) ->
       sub.index or= i
       sub
@@ -44,17 +53,3 @@ module.exports =
   SUBSCRIPTIONS_ADDED_NEW: (state, actions) ->
 
     Object.assign {}, state, { adding: false }
-
-  SUBSCRIPTIONS_REORDERED: (state, action) ->
-
-    docs = state.docs.slice()
-    dragSub = docs[action.dragIndex]
-
-    docs.splice action.dragIndex, 1
-    docs.splice action.hoverIndex, 0, dragSub
-
-    docs = docs.map (doc, i) ->
-      doc.index = i
-      doc
-
-    Object.assign {}, state, { docs }

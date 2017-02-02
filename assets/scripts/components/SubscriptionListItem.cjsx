@@ -44,6 +44,8 @@ dropCollect = (connect) ->
 subscriptionSource =
   beginDrag: onSourceBeginDrag
   isDragging: onSourceIsDragging
+  endDrag: (props) ->
+    props.onDrop()
 
 subscriptionTarget =
   hover: onTargetHover

@@ -1,3 +1,9 @@
+async = require 'async'
+
+saveDoc = (doc, callback) ->
+  doc.save (err, savedDoc) ->
+    callback()
+
 module.exports = (app) ->
 
   Subscription = app.models.Subscription
@@ -90,3 +96,22 @@ module.exports = (app) ->
 
       subscription.save (err, updatedSubscription) ->
         res.json updatedSubscription
+
+  updateMany: (req, res) ->
+
+    documentMap = {}
+
+    req.body.subscriptions.forEach (sub) ->
+      documentMap[sub._id] = sub
+
+    query =
+      user: req.user.sub
+      _id: { $in: Object.keys(documentMap) }
+
+    Subscription.find query, (err, docs) ->
+
+      updatedDocs = docs.map (doc) ->
+        Object.assign doc, documentMap[doc._id]
+
+      async.each updatedDocs, saveDoc, (err) ->
+        res.json { hooray: 'saved!' }

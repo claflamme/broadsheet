@@ -27,8 +27,6 @@ module.exports = DragDropContext(HTML5Backend) React.createClass
 
   render: ->
 
-    @props.subscriptions.docs.sort (a, b) -> a.index - b.index
-
     <div>
       <UserBadge title={ @props.user?.email } />
       <div className='subscriptions-section'>
@@ -74,7 +72,8 @@ module.exports = DragDropContext(HTML5Backend) React.createClass
       feedId={ subscription.feed._id }
       subId={ subscription._id }
       onClick={ @_onLinkClicked }
-      onMove={ @_onSubscriptionMoved } />
+      onMove={ @_onSubscriptionMoved }
+      onDrop={ @_onSubscriptionDropped } />
 
   _addSubscription: (form) ->
 
@@ -94,4 +93,8 @@ module.exports = DragDropContext(HTML5Backend) React.createClass
 
   _onSubscriptionMoved: (dragIndex, hoverIndex)->
 
-    @props.dispatch SubscriptionActions.move dragIndex, hoverIndex
+    @props.dispatch SubscriptionActions.move @props.subscriptions.docs, dragIndex, hoverIndex
+
+  _onSubscriptionDropped: ->
+
+    @props.dispatch SubscriptionActions.saveOrder @props.subscriptions.docs
