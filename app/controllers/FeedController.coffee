@@ -5,13 +5,8 @@ module.exports = (app) ->
   Feed = app.models.Feed
   ParserService = app.services.ParserService
 
-  ###
-  @apiGroup Feeds
-  @api { post } /api/feeds Create
-  @apiDescription
-    Creates a new feed with the given URL then returns the model. If a feed with
-    that URL already exists, then the model for the existing feed is returned.
-  ###
+  # Creates a new feed with the given URL then returns the model. If a feed with
+  # that URL already exists, then the model for the existing feed is returned.
   create: (req, res) ->
 
     feedUrl = req.body.url
@@ -49,21 +44,13 @@ module.exports = (app) ->
         newFeed.remove ->
           return res.error 'INVALID_REQUEST_BODY_PARAMS', 'url'
 
-  ###
-  @apiGroup Feeds
-  @api { get } /api/feeds List
-  @apiDescription Returns a list of all feeds being indexed by the system.
-  ###
+  # Returns a list of all feeds being indexed by the system.
   list: (req, res) ->
 
     Feed.find {}, (err, feeds) ->
       res.json feeds
 
-  ###
-  @apiGroup Feeds
-  @api { patch } /api/feeds/:id Refresh
-  @apiDescription Forces a given feed to immediately re-index
-  ###
+  # Forces a given feed to immediately re-index
   refresh: (req, res) ->
 
     Feed.findById req.params.id, (err, feed) ->

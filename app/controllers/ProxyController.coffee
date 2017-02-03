@@ -4,13 +4,7 @@ read = require 'node-readability'
 
 module.exports = (app) ->
 
-  ###
-  @apiGroup Proxy
-  @api { get } /api/proxy Fetch
-  @apiParam { String } url A valid URL with an http or https protocol.
-  @apiDescription
-    A simple proxy for fetching images and pages from the same domain.
-  ###
+  # A simple proxy for fetching images and pages from the same domain.
   get: (req, res) ->
 
     url = req.query.url
