@@ -2,6 +2,8 @@ mongoosePaginate = require 'mongoose-paginate'
 
 module.exports = (app) ->
 
+  # --- Schema -----------------------------------------------------------------
+
   schema =
 
     title: String
@@ -11,6 +13,7 @@ module.exports = (app) ->
       unique: true
 
     summary: String
+
     publishedAt: Date
 
     feed:
@@ -18,6 +21,8 @@ module.exports = (app) ->
       ref: 'Feed'
 
   Schema = app.mongoose.Schema schema
+
+  # --- Plugins ----------------------------------------------------------------
 
   Schema.plugin mongoosePaginate
 

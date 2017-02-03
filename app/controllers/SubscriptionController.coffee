@@ -6,7 +6,7 @@ saveDoc = (doc, callback) ->
 
 module.exports = (app) ->
 
-  Subscription = app.models.Subscription
+  { Subscription } = app.models
 
   # Returns a list of all subscriptions belonging to a user.
   list: (req, res) ->

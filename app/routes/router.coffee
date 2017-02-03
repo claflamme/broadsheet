@@ -1,10 +1,11 @@
 module.exports = (app, router) ->
 
-  FeedController = app.controllers.FeedController
-  FeedController = app.controllers.FeedController
-  SubscriptionController = app.controllers.SubscriptionController
-  ProxyController = app.controllers.ProxyController
-  ArticleController = app.controllers.ArticleController
+  {
+    FeedController
+    SubscriptionController
+    ProxyController
+    ArticleController
+  } = app.controllers
 
   router.get '/api/subscriptions', SubscriptionController.list
   router.post '/api/subscriptions', SubscriptionController.create
