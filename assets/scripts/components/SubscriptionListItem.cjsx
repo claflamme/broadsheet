@@ -3,6 +3,9 @@ React = require 'react'
 { DragSource, DropTarget } = require 'react-dnd'
 { findDOMNode } = require 'react-dom'
 
+onImgError = (e) ->
+  e.target.style.visibility = 'hidden'
+
 onSourceBeginDrag = (props) ->
   index: props.index
   subId: props.subId
@@ -72,7 +75,11 @@ SubscriptionListItem = React.createClass
           to={ "/feeds/#{ @props.feedId }"}
           activeClassName='active'
           onClick={ @props.onClick }>
-          <img className='subscriptionIcon' src={ iconUrl } />
+          <img
+            className='subscriptionIcon'
+            src={ iconUrl }
+            onError={ onImgError }
+          />
           { @props.title or @props.feedUrl }
         </Link>
       </li>
