@@ -30,7 +30,7 @@ renderArticle = (props, article, i) ->
     key={ i }
     onClick={ props.onClick.bind null, article }
     className="#{ className }">
-    <a href={ article.url } onClick={ onArticleClick }>
+    <a href={ article.url } onClick={ onArticleClick } title={ article.title }>
       <ArticleListItem article={ article } />
     </a>
   </li>
