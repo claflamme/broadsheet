@@ -15,8 +15,8 @@ SubscriptionDeleteWindow = (props, context) ->
         Are you sure you want to unsubscribe from <strong>{ title }</strong>?
       </Modal.Body>
       <Modal.Footer>
-        <Button bsStyle='danger' onClick={ props.onHide }>Cancel</Button>
-        <Button bsStyle='primary' type='submit'>Unsubscribe</Button>
+        <Button bsStyle='link' onClick={ props.onHide }>Cancel</Button>
+        <Button bsStyle='danger' type='submit'>Unsubscribe</Button>
       </Modal.Footer>
     </form>
   </Modal>

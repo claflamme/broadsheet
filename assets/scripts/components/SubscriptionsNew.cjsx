@@ -32,7 +32,7 @@ module.exports = React.createClass
             onChange={ @_onChange } />
         </Modal.Body>
         <Modal.Footer>
-          <Button bsStyle='danger' onClick={ @props.onHide }>
+          <Button bsStyle='link' onClick={ @props.onHide }>
             Cancel
           </Button>
           <Button bsStyle='primary' type='submit'>

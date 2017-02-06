@@ -43,7 +43,7 @@ SubscriptionEditWindow = React.createClass
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button bsStyle='danger' onClick={ @props.onHide }>Cancel</Button>
+          <Button bsStyle='link' onClick={ @props.onHide }>Cancel</Button>
           <Button bsStyle='primary' type='submit'>Save</Button>
         </Modal.Footer>
       </form>
