@@ -1,2 +1,1 @@
-web: node start --serve
-worker: node start --work
+web: node start --serve --work
