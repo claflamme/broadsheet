@@ -44,12 +44,6 @@ module.exports = (app) ->
         newFeed.remove ->
           return res.error 'INVALID_REQUEST_BODY_PARAMS', 'url'
 
-  # Returns a list of all feeds being indexed by the system.
-  list: (req, res) ->
-
-    Feed.find {}, (err, feeds) ->
-      res.json feeds
-
   # Forces a given feed to immediately re-index
   refresh: (req, res) ->
 
