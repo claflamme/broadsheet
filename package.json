@@ -8,7 +8,7 @@
     "title": "Broadsheet"
   },
   "scripts": {
-    "start": "node start",
+    "start": "node start --serve --work",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
