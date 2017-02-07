@@ -8,9 +8,7 @@ module.exports = (app) ->
 
     title: String
 
-    url:
-      type: String
-      unique: true
+    url: String
 
     summary: String
 
