@@ -32,8 +32,7 @@ module.exports =
   fetchContent: (article) ->
 
     request =
-      url: '/api/proxy/article'
-      query: { url: article.url }
+      url: "/api/articles/#{ article._id }"
 
     (dispatch) ->
       req = api.send request, (res, content) ->

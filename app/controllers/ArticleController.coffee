@@ -1,3 +1,6 @@
+read = require 'node-readability'
+moment = require 'moment'
+
 module.exports = (app) ->
 
   { Article, Subscription } = app.models
@@ -38,3 +41,30 @@ module.exports = (app) ->
 
     Article.paginate query, options, (err, articles) ->
       res.json articles or []
+
+  # Fetches a single article. If there's no body copy saved (or it's outdated),
+  # this call will also fetch the article html and store it before returning
+  # the article data.
+  get: (req, res) ->
+
+    Article.findById req.params.id, (err, doc) ->
+      yesterday = moment().utc().subtract 1, 'days'
+      updatedAt = moment(doc.updatedAt).utc()
+
+      if doc.body and updatedAt > yesterday
+        return res.json body: doc.body
+
+      requestOpts =
+        headers:
+          'user-agent': 'Broadsheet RSS Reader (github.com/claflamme/broadsheet)'
+
+      read doc.url, requestOpts, (err, article, httpRes) ->
+        body = article?.content or 'There was an error fetching this article.'
+
+        doc.body = body
+        doc.markModified 'body'
+        doc.save()
+
+        res.json { body }
+
+        article.close()
