@@ -183,9 +183,29 @@ module.exports = (app) ->
         console.log 'Done! Added %d articles.', articlesToInsert.length
         done()
 
+  deleteOldArticles = (feed) ->
+
+    twoWeeksAgo = moment().subtract 2, 'weeks'
+
+    console.log 'Deleting old articles from %s', feed.url
+
+    query =
+      feed: feed._id
+      publishedAt:
+        $lt: twoWeeksAgo
+
+    Article.remove query, (err) ->
+      if err
+        console.error 'Error removing old articles from %s', feed.url
+        console.error err
+      else
+        console.log 'Success! Removed old articles from %s', feed.url
+
   processFeed: (feed, done) ->
 
     feed.updatedAt = new Date()
+
+    deleteOldArticles feed
 
     # @TODO: Refactor to async waterfall.
     feed.save (err, feed) ->

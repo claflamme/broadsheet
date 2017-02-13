@@ -12,7 +12,6 @@ ArticleList = (props, context) ->
     <ul className={ "articlesList slide #{ if hasDocs then 'up' }" }>
       { props.articles.docs.map renderArticle.bind null, props }
     </ul>
-    <p></p>
     { renderLoadMore props }
   </div>
 
@@ -45,7 +44,7 @@ renderLoadMore = (props) ->
   if props.articles.loading and props.articles.docs.length is 0
     return null
 
-  text = 'Load more...'
+  text = <div>Load more <i className='fa fa-fw fa-arrow-down'></i></div>
   isFinished = props.articles.page is props.articles.pages
 
   if props.articles.loading
@@ -57,6 +56,7 @@ renderLoadMore = (props) ->
   <Button
     disabled={ isFinished or props.articles.loading }
     className='load-more-articles'
+    bsStyle='primary'
     block
     onClick={ props.loadMore }>
     { text }
