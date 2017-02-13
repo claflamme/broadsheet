@@ -52,19 +52,16 @@ module.exports = (app) ->
       updatedAt = moment(doc.updatedAt).utc()
 
       if doc.body and updatedAt > yesterday
-        return res.json body: doc.body
+        return res.json doc
 
       requestOpts =
         headers:
           'user-agent': 'Broadsheet RSS Reader (github.com/claflamme/broadsheet)'
 
       read doc.url, requestOpts, (err, article, httpRes) ->
-        body = article?.content or 'There was an error fetching this article.'
-
-        doc.body = body
+        doc.body = article?.content or null
         doc.markModified 'body'
-        doc.save()
-
-        res.json { body }
+        doc.save (err, savedDoc) ->
+          res.json savedDoc
 
         article.close()

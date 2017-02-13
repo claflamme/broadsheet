@@ -1,8 +1,35 @@
+url = require 'url'
 FeedParser = require 'feedparser'
 sanitize = require 'sanitize-html'
 request = require 'request'
 moment = require 'moment'
 faviconoclast = require 'faviconoclast'
+cheerio = require 'cheerio'
+
+parseUrl = url.parse
+resolveUrl = url.resolve
+
+feedTypes = [
+  'application/rss+xml'
+  'application/atom+xml'
+  'application/rdf+xml'
+]
+
+linkIsRssFeed = (attrs) ->
+
+  unless attrs
+    return false
+
+  if attrs.title and attrs.title.toLowerCase() is 'rss'
+    return true
+
+  if attrs.type
+    isValidFeedType = feedTypes.some (feedType) ->
+      feedType is attrs.type
+    if isValidFeedType
+      return true
+
+  return false
 
 # Articles sometimes have dates set in the future. Sites will do this to "pin"
 # an item until the date has passed. Obviously, we don't want this in a feed,
@@ -18,6 +45,38 @@ module.exports = (app) ->
 
   Feed = app.models.Feed
   Article = app.models.Article
+
+  findRss = (res, done) ->
+
+    html = ''
+
+    res.on 'data', (data) ->
+      html += data.toString()
+
+    res.on 'error', (err) ->
+      console.log 'findRss error:\n'
+      console.log err
+      done err
+
+    res.on 'end', ->
+      $ = cheerio.load html
+      links = []
+      $('link').each (i) ->
+        attrs = $(@).attr()
+        if linkIsRssFeed attrs
+          links.push attrs
+          return false
+      if links.length > 0
+        parsedUrl = parseUrl links[0].href
+        # This if/else block is for resolving relative URLs.
+        if parsedUrl.hostname
+          downloadFeed links[0].href, done
+        else
+          rootUrl = "#{ res.request.uri.protocol }//#{ res.request.uri.host }/"
+          console.log rootUrl
+          downloadFeed resolveUrl(rootUrl, links[0].href), done
+      else
+        done 404
 
   parseArticle = (item) ->
 
@@ -66,22 +125,31 @@ module.exports = (app) ->
 
     req.on 'error', (err) ->
       console.error url, err
-      return done null, @
+      return done err
 
     req.on 'response', (res) ->
       if res.statusCode isnt 200
         err = new Error('Bad status code')
         @emit 'error', err
       else
-        done null, @
+        contentType = res.headers['content-type']
 
-  updateFeed = (feed, meta, done) ->
+        isRssFeed = ['rss', 'rdf', 'atom', 'xml'].some (type) ->
+          contentType.indexOf(type) > -1
+
+        if isRssFeed
+          done null, @, url
+        else
+          findRss res, done
+
+  updateFeed = (feed, meta, realUrl, done) ->
 
     unless meta?.link
       return new Error "Invalid feed - no metadata: #{ feed.url }"
 
     feed.title = meta.title or null
     feed.description = meta.description or null
+    feed.url = realUrl
 
     faviconoclast meta.link, (err, iconUrl) ->
       feed.iconUrl = iconUrl or null
@@ -98,7 +166,7 @@ module.exports = (app) ->
 
     urls = parsedArticles.map (article) -> article.url
 
-    Article.find url: { $in: urls }, (err, foundArticles) ->
+    Article.find { url: { $in: urls }, feed: feed._id }, (err, foundArticles) ->
 
       foundUrls = foundArticles.map (article) -> article.url
 
@@ -121,13 +189,13 @@ module.exports = (app) ->
 
     # @TODO: Refactor to async waterfall.
     feed.save (err, feed) ->
-      downloadFeed feed.url, (err, res) ->
+      downloadFeed feed.url, (err, res, realUrl) ->
         if err
           return done err
         parseStream res, (err, articles, meta) ->
           if err
             return done err
-          updateFeed feed, meta, (err, feed) ->
+          updateFeed feed, meta, realUrl, (err, feed) ->
             if err
               return done err
             addArticles articles, feed, done

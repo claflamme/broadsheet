@@ -38,7 +38,7 @@ module.exports =
       req = api.send request, (res, content) ->
         action =
           type: constants.ARTICLE_CONTENT_RECEIVED
-          body: content.body
+          body: content.body or 'There was an error fetching this article.'
           doc: article
         dispatch action
 
