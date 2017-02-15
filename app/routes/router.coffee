@@ -1,11 +1,17 @@
 module.exports = (app, router) ->
 
   {
+    AuthController
     FeedController
     SubscriptionController
     ProxyController
     ArticleController
   } = app.controllers
+
+  # Authentication
+  router.post '/api/auth/authenticate', AuthController.authenticate
+  router.get '/api/auth/user/', AuthController.getAuthenticatedUser
+  router.get '/api/auth/redeem', AuthController.redeemAuthRequest
 
   # Subscriptions
   router.get '/api/subscriptions', SubscriptionController.list
