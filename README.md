@@ -2,15 +2,20 @@
 
 # Broadsheet
 
-Broadsheet is a website that crawls RSS feeds and shows articles inline. If you hate modern software, you might like it.
+Broadsheet is a website that crawls RSS feeds and shows articles inline.
 
-### A Featureless Void
+If you hate modern software, you might like it.
+
+## A Featureless Void
 
 Broadsheet eschews common features of investment-backed software:
 
 - **No recommendations**: Doesn't analyze your reading habits. Personally, I resent software getting that familiar.
+
 - **No social media integration**: Social media sites use shared articles to guess your demographics. No one cares that you read an article, anyways.
+
 - **No Pocket/Instapaper/Evernote integration**: News is ephemeral. If you don't read it now, you won't read it later.
+
 - **No unread counts**: Life is already a burdensome list of tasks to accomplish. Why give yourself another?
 
 ## Installation
