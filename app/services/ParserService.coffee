@@ -54,8 +54,8 @@ module.exports = (app) ->
       html += data.toString()
 
     res.on 'error', (err) ->
-      console.log 'findRss error:\n'
-      console.log err
+      console.error 'findRss error:\n'
+      console.error err
       done err
 
     res.on 'end', ->
@@ -73,7 +73,6 @@ module.exports = (app) ->
           downloadFeed links[0].href, done
         else
           rootUrl = "#{ res.request.uri.protocol }//#{ res.request.uri.host }/"
-          console.log rootUrl
           downloadFeed resolveUrl(rootUrl, links[0].href), done
       else
         done 404
