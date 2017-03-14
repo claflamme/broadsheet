@@ -1,3 +1,4 @@
 {
-  "ext": "js json coffee"
+  "ext": "js json coffee",
+  "ignore": ["assets/*"]
 }
