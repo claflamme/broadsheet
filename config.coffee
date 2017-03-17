@@ -22,7 +22,6 @@ module.exports =
     public: 'public'
 
   auth:
-    bcryptSaltRounds: 10
     email:
       from: 'Broadsheet <noreply@broadsheet.ca>'
       subject: 'Login Request'
