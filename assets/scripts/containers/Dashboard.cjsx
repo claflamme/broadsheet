@@ -1,16 +1,14 @@
 React = require 'react'
 { connect } = require 'react-redux'
+{ Grid, Row, Col } = require 'react-bootstrap'
 pick = require 'lodash/pick'
+
+Subscriptions = require '../components/Subscriptions'
 AuthActions = require '../actions/AuthActions'
 
-mapStateToProps = (state) -> state
-
-module.exports = connect(mapStateToProps) React.createClass
-
-  displayName: 'Dashboard'
+Dashboard = connect((state) -> state) React.createClass
 
   contextTypes:
-
     router: React.PropTypes.object
 
   componentWillMount: ->
@@ -32,4 +30,19 @@ module.exports = connect(mapStateToProps) React.createClass
       'dispatch', 'auth', 'articles', 'modals', 'reader', 'subscriptions'
     ]
 
-    React.cloneElement @props.children, authenticatedProps
+    <Grid fluid className='dashboardGrid'>
+      <Row>
+        <Col xs={ 12 } sm={ 3 } lg={ 2 } className='subscriptions dashboard-col'>
+          <Subscriptions
+            subscriptions={ @props.subscriptions.docs }
+            isAdding={ @props.subscriptions.adding }
+            showNewSub={ @props.modals.showNewSub }
+            newSubError={ @props.modals.newSubError }
+            user={ @props.auth.user }
+            dispatch={ @props.dispatch } />
+        </Col>
+        { React.cloneElement @props.children, authenticatedProps }
+      </Row>
+    </Grid>
+
+module.exports = Dashboard

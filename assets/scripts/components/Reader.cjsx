@@ -8,39 +8,29 @@ FeedTitleBar = require '../components/FeedTitleBar'
 
 Reader = (props) ->
 
-  <Grid fluid className='dashboardGrid'>
-    <Row>
-      <Col xs={ 12 } sm={ 3 } lg={ 2 } className='subscriptions dashboard-col'>
-        <Subscriptions
-          subscriptions={ props.subscriptions }
-          showNewSub={ props.modals.showNewSub }
-          newSubError={ props.modals.newSubError }
-          user={ props.auth.user }
-          dispatch={ props.dispatch } />
-      </Col>
-      <Col xs={ 12 } sm={ 9 } lg={ 4 } className='article-list-col dashboard-col'>
-        <FeedTitleBar
-          title={ props.title }
-          dispatch={ props.dispatch }
-          showControls={ props.showControls }
-          subscription={ props.subscription }
-          showEditSub={ props.modals.showEditSub }
-          showDeleteSub={ props.modals.showDeleteSub } />
-        <ArticleList
-          loadMore={ props.loadMoreArticles }
-          articles={ props.articles }
-          currentArticle={ props.reader.doc }
-          onClick={ props.onArticleClick } />
-      </Col>
-      <Col xs={ 12 } lg={ 6 } className='articleContent dashboard-col'>
-        <ArticleReader
-          show={ props.reader.showMobileReader }
-          onHide={ props.hideReader }
-          reader={ props.reader }
-          subscriptions={ props.subscriptions  } />
-      </Col>
-    </Row>
-  </Grid>
+  <div style={{ height: '100%' }}>
+    <Col xs={ 12 } sm={ 9 } lg={ 4 } className='article-list-col dashboard-col'>
+      <FeedTitleBar
+        title={ props.title }
+        dispatch={ props.dispatch }
+        showControls={ props.showControls }
+        subscription={ props.subscription }
+        showEditSub={ props.modals.showEditSub }
+        showDeleteSub={ props.modals.showDeleteSub } />
+      <ArticleList
+        loadMore={ props.loadMoreArticles }
+        articles={ props.articles }
+        currentArticle={ props.reader.doc }
+        onClick={ props.onArticleClick } />
+    </Col>
+    <Col xs={ 12 } lg={ 6 } className='articleContent dashboard-col'>
+      <ArticleReader
+        show={ props.reader.showMobileReader }
+        onHide={ props.hideReader }
+        reader={ props.reader }
+        subscriptions={ props.subscriptions  } />
+    </Col>
+  </div>
 
 Reader.propTypes =
   title: React.PropTypes.string

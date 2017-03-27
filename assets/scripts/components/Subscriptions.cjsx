@@ -11,8 +11,9 @@ SubscriptionListItem = require './SubscriptionListItem'
 module.exports = DragDropContext(HTML5Backend) React.createClass
 
   propTypes:
-
-    subscriptions: React.PropTypes.object.isRequired
+    subscriptions: React.PropTypes.array.isRequired
+    isAdding: React.PropTypes.bool
+    isLoading: React.PropTypes.bool
     showNewSub: React.PropTypes.bool
     newSubError: React.PropTypes.bool
     dispatch: React.PropTypes.func.isRequired
@@ -40,7 +41,7 @@ module.exports = DragDropContext(HTML5Backend) React.createClass
               All
             </IndexLink>
           </li>
-          { @props.subscriptions.docs.map @_renderSubscription }
+          { @props.subscriptions.map @_renderSubscription }
         </ul>
       </div>
       <div className='subscriptions-section'>
@@ -58,7 +59,7 @@ module.exports = DragDropContext(HTML5Backend) React.createClass
         hasError={ @props.newSubError }
         onHide={ @_hideNewSubscription }
         onSubmit={ @_addSubscription }
-        loading={ @props.subscriptions.adding } />
+        loading={ @props.isAdding } />
     </div>
 
   _renderSubscription: (subscription, i) ->
@@ -93,8 +94,8 @@ module.exports = DragDropContext(HTML5Backend) React.createClass
 
   _onSubscriptionMoved: (dragIndex, hoverIndex)->
 
-    @props.dispatch SubscriptionActions.move @props.subscriptions.docs, dragIndex, hoverIndex
+    @props.dispatch SubscriptionActions.move @props.subscriptions, dragIndex, hoverIndex
 
   _onSubscriptionDropped: ->
 
-    @props.dispatch SubscriptionActions.saveOrder @props.subscriptions.docs
+    @props.dispatch SubscriptionActions.saveOrder @props.subscriptions

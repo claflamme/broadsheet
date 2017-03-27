@@ -18,7 +18,7 @@
     "cheerio": "^0.22.0",
     "coffee-reactify": "^5.1.0",
     "faviconoclast": "0.0.3",
-    "feedparser": "1.1.4",
+    "feedparser": "2.1.0",
     "gunpowder": "git+https://github.com/claflamme/gunpowder.git#master",
     "keymirror": "0.1.1",
     "lodash": "^4.17.2",
