@@ -1,7 +1,9 @@
 React = require 'react'
+c = React.createElement
 
 module.exports = React.createClass
 
   render: ->
 
-    <p>Page not found</p>
+    c 'p', {},
+      'Page not found.'

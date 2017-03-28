@@ -1,4 +1,5 @@
 React = require 'react'
+c = React.createElement
 { connect } = require 'react-redux'
 
 AuthActions = require '../actions/AuthActions'
@@ -24,4 +25,4 @@ module.exports = connect(mapStateToProps) React.createClass
 
   render: ->
 
-    <p></p>
+    c 'p', {}

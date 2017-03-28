@@ -29,7 +29,7 @@ module.exports =
 
   browserify: [
     {
-      inputPath: 'assets/scripts/App.cjsx'
+      inputPath: 'assets/scripts/App.coffee'
       outputPath: 'app.js' # Relative to the public folder.
       options:
         transform: ['coffee-reactify']

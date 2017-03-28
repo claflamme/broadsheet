@@ -1,4 +1,5 @@
 React = require 'react'
+c = React.createElement
 { render } = require 'react-dom'
 { Provider } = require 'react-redux'
 { createStore, applyMiddleware, combineReducers } = require 'redux'
@@ -47,9 +48,8 @@ for name, reducer of reducers
   reducers[name] = createReducer reducer
 
 App =
-  <Provider store={ configureStore() }>
-    <Router />
-  </Provider>
+  c Provider, { store: configureStore() },
+    c Router, {}
 
 if root = document.getElementById 'root'
   render App, root
