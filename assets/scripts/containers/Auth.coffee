@@ -6,7 +6,6 @@ c = React.createElement
 AuthActions = require '../actions/AuthActions'
 
 mapStateToProps = (state) ->
-
   token: state.auth.token
   loading: state.auth.loading
   emailSent: state.auth.emailSent
@@ -14,20 +13,16 @@ mapStateToProps = (state) ->
 module.exports = connect(mapStateToProps) React.createClass
 
   contextTypes:
-
     router: React.PropTypes.object
 
   getInitialState: ->
-
     email: ''
 
   componentWillReceiveProps: (nextProps) ->
-
     if nextProps.token
       @context.router.push '/'
 
   render: ->
-
     c Grid, { className: 'auth-prompt' },
       c Row, {},
         c Col, { md: 4, mdOffset: 3, lg: 4, lgOffset: 4, sm: 6, smOffset: 3 },
@@ -44,7 +39,6 @@ module.exports = connect(mapStateToProps) React.createClass
           @renderConfirmation @props.emailSent
 
   renderAuthForm: (show) ->
-
     unless show
       return
 
@@ -68,7 +62,6 @@ module.exports = connect(mapStateToProps) React.createClass
         c 'i', { className: 'fa fa-fw fa-lock' }
 
   renderConfirmation: (show) ->
-
     unless show
       return
 
@@ -80,12 +73,10 @@ module.exports = connect(mapStateToProps) React.createClass
         "Check your email, you should get a login link any second now."
 
   _onChange: (key, e) ->
-
     @state[key] = e.target.value
     @setState @state
 
   _onSubmit: (e) ->
-
     e.preventDefault()
 
     if @props.loading

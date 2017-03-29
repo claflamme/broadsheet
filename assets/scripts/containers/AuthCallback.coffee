@@ -5,7 +5,6 @@ c = React.createElement
 AuthActions = require '../actions/AuthActions'
 
 mapStateToProps = (state) ->
-
   token: state.auth.token
 
 module.exports = connect(mapStateToProps) React.createClass
@@ -14,15 +13,12 @@ module.exports = connect(mapStateToProps) React.createClass
     router: React.PropTypes.object
 
   componentWillMount: ->
-
     action = AuthActions.redeemNonce @props.location.query.nonce
     @props.dispatch action
 
   componentWillReceiveProps: (nextProps) ->
-
     if nextProps.token
       @context.router.push '/'
 
   render: ->
-
     c 'p', {}
