@@ -1,15 +1,15 @@
 path = require 'path'
 
 mailgun = require 'mailgun-js'
-jade = require 'jade'
+pug = require 'pug'
 
 module.exports = (app) ->
 
   send: (templatePath, data = {}, cb) ->
 
     paths = app.config.paths
-    templatePath = path.join paths.root, paths.views, "#{ templatePath }.jade"
-    data.html = jade.renderFile templatePath, data
+    templatePath = path.join paths.root, paths.views, "#{ templatePath }.pug"
+    data.html = pug.renderFile templatePath, data
 
     mailer = mailgun
       apiKey: app.config.mail.mailgun.secretKey

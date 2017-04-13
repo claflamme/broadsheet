@@ -33,14 +33,14 @@ loadEnv =  ->
 # --- Main Export --------------------------------------------------------------
 # ==============================================================================
 
-module.exports = (config) ->
+module.exports = (configPath) ->
 
   loadEnv()
 
   app = {}
 
   app.argv = parse process.argv.slice(2), { boolean: ['serve', 'work'] }
-  app.config = config
+  app.config = require configPath
   app.helpers = require('./helpers') app
   app.mongoose = require 'mongoose'
   app.models = require('./models') app
@@ -52,7 +52,7 @@ module.exports = (config) ->
 
   # Server config
   app.express.set 'views', app.utils.getPath app.config.paths.views
-  app.express.set 'view engine', 'jade'
+  app.express.set 'view engine', 'pug'
 
   if process.env.DATABASE_URL
     console.log 'Connecting to database...'
