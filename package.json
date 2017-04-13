@@ -3,27 +3,32 @@
   "version": "0.0.0",
   "description": "The no bullshit RSS reader.",
   "repository": "https://github.com/claflamme/rss",
-  "apidoc": {
-    "name": "Broadsheet",
-    "title": "Broadsheet"
-  },
   "scripts": {
-    "start": "node start --serve --work",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node start --serve --work"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "2.0.1",
+    "body-parser": "^1.17.1",
+    "bootstrap-styl": "^5.0.8",
+    "browserify-middleware": "^7.1.0",
     "cheerio": "^0.22.0",
     "coffee-reactify": "^5.1.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "express-jwt": "^5.1.0",
     "faviconoclast": "0.0.3",
     "feedparser": "2.1.0",
-    "gunpowder": "git+https://github.com/claflamme/gunpowder.git#master",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^7.3.0",
     "keymirror": "0.1.1",
     "lodash": "^4.17.2",
     "mailgun-js": "0.7.12",
     "moment": "^2.17.0",
+    "mongoose": "^4.9.4",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.8.1",
     "node-readability": "2.2.0",
     "react": "^15.3.1",
     "react-bootstrap": "^0.30.3",
@@ -35,7 +40,10 @@
     "redux": "^3.6.0",
     "redux-thunk": "2.1.0",
     "request": "2.74.0",
+    "require-dir": "^0.3.1",
     "sanitize-html": "1.13.0",
-    "validator": "5.7.0"
+    "stylus": "^0.54.5",
+    "validator": "5.7.0",
+    "yargs-parser": "^5.0.0"
   }
 }
