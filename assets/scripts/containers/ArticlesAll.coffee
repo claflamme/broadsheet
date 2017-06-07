@@ -1,10 +1,11 @@
 React = require 'react'
+{ Component } = React
 { connect } = require 'react-redux'
 fromPairs = require 'lodash/fromPairs'
 ArticleActions = require '../actions/ArticleActions'
 Reader = require '../components/Reader'
 
-module.exports = ArticlesAll = React.createClass
+class ArticlesAll extends Component
 
   componentWillMount: ->
     @props.dispatch ArticleActions.fetchAll clearDocs: true
@@ -41,3 +42,5 @@ module.exports = ArticlesAll = React.createClass
 
     articlesList.map (article) ->
       Object.assign article, { subscription: subsByFeedId[article.feed] }
+
+module.exports = ArticlesAll

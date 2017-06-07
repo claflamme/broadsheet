@@ -1,9 +1,10 @@
 React = require 'react'
+{ Component } = React
 { connect } = require 'react-redux'
 ArticleActions = require '../actions/ArticleActions'
 Reader = require '../components/Reader'
 
-module.exports = ArticlesByFeed = React.createClass
+class ArticlesByFeed extends Component
 
   componentWillMount: ->
     @_reload @props.params.feedId
@@ -53,3 +54,5 @@ module.exports = ArticlesByFeed = React.createClass
 
   _hideReader: ->
     @props.dispatch ArticleActions.hideReader()
+
+module.exports = ArticlesByFeed

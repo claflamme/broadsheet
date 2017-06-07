@@ -1,15 +1,13 @@
 React = require 'react'
-c = React.createElement
+{ Component } = React
+el = React.createElement
 { connect } = require 'react-redux'
 
 AuthActions = require '../actions/AuthActions'
 
-mapStateToProps = (state) ->
-  token: state.auth.token
+class AuthCallback extends Component
 
-module.exports = connect(mapStateToProps) React.createClass
-
-  contextTypes:
+  @contextTypes:
     router: React.PropTypes.object
 
   componentWillMount: ->
@@ -21,4 +19,9 @@ module.exports = connect(mapStateToProps) React.createClass
       @context.router.push '/'
 
   render: ->
-    c 'p', {}
+    el 'p', {}
+
+mapStateToProps = (state) ->
+  token: state.auth.token
+
+module.exports = connect(mapStateToProps) AuthCallback

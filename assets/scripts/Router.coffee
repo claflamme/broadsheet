@@ -11,4 +11,4 @@ module.exports = ->
     el Route, path: '/callback', component: require('./containers/AuthCallback')
     el Route, path: '/authenticate', component: require('./containers/Auth')
     el Route, path: '/logout', component: require('./containers/Logout')
-    el Route, path: '*', component: require('./containers/404')
+    el Route, path: '*', component: require('./containers/PageNotFound')
