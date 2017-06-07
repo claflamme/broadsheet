@@ -1,5 +1,6 @@
 React = require 'react'
-c = React.createElement
+{ Component } = React
+el = React.createElement
 { connect } = require 'react-redux'
 { Grid, Row, Col } = require 'react-bootstrap'
 pick = require 'lodash/pick'
@@ -7,9 +8,9 @@ pick = require 'lodash/pick'
 Subscriptions = require '../components/Subscriptions'
 AuthActions = require '../actions/AuthActions'
 
-Dashboard = connect((state) -> state) React.createClass
+class Dashboard extends Component
 
-  contextTypes:
+  @contextTypes:
     router: React.PropTypes.object
 
   componentWillMount: ->
@@ -33,17 +34,18 @@ Dashboard = connect((state) -> state) React.createClass
       'subscriptions'
     ]
 
-    c Grid, { fluid: true, className: 'dashboardGrid' },
-      c Row, {},
-        c Col, { xs: 12, sm: 3, lg: 2, className: 'subscriptions dashboard-col' },
-          c Subscriptions, {
-            subscriptions: @props.subscriptions.docs
-            isAdding: @props.subscriptions.adding
-            showNewSub: @props.modals.showNewSub
-            newSubError: @props.modals.newSubError
-            user: @props.auth.user
-            dispatch: @props.dispatch
-          }
+    subscriptionsProps =
+      subscriptions: @props.subscriptions.docs
+      isAdding: @props.subscriptions.adding
+      showNewSub: @props.modals.showNewSub
+      newSubError: @props.modals.newSubError
+      user: @props.auth.user
+      dispatch: @props.dispatch
+
+    el Grid, fluid: true, className: 'dashboardGrid',
+      el Row, {},
+        el Col, xs: 12, sm: 3, lg: 2, className: 'subscriptions dashboard-col',
+          el Subscriptions, subscriptionsProps
         React.cloneElement @props.children, childProps
 
-module.exports = Dashboard
+module.exports = connect((state) -> state) Dashboard

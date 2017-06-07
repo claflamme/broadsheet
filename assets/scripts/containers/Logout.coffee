@@ -1,9 +1,7 @@
 React = require 'react'
+{ Component } = React
 
-module.exports = React.createClass
-
-  contextTypes:
-    router: React.PropTypes.object
+module.exports = class Logout extends Component
 
   componentWillMount: ->
     localStorage.clear()
