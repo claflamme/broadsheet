@@ -23,15 +23,15 @@ class ArticlesAll extends Component
 
     React.createElement Reader, Object.assign(childProps, @props)
 
-  _loadMore: ->
+  _loadMore: =>
     nextPage = @props.articles.page + 1
 
     @props.dispatch ArticleActions.fetchAll page: nextPage
 
-  _onClick: (article) ->
+  _onClick: (article) =>
     @props.dispatch ArticleActions.fetchContent article
 
-  _hideReader: ->
+  _hideReader: =>
     @props.dispatch ArticleActions.hideReader()
 
   _mapSubsToArticles: (subscriptionsList, articlesList) ->

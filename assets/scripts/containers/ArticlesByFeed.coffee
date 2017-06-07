@@ -29,13 +29,13 @@ class ArticlesByFeed extends Component
   _reload: (feedId) ->
     @props.dispatch ArticleActions.fetchByFeed feedId, { clearDocs: true }
 
-  _loadMore: ->
+  _loadMore: =>
     nextPage = @props.articles.page + 1
     feedId = @props.params.feedId
 
     @props.dispatch ArticleActions.fetchByFeed feedId, { page: nextPage }
 
-  _onClick: (article) ->
+  _onClick: (article) =>
     @props.dispatch ArticleActions.fetchContent article
 
   _getActiveSubscription: (feedId) ->
