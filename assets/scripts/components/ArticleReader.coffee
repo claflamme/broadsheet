@@ -1,4 +1,7 @@
 React = require 'react'
+{ Component } = React
+el = React.createElement
+pt = require 'prop-types'
 { Button } = require 'react-bootstrap'
 moment = require 'moment'
 
@@ -10,7 +13,6 @@ Loader = require './Loader'
 # attributes. This function pulls those out, assigns them to their non-data
 # equivalents, and proxies requests for insecure images.
 adjustImages = ->
-
   imageNodesList = document.querySelectorAll '.article-body img'
 
   Array.prototype.slice.call(imageNodesList).forEach (imageNode) ->
@@ -24,7 +26,6 @@ adjustImages = ->
 
 # Replaces an insecure image src with a proxy URL.
 fixInsecureSrc = (src) ->
-
   if src.substring(0, 7) isnt 'http://'
     return src
 
@@ -32,7 +33,6 @@ fixInsecureSrc = (src) ->
 
 # Parses out the srcset and fixes up and insecure src attributes.
 fixInsecureSrcSet = (srcset) ->
-
   sizeList = srcset.split ','
 
   sizeList = sizeList.map (size) ->
@@ -44,84 +44,64 @@ fixInsecureSrcSet = (srcset) ->
 
 # --- Component ----------------------------------------------------------------
 
-ArticleReader = React.createClass
+class ArticleReader extends Component
 
-  propTypes:
-    reader: React.PropTypes.object
-    show: React.PropTypes.bool
-    hideReader: React.PropTypes.func
+  @propTypes:
+    reader: pt.object
+    show: pt.bool
+    hideReader: pt.func
 
   componentDidUpdate: ->
-
     adjustImages()
 
   render: ->
-
     unless @props.reader.doc
       return @renderPlaceholder()
 
-    <div className="article-wrapper #{ if @props.show then 'show-mobile-reader' else '' }">
-      <div className='article-body'>
-        <Loader show={ @props.reader.loading } />
-        <div className={ "slide #{ if @props.reader.body then 'up' }" }>
-          <Button
-            block
-            bsStyle='primary'
-            bsSize='large'
-            className='article-close-button text-center'
-            onClick={ @props.onHide }>
-            <i className='fa fa-arrow-left'>&nbsp;</i>
-            Back
-          </Button>
-          <h1>
-            <a
-              href={ @props.reader.doc?.url or '' }
-              target='_blank'>
-                { @props.reader.doc?.title or '' }
-            </a>
-          </h1>
-          { @renderSubscription() }
-          { @renderDate @props.reader.doc?.publishedAt }
-          <div
-            onClick={ @onArticleClick }
-            dangerouslySetInnerHTML={{ __html: @props.reader.body }}>
-          </div>
-        </div>
-      </div>
-    </div>
+    buttonProps =
+      block: true
+      bsStyle: 'primary'
+      bsSize: 'large'
+      className: 'article-close-button text-center'
+      onClick: @props.onHide
+
+    el 'div', className: "article-wrapper #{ if @props.show then 'show-mobile-reader' else '' }",
+      el 'div', className: 'article-body',
+        el Loader, show: @props.reader.loading
+        el 'div', className: "slide #{ if @props.reader.body then 'up' }",
+          el Button, buttonProps,
+            el 'i', className: 'fa fa-arrow-left'
+            ' Back'
+          el 'h1', null,
+            el 'a', href: (@props.reader.doc?.url or ''), target: '_blank',
+              @props.reader.doc?.title or ''
+          @renderSubscription()
+          @renderDate @props.reader.doc?.publishedAt
+          el 'div', onClick: @onArticleClick, dangerouslySetInnerHTML: { __html: @props.reader.body }
 
   renderPlaceholder: ->
-
-    <div className='article-placeholder'>
-      <p className='text-muted'>
-        Select an article from the left.
-      </p>
-    </div>
+    el 'div', className: 'article-placeholder',
+      el 'p', className: 'text-muted',
+        'Select an article from the left.'
 
   onArticleClick: (e) ->
-
     if e.target.href
       e.preventDefault()
       window.open e.target.href
 
   renderDate: (date) ->
-
     verbose = moment(date).format 'dddd, MMMM Do, YYYY'
     short = moment(date).fromNow()
 
-    <p className='text-muted'>
-      <em>
-        { short }&mdash;{ verbose }
-      </em>
-    </p>
+    el 'p', className: 'text-muted',
+      el 'em', null,
+        "#{ short }—#{ verbose }"
 
   renderSubscription: ->
-
     sub = @props.subscriptions.docs.find (sub) =>
       sub.feed._id is @props.reader.doc.feed
 
-    <div className='text-muted' style={{textTransform:'uppercase'}}>
-      { sub.customTitle or sub.feed.title }
-    </div>
+    el 'div', className: 'text-muted', style: {textTransform:'uppercase'},
+      sub.customTitle or sub.feed.title
 
 module.exports = ArticleReader

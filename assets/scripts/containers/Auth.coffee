@@ -1,6 +1,7 @@
 React = require 'react'
-{ Component, PropTypes } = React
+{ Component } = React
 el = React.createElement
+pt = require 'prop-types'
 { Grid, Row, Col, Panel, FormControl, FormGroup, Button } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 { Link } = require 'react-router'
@@ -10,13 +11,13 @@ AuthActions = require '../actions/AuthActions'
 class Auth extends Component
 
   @propTypes:
-    dispatch: PropTypes.func
-    token: PropTypes.string
-    loading: PropTypes.bool
-    emailSent: PropTypes.bool
+    dispatch: pt.func
+    token: pt.string
+    loading: pt.bool
+    emailSent: pt.bool
 
   @contextTypes:
-    router: React.PropTypes.object
+    router: pt.object
 
   constructor: (props) ->
     super props
