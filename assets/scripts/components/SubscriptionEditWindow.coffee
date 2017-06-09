@@ -13,12 +13,15 @@ class SubscriptionEditWindow extends Component
     onHide: pt.func
     feedUrl: pt.string
 
+  constructor: (props) ->
+    super props
+
+    @state =
+      subscription: props.initialSubscription
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.initialSubscription
       @setState subscription: nextProps.initialSubscription
-
-  getInitialState: ->
-    subscription: @props.initialSubscription
 
   _editSubscription: (e) ->
     e.preventDefault()
@@ -40,7 +43,7 @@ class SubscriptionEditWindow extends Component
       onChange: @_onTitleChange
 
     el Modal, show: (@props.show or false), onHide: @props.onHide,
-      el form, onSubmit: @_editSubscription,
+      el 'form', onSubmit: @_editSubscription,
         el Modal.Header, closeButton: true,
           el Modal.Title, null,
             "Edit subscription"
