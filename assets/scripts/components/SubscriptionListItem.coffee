@@ -1,4 +1,7 @@
 React = require 'react'
+{ Component } = React
+el = React.createElement
+pt = require 'prop-types'
 { Link } = require 'react-router'
 { DragSource, DropTarget } = require 'react-dnd'
 { findDOMNode } = require 'react-dom'
@@ -55,34 +58,29 @@ subscriptionTarget =
 
 # react-dnd doesn't work with stateless components, so this one is stateful
 # solely for that reason.
-SubscriptionListItem = React.createClass
+class SubscriptionListItem extends Component
 
-  propTypes:
-    isDragging: React.PropTypes.bool.isRequired
-    connectDragSource: React.PropTypes.func.isRequired
+  @propTypes:
+    isDragging: pt.bool.isRequired
+    connectDragSource: pt.func.isRequired
 
   render: ->
-
     opacity = if @props.isDragging then 0 else 1
     iconUrl = @props.iconUrl or ''
 
     if iconUrl.startsWith 'http://'
       iconUrl = "/api/proxy?url=#{ iconUrl }"
 
+    linkProps =
+      to: "/feeds/#{ @props.feedId }"
+      activeClassName: 'active'
+      onClick: @props.onClick
+
     @props.connectDragSource(@props.connectDropTarget(
-      <li style={{ opacity }}>
-        <Link
-          to={ "/feeds/#{ @props.feedId }"}
-          activeClassName='active'
-          onClick={ @props.onClick }>
-          <img
-            className='subscriptionIcon'
-            src={ iconUrl }
-            onError={ onImgError }
-          />
-          { @props.title or @props.feedUrl }
-        </Link>
-      </li>
+      el 'li', style: { opacity },
+        el Link, linkProps,
+          el 'img', className: 'subscriptionIcon', src: iconUrl, onError: onImgError
+          @props.title or @props.feedUrl
     ))
 
 connectDragSource = DragSource 'SUBSCRIPTION', subscriptionSource, dragCollect

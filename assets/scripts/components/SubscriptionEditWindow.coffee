@@ -23,12 +23,12 @@ class SubscriptionEditWindow extends Component
     if nextProps.initialSubscription
       @setState subscription: nextProps.initialSubscription
 
-  _editSubscription: (e) ->
+  _editSubscription: (e) =>
     e.preventDefault()
 
     @props.onSubmit @state.subscription
 
-  _onTitleChange: (e) ->
+  _onTitleChange: (e) =>
     updatedSubscription = Object.assign {}, @state.subscription
     updatedSubscription.customTitle = e.target.value
 
