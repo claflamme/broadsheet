@@ -32,8 +32,8 @@ module.exports =
       inputPath: 'assets/scripts/App.coffee'
       outputPath: 'app.js' # Relative to the public folder.
       options:
-        transform: ['coffee-reactify']
-        extensions: ['.coffee', '.cjsx']
+        transform: ['coffeeify']
+        extensions: ['.coffee']
     }
   ]
 
