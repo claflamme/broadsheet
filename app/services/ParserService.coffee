@@ -86,7 +86,10 @@ module.exports = (app) ->
     summary = summary.split('</p>').find (p) ->
       sanitize(p, allowedTags: []) isnt ''
 
-    summary = sanitize summary, allowedTags: []
+    summary = if summary
+    	sanitize summary, allowedTags: []
+    else
+      ''
 
     if summary.length > 200
       summary = "#{ summary.substring(0, 200).trim() }..."
