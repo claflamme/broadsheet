@@ -11,7 +11,7 @@ renderSubscriptionName = (subscription) ->
   el 'small', className: 'text-muted', style: { textTransform:'uppercase' },
     subscription.customTitle or subscription.feed.title
 
-Article = (props, context) ->
+ArticleListItem = (props, context) ->
   titleProps =
     className: 'article-title'
     dangerouslySetInnerHTML: { __html: props.article?.title }
@@ -27,7 +27,7 @@ Article = (props, context) ->
         renderSubscriptionName props.article.subscription
       el 'span', summaryProps
 
-Article.propTypes =
+ArticleListItem.propTypes =
   article: pt.object.isRequired
 
-module.exports = Article
+module.exports = ArticleListItem

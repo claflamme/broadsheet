@@ -101,7 +101,12 @@ class ArticleReader extends Component
     sub = @props.subscriptions.docs.find (sub) =>
       sub.feed._id is @props.reader.doc.feed
 
-    el 'div', className: 'text-muted', style: {textTransform:'uppercase'},
-      sub.customTitle or sub.feed.title
+    el 'div', className: 'text-muted',
+      el 'span', style: { textTransform: 'uppercase' },
+        sub.customTitle or sub.feed.title
+      if @props.reader.doc.author
+        el 'span', null,
+          ' by '
+          @props.reader.doc.author
 
 module.exports = ArticleReader

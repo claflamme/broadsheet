@@ -12,6 +12,8 @@ module.exports = (app) ->
 
     summary: String
 
+    author: String
+
     body:
       type: String
       default: null

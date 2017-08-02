@@ -97,6 +97,7 @@ module.exports = (app) ->
     title: item.title.trim()
     url: item.link
     summary: summary.trim()
+    author: item.author
     publishedAt: normalizeArticleDate item.pubdate
 
   parseStream = (xmlStream, done) ->
