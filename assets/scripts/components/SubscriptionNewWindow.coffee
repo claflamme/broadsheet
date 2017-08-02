@@ -4,7 +4,7 @@ pt = require 'prop-types'
 el = React.createElement
 { Modal, Button, FormControl, Alert } = require 'react-bootstrap'
 
-module.exports = class SubscriptionsNew extends Component
+module.exports = class SubscriptionNewWindow extends Component
 
   @propTypes:
     show: pt.bool.isRequired

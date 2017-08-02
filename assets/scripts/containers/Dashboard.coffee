@@ -5,7 +5,7 @@ el = React.createElement
 { Grid, Row, Col } = require 'react-bootstrap'
 pick = require 'lodash/pick'
 
-Subscriptions = require '../components/Subscriptions'
+SubscriptionList = require '../components/SubscriptionList'
 AuthActions = require '../actions/AuthActions'
 
 class Dashboard extends Component
@@ -45,7 +45,7 @@ class Dashboard extends Component
     el Grid, fluid: true, className: 'dashboardGrid',
       el Row, {},
         el Col, xs: 12, sm: 3, lg: 2, className: 'subscriptions dashboard-col',
-          el Subscriptions, subscriptionsProps
+          el SubscriptionList, subscriptionsProps
         React.cloneElement @props.children, childProps
 
 module.exports = connect((state) -> state) Dashboard

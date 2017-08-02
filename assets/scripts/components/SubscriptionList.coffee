@@ -6,12 +6,13 @@ HTML5Backend = require 'react-dnd-html5-backend'
 { DragDropContext } = require 'react-dnd'
 { IndexLink } = require 'react-router'
 { Button  } = require 'react-bootstrap'
+
 UserBadge = require '../components/UserBadge'
 SubscriptionActions = require '../actions/SubscriptionActions'
-SubscriptionsNew = require './SubscriptionsNew'
+SubscriptionNewWindow = require './SubscriptionNewWindow'
 SubscriptionListItem = require './SubscriptionListItem'
 
-class Subscriptions extends Component
+class SubscriptionList extends Component
 
   @propTypes:
     subscriptions: pt.array.isRequired
@@ -61,7 +62,7 @@ class Subscriptions extends Component
     el SubscriptionListItem, subscriptionItemProps
 
   render: ->
-    subscriptionsNewProps =
+    subscriptionNewProps =
       show: @props.showNewSub
       hasError: @props.newSubError
       onHide: @_hideNewSubscription
@@ -82,6 +83,6 @@ class Subscriptions extends Component
           el 'span', null,
             "Add Subscription "
           el 'i', className: 'fa fa-plus'
-      el SubscriptionsNew, subscriptionsNewProps
+      el SubscriptionNewWindow, subscriptionNewProps
 
-module.exports = DragDropContext(HTML5Backend) Subscriptions
+module.exports = DragDropContext(HTML5Backend) SubscriptionList

@@ -4,7 +4,6 @@ pt = require 'prop-types'
 { Grid, Row, Col } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 
-Subscriptions = require '../components/Subscriptions'
 ArticleReader = require '../components/ArticleReader'
 ArticleList = require '../components/ArticleList'
 FeedTitleBar = require '../components/FeedTitleBar'
