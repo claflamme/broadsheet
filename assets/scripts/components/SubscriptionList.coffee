@@ -26,7 +26,7 @@ class SubscriptionList extends Component
     showNewSub: false
 
   componentWillMount: ->
-    @props.dispatch SubscriptionActions.fetchSubscriptions()
+    @props.dispatch SubscriptionActions.fetchSubscriptionList()
 
   _addSubscription: (form) =>
     @props.dispatch SubscriptionActions.add form.url

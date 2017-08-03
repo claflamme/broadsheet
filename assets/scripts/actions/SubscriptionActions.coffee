@@ -21,33 +21,30 @@ createSubscription = (feedId, cb) ->
   api.send request, cb
 
 module.exports =
+  updateSubscriptionUI: (uiProperties) ->
+    Object.assign { type: constants.SUBSCRIPTION_UI_UPDATED }, uiProperties
 
-  receiveSubscriptions: (subscriptions) ->
-
+  updateSubscriptionList: (subscriptionList) ->
     type: constants.SUBSCRIPTION_LIST_UPDATED
-    subscriptions: subscriptions
+    subscriptionList: subscriptionList
 
-  fetchSubscriptions: ->
-
-    request =
-      url: '/api/subscriptions'
-
+  fetchSubscriptionList: ->
     (dispatch) =>
-      dispatch type: constants.SUBSCRIPTIONS_REQUESTED
-      api.send request, (res, json) =>
-        dispatch @receiveSubscriptions json
+      dispatch @updateSubscriptionUI loading: true
+      api.send { url: '/api/subscriptions' }, (res, json) =>
+        dispatch @updateSubscriptionList json
+        dispatch @updateSubscriptionUI loading: false
 
   add: (url) ->
-
     (dispatch) =>
-      dispatch type: constants.SUBSCRIPTION_UI_UPDATED, adding: true
+      dispatch @updateSubscriptionUI adding: true
       createFeed url, (res, feed) =>
         createSubscription feed._id, (res, json) =>
           if json.error
             return dispatch type: constants.MODAL_NEW_SUBSCRIPTION_RETURNED_ERROR
-          dispatch type: constants.SUBSCRIPTION_UI_UPDATED, adding: false
+          dispatch @updateSubscriptionUI adding: false
           dispatch @hideNewPrompt()
-          dispatch @fetchSubscriptions()
+          dispatch @fetchSubscriptionList()
 
   showNewPrompt: ->
 

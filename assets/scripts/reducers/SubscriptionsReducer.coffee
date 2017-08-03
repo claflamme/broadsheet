@@ -11,7 +11,7 @@ module.exports =
   SUBSCRIPTION_LIST_UPDATED: (state, action) ->
     # Subscriptions that haven't been dragged-and-dropped yet will have their
     # sort index set to null.
-    action.subscriptions.sort (a, b) ->
+    action.subscriptionList.sort (a, b) ->
       if a.index is null and b.index is null
         return 0
       if a.index is null
@@ -20,15 +20,12 @@ module.exports =
         return -1
       a.index - b.index
 
-    subscriptions = action.subscriptions.map (sub, i) ->
-      sub.index or= i
-      sub
-
-    newState =
-      docs: subscriptions
+    Object.assign {}, state, {
       loading: false
-
-    Object.assign {}, state, newState
+      docs: action.subscriptionList.map (subscription, i) ->
+        subscription.index or= i
+        subscription
+    }
 
   SUBSCRIPTION_UPDATED: (state, action) ->
     docs = state.docs.map (sub) ->
@@ -46,6 +43,7 @@ module.exports =
     Object.assign {}, state, { docs }
 
   SUBSCRIPTION_UI_UPDATED: (state, action) ->
-    ui = pick action, Object.keys(@initialState.ui)
+    uiProps = pick action, Object.keys(@initialState.ui)
+    ui = Object.assign {}, state.ui, uiProps
 
     Object.assign {}, state, { ui }
