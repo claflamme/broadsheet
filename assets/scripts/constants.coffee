@@ -27,8 +27,8 @@ module.exports = keymirror
   # The user's subscriptions have been requested.
   SUBSCRIPTIONS_REQUESTED: null
 
-  # A list of the user's feed subscriptions has been fetched.
-  SUBSCRIPTIONS_RECEIVED: null
+  # The list of feed subscriptions has been updated.
+  SUBSCRIPTION_LIST_UPDATED: null
 
   # Sent a request to add a new subscription.
   SUBSCRIPTIONS_ADDING_NEW: null
@@ -36,11 +36,11 @@ module.exports = keymirror
   # New subscription added successfully.
   SUBSCRIPTIONS_ADDED_NEW: null
 
-  # One or more subscriptions were edited.
-  SUBSCRIPTIONS_EDITED: null
+  # A single subscription was updated with new information.
+  SUBSCRIPTION_UPDATED: null
 
   # One or more subscriptions were deleted.
-  SUBSCRIPTIONS_DELETED: null
+  SUBSCRIPTION_DELETED: null
 
   # A subscription has been moved around via drag-and-drop.
   SUBSCRIPTIONS_REORDERED: null

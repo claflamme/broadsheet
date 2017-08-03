@@ -72,7 +72,8 @@ module.exports = (app) ->
         subscription.customTitle = req.body.customTitle
 
       subscription.save (err, updatedSubscription) ->
-        res.json updatedSubscription
+        updatedSubscription.populate 'feed', (err, updatedSubscription) ->
+          res.json updatedSubscription
 
   updateMany: (req, res) ->
 

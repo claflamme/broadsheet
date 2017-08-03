@@ -24,7 +24,7 @@ module.exports =
 
   receiveSubscriptions: (subscriptions) ->
 
-    type: constants.SUBSCRIPTIONS_RECEIVED
+    type: constants.SUBSCRIPTION_LIST_UPDATED
     subscriptions: subscriptions
 
   fetchSubscriptions: ->
@@ -76,21 +76,21 @@ module.exports =
   edit: (subscription) ->
 
     (dispatch) =>
-      dispatch type: constants.SUBSCRIPTIONS_EDITED, subscription: subscription
-      dispatch @hideEditPrompt()
-
       request =
         url: "/api/subscriptions/#{ subscription._id }"
         method: 'PATCH'
         body:
           customTitle: subscription.customTitle
 
-      api.send request
+      api.send request, (res, json) =>
+        dispatch type: constants.SUBSCRIPTION_UPDATED, subscription: json
+        dispatch @hideEditPrompt()
+
 
   unsubscribe: (subscription) ->
 
     (dispatch) =>
-      dispatch type: constants.SUBSCRIPTIONS_DELETED, subscription: subscription
+      dispatch type: constants.SUBSCRIPTION_DELETED, subscription: subscription
       dispatch @hideDeletePrompt()
 
       request =
@@ -111,7 +111,7 @@ module.exports =
       doc.index = i
       doc
 
-    type: constants.SUBSCRIPTIONS_RECEIVED
+    type: constants.SUBSCRIPTION_LIST_UPDATED
     subscriptions: docs
 
   saveOrder: (subscriptions) ->
