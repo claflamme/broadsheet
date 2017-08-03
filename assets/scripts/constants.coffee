@@ -30,20 +30,14 @@ module.exports = keymirror
   # The list of feed subscriptions has been updated.
   SUBSCRIPTION_LIST_UPDATED: null
 
-  # Sent a request to add a new subscription.
-  SUBSCRIPTIONS_ADDING_NEW: null
-
-  # New subscription added successfully.
-  SUBSCRIPTIONS_ADDED_NEW: null
-
   # A single subscription was updated with new information.
   SUBSCRIPTION_UPDATED: null
 
   # One or more subscriptions were deleted.
   SUBSCRIPTION_DELETED: null
 
-  # A subscription has been moved around via drag-and-drop.
-  SUBSCRIPTIONS_REORDERED: null
+  # The state of the UI related to subscriptions has been changed.
+  SUBSCRIPTION_UI_UPDATED: null
 
   # --- Articles ---------------------------------------------------------------
 

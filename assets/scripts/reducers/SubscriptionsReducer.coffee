@@ -1,12 +1,12 @@
+pick = require 'lodash/pick'
+
 module.exports =
 
   initialState:
-    # List of subscriptions.
     docs: []
-    # The list of subscriptions is being fetched.
-    loading: false
-    # A new subscription is being added.
-    adding: false
+    ui:
+      loading: false
+      adding: false
 
   SUBSCRIPTION_LIST_UPDATED: (state, action) ->
     # Subscriptions that haven't been dragged-and-dropped yet will have their
@@ -45,8 +45,7 @@ module.exports =
 
     Object.assign {}, state, { docs }
 
-  SUBSCRIPTIONS_ADDING_NEW: (state, actions) ->
-    Object.assign {}, state, { adding: true }
+  SUBSCRIPTION_UI_UPDATED: (state, action) ->
+    ui = pick action, Object.keys(@initialState.ui)
 
-  SUBSCRIPTIONS_ADDED_NEW: (state, actions) ->
-    Object.assign {}, state, { adding: false }
+    Object.assign {}, state, { ui }
