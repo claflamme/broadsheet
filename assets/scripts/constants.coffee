@@ -60,14 +60,8 @@ module.exports = keymirror
 
   # --- Modal windows ----------------------------------------------------------
 
-  # The "new subscription" window has been toggled open or closed.
-  MODAL_NEW_SUBSCRIPTION_TOGGLED: null
-
   # An attempt to add a new subscription resulted in an error.
   MODAL_NEW_SUBSCRIPTION_RETURNED_ERROR: null
 
-  # The "edit subscription" window has been opened or closed.
-  MODAL_EDIT_SUBSCRIPTION_TOGGLED: null
-
-  # The "unsubscribe" window has been opened or closed.
-  MODAL_DELETE_SUBSCRIPTION_TOGGLED: null
+  # A modal window's visibility has been changed.
+  MODAL_VISIBILITY_UPDATED: null

@@ -8,6 +8,7 @@ HTML5Backend = require 'react-dnd-html5-backend'
 { Button  } = require 'react-bootstrap'
 
 UserBadge = require '../components/UserBadge'
+ModalActions = require '../actions/ModalActions'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionNewWindow = require './SubscriptionNewWindow'
 SubscriptionListItem = require './SubscriptionListItem'
@@ -32,10 +33,10 @@ class SubscriptionList extends Component
     @props.dispatch SubscriptionActions.add form.url
 
   _showNewSubscription: =>
-    @props.dispatch SubscriptionActions.showNewPrompt()
+    @props.dispatch ModalActions.setVisibility subscriptionNew: true
 
   _hideNewSubscription: =>
-    @props.dispatch SubscriptionActions.hideNewPrompt()
+    @props.dispatch ModalActions.setVisibility subscriptionNew: false
 
   _onLinkClicked: ->
     document.body.classList.remove 'show-mobile-menu'

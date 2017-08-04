@@ -14,8 +14,8 @@ Reader = (props) ->
     dispatch: props.dispatch
     showControls: props.showControls
     subscription: props.subscription
-    showEditSub: props.modals.showEditSub
-    showDeleteSub: props.modals.showDeleteSub
+    showEditSub: props.modals.visibility.subscriptionEdit
+    showDeleteSub: props.modals.visibility.subscriptionDelete
 
   articleListProps =
     loadMore: props.loadMoreArticles

@@ -46,30 +46,6 @@ module.exports =
           dispatch @hideNewPrompt()
           dispatch @fetchSubscriptionList()
 
-  showNewPrompt: ->
-
-    type: constants.MODAL_NEW_SUBSCRIPTION_TOGGLED, show: true
-
-  hideNewPrompt: ->
-
-    type: constants.MODAL_NEW_SUBSCRIPTION_TOGGLED, show: false
-
-  showEditPrompt: ->
-
-    type: constants.MODAL_EDIT_SUBSCRIPTION_TOGGLED, show: true
-
-  hideEditPrompt: ->
-
-    type: constants.MODAL_EDIT_SUBSCRIPTION_TOGGLED, show: false
-
-  showDeletePrompt: ->
-
-    type: constants.MODAL_DELETE_SUBSCRIPTION_TOGGLED, show: true
-
-  hideDeletePrompt: ->
-
-    type: constants.MODAL_DELETE_SUBSCRIPTION_TOGGLED, show: false
-
   edit: (subscription) ->
 
     (dispatch) =>
