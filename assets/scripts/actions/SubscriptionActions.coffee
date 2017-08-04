@@ -1,6 +1,8 @@
+{ browserHistory } = require 'react-router'
+
 constants = require '../constants'
 api = require '../api'
-{ browserHistory } = require 'react-router'
+ModalActions = require './ModalActions'
 
 createFeed = (url, cb) ->
 
@@ -43,7 +45,7 @@ module.exports =
           if json.error
             return dispatch type: constants.MODAL_NEW_SUBSCRIPTION_RETURNED_ERROR
           dispatch @updateSubscriptionUI adding: false
-          dispatch @hideNewPrompt()
+          dispatch ModalActions.setVisibility subscriptionNew: false
           dispatch @fetchSubscriptionList()
 
   edit: (subscription) ->
@@ -57,14 +59,13 @@ module.exports =
 
       api.send request, (res, json) =>
         dispatch type: constants.SUBSCRIPTION_UPDATED, subscription: json
-        dispatch @hideEditPrompt()
-
+        dispatch ModalActions.setVisibility subscriptionEdit: false
 
   unsubscribe: (subscription) ->
 
     (dispatch) =>
       dispatch type: constants.SUBSCRIPTION_DELETED, subscription: subscription
-      dispatch @hideDeletePrompt()
+      dispatch ModalActions.setVisibility subscriptionDelete: false
 
       request =
         url: "/api/subscriptions/#{ subscription._id }"

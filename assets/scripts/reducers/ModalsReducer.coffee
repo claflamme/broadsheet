@@ -6,8 +6,6 @@ module.exports =
       subscriptionEdit: false
       subscriptionDelete: false
     newSubError: false
-    showEditSub: false
-    showDeleteSub: false
 
   MODAL_VISIBILITY_UPDATED: (state, action) ->
     visibility = Object.assign state.visibility, action.visibility

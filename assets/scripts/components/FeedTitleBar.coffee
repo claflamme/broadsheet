@@ -33,26 +33,24 @@ renderControls = (props) ->
 renderModals = (props) ->
   subscriptionEditProps =
     show: props.showEditSub
-    onHide: -> props.dispatch ModalActions.setVisibility subscriptionEdit: false
     initialSubscription: props.subscription
-    onSubmit: (subscription) -> editSub props, subscription
     feedUrl: props.subscription.feed.url
+    onHide: ->
+      props.dispatch ModalActions.setVisibility subscriptionEdit: false
+    onSubmit: (subscription) ->
+      props.dispatch SubscriptionActions.edit subscription
 
   subscriptionDeleteProps =
     show: props.showDeleteSub
-    onHide: -> props.dispatch ModalActions.setVisibility subscriptionDelete: false
     subscription: props.subscription
-    onSubmit: (subscription) -> deleteSub props, subscription
+    onHide: ->
+      props.dispatch ModalActions.setVisibility subscriptionDelete: false
+    onSubmit: (subscription) ->
+      props.dispatch SubscriptionActions.unsubscribe subscription
 
   el 'div', null,
     el SubscriptionEditWindow, subscriptionEditProps
     el SubscriptionDeleteWindow, subscriptionDeleteProps
-
-editSub = (props, subscription) ->
-  props.dispatch SubscriptionActions.edit subscription
-
-deleteSub = (props, subscription) ->
-  props.dispatch SubscriptionActions.unsubscribe subscription
 
 FeedTitleBar = (props, context) ->
   el 'div', className: 'feedTitleBar',
