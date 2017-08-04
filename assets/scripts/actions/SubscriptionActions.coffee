@@ -86,7 +86,7 @@ module.exports =
       doc
 
     type: constants.SUBSCRIPTION_LIST_UPDATED
-    subscriptions: docs
+    subscriptionList: docs
 
   saveOrder: (subscriptions) ->
 
