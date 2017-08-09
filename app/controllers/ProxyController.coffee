@@ -18,4 +18,7 @@ module.exports = (app) ->
     unless validator.isURL url, validatorConfig
       return res.error 'PROXY_INVALID_URL'
 
-    request(url).pipe res
+    request(url)
+    .on 'error', (err) ->
+      return res.error 'PROXY_STREAM_ERROR'
+    .pipe res

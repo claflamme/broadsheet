@@ -68,6 +68,10 @@ module.exports =
     message: 'The url param must be a valid URL with an http or https protocol.'
     status: 400
 
+  PROXY_STREAM_ERROR:
+    message: 'There was a problem fetching the requested resource.'
+    status: 500
+
   # --- Article ----------------------------------------------------------------
 
   ARTICLE_UNKNOWN_ERROR:
