@@ -5,7 +5,6 @@ api = require '../api'
 ModalActions = require './ModalActions'
 
 createFeed = (url, cb) ->
-
   request =
     url: '/api/feeds'
     method: 'post'
@@ -14,7 +13,6 @@ createFeed = (url, cb) ->
   api.send request, cb
 
 createSubscription = (feedId, cb) ->
-
   request =
     url: '/api/subscriptions'
     method: 'post'
@@ -49,7 +47,6 @@ module.exports =
           dispatch @fetchSubscriptionList()
 
   edit: (subscription) ->
-
     (dispatch) =>
       request =
         url: "/api/subscriptions/#{ subscription._id }"
@@ -62,7 +59,6 @@ module.exports =
         dispatch ModalActions.setVisibility subscriptionEdit: false
 
   unsubscribe: (subscription) ->
-
     (dispatch) =>
       dispatch type: constants.SUBSCRIPTION_DELETED, subscription: subscription
       dispatch ModalActions.setVisibility subscriptionDelete: false
@@ -75,21 +71,18 @@ module.exports =
         browserHistory.push '/'
 
   move: (docs, dragIndex, hoverIndex) ->
-
-    dragSub = docs[dragIndex]
+    draggedSubscription = docs[dragIndex]
 
     docs.splice dragIndex, 1
-    docs.splice hoverIndex, 0, dragSub
+    docs.splice hoverIndex, 0, draggedSubscription
 
     docs = docs.map (doc, i) ->
       doc.index = i
       doc
 
-    type: constants.SUBSCRIPTION_LIST_UPDATED
-    subscriptionList: docs
+    @updateSubscriptionList docs
 
   saveOrder: (subscriptions) ->
-
     subscriptions = subscriptions.map (sub) ->
       { _id: sub._id, index: sub.index }
 
