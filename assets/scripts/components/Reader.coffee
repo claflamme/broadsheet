@@ -30,7 +30,7 @@ Reader = (props) ->
     subscriptions: props.subscriptions
 
   el 'div', style: { height: '100%' },
-    el Col, xs: 12, sm: 9, lg: 4, className: 'article-list-col dashboard-col',
+    el Col, xs: 12, sm: 9, lg: 4, className: 'article-list-col height-100',
       el FeedTitleBar, feedTitleBarProps
       el ArticleList, articleListProps
     el Col, xs: 12, lg: 6, className: 'articleContent dashboard-col',

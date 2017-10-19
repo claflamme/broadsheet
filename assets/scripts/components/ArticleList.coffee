@@ -50,7 +50,7 @@ renderLoadMore = (props) ->
 ArticleList = (props, context) ->
   hasDocs = props.articles.docs.length > 0
 
-  el 'div', className: 'articlesListContainer',
+  el 'div', className: 'article-list-container dashboard-col',
     el Loader, show: (props.articles.loading and not hasDocs)
     el 'ul', className: "articlesList slide #{ if hasDocs then 'up' }",
       props.articles.docs.map renderArticle.bind null, props
