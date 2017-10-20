@@ -87,7 +87,7 @@ module.exports = (app) ->
       sanitize(p, allowedTags: []) isnt ''
 
     summary = if summary
-    	sanitize summary, allowedTags: []
+      sanitize summary, allowedTags: []
     else
       ''
 

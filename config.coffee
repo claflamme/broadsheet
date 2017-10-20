@@ -32,7 +32,10 @@ module.exports =
       inputPath: 'assets/scripts/App.coffee'
       outputPath: 'app.js' # Relative to the public folder.
       options:
-        transform: ['coffeeify']
+        transform: [
+          'coffeeify'
+          ['babelify', { presets: ['es2015', 'react'], extensions: ['.coffee'] }]
+        ]
         extensions: ['.coffee']
     }
   ]
