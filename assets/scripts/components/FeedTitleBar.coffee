@@ -53,7 +53,7 @@ renderModals = (props) ->
     el SubscriptionDeleteWindow, subscriptionDeleteProps
 
 FeedTitleBar = (props, context) ->
-  el 'div', className: 'feedTitleBar',
+  el 'div', className: 'feed-title-bar',
     el 'i', className: 'fa fa-bars mobile-menu-button', onClick: toggleMobileMenu
     el 'i', className: 'fa fa-times mobile-menu-button', onClick: toggleMobileMenu
     el 'h3', className: 'feed-title',
