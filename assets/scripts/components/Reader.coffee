@@ -6,8 +6,17 @@ pt = require 'prop-types'
 
 ArticleReader = require '../components/ArticleReader'
 ArticleList = require '../components/ArticleList'
+FeedTitleBar = require '../components/FeedTitleBar'
 
 Reader = (props) ->
+  feedTitleBarProps =
+    title: props.title
+    dispatch: props.dispatch
+    showControls: props.showControls
+    subscription: props.subscription
+    showEditSub: props.modals.visibility.subscriptionEdit
+    showDeleteSub: props.modals.visibility.subscriptionDelete
+
   articleListProps =
     loadMore: props.loadMoreArticles
     articles: props.articles
@@ -22,6 +31,7 @@ Reader = (props) ->
 
   el 'div', style: { height: '100%' },
     el Col, xs: 12, sm: 9, lg: 4, className: 'article-list-col height-100',
+      el FeedTitleBar, feedTitleBarProps
       el ArticleList, articleListProps
     el Col, xs: 12, lg: 6, className: 'articleContent dashboard-col',
       el ArticleReader, articleReaderProps

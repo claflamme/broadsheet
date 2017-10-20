@@ -39,12 +39,6 @@ module.exports = keymirror
   # The state of the UI related to subscriptions has been changed.
   SUBSCRIPTION_UI_UPDATED: null
 
-  # Picked a subscription to view from the list.
-  SUBSCRIPTION_SELECTED: null
-
-  # Cleared the current subscription selection, probably to use 'View All'
-  SUBSCRIPTION_DESELECTED: null
-
   # --- Articles ---------------------------------------------------------------
 
   # A request was sent to fetch an article list.

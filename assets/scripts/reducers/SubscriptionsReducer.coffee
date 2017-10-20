@@ -4,7 +4,6 @@ module.exports =
 
   initialState:
     docs: []
-    activeSubscription: null
     ui:
       loading: false
       adding: false
@@ -35,22 +34,16 @@ module.exports =
       else
         sub
 
-    { state..., docs }
+    Object.assign {}, state, { docs }
 
   SUBSCRIPTION_DELETED: (state, action) ->
     docs = state.docs.filter (sub) ->
       sub._id isnt action.subscription._id
 
-    { state..., docs }
+    Object.assign {}, state, { docs }
 
   SUBSCRIPTION_UI_UPDATED: (state, action) ->
     uiProps = pick action, Object.keys(@initialState.ui)
-    ui = { state.ui..., uiProps... }
+    ui = Object.assign {}, state.ui, uiProps
 
-    { state..., ui }
-
-  SUBSCRIPTION_SELECTED: (state, action) ->
-    { state..., activeSubscription: action.subscription }
-
-  SUBSCRIPTION_DESELECTED: (state, action) ->
-    { state..., activeSubscription: @initialState.activeSubscription }
+    Object.assign {}, state, { ui }
