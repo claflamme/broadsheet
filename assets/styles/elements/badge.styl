@@ -1,23 +1,18 @@
 .user-badge
-  margin (halfGutter() * -1)
   margin-bottom 0
   transition 200ms background-color
 
-  &:hover
-    background-color darken($gray-lighter, 5)
-
   .dropdown, button
-    width 100%
     text-align left
 
   button, button:hover, button:focus
-    padding halfGutter()
+    padding 0
     color $gray-dark
     font-weight 500
     text-decoration none
 
   .fa
-    margin-top 3px
+    margin 3px 0 0 halfGutter()
 
   .dropdown-menu
     right 0

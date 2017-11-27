@@ -57,6 +57,8 @@ class Dashboard extends Component
       'subscriptions'
     ]
 
+    childProps.user = @props.auth.user
+
     subscriptionsProps =
       subscriptions: @props.subscriptions.docs
       isAdding: @props.subscriptions.ui.adding
