@@ -1,17 +1,4 @@
 .feed-title-bar
-  padding halfGutter()
-  padding-left halfGutter() * 3
-  border-bottom 1px solid $gray-border
-
-  +sm()
-    position absolute
-    background-color white
-    width "calc(100% - %s)" % halfGutter()
-    height $feed-title-bar-height
-    padding-left halfGutter()
-    z-index 1
-    box-shadow 0 8px 10px -10px rgba(0, 0, 0, 0.1)
-
   .mobile-menu-button
     position absolute
     left halfGutter()
@@ -28,12 +15,14 @@
     overflow-x hidden
     white-space nowrap
     text-overflow ellipsis
+    line-height $app-nav-height
 
 .feed-title-bar-icons
   font-size 1.1em
-  margin 10px halfGutter() * -1 0
-  padding 0 halfGutter()
+  line-height $app-nav-height
   list-style-type none
+  padding 0
+  margin 0
   overflow hidden
   display none
 
@@ -42,8 +31,7 @@
 
   li
     display inline-block
-    float left
-    margin-right halfGutter()
+    margin-left halfGutter()
     line-height 0
 
   .fa

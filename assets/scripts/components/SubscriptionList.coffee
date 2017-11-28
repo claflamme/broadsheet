@@ -7,7 +7,6 @@ HTML5Backend = require 'react-dnd-html5-backend'
 { IndexLink } = require 'react-router'
 { Button  } = require 'react-bootstrap'
 
-UserBadge = require '../components/UserBadge'
 ModalActions = require '../actions/ModalActions'
 SubscriptionActions = require '../actions/SubscriptionActions'
 SubscriptionNewWindow = require './SubscriptionNewWindow'
@@ -71,7 +70,6 @@ class SubscriptionList extends Component
       loading: @props.isAdding
 
     el 'div', null,
-      el UserBadge, title: @props.user?.email
       el 'div', className: 'subscriptions-section',
         el 'ul', className: 'subscriptions-list',
           el 'li', null,

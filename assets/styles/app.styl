@@ -8,6 +8,7 @@
 @import 'elements/badge'
 @import 'elements/loader'
 
+@import 'components/app-nav'
 @import 'components/feed-title-bar'
 
 html
@@ -85,7 +86,7 @@ button.load-more-articles
 .dashboardGrid
   background #fff
   position absolute
-  top 0
+  top $app-nav-height
   bottom 0
   left 0
   right 0
@@ -97,6 +98,14 @@ button.load-more-articles
 .dashboard-col
   height 100%
   overflow-y auto
+
+  &::-webkit-scrollbar
+    background-color $gray-lighter
+    width 5px
+
+  &::-webkit-scrollbar-thumb
+    background-color $gray-light
+    outline 0
 
 .slide
   transition none

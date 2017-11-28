@@ -93,3 +93,10 @@ module.exports =
 
     (dispatch) ->
       api.send request
+
+  selectActiveSubscription: (subscription) ->
+    type: constants.SUBSCRIPTION_SELECTED
+    subscription: subscription
+
+  deselectActiveSubscription: ->
+    type: constants.SUBSCRIPTION_DESELECTED

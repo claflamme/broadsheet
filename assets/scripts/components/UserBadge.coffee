@@ -11,7 +11,7 @@ UserBadge = (props) ->
     title: renderTitle props.title
     bsStyle: 'link'
 
-  el 'div', className: 'user-badge',
+  el 'span', className: 'user-badge pull-right',
     el DropdownButton, dropdownButtonProps,
       el MenuItem, href: '/logout',
         el 'i', className: 'fa fa-fw fa-sign-out'
