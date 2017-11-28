@@ -42,19 +42,20 @@ hr
   height 100%
 
 .articlesList
-  margin 0
+  margin-top halfGutter()
   padding 0
   list-style-type none
 
   li
+    background-color white
     border-bottom 1px solid $gray-border
-    margin 0 halfGutter() * -1
     padding halfGutter()
     cursor pointer
     transition box-shadow 100ms
 
     +sm()
       padding 8px halfGutter()
+      margin-bottom (halfGutter() / 3)
 
     &:hover
       box-shadow inset 5px 0 0 0 darken($gray-lighter, 10)
@@ -84,7 +85,7 @@ button.load-more-articles
     display inline
 
 .dashboardGrid
-  background #fff
+  background $gray-lighter
   position absolute
   top $app-nav-height
   bottom 0
