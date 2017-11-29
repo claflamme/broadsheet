@@ -7,9 +7,8 @@ FeedTitleBar = require './FeedTitleBar'
 UserBadge = require './UserBadge'
 
 AppNav = (props) ->
-
   title = 'All Subscriptions'
-  activeSub = props.subscriptions.activeSubscription
+  activeSub = props.subscriptions.active
 
   if activeSub
     title = activeSub?.customTitle or activeSub?.feed.title
@@ -17,8 +16,8 @@ AppNav = (props) ->
   titleBarProps =
     title: title
     dispatch: props.dispatch
-    showControls: props.subscriptions.activeSubscription?
-    subscription: props.subscriptions.activeSubscription
+    showControls: props.subscriptions.active?
+    subscription: props.subscriptions.active
     showEditSub: props.modals.visibility.subscriptionEdit
     showDeleteSub: props.modals.visibility.subscriptionDelete
 

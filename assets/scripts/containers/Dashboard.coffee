@@ -19,28 +19,7 @@ class Dashboard extends Component
     unless @props.auth.token
       return @context.router.replace '/authenticate'
 
-    @selectActiveSubscription()
     @props.dispatch AuthActions.fetchUser()
-
-  componentDidUpdate: (prevProps) ->
-    subs = @props.subscriptions
-    if subs.docs.length > 0
-      if @props.params.feedId isnt subs.activeSubscription?.feed?._id
-        @selectActiveSubscription()
-
-  selectActiveSubscription: ->
-    if @props.params.feedId
-      sub = @getActiveSubscription @props.params.feedId
-      @props.dispatch SubscriptionActions.selectActiveSubscription sub
-    else
-      @props.dispatch SubscriptionActions.deselectActiveSubscription()
-
-  getActiveSubscription: (feedId) ->
-    unless feedId
-      return null
-
-    @props.subscriptions.docs.find (subscription, i) ->
-      subscription.feed._id is feedId
 
   render: ->
     # Prevent any "flicker" when redirecting to login screen.
@@ -58,6 +37,8 @@ class Dashboard extends Component
     ]
 
     childProps.user = @props.auth.user
+    childProps.subscriptions.active = @props.subscriptions.docs.find (sub) =>
+      sub.feed._id is @props.params.feedId
 
     subscriptionsProps =
       subscriptions: @props.subscriptions.docs

@@ -4,7 +4,6 @@ module.exports =
 
   initialState:
     docs: []
-    activeSubscription: null
     ui:
       loading: false
       adding: false
@@ -48,9 +47,3 @@ module.exports =
     ui = { state.ui..., uiProps... }
 
     { state..., ui }
-
-  SUBSCRIPTION_SELECTED: (state, action) ->
-    { state..., activeSubscription: action.subscription }
-
-  SUBSCRIPTION_DESELECTED: (state, action) ->
-    { state..., activeSubscription: @initialState.activeSubscription }
