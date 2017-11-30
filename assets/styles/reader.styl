@@ -5,7 +5,6 @@
   padding 0 halfGutter()
 
 .articleContent
-  background-color white
   padding 0
   overflow hidden
   font-size 16px
@@ -32,22 +31,24 @@
     width 100%
     padding halfGutter()
     transition transform $animation-speed
-    transform translateX(100%)
 
     &.show-mobile-reader
-      transform translateX(0)
+      +xs()
+        transform translateX(0)
 
     +sm()
       width auto
       height auto
       position static
-      background-color transparent
-      transform translateX(0)
+      background-color #fff
+      margin halfGutter()
       padding halfGutter() * 3
       transition none
+      box-shadow $card-shadow
+      border-radius 8px
 
   .article-body
-    max-width 600px
+    max-width 700px
     margin auto
 
     [class*='caption'], figcaption

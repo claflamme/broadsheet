@@ -65,10 +65,17 @@ class ArticleReader extends Component
       className: 'article-close-button text-center'
       onClick: @props.onHide
 
-    el 'div', className: "article-wrapper #{ if @props.show then 'show-mobile-reader' else '' }",
-      el 'div', className: 'article-body',
+    articleWrapperClasses = [
+      'article-wrapper'
+      if @props.show then 'show-mobile-reader'
+      'slide'
+      if @props.reader.body then 'up'
+    ]
+
+    el 'div', className: articleWrapperClasses.join(' '),
+      el 'div', className: "article-body",
         el Loader, show: @props.reader.loading
-        el 'div', className: "slide #{ if @props.reader.body then 'up' }",
+        el 'div', null,
           el Button, buttonProps,
             el 'i', className: 'fa fa-arrow-left'
             ' Back'
