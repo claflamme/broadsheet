@@ -5,8 +5,6 @@ pt = require 'prop-types'
 { Button } = require 'react-bootstrap'
 moment = require 'moment'
 
-Loader = require './Loader'
-
 # --- Helpers ------------------------------------------------------------------
 
 # Some sites use lazy loaders that store image src/srcset attributes in data
@@ -74,7 +72,6 @@ class ArticleReader extends Component
 
     el 'div', className: articleWrapperClasses.join(' '),
       el 'div', className: "article-body",
-        el Loader, show: @props.reader.loading
         el 'div', null,
           el Button, buttonProps,
             el 'i', className: 'fa fa-arrow-left'
