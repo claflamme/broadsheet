@@ -81,7 +81,7 @@ module.exports = (app) ->
 
     # Full article data is fetched at "read time", so we don't need to store any
     # more than a brief summary. In this case, that's the first sentence.
-    summary = item.summary or item.description
+    summary = item.summary or item.description or ''
 
     summary = summary.split('</p>').find (p) ->
       sanitize(p, allowedTags: []) isnt ''

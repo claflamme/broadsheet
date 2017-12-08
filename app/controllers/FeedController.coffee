@@ -35,6 +35,8 @@ module.exports = (app) ->
       if err?.code is 11000
         return Feed.findOne params, (err, existingFeed) ->
           res.json existingFeed
+      else
+        return res.error 'FEED_UNKNOWN_ERROR'
 
       ParserService.processFeed newFeed, (err) ->
 
