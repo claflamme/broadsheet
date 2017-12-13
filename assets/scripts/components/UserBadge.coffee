@@ -13,8 +13,9 @@ UserBadge = (props) ->
 
   el 'span', className: 'user-badge pull-right',
     el DropdownButton, dropdownButtonProps,
+      el MenuItem, header: true,
+        props.title
       el MenuItem, href: '/logout',
-        el 'i', className: 'fa fa-fw fa-sign-out'
         el 'span', {},
           'Log Out'
 
@@ -23,7 +24,7 @@ UserBadge.propTypes =
 
 renderTitle = (title) ->
   el 'div', {},
-    title or ''
+    'Settings'
     el 'i', className: 'fa fa-chevron-down pull-right'
 
 module.exports = UserBadge

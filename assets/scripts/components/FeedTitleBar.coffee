@@ -1,15 +1,11 @@
-React = require 'react'
-el = React.createElement
-pt = require 'prop-types'
-{ Row, Col } = require 'react-bootstrap'
+import React, { createElement as el } from 'react'
+import pt from 'prop-types'
+import { Row, Col } from 'react-bootstrap'
 
 SubscriptionEditWindow = require './SubscriptionEditWindow'
 SubscriptionDeleteWindow = require './SubscriptionDeleteWindow'
 SubscriptionActions = require '../actions/SubscriptionActions'
 ModalActions = require '../actions/ModalActions'
-
-toggleMobileMenu = (e) ->
-  document.body.classList.toggle 'show-mobile-menu'
 
 renderControls = (props) ->
   editProps =
@@ -20,11 +16,11 @@ renderControls = (props) ->
     title: 'Unsubscribe'
     onClick: -> props.dispatch ModalActions.setVisibility subscriptionDelete: true
 
-  el 'ul', className: 'feed-title-bar-icons text-right',
-    el 'li', null,
+  el 'ul', className: 'feed-title-bar__icon-list text-right',
+    el 'li', className: 'feed-title-bar__icon',
       el 'a', editProps,
         el 'i', className: 'fa fa-pencil'
-    el 'li', null,
+    el 'li', className: 'feed-title-bar__icon',
       el 'a', deleteProps,
         el 'i', className: 'fa fa-times'
 
@@ -54,9 +50,7 @@ FeedTitleBar = (props, context) ->
   el 'div', className: 'feed-title-bar',
     el Row, null,
       el Col, xs: (if props.showControls then 9 else 12),
-        el 'i', className: 'fa fa-bars mobile-menu-button', onClick: toggleMobileMenu
-        el 'i', className: 'fa fa-times mobile-menu-button', onClick: toggleMobileMenu
-        el 'h3', className: 'feed-title',
+        el 'h3', className: 'feed-title-bar__title',
           props.title or el('span', null, '')
       if props.showControls
         el Col, xs: 3,

@@ -1,53 +1,36 @@
 .feed-title-bar
-  .mobile-menu-button
-    position absolute
-    left halfGutter()
-    font-size 24px
 
-    &.fa-times
-      display none
-
-    +sm()
-      display none
-
-  .feed-title
+  &__title
     margin 0
     overflow-x hidden
     white-space nowrap
     text-overflow ellipsis
     line-height $app-nav-height
 
-.feed-title-bar-icons
-  font-size 1.1em
-  line-height $app-nav-height
-  list-style-type none
-  padding 0
-  margin 0
-  overflow hidden
-  display none
+  &__icon-list
+    font-size 1.1em
+    line-height $app-nav-height
+    list-style-type none
+    padding 0
+    margin 0
+    overflow hidden
+    display none
 
-  +sm()
-    display block
+    +sm()
+      display block
 
-  li
+  &__icon
     display inline-block
     margin-left halfGutter()
     line-height 0
 
-  .fa
-    margin-right (halfGutter()/ 3)
+    .fa
+      margin-right (halfGutter() / 3)
 
-  a
-    cursor pointer
-    color $gray-light
+    a
+      cursor pointer
+      color $gray-light
 
-  a:hover
-    color $gray
-    text-decoration none
-
-.show-mobile-menu
-  .feed-title-bar
-    .fa-times
-      display inline
-    .fa-bars
-      display none
+    a:hover
+      color $gray
+      text-decoration none

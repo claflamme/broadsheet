@@ -10,5 +10,21 @@
   z-index 5
 
   .logo
-    line-height $app-nav-height
+    display inline-block
+    float left
     margin 0
+    line-height $app-nav-height
+
+.mobile-menu-button
+  display inline-block
+  float left
+  margin-right halfGutter()
+  font-size 24px
+  line-height $app-nav-height
+  color $gray-dark
+
+  +sm()
+    display none
+
+  &.fa-times
+    display none

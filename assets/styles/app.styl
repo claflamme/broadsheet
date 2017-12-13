@@ -114,12 +114,13 @@ button.load-more-articles
   height 100%
   overflow-y auto
 
-  &::-webkit-scrollbar
-    width 6px
+  +sm()
+    &::-webkit-scrollbar
+      width 6px
 
-  &::-webkit-scrollbar-thumb
-    background-color lighten($gray-light, 25%)
-    outline 0
+    &::-webkit-scrollbar-thumb
+      background-color lighten($gray-light, 25%)
+      outline 0
 
 .slide
   opacity 0
@@ -142,7 +143,6 @@ blockquote
   border none
 
 .dropdown-menu > li > a
-  padding 5px 10px
   color $gray-dark
 
 .auth-prompt

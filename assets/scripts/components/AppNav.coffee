@@ -6,6 +6,9 @@ pt = require 'prop-types'
 FeedTitleBar = require './FeedTitleBar'
 UserBadge = require './UserBadge'
 
+toggleMobileMenu = (e) ->
+  document.body.classList.toggle 'show-mobile-menu'
+
 AppNav = (props) ->
   title = 'All Subscriptions'
   activeSub = props.subscriptions.active
@@ -23,12 +26,17 @@ AppNav = (props) ->
 
   el Navbar, fluid: true, className: 'app-nav',
     el Row, null,
-      el Col, xs: 12, sm: 3, lg: 2,
+      # --- Broadsheet logo & burger icon
+      el Col, xs: 6, sm: 3, lg: 2,
+        el 'i', className: 'fa fa-bars mobile-menu-button', onClick: toggleMobileMenu
+        el 'i', className: 'fa fa-times mobile-menu-button', onClick: toggleMobileMenu
         el 'h4', className: 'logo',
           'Broadsheet'
+      # --- Feed title & controls
       el Col, xs: 12, sm: 7, lg: 4,
         el FeedTitleBar, titleBarProps
-      el Col, xs: 12, sm: 2, lg: 6,
+      # --- User options dropdown
+      el Col, xs: 6, sm: 2, lg: 6, className: 'user-badge-col',
         el UserBadge, title: props.user?.email
 
 AppNav.propTypes =
