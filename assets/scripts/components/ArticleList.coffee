@@ -15,7 +15,7 @@ renderArticle = (props, article, i) ->
   liProps =
     key: i
     onClick: props.onClick.bind null, article
-    className: "#{ className }"
+    className: "article-list-item #{ className }"
 
   el 'li', liProps,
     el 'a', href: article.url, onClick: onArticleClick, title: article.title,
@@ -39,7 +39,7 @@ renderLoadMore = (props) ->
 
   buttonProps =
     disabled: isFinished or props.articles.loading
-    className: 'load-more-articles'
+    className: 'my-1'
     bsStyle: 'primary'
     block: true
     onClick: props.loadMore
@@ -52,7 +52,7 @@ ArticleList = (props, context) ->
 
   el 'div', className: 'article-list-container dashboard-col',
     el Loader, show: (props.articles.loading and not hasDocs)
-    el 'ul', className: "articlesList slide #{ if hasDocs then 'up' }",
+    el 'ul', className: "article-list slide #{ if hasDocs then 'up' }",
       props.articles.docs.map renderArticle.bind null, props
     renderLoadMore props
 

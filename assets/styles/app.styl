@@ -1,7 +1,6 @@
 @import 'variables'
 @import 'bootstrap'
 @import 'subscriptions'
-@import 'reader'
 
 @import 'elements/button'
 @import 'elements/input'
@@ -10,6 +9,8 @@
 
 @import 'components/app-nav'
 @import 'components/feed-title-bar'
+@import 'components/article-list'
+@import 'components/article-display'
 
 html
   height: 100%
@@ -41,62 +42,11 @@ hr
 .height-100
   height 100%
 
-.articlesList
-  margin-top halfGutter()
-  padding 0
-  list-style-type none
-
-  li
-    position relative
-    background-color white
-    box-shadow $card-shadow
-    border-radius 5px
-    padding halfGutter()
-    cursor pointer
-
-    +sm()
-      padding 8px halfGutter()
-      margin-bottom (halfGutter() / 2.5)
-
-    &:before
-      content ''
-      background-color darken($gray-lighter, 10)
-      position absolute
-      top 0
-      bottom 0
-      left 0
-      width 5px
-      opacity 0
-      border-radius 5px 0 0 5px
-      transition opacity 200ms, background-color 200ms
-
-    &:hover:before
-      opacity 1
-
-  li.active:before
-    opacity 1
-    background-color $brand-primary
-
-button.load-more-articles
+.my-1
   margin halfGutter() 0
 
-.article-title
-  color $gray-dark
-  font-weight 400
-  margin 0
-  overflow hidden
-  text-overflow ellipsis
-
-  +sm()
-    font-weight 500
-
-.article-preview
-  color $gray-light
-  font-weight 300
-  display none
-
-  +sm()
-    display inline
+.mx-1
+  margin 0 halfGutter()
 
 .dashboardGrid
   background $gray-lighter

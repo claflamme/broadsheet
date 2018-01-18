@@ -12,14 +12,14 @@ class ArticlesAll extends Component
 
   render: ->
     subscriptionsList = @props.subscriptions.docs
-    articlesList = @props.articles.docs
+    articleList = @props.articles.docs
 
     childProps =
       title: 'All subscriptions'
       loadMoreArticles: @_loadMore
       onArticleClick: @_onClick
       hideReader: @_hideReader
-      articles: @_mapSubsToArticles subscriptionsList, articlesList
+      articles: @_mapSubsToArticles subscriptionsList, articleList
 
     React.createElement Reader, Object.assign(childProps, @props)
 
@@ -34,13 +34,13 @@ class ArticlesAll extends Component
   _hideReader: =>
     @props.dispatch ArticleActions.hideReader()
 
-  _mapSubsToArticles: (subscriptionsList, articlesList) ->
+  _mapSubsToArticles: (subscriptionsList, articleList) ->
     # A hash of subscriptions, where keys are a subscription's feed ID and
     # values are the subscriptions themselves.
     subsByFeedId = fromPairs subscriptionsList.map (subscription) ->
       [subscription.feed._id, subscription]
 
-    articlesList.map (article) ->
+    articleList.map (article) ->
       Object.assign article, { subscription: subsByFeedId[article.feed] }
 
 module.exports = ArticlesAll

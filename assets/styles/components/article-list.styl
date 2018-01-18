@@ -1,0 +1,59 @@
+.article-list
+  margin-top halfGutter()
+  padding 0
+  list-style-type none
+
+.article-list-col
+  padding 0
+
+.article-list-container
+  padding 0 halfGutter()
+
+.article-list-item
+  position relative
+  background-color white
+  box-shadow $card-shadow
+  border-radius 5px
+  padding halfGutter()
+  cursor pointer
+
+  +sm()
+    padding 8px halfGutter()
+    margin-bottom (halfGutter() / 2.5)
+
+  &:before
+    content ''
+    background-color darken($gray-lighter, 10)
+    position absolute
+    top 0
+    bottom 0
+    left 0
+    width 5px
+    opacity 0
+    border-radius 5px 0 0 5px
+    transition opacity 200ms, background-color 200ms
+
+  &:hover:before
+    opacity 1
+
+  &.active:before
+    opacity 1
+    background-color $brand-primary
+
+.article-list-item-title
+  color $gray-dark
+  font-weight 400
+  margin 0
+  overflow hidden
+  text-overflow ellipsis
+
+  +sm()
+    font-weight 500
+
+.article-list-item-preview
+  color $gray-light
+  font-weight 300
+  display none
+
+  +sm()
+    display inline

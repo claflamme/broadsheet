@@ -13,11 +13,11 @@ renderSubscriptionName = (subscription) ->
 
 ArticleListItem = (props, context) ->
   titleProps =
-    className: 'article-title'
+    className: 'article-list-item-title'
     dangerouslySetInnerHTML: { __html: props.article?.title }
 
   summaryProps =
-    className: 'text-muted article-preview'
+    className: 'text-muted article-list-item-preview'
     dangerouslySetInnerHTML: { __html: props.article.summary }
 
   el Row, null,

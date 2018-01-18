@@ -24,7 +24,7 @@ Reader = (props) ->
   el 'div', style: { height: '100%' },
     el Col, xs: 12, sm: 9, lg: 4, className: 'article-list-col height-100',
       el ArticleList, articleListProps
-    el Col, xs: 12, lg: 6, className: 'articleContent dashboard-col',
+    el Col, xs: 12, lg: 6, className: 'article-display dashboard-col',
       el Loader, show: props.reader.loading
       el ArticleReader, articleReaderProps
 
