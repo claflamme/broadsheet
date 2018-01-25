@@ -19,6 +19,9 @@ build-button-variant($name, $color)
   transition $animation-speed all
   padding (halfGutter() / 2) halfGutter()
 
+  &.btn-lg
+    padding halfGutter() (halfGutter() * 1.5)
+
   &[disabled]
     opacity 0.5
 

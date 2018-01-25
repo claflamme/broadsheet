@@ -25,17 +25,8 @@ class SubscriptionList extends Component
   @defaultProps:
     showNewSub: false
 
-  componentWillMount: ->
-    @props.dispatch SubscriptionActions.fetchSubscriptionList()
-
-  _addSubscription: (form) =>
-    @props.dispatch SubscriptionActions.add form.url
-
   _showNewSubscription: =>
     @props.dispatch ModalActions.setVisibility subscriptionNew: true
-
-  _hideNewSubscription: =>
-    @props.dispatch ModalActions.setVisibility subscriptionNew: false
 
   _onLinkClicked: ->
     document.body.classList.remove 'show-mobile-menu'
@@ -71,17 +62,16 @@ class SubscriptionList extends Component
 
     el 'div', null,
       el 'div', className: 'subscriptions-section',
+        el Button, bsStyle: 'primary', block: true, onClick: @_showNewSubscription,
+          el 'span', null,
+            "Add Subscription "
+          el 'i', className: 'fa fa-plus'
+      el 'div', className: 'subscriptions-section',
         el 'ul', className: 'subscriptions-list',
           el 'li', null,
             el IndexLink, to: '/', activeClassName: 'active', onClick: @_onLinkClicked,
               el 'i', className: 'fa fa-fw fa-rss subscriptionIcon'
               "All"
           @props.subscriptions.map @_renderSubscription
-      el 'div', className: 'subscriptions-section',
-        el Button, bsStyle: 'primary', block: true, onClick: @_showNewSubscription,
-          el 'span', null,
-            "Add Subscription "
-          el 'i', className: 'fa fa-plus'
-      el SubscriptionNewWindow, subscriptionNewProps
 
 module.exports = DragDropContext(HTML5Backend) SubscriptionList

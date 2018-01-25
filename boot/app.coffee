@@ -54,14 +54,17 @@ module.exports = (configPath) ->
   app.express.set 'views', app.utils.getPath app.config.paths.views
   app.express.set 'view engine', 'pug'
 
-  if process.env.DATABASE_URL
-    console.log 'Connecting to database...'
-    app.mongoose.connect process.env.DATABASE_URL, (err) ->
-      if err
-        console.error '!!!', err.message, '!!!'
-        throw err
-      else
-        console.log '...connected!'
-        startServer app
-  else
-    startServer app
+  unless process.env.DATABASE_URL
+    return startServer app
+
+  console.log 'Connecting to database...'
+
+  app.mongoose.connect process.env.DATABASE_URL, { useMongoClient: true }, (err) ->
+    if err
+      # For some reason, not all mongo errors are throwable. throw() will still
+      # halt the process, though.
+      console.error err
+      throw err
+    else
+      console.log '...connected!'
+      startServer app

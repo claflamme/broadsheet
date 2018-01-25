@@ -86,7 +86,7 @@ class ArticleReader extends Component
   renderPlaceholder: ->
     el 'div', className: 'article-placeholder',
       el 'p', className: 'text-muted',
-        'Select an article from the left.'
+        '← Select an article from the left.'
 
   onArticleClick: (e) ->
     if e.target.href

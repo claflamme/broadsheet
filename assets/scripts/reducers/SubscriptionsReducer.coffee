@@ -5,6 +5,7 @@ module.exports =
   initialState:
     docs: []
     ui:
+      fetched: false
       loading: false
       adding: false
 
@@ -21,6 +22,7 @@ module.exports =
       a.index - b.index
 
     Object.assign {}, state, {
+      fetched: true
       loading: false
       docs: action.subscriptionList.map (subscription, i) ->
         subscription.index or= i
