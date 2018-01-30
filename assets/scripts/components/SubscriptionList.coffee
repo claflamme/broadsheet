@@ -69,7 +69,7 @@ class SubscriptionList extends Component
       el 'div', className: 'subscriptions-section',
         el 'ul', className: 'subscriptions-list',
           el 'li', null,
-            el IndexLink, to: '/', activeClassName: 'active', onClick: @_onLinkClicked,
+            el IndexLink, to: '/feeds/all', activeClassName: 'active', onClick: @_onLinkClicked,
               el 'i', className: 'fa fa-fw fa-rss subscriptionIcon'
               "All"
           @props.subscriptions.map @_renderSubscription

@@ -5,6 +5,7 @@ el = React.createElement
 { Grid, Row, Col } = require 'react-bootstrap'
 pick = require 'lodash/pick'
 
+Loader = require '../components/Loader'
 AppNav = require '../components/AppNav'
 SubscriptionList = require '../components/SubscriptionList'
 SubscriptionNewWindow = require '../components/SubscriptionNewWindow'
@@ -69,7 +70,7 @@ class Dashboard extends Component
       el AppNav, childProps
       el Grid, fluid: true, className: 'dashboardGrid',
         unless @props.subscriptions.fetched
-          null
+          el Loader, show: true
         else if subscriptionsProps.subscriptions.length > 0
           el Row, null,
             el Col, xs: 12, sm: 3, lg: 2, className: 'subscriptions dashboard-col',
