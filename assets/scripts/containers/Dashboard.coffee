@@ -4,15 +4,18 @@ el = React.createElement
 { connect } = require 'react-redux'
 { Grid, Row, Col } = require 'react-bootstrap'
 pick = require 'lodash/pick'
+fromPairs = require 'lodash/fromPairs'
 
 Loader = require '../components/Loader'
 AppNav = require '../components/AppNav'
 SubscriptionList = require '../components/SubscriptionList'
 SubscriptionNewWindow = require '../components/SubscriptionNewWindow'
+ArticleReader = require '../components/ArticleReader'
 ZeroState = require '../components/ZeroState'
 AuthActions = require '../actions/AuthActions'
 SubscriptionActions = require '../actions/SubscriptionActions'
 ModalActions = require '../actions/ModalActions'
+ArticleActions = require '../actions/ArticleActions'
 
 class Dashboard extends Component
 
@@ -34,6 +37,9 @@ class Dashboard extends Component
 
   _hideNewSubscription: =>
     @props.dispatch ModalActions.setVisibility subscriptionNew: false
+
+  _hideReader: =>
+    @props.dispatch ArticleActions.hideReader()
 
   render: ->
     # Prevent any "flicker" when redirecting to login screen.
@@ -66,16 +72,33 @@ class Dashboard extends Component
       onSubmit: @_addSubscription
       loading: @props.subscriptions.ui.adding
 
+    articleListProps =
+      articles: @props.articles
+      currentArticle: @props.reader.doc
+      dispatch: @props.dispatch
+      subscriptions: @props.subscriptions
+      reader: @props.reader
+
+    articleReaderProps =
+      show: @props.reader.showMobileReader
+      onHide: @_hideReader
+      reader: @props.reader
+      subscriptions: @props.subscriptions
+
     el 'div', null,
       el AppNav, childProps
       el Grid, fluid: true, className: 'dashboardGrid',
         unless @props.subscriptions.fetched
           el Loader, show: true
         else if subscriptionsProps.subscriptions.length > 0
-          el Row, null,
+          el Row, className: 'height-100',
             el Col, xs: 12, sm: 3, lg: 2, className: 'subscriptions dashboard-col',
               el SubscriptionList, subscriptionsProps
-            React.cloneElement @props.children, childProps
+            el Col, xs: 12, sm: 9, lg: 4, className: 'article-list-col dashboard-col',
+              React.cloneElement @props.children, articleListProps
+            el Col, xs: 12, lg: 6, className: 'article-display dashboard-col',
+              el Loader, show: @props.reader.loading
+              el ArticleReader, articleReaderProps
         else
           el Row, null,
             el Col, xs: 12,

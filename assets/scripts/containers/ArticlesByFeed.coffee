@@ -2,7 +2,7 @@ React = require 'react'
 { Component } = React
 { connect } = require 'react-redux'
 ArticleActions = require '../actions/ArticleActions'
-Reader = require '../components/Reader'
+ArticleList = require '../components/ArticleList'
 
 class ArticlesByFeed extends Component
 
@@ -14,17 +14,13 @@ class ArticlesByFeed extends Component
       @_reload nextProps.params.feedId
 
   render: ->
-    subscription = @_getActiveSubscription @props.params.feedId
+    articleListProps =
+      loadMore: @_loadMore
+      articles: @props.articles
+      currentArticle: @props.reader.doc
+      onClick: @_onClick
 
-    childProps =
-      title: subscription?.customTitle or subscription?.feed.title
-      loadMoreArticles: @_loadMore
-      onArticleClick: @_onClick
-      hideReader: @_hideReader
-      showControls: true
-      subscription: subscription
-
-    React.createElement Reader, Object.assign(childProps, @props)
+    React.createElement ArticleList, Object.assign(articleListProps, @props)
 
   _reload: (feedId) ->
     @props.dispatch ArticleActions.fetchByFeed feedId, { clearDocs: true }
@@ -51,8 +47,5 @@ class ArticlesByFeed extends Component
       return ''
 
     sub.customTitle or sub.feed.title
-
-  _hideReader: ->
-    @props.dispatch ArticleActions.hideReader()
 
 module.exports = ArticlesByFeed

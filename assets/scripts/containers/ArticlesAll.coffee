@@ -3,7 +3,7 @@ React = require 'react'
 { connect } = require 'react-redux'
 fromPairs = require 'lodash/fromPairs'
 ArticleActions = require '../actions/ArticleActions'
-Reader = require '../components/Reader'
+ArticleList = require '../components/ArticleList'
 
 class ArticlesAll extends Component
 
@@ -14,14 +14,13 @@ class ArticlesAll extends Component
     subscriptionsList = @props.subscriptions.docs
     articleList = @props.articles.docs
 
-    childProps =
-      title: 'All subscriptions'
-      loadMoreArticles: @_loadMore
-      onArticleClick: @_onClick
-      hideReader: @_hideReader
+    articleListProps =
+      loadMore: @_loadMore
       articles: @_mapSubsToArticles subscriptionsList, articleList
+      currentArticle: @props.reader.doc
+      onClick: @_onClick
 
-    React.createElement Reader, Object.assign(childProps, @props)
+    React.createElement ArticleList, Object.assign(articleListProps, @props)
 
   _loadMore: =>
     nextPage = @props.articles.page + 1
@@ -30,9 +29,6 @@ class ArticlesAll extends Component
 
   _onClick: (article) =>
     @props.dispatch ArticleActions.fetchContent article
-
-  _hideReader: =>
-    @props.dispatch ArticleActions.hideReader()
 
   _mapSubsToArticles: (subscriptionsList, articleList) ->
     # A hash of subscriptions, where keys are a subscription's feed ID and
