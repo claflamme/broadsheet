@@ -47,7 +47,15 @@ class ArticleReader extends Component
   @propTypes:
     reader: pt.object
     show: pt.bool
-    hideReader: pt.func
+    onHide: pt.func
+    subscriptions: pt.arrayOf pt.shape
+      customTitle: pt.string
+      feed: pt.shape
+        _id: pt.string
+        title: pt.string
+
+  @defaultProps:
+    subscriptions: []
 
   componentDidUpdate: ->
     adjustImages()
@@ -79,7 +87,7 @@ class ArticleReader extends Component
           el 'h1', null,
             el 'a', href: (@props.reader.doc?.url or ''), target: '_blank',
               @props.reader.doc?.title or ''
-          @renderSubscription()
+          @renderByline()
           @renderDate @props.reader.doc?.publishedAt
           el 'div', onClick: @onArticleClick, dangerouslySetInnerHTML: { __html: @props.reader.body }
 
@@ -101,8 +109,8 @@ class ArticleReader extends Component
       el 'em', null,
         "#{ short }—#{ verbose }"
 
-  renderSubscription: ->
-    sub = @props.subscriptions.docs.find (sub) =>
+  renderByline: ->
+    sub = @props.subscriptions.find (sub) =>
       sub.feed._id is @props.reader.doc.feed
 
     el 'div', className: 'text-muted',

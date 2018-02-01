@@ -83,7 +83,7 @@ class Dashboard extends Component
       show: @props.reader.showMobileReader
       onHide: @_hideReader
       reader: @props.reader
-      subscriptions: @props.subscriptions
+      subscriptions: @props.subscriptions.docs
 
     el 'div', null,
       el AppNav, childProps
