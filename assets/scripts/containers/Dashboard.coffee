@@ -7,7 +7,7 @@ pick = require 'lodash/pick'
 fromPairs = require 'lodash/fromPairs'
 
 Loader = require '../components/Loader'
-AppNav = require '../components/AppNav'
+Nav = require '../components/Nav'
 SubscriptionList = require '../components/SubscriptionList'
 SubscriptionNewWindow = require '../components/SubscriptionNewWindow'
 ArticleReader = require '../components/ArticleReader'
@@ -46,19 +46,14 @@ class Dashboard extends Component
     unless @props.auth.token
       return null
 
-    # Any child components of this route handler will receive these as props.
-    childProps = pick @props, [
+    navProps = pick @props, [
       'dispatch'
-      'auth'
-      'articles'
       'modals'
-      'reader'
       'subscriptions'
     ]
 
-    childProps.user = @props.auth.user
-    childProps.subscriptions.active = @props.subscriptions.docs.find (sub) =>
-      sub.feed._id is @props.params.feedId
+    navProps.user = @props.auth.user
+    navProps.activeFeedId = @props.params.feedId
 
     subscriptionsProps =
       subscriptions: @props.subscriptions.docs
@@ -86,7 +81,7 @@ class Dashboard extends Component
       subscriptions: @props.subscriptions.docs
 
     el 'div', null,
-      el AppNav, childProps
+      el Nav, navProps
       el Grid, fluid: true, className: 'dashboardGrid',
         unless @props.subscriptions.fetched
           el Loader, show: true

@@ -9,18 +9,16 @@ UserBadge = require './UserBadge'
 toggleMobileMenu = (e) ->
   document.body.classList.toggle 'show-mobile-menu'
 
-AppNav = (props) ->
+Nav = (props) ->
   title = 'All Subscriptions'
-  activeSub = props.subscriptions.active
-
-  if activeSub
-    title = activeSub?.customTitle or activeSub?.feed.title
+  activeSub = props.subscriptions.docs.find (sub) =>
+    sub.feed._id is props.activeFeedId
 
   titleBarProps =
-    title: title
+    title: activeSub?.customTitle or activeSub?.feed.title or title
     dispatch: props.dispatch
-    showControls: props.subscriptions.active?
-    subscription: props.subscriptions.active
+    showControls: activeSub?
+    subscription: activeSub
     showEditSub: props.modals.visibility.subscriptionEdit
     showDeleteSub: props.modals.visibility.subscriptionDelete
 
@@ -39,7 +37,8 @@ AppNav = (props) ->
       el Col, xs: 6, sm: 2, lg: 6, className: 'user-badge-col',
         el UserBadge, title: props.user?.email
 
-AppNav.propTypes =
+Nav.propTypes =
+  activeFeedId: pt.string
   subTitle: pt.string
   dispatch: pt.func
   auth: pt.object
@@ -48,4 +47,4 @@ AppNav.propTypes =
   reader: pt.object
   subscriptions: pt.object
 
-module.exports = AppNav
+module.exports = Nav
