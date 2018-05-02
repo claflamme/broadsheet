@@ -36,16 +36,16 @@ module.exports =
       else
         sub
 
-    { state..., docs }
+    Object.assign {}, state, { docs }
 
   SUBSCRIPTION_DELETED: (state, action) ->
     docs = state.docs.filter (sub) ->
       sub._id isnt action.subscription._id
 
-    { state..., docs }
+    Object.assign {}, state, { docs }
 
   SUBSCRIPTION_UI_UPDATED: (state, action) ->
     uiProps = pick action, Object.keys(@initialState.ui)
-    ui = { state.ui..., uiProps... }
+    ui = Object.assign {}, state.ui, uiProps
 
-    { state..., ui }
+    Object.assign {}, state, { ui }

@@ -34,7 +34,7 @@ module.exports =
       options:
         transform: [
           'coffeeify'
-          ['babelify', { presets: ['es2015', 'react'], extensions: ['.coffee'] }]
+          ['babelify', { presets: ['env', 'react'], extensions: ['.coffee'] }]
         ]
         extensions: ['.coffee']
     }
