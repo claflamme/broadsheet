@@ -2,7 +2,7 @@ React = require 'react'
 { Component } = React
 el = React.createElement
 pt = require 'prop-types'
-{ Grid, Row, Col, Panel, FormControl, FormGroup, Button } = require 'react-bootstrap'
+{ Grid, Row, Col, Panel, FormControl, FormGroup, Button, Navbar } = require 'react-bootstrap'
 { connect } = require 'react-redux'
 { Link } = require 'react-router'
 
@@ -78,20 +78,26 @@ class Auth extends Component
         "Check your email, you should get a login link any second now."
 
   render: ->
-    el Grid, className: 'auth-prompt',
-      el Row, null,
-        el Col, md: 4, mdOffset: 3, lg: 4, lgOffset: 4, sm: 6, smOffset: 3,
-          el 'div', className: 'text-center',
-            el 'h1', null,
-              el 'i', className: 'fa fa-user fa-2x'
-            el 'h3', className: 'text-center',
-              "Log in or Sign up"
-            el 'p', null,
-              "Enter your email address to sign in. If you don't have an account, we'll create one for you."
-            el 'h4', null,
-              " "
-          @renderAuthForm not @props.emailSent
-          @renderConfirmation @props.emailSent
+    el 'div', null,
+      el Navbar, fluid: true, className: 'app-nav',
+        el Row, null,
+          el Col, xs: 12, className: 'text-center',
+            el 'h4', className: 'logo',
+              'Broadsheet'
+      el Grid, className: 'auth-prompt',
+        el Row, null,
+          el Col, md: 4, mdOffset: 3, lg: 4, lgOffset: 4, sm: 6, smOffset: 3,
+            el 'div', className: 'text-center',
+              el 'h1', null,
+                el 'i', className: 'fa fa-user fa-2x'
+              el 'h3', className: 'text-center',
+                "Log in or Sign up"
+              el 'p', null,
+                "Enter your email address to sign in. If you don't have an account, we'll create one for you."
+              el 'h4', null,
+                " "
+            @renderAuthForm not @props.emailSent
+            @renderConfirmation @props.emailSent
 
 mapStateToProps = (state) ->
   token: state.auth.token

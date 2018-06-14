@@ -25,7 +25,7 @@ ArticleListItem = (props, context) ->
       el 'div', titleProps
       el 'div', null,
         renderSubscriptionName props.article.subscription
-      el 'span', summaryProps
+      el 'div', summaryProps
 
 ArticleListItem.propTypes =
   article: pt.object.isRequired
