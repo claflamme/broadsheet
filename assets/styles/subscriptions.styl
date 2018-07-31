@@ -40,11 +40,14 @@
         font-weight 500
         box-shadow inset 5px 0 0 0 $brand-primary
 
-      .subscriptionIcon
+      .subscriptions-icon
         width 16px
         height 16px
         margin-right halfGutter()
         border-radius 4px
+
+        &.error-loading
+          background-color $gray-light
 
 .show-mobile-menu
   +xs()

@@ -7,7 +7,7 @@ pt = require 'prop-types'
 { findDOMNode } = require 'react-dom'
 
 onImgError = (e) ->
-  e.target.style.visibility = 'hidden'
+  e.target.classList.add 'error-loading'
 
 onSourceBeginDrag = (props) ->
   index: props.index
@@ -79,7 +79,7 @@ class SubscriptionListItem extends Component
     @props.connectDragSource(@props.connectDropTarget(
       el 'li', style: { opacity },
         el Link, linkProps,
-          el 'img', className: 'subscriptionIcon', src: iconUrl, onError: onImgError
+          el 'img', className: 'subscriptions-icon', src: iconUrl, onError: onImgError
           @props.title or @props.feedUrl
     ))
 
