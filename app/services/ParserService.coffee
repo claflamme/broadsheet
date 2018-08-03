@@ -6,6 +6,9 @@ moment = require 'moment'
 faviconoclast = require 'faviconoclast'
 cheerio = require 'cheerio'
 
+Feed = require '../models/Feed'
+Article = require '../models/Article'
+
 parseUrl = url.parse
 resolveUrl = url.resolve
 
@@ -42,10 +45,6 @@ normalizeArticleDate = (articleDate) ->
   moment Math.min articleDate, currentDate
 
 module.exports = (app) ->
-
-  Feed = app.models.Feed
-  Article = app.models.Article
-
   findRss = (res, done) ->
 
     html = ''

@@ -1,13 +1,12 @@
-module.exports = (app) ->
+mongoose = require 'mongoose'
 
-  schema =
+Schema = mongoose.Schema {
+  nonce:
+    type: String
+    unique: true
+  user:
+    type: mongoose.Schema.Types.ObjectId
+    ref: 'User'
+}, timestamps: true
 
-    nonce:
-      type: String
-      unique: true
-
-    user:
-      type: app.mongoose.Schema.Types.ObjectId
-      ref: 'User'
-
-  app.mongoose.Schema schema, timestamps: true
+module.exports = mongoose.model 'AuthRequest', Schema

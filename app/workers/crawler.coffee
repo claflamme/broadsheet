@@ -1,9 +1,10 @@
 forever = require 'async/forever'
 
+Feed = require '../models/Feed'
+
 module.exports = (app) ->
 
   ParserService = app.services.ParserService
-  Feed = app.models.Feed
 
   forever (repeat) ->
 

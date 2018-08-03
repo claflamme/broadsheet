@@ -1,33 +1,20 @@
+mongoose = require 'mongoose'
 mongoosePaginate = require 'mongoose-paginate'
 
-module.exports = (app) ->
+schema =
+  title: String
+  url: String
+  summary: String
+  author: String
+  body:
+    type: String
+    default: null
+  publishedAt: Date
+  feed:
+    type: mongoose.Schema.Types.ObjectId
+    ref: 'Feed'
 
-  # --- Schema -----------------------------------------------------------------
+Schema = mongoose.Schema schema, timestamps: true
+Schema.plugin mongoosePaginate
 
-  schema =
-
-    title: String
-
-    url: String
-
-    summary: String
-
-    author: String
-
-    body:
-      type: String
-      default: null
-
-    publishedAt: Date
-
-    feed:
-      type: app.mongoose.Schema.Types.ObjectId
-      ref: 'Feed'
-
-  Schema = app.mongoose.Schema schema, timestamps: true
-
-  # --- Plugins ----------------------------------------------------------------
-
-  Schema.plugin mongoosePaginate
-
-  return Schema
+module.exports = mongoose.model 'Article', Schema

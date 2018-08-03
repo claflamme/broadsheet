@@ -1,13 +1,11 @@
-module.exports = (app) ->
+mongoose = require 'mongoose'
 
-  schema =
+Schema = mongoose.Schema {
+  jti: String
+  iat: Number
+  user:
+    type: mongoose.Schema.Types.ObjectId
+    ref: 'User'
+}
 
-    jti: String
-
-    iat: Number
-
-    user:
-      type: app.mongoose.Schema.Types.ObjectId
-      ref: 'User'
-
-  return app.mongoose.Schema schema
+module.exports = mongoose.model 'Token', Schema

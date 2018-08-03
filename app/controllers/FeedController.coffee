@@ -1,8 +1,9 @@
 validator = require 'validator'
 
+Feed = require '../models/Feed'
+
 module.exports = (app) ->
 
-  { Feed } = app.models
   { ParserService } = app.services
 
   # Creates a new feed with the given URL then returns the model. If a feed with

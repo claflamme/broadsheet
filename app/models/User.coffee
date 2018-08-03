@@ -1,11 +1,9 @@
-module.exports = (app) ->
+mongoose = require 'mongoose'
 
-  schema =
+Schema = mongoose.Schema {
+  email:
+    type: String
+    unique: true
+}, timestamps: true
 
-    email:
-      type: String
-      unique: true
-
-  Schema = app.mongoose.Schema schema, timestamps: true
-
-  return Schema
+module.exports = mongoose.model 'User', Schema

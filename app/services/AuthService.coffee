@@ -1,6 +1,10 @@
 jwt = require 'jsonwebtoken'
 uuid = require 'node-uuid'
 
+User = require '../models/User'
+Token = require '../models/Token'
+AuthRequest = require '../models/AuthRequest'
+
 getOrCreateUser = (User, email, cb) ->
 
   User.findOne { email: email }, (err, foundUser) ->
@@ -12,7 +16,6 @@ getOrCreateUser = (User, email, cb) ->
 
 module.exports = (app) ->
 
-  { User, Token, AuthRequest } = app.models
   { MailHelper } = app.helpers
 
   generateToken: (user, callback) ->

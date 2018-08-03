@@ -2,6 +2,7 @@ path = require 'path'
 express = require 'express'
 _ = require 'lodash'
 parse = require 'yargs-parser'
+mongoose = require 'mongoose'
 
 # --- Helpers ------------------------------------------------------------------
 # ==============================================================================
@@ -42,8 +43,6 @@ module.exports = (configPath) ->
   app.argv = parse process.argv.slice(2), { boolean: ['serve', 'work'] }
   app.config = require configPath
   app.helpers = require('./helpers') app
-  app.mongoose = require 'mongoose'
-  app.models = require('./models') app
   app.services = require('./services') app
   app.controllers = require('./controllers') app
   app.express = express()
@@ -59,7 +58,8 @@ module.exports = (configPath) ->
 
   console.log 'Connecting to database...'
 
-  app.mongoose.connect process.env.DATABASE_URL, { useMongoClient: true }, (err) ->
+  mongoose.set 'debug', app.config.db.debug
+  mongoose.connect process.env.DATABASE_URL, { useMongoClient: true }, (err) ->
     if err
       # For some reason, not all mongo errors are throwable. throw() will still
       # halt the process, though.

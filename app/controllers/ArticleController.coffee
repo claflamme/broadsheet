@@ -1,9 +1,10 @@
 read = require 'node-readability'
 moment = require 'moment'
 
-module.exports = (app) ->
+Article = require '../models/Article'
+Subscription = require '../models/Subscription'
 
-  { Article, Subscription } = app.models
+module.exports = (app) ->
 
   # Returns articles from all of a user's subscriptions.
   all: (req, res) ->

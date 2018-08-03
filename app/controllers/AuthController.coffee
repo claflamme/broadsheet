@@ -1,6 +1,6 @@
-module.exports = (app) ->
+User = require '../models/User'
 
-  { User } = app.models
+module.exports = (app) ->
   { AuthService } = app.services
 
   authenticate: (req, res) ->

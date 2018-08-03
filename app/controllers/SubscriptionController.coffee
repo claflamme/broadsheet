@@ -1,12 +1,12 @@
 async = require 'async'
 
+Subscription = require '../models/Subscription'
+
 saveDoc = (doc, callback) ->
   doc.save (err, savedDoc) ->
     callback()
 
 module.exports = (app) ->
-
-  { Subscription } = app.models
 
   # Returns a list of all subscriptions belonging to a user.
   list: (req, res) ->
