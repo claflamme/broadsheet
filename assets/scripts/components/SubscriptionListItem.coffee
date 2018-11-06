@@ -66,10 +66,7 @@ class SubscriptionListItem extends Component
 
   render: ->
     opacity = if @props.isDragging then 0 else 1
-    iconUrl = @props.iconUrl or ''
-
-    if iconUrl.startsWith 'http://'
-      iconUrl = "/api/proxy?url=#{ iconUrl }"
+    iconUrl = "/api/proxy?url=#{ @props.iconUrl or '' }"
 
     linkProps =
       to: "/feeds/#{ @props.feedId }"
