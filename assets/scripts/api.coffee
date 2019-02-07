@@ -1,6 +1,7 @@
-refresh = ->
+Cookies = require 'js-cookie'
 
-  localStorage.clear()
+refresh = ->
+  Cookies.remove'token'
   window.location.reload()
 
 stringifyQueryObject = (queryObject) ->
@@ -25,7 +26,7 @@ module.exports =
     req.open config.method, config.url, true
     req.setRequestHeader 'content-type', 'application/json'
 
-    if token = localStorage.getItem 'token'
+    if token = Cookies.get 'token'
       req.setRequestHeader 'Authorization', "Bearer #{ token }"
 
     req.onreadystatechange = ->

@@ -1,3 +1,5 @@
+Cookies = require 'js-cookie'
+
 module.exports =
 
   # This module handles any events dispatched for authentication processes.
@@ -9,7 +11,7 @@ module.exports =
   initialState:
 
     # A JSON web token issued by the server.
-    token: localStorage.getItem 'token'
+    token: Cookies.get 'token'
 
     # A user model for the token bearer.
     user: null

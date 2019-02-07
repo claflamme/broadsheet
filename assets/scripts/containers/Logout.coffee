@@ -1,10 +1,11 @@
+Cookies = require 'js-cookie'
 React = require 'react'
 { Component } = React
 
 module.exports = class Logout extends Component
 
   componentWillMount: ->
-    localStorage.clear()
+    Cookies.remove 'token'
     window.location.href = '/authenticate'
 
   render: ->

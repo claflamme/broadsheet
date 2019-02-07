@@ -1,3 +1,4 @@
+Cookies = require 'js-cookie'
 constants = require '../constants'
 api = require '../api'
 
@@ -6,7 +7,7 @@ receiveToken = (token) ->
   action = type: constants.AUTH_TOKEN_RECEIVED
 
   if token
-    localStorage.setItem 'token', token
+    Cookies.set 'token', token
     action.token = token
 
   action
