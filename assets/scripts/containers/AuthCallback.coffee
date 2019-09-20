@@ -1,6 +1,7 @@
 React = require 'react'
 { Component } = React
 el = React.createElement
+pt = require 'prop-types'
 { connect } = require 'react-redux'
 
 AuthActions = require '../actions/AuthActions'
@@ -8,14 +9,14 @@ AuthActions = require '../actions/AuthActions'
 class AuthCallback extends Component
 
   @contextTypes:
-    router: React.PropTypes.object
+    router: pt.object
 
-  componentWillMount: ->
+  componentDidMount: ->
     action = AuthActions.redeemNonce @props.location.query.nonce
     @props.dispatch action
 
-  componentWillReceiveProps: (nextProps) ->
-    if nextProps.token
+  componentDidUpdate: ->
+    if @props.token
       @context.router.push '/'
 
   render: ->

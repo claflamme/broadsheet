@@ -1,6 +1,7 @@
 React = require 'react'
 { Component } = React
 el = React.createElement
+pt = require 'prop-types'
 { connect } = require 'react-redux'
 { Grid, Row, Col } = require 'react-bootstrap'
 pick = require 'lodash/pick'
@@ -20,9 +21,9 @@ ArticleActions = require '../actions/ArticleActions'
 class Dashboard extends Component
 
   @contextTypes:
-    router: React.PropTypes.object
+    router: pt.object
 
-  componentWillMount: ->
+  componentDidMount: ->
     unless @props.auth.token
       return @context.router.replace '/authenticate'
 

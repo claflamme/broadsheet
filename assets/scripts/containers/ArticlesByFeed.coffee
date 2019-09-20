@@ -6,12 +6,12 @@ ArticleList = require '../components/ArticleList'
 
 class ArticlesByFeed extends Component
 
-  componentWillMount: ->
+  componentDidMount: ->
     @_reload @props.params.feedId
 
-  componentWillReceiveProps: (nextProps) ->
-    if nextProps.params.feedId isnt @props.params.feedId
-      @_reload nextProps.params.feedId
+  componentDidUpdate: (prevProps) ->
+    if prevProps.params.feedId isnt @props.params.feedId
+      @_reload @props.params.feedId
 
   render: ->
     articleListProps =
