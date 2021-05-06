@@ -50,7 +50,7 @@
     "redux-thunk": "^2.3.0",
     "request": "^2.88.0",
     "require-dir": "^0.3.1",
-    "sanitize-html": "^1.18.5",
+    "sanitize-html": "^2.3.2",
     "stylus": "^0.54.5",
     "validator": "5.7.0",
     "yargs-parser": "^5.0.0"
