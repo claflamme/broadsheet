@@ -27,7 +27,7 @@
     "faviconoclast": "0.0.3",
     "feedparser": "^2.2.9",
     "js-cookie": "^2.2.0",
-    "jsonwebtoken": "^7.4.3",
+    "jsonwebtoken": "^9.0.0",
     "keymirror": "0.1.1",
     "lodash": "^4.17.10",
     "mailgun-js": "0.7.12",
